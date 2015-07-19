@@ -7,7 +7,7 @@ PowerShell Module for displaying Windows 8/10 Toast Notifications
 	
 ### Windows 8.1
 
-![BurntToast Notification Example in Windows 8.1](/Images/Toast-Win10.png)
+![BurntToast Notification Example in Windows 8.1](/Images/Toast-Win8.png)
 
 ### Windows 10
 
