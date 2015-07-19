@@ -1,5 +1,4 @@
-﻿#requires -Version 2
-function New-BurntToastNotification
+﻿function New-BurntToastNotification
 {
     <#
         .SYNOPSIS
@@ -43,7 +42,7 @@ function New-BurntToastNotification
         
         [Parameter(Mandatory = $false)]
         [ValidateScript({ Test-Path -Path $_ })]
-        [String] $Image = ( Join-Path -Path (Split-Path -Path $script:MyInvocation.MyCommand.Path) -ChildPath 'BurntToast.png' )
+        [String] $Image = ( Join-Path -Path $PSScriptRoot -ChildPath 'BurntToast.png' )
     )
     
     $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
