@@ -1,6 +1,10 @@
 # BurntToast
 PowerShell Module for displaying Windows 8/10 Toast Notifications
 
+## Install
+
+Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download/Latest/BurntToast.zip) and extract the contents into `C:\Users\[User]\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
+
 ## Example
 
     New-BurntToastNotification -FirstLine 'Random Background Job' -SecondLine 'You background job has finished. This text is really long and wraps to the third line.'
