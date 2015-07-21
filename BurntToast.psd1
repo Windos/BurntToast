@@ -16,7 +16,7 @@
 ModuleToProcess = 'loader.psm1'
 
 # Version Number
-ModuleVersion = '0.1'
+ModuleVersion = '0.2'
 
 # Unique Module ID
 GUID = '751a2aeb-a68f-422e-a2ea-376bdd81612a'
@@ -79,7 +79,7 @@ CmdletsToExport = '*'
 VariablesToExport = '*'
 
 # List of exportable aliases
-AliasesToExport = '*'
+AliasesToExport = 'Toast'
 
 # List of all modules contained in this module
 ModuleList = @()

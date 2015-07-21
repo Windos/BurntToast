@@ -1,24 +1,24 @@
 # TODO
 
 - [ ] Better template selection
-- [ ] Alias (for function and maybe parameters)
-- [ ] Package as Module
+- [X] Alias (for function and maybe parameters)
+- [X] Package as Module
 - [ ] Pester test cases?
 - [ ] Dynamic parameters/parameter sets based on template selection?
-- [ ] Ability to change sound
+- [X] Ability to change sound
 - [ ] Action when clicking toast
 - [ ] Bundle a function to restore default PowerShell start screen/menu shortcut(s)
 - [ ] Fill out comment based help
-- [ ] Nicer validation script output (break out to function which throws)
+- [X] Nicer validation script output (break out to function which throws)
 - [ ] Refactor
     - [ ] Parameter Names?
     - [ ] Pipeline input?
-    - [ ] Maintain line length of 115
+    - [X] Maintain line length of 120
 	- [ ] Variable names make sense?
 	- [ ] Any redundant code?
 	- [ ] Switch statement best way of taking care of text
-- [ ] AppId as Parameter (user can pass it in)
-- [ ] Default AppId gathered at run time using Get-StartApps
+- [X] AppId as Parameter (user can pass it in)
+- [X] Default AppId gathered at run time using Get-StartApps
 
 ## Meta
 
