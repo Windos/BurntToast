@@ -19,6 +19,8 @@
 	- [ ] Switch statement best way of taking care of text
 - [X] AppId as Parameter (user can pass it in)
 - [X] Default AppId gathered at run time using Get-StartApps
+- [ ] Add silent switch (toast makes no sound)
+- [ ] Don't try adding an image if a template with no image is selected
 
 ## Meta
 
