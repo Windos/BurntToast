@@ -1,5 +1,5 @@
 ﻿$Url = 'https://github.com/Windos/BurntToast/releases/download/Latest/BurntToast.zip'
-$BurntToastPath = Join-Path -Path (Split-Path -Path $profile) -ChildPath '\Modules\BurntToast2'
+$BurntToastPath = Join-Path -Path (Split-Path -Path $profile) -ChildPath '\Modules\BurntToast'
 
 if (!(Test-Path -Path $BurntToastPath))
 {

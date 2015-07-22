@@ -16,7 +16,7 @@
 ModuleToProcess = 'loader.psm1'
 
 # Version Number
-ModuleVersion = '0.2'
+ModuleVersion = '0.3'
 
 # Unique Module ID
 GUID = '751a2aeb-a68f-422e-a2ea-376bdd81612a'
@@ -25,16 +25,16 @@ GUID = '751a2aeb-a68f-422e-a2ea-376bdd81612a'
 Author = 'Joshua (Windos) King'
 
 # Company
-CompanyName = 'Created by ISESteroids'
+CompanyName = 'king.geek.nz'
 
 # Copyright
 Copyright = '(c) 2015 Joshua (Windos) King. All rights reserved.'
 
 # Module Description
-Description = ''
+Description = 'Module for creating and displaying Toast Notifications on Microsoft Windows 8 and Windows 10 operating systems.'
 
 # Minimum PowerShell Version Required
-PowerShellVersion = ''
+PowerShellVersion = '3.0'
 
 # Name of Required PowerShell Host
 PowerShellHostName = ''
@@ -70,7 +70,7 @@ FormatsToProcess = @()
 NestedModules = @()
 
 # List of exportable functions
-FunctionsToExport = '*'
+FunctionsToExport = 'New-BurntToastNotification'
 
 # List of exportable cmdlets
 CmdletsToExport = '*'

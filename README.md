@@ -3,7 +3,21 @@ PowerShell Module for displaying Windows 8/10 Toast Notifications
 
 ## Install
 
+### Manual Install
+
 Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download/Latest/BurntToast.zip) and extract the contents into `C:\Users\[User]\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
+
+### Scripted Install
+
+Open a PowerShell console or the PowerShell ISE and run the following:
+
+    iex ((New-Object net.webclient).DownloadString('https://raw.githubusercontent.com/Windos/BurntToast/master/install.ps1'))
+
+_Note that your Execution Policy should be set to at least Bypass. See [about_Execution_Policies](https://technet.microsoft.com/en-us/library/hh847748.aspx) for more details._
+
+### PowerShell Gallery Install (Requires PowerShell v5)
+
+_See the [PowerShell Gallery](http://www.powershellgallery.com/packages/BurntToast/) for the complete details and instructions._
 
 ## Example
 
@@ -18,7 +32,12 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 ![BurntToast Notification Example in Windows 10](/Images/Toast-Win10.png)
 
 ## Download
-* [Current](https://github.com/Windos/BurntToast/archive/master.zip)
+* [Bleeding Edge](https://github.com/Windos/BurntToast/archive/master.zip)
+* [Latest Release](https://github.com/Windos/BurntToast/releases/download/Latest/BurntToast.zip)
+
+### Previous Releases
+* [v0.2.0](https://github.com/Windos/BurntToast/releases/download/v0.2.0/BurntToast.zip)
+* [v0.1.0](https://github.com/Windos/BurntToast/releases/download/v0.1.0/BurntToast.zip)
 
 ## Contributors
 * [Windos](https://github.com/Windos)
