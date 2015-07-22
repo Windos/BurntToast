@@ -1,4 +1,5 @@
-﻿function New-BurntToastNotification
+﻿#requires -Version 2 
+function New-BurntToastNotification
 {
     <#
         .SYNOPSIS
@@ -14,12 +15,12 @@
         .INPUTS
         None
 
-            You cannot pipe input to this cmdlet.
+        You cannot pipe input to this cmdlet.
 
         .OUTPUTS
         None
 
-           New-BurntToastNotification displays the Toast Notification that is created.
+        New-BurntToastNotification displays the Toast Notification that is created.
         
         .EXAMPLE
         New-BurntToastNotification
@@ -45,7 +46,7 @@
         https://github.com/Windos/BurntToast
     #>
     [alias('Toast')]
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'Sound')]
     param
     (
         # Specifies the first line of text of the Toast Notification.
@@ -100,14 +101,15 @@
         # The AppId needs to be for a shortcut present under 'All Programs' on the Windows Start Screen/Menu.
         [Parameter(Mandatory = $false)]
         [ValidateScript({ Test-ToastAppId -Id $_ })]
-        [String] $AppId = ( (Get-StartApps -Name '*PowerShell*')[0].AppId ),
+        [String] $AppId = ( ((Get-StartApps -Name '*PowerShell*') | Select-Object -First 1).AppId ),
 
         # Specifies the sound that is played when the Toast Notification is displayed.
         #
         # If an alarm or call sound is chosen, the toast will be displayed for an extended period of time and the sound will loop while the toast is displayed.
         #
         # A catalog of available sounds can be found on MSDN: https://msdn.microsoft.com/en-us/library/windows/apps/hh761492.aspx
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory = $false,
+                   ParameterSetName = 'Sound')]
         [ValidateSet('Default',
                      'IM',
                      'Mail',
@@ -133,51 +135,77 @@
                      'Call8',
                      'Call9',
                      'Call10')]
-        [String] $Sound = 'Default'
+        [String] $Sound = 'Default',
+
+        # Specifies that the Toast Notification should not play any sound when displayed.
+        [Parameter(Mandatory = $true,
+                   ParameterSetName = 'Silent')]
+        [Switch] $Silent
     )
     
-    $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
-    [xml]$ToastTemplate = ([Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent(
-        [Windows.UI.Notifications.ToastTemplateType]::$Template)).GetXml()
-
-    $TextElements = $ToastTemplate.GetElementsByTagName('text')
-    foreach ($TextElement in $TextElements)
+    if ($AppId -ne $null -and $AppId -ne '')
     {
-        switch ($TextElement.id)
+        $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
+        [xml]$ToastTemplate = ([Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent(
+            [Windows.UI.Notifications.ToastTemplateType]::$Template)).GetXml()
+
+        $TextElements = $ToastTemplate.GetElementsByTagName('text')
+        foreach ($TextElement in $TextElements)
         {
-            '1' { $null = $TextElement.AppendChild($ToastTemplate.CreateTextNode($FirstLine)) }
-            '2' { $null = $TextElement.AppendChild($ToastTemplate.CreateTextNode($SecondLine)) }
-            '3' { $null = $TextElement.AppendChild($ToastTemplate.CreateTextNode($ThirdLine)) }
+            switch ($TextElement.id)
+            {
+                '1' { $null = $TextElement.AppendChild($ToastTemplate.CreateTextNode($FirstLine)) }
+                '2' { $null = $TextElement.AppendChild($ToastTemplate.CreateTextNode($SecondLine)) }
+                '3' { $null = $TextElement.AppendChild($ToastTemplate.CreateTextNode($ThirdLine)) }
+            }
         }
-    }
-    
-    $ImageElements = $ToastTemplate.GetElementsByTagName('image')
-    $ImageElements[0].src = "file:///$Image"
+        
+        if ($Template -like '*Image*')
+        {
+            $ImageElements = $ToastTemplate.GetElementsByTagName('image')
+            $ImageElements[0].src = "file:///$Image"
+        }
 
-    if ($Sound -ne 'Default')
-    {
-        $SoundEvent = $Sound
         $ToastNode = $ToastTemplate.SelectSingleNode('/toast')
-        
-        if ($SoundEvent -like 'Alarm*' -or $SoundEvent -like 'Call*')
+        if ($Silent)
         {
-            $ToastNode.SetAttribute('duration', 'long')
-            $SoundEvent = 'Looping.' + $SoundEvent
-        }
+            $AudioElement = $ToastTemplate.CreateElement('audio')
+            $AudioElement.SetAttribute('silent', 'true')
 
-        $Audio = $ToastTemplate.CreateElement('audio')
-        $Audio.SetAttribute('src', "ms-winsoundevent:Notification.$SoundEvent")
-        
-        if ($SoundEvent -like 'Looping*')
+            $null = $ToastNode.AppendChild($AudioElement)
+        }
+        else
         {
-            $Audio.SetAttribute('loop', 'true')
-        }
+            if ($Sound -ne 'Default')
+            {
+                $SoundEvent = $Sound
+            
+                if ($SoundEvent -like 'Alarm*' -or $SoundEvent -like 'Call*')
+                {
+                    $ToastNode.SetAttribute('duration', 'long')
+                    $SoundEvent = 'Looping.' + $SoundEvent
+                }
 
-        $null = $ToastNode.AppendChild($Audio)
+                $AudioElement = $ToastTemplate.CreateElement('audio')
+                $AudioElement.SetAttribute('src', "ms-winsoundevent:Notification.$SoundEvent")
+            
+                if ($SoundEvent -like 'Looping*')
+                {
+                    $AudioElement.SetAttribute('loop', 'true')
+                }
+
+                $null = $ToastNode.AppendChild($AudioElement)
+            }
+        }
+        
+        $ToastXml = New-Object -TypeName Windows.Data.Xml.Dom.XmlDocument
+        $ToastXml.LoadXml($ToastTemplate.OuterXml)
+        
+        [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show($ToastXml)
     }
-    
-    $ToastXml = New-Object -TypeName Windows.Data.Xml.Dom.XmlDocument
-    $ToastXml.LoadXml($ToastTemplate.OuterXml)
-    
-    [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show($ToastXml)
+    else
+    {
+        throw 'There is no PowerShell shortcut present on the Start Menu/Screen. Please create one or specify another ' +
+        'AppId which you can find with the Get-StartApps cmdlet.'
+    }
 }

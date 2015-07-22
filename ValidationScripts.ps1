@@ -1,4 +1,5 @@
-﻿function Test-ToastImage
+﻿#requires -Version 3
+function Test-ToastImage
 {
     param
     (
@@ -24,13 +25,14 @@ function Test-ToastAppId
         [String] $Id
     )
 
-    if ((Get-StartApps | Where-Object -Property AppId -EQ $Id | Measure-Object).Count -gt 0) 
+    if ((Get-StartApps | Where-Object -Property AppId -EQ -Value $Id |
+    Measure-Object).Count -gt 0) 
     {
         $true
     }
     else 
     {
         throw "A shortcut with the AppId '$Id' doesn't exist on the Start Screen/Menu. " +
-            'Please provide a valid AppId and try again.'
+        'Please provide a valid AppId and try again.'
     }
 }
