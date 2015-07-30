@@ -5,6 +5,7 @@ $Files = @(
     "$Path\BurntToast.psd1",
     "$Path\loader.psm1",
     "$Path\New-BurntToastNotification.ps1",
+    "$Path\Test-PSDifferentUser.ps1",
     "$Path\ValidationScripts.ps1"
 )
 
