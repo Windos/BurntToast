@@ -31,11 +31,14 @@ _See the [PowerShell Gallery](http://www.powershellgallery.com/packages/BurntToa
 
 ![BurntToast Notification Example in Windows 10](/Images/Toast-Win10.png)
 
-## Download
-* [Bleeding Edge](https://github.com/Windos/BurntToast/archive/master.zip)
+## Releases
+* [Bleeding Edge](https://github.com/Windos/BurntToast/archive/master.zip) (Development/Raw Repo - **CAUTION**)
 * [Latest Release](https://github.com/Windos/BurntToast/releases/download/Latest/BurntToast.zip)
-
-### Previous Releases
+    * Credential parameter added so toasts can be generated for regular user when running PowerShell host as a different (e.g. Admin) account.
+* [v0.3.0](https://github.com/Windos/BurntToast/releases/download/v0.3.0/BurntToast.zip)
+    * Help has been added
+    * Toasts can be silent with -Silent switch
+    * General bug fixes
 * [v0.2.0](https://github.com/Windos/BurntToast/releases/download/v0.2.0/BurntToast.zip)
 * [v0.1.0](https://github.com/Windos/BurntToast/releases/download/v0.1.0/BurntToast.zip)
 
