@@ -249,7 +249,8 @@ function New-BurntToastNotification
                 $ToastXml = New-Object -TypeName Windows.Data.Xml.Dom.XmlDocument
                 $ToastXml.LoadXml($ToastTemplate.OuterXml)
 
-                [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show($ToastXml)
+                $Toast = [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId)
+                $Toast.Show($ToastXml)
             }
             else
             {
