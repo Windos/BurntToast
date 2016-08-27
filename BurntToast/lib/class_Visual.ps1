@@ -1,0 +1,4 @@
+﻿class Visual
+{
+    [Binding] $Binding
+}

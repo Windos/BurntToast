@@ -1,0 +1,4 @@
+﻿class Toast
+{
+    [Visual] $Visual
+}
