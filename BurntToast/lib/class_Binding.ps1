@@ -19,7 +19,7 @@
     {
         $BindingXML = New-Object System.XML.XMLDocument
         $BindingElement = $BindingXML.CreateElement('binding')
-        $BindingElement.SetAttribute('template', $this.Template)
+        $BindingElement.SetAttribute('template', [Binding]::Template)
         
         foreach ($Element in $this.Element)
         {
