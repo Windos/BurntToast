@@ -23,7 +23,6 @@
         if ($this.Element.Count -eq 0)
         {
             $ActionsElement.SetAttribute('hint-systemCommands', $this.SystemCommand)
-            Write-Warning -Message 'The snooze button does not currently work, I''m looking into it.'
         }
         else
         {
