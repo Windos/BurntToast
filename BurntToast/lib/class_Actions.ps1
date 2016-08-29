@@ -10,7 +10,7 @@
         $this.SystemCommand = $SystemCommand
     }
 
-    [void] AddElement ([Action] $Element)
+    [void] AddElement ([ToastAction] $Element)
     {
         $this.Element += $Element
     }
