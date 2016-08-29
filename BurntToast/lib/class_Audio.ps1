@@ -1,6 +1,7 @@
 ﻿class Audio
 {
     [AudioSource] $Source
+    [string] $Path
     [boolean] $Loop
     [boolean] $Silent
 
@@ -12,6 +13,13 @@
         }
 
         $this.Source = $Source
+        $this.Silent = $false
+    }
+
+    Audio ([String] $Path)
+    {
+        $this.Loop = $true
+        $this.Path = $Path
         $this.Silent = $false
     }
 
@@ -38,14 +46,22 @@
         }
         else
         {
-            $src = 'ms-winsoundevent:Notification.'
-            
-            if ($this.Source -like 'Call*' -or $this.Source -like 'Alarm*')
+            if (!$this.Path)
             {
-                $src += 'Looping.'
+                $src = 'ms-winsoundevent:Notification.'
+                
+                if ($this.Source -like 'Call*' -or $this.Source -like 'Alarm*')
+                {
+                    $src += 'Looping.'
+                }
+
+                $src += $this.Source
+            }
+            else
+            {
+                $src = "file:///$($this.Path)"
             }
 
-            $src += $this.Source
             $AudioElement.SetAttribute('src',$src)
 
             if ($this.Loop)
