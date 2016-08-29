@@ -1,4 +1,4 @@
-﻿class Action
+﻿class ToastAction
 {
     [string] $Content
     [string] $Arguments
@@ -6,20 +6,20 @@
     [System.IO.Path] $ImageUri
     [string] $InputId
 
-    Action ([string] $Content, [string] $Arguments)
+    ToastAction ([string] $Content, [string] $Arguments)
     {
         $this.Content = $Content
         $this.Arguments = $Arguments
     }
 
-    Action ([string] $Content, [string] $Arguments, [ActivationType] $ActivationType)
+    ToastAction ([string] $Content, [string] $Arguments, [ActivationType] $ActivationType)
     {
         $this.Content = $Content
         $this.Arguments = $Arguments
         $this.ActivationType = $ActivationType
     }
 
-    Action ([string] $Content, [string] $Arguments, [ActivationType] $ActivationType, [System.IO.Path] $ImageUri)
+    ToastAction ([string] $Content, [string] $Arguments, [ActivationType] $ActivationType, [System.IO.Path] $ImageUri)
     {
         $this.Content = $Content
         $this.Arguments = $Arguments
@@ -27,7 +27,7 @@
         $this.ImageUri = $ImageUri
     }
 
-    Action ([string] $Content, [string] $Arguments, [ActivationType] $ActivationType, [string] $InputId)
+    ToastAction ([string] $Content, [string] $Arguments, [ActivationType] $ActivationType, [string] $InputId)
     {
         $this.Content = $Content
         $this.Arguments = $Arguments
@@ -35,21 +35,21 @@
         $this.InputId = $InputId
     }
 
-    Action ([string] $Content, [string] $Arguments, [System.IO.Path] $ImageUri)
+    ToastAction ([string] $Content, [string] $Arguments, [System.IO.Path] $ImageUri)
     {
         $this.Content = $Content
         $this.Arguments = $Arguments
         $this.ImageUri = $ImageUri
     }
 
-    Action ([string] $Content, [string] $Arguments, [string] $InputId)
+    ToastAction ([string] $Content, [string] $Arguments, [string] $InputId)
     {
         $this.Content = $Content
         $this.Arguments = $Arguments
         $this.InputId = $InputId
     }
 
-    Action ([string] $Content, [string] $Arguments, [System.IO.Path] $ImageUri, [string] $InputId)
+    ToastAction ([string] $Content, [string] $Arguments, [System.IO.Path] $ImageUri, [string] $InputId)
     {
         $this.Content = $Content
         $this.Arguments = $Arguments
@@ -57,7 +57,7 @@
         $this.InputId = $InputId
     }
 
-    Action ([string] $Content, [string] $Arguments, [ActivationType] $ActivationType, [System.IO.Path] $ImageUri, [string] $InputId)
+    ToastAction ([string] $Content, [string] $Arguments, [ActivationType] $ActivationType, [System.IO.Path] $ImageUri, [string] $InputId)
     {
         $this.Content = $Content
         $this.Arguments = $Arguments
@@ -68,24 +68,24 @@
 
     [xml] GetXML ()
     {
-        $ActionXML = New-Object System.XML.XMLDocument
-        $ActionElement = $ActionXML.CreateElement('action')
+        $ToastActionXML = New-Object System.XML.XMLDocument
+        $ToastActionElement = $ToastActionXML.CreateElement('action')
 
-        $ActionElement.SetAttribute('content', $this.Content)
-        $ActionElement.SetAttribute('arguments', $this.Arguments)
-        $ActionElement.SetAttribute('activationType', $this.ActivationType)
+        $ToastActionElement.SetAttribute('content', $this.Content)
+        $ToastActionElement.SetAttribute('arguments', $this.Arguments)
+        $ToastActionElement.SetAttribute('activationType', $this.ActivationType)
 
         if ($this.ImageUri)
         {
-            $ActionElement.SetAttribute('imageUri', $this.ImageUri)
+            $ToastActionElement.SetAttribute('imageUri', $this.ImageUri)
         }
 
         if ($this.InputId)
         {
-            $ActionElement.SetAttribute('hint-inputId', $this.InputId)
+            $ToastActionElement.SetAttribute('hint-inputId', $this.InputId)
         }
 
-        $ActionXML.AppendChild($ActionElement)
-        return $ActionXML
+        $ToastActionXML.AppendChild($ToastActionElement)
+        return $ToastActionXML
     }
 }
