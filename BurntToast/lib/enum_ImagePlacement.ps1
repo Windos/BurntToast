@@ -1,0 +1,5 @@
+﻿enum ImagePlacement
+{
+    inline
+    appLogoOverride
+}

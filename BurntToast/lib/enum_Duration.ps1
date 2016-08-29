@@ -1,0 +1,5 @@
+﻿enum Duration
+{
+    short
+    long
+}
