@@ -16,6 +16,12 @@
         $this.Alt = $Alt
     }
 
+    Image ([String] $Source, [ImageCrop] $Crop)
+    {
+        $this.Source = $Source
+        $this.Crop = $Crop
+    }
+
     Image ([String] $Source, [ImagePlacement] $Placement)
     {
         $this.Source = $Source
@@ -26,9 +32,16 @@
     {
         $this.Source = $Source
         $this.Placement = $Placement
-        $this.Crop = $crop
+        $this.Crop = $Crop
     }
 
+    Image ([String] $Source, [string] $Alt, [ImageCrop] $Crop)
+    {
+        $this.Source = $Source
+        $this.Alt = $Alt
+        $this.Crop = $Crop
+    }
+    
     Image ([String] $Source, [string] $Alt, [ImagePlacement] $Placement)
     {
         $this.Source = $Source
@@ -41,7 +54,7 @@
         $this.Source = $Source
         $this.Alt = $Alt
         $this.Placement = $Placement
-        $this.Crop = $crop
+        $this.Crop = $Crop
     }
 
     [xml] GetXML ()
