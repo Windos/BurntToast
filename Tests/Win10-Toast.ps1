@@ -1,3 +1,5 @@
+using module BurntToast
+
 $text1 = New-BTTextElement -Content 'This is a test'
 $text2 = New-BTTextElement
 $text3 = New-BTTextElement -Content 'This more testing'

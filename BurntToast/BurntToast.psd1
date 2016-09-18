@@ -1,7 +1,7 @@
 ﻿@{
 
 # Module Loader File
-ModuleToProcess = 'loader.psm1'
+ModuleToProcess = 'BurntToast.psm1'
 
 # Version Number
 ModuleVersion = '0.5.0'
