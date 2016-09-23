@@ -1,4 +1,4 @@
-﻿#TODO: Implement hint-style (https://blogs.msdn.microsoft.com/tiles_and_toasts/2015/06/30/adaptive-tile-templates-schema-and-documentation/)
+﻿using module BurntToast.Class
 
 function New-BTTextElement
 {
@@ -30,6 +30,9 @@ function New-BTTextElement
         New-BTTextElement
 
         Creates a Text Element that will show a blank line on a Toast Notification.
+
+        .NOTES
+        TODO: Implement hint-style (https://blogs.msdn.microsoft.com/tiles_and_toasts/2015/06/30/adaptive-tile-templates-schema-and-documentation/)
 
         .LINK
         https://github.com/Windos/BurntToast

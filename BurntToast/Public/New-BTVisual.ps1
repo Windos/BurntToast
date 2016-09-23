@@ -1,4 +1,6 @@
-﻿function New-BTVisual
+﻿using module BurntToast.Class
+
+function New-BTVisual
 {
     <#
         .SYNOPSIS
@@ -21,6 +23,7 @@
         https://github.com/Windos/BurntToast
     #>
 
+    [CmdletBinding()]
     [OutputType([Visual])]
     param
     (

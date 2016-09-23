@@ -1,4 +1,6 @@
-﻿function New-BTAudioElement
+﻿using module BurntToast.Class
+
+function New-BTAudioElement
 {
     <#
         .SYNOPSIS

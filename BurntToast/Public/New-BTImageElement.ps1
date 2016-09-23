@@ -1,4 +1,6 @@
-﻿function New-BTImageElement
+﻿using module BurntToast.Class
+
+function New-BTImageElement
 {
     <#
         .SYNOPSIS
@@ -25,6 +27,7 @@
         https://github.com/Windos/BurntToast
     #>
 
+    [CmdletBinding()]
     [OutputType([Image])]
     param
     (

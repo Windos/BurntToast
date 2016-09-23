@@ -1,9 +1,7 @@
 $Public  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue )
 $Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue )
-$Library = @( Get-ChildItem -Path $PSScriptRoot\lib\*.ps1 -ErrorAction SilentlyContinue | where name -NotLike 'enum_*' | sort )
-$Enums   = @( Get-ChildItem -Path $PSScriptRoot\lib\*.ps1 -ErrorAction SilentlyContinue | where name -Like 'enum_*' )
 
-Foreach($Import in @($Enums + $Library + $Public + $Private))
+Foreach($Import in @($Public + $Private))
 {
     Try
     {
@@ -15,4 +13,4 @@ Foreach($Import in @($Enums + $Library + $Public + $Private))
     }
 }
 
-Export-ModuleMember -Function @($Public.Basename)
+Export-ModuleMember -Function @($Public.BaseName)
