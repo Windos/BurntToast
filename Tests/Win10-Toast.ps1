@@ -1,4 +1,4 @@
-using module BurntToast
+using module BurntToast.Class
 
 $text1 = New-BTTextElement -Content 'This is a test'
 $text2 = New-BTTextElement
@@ -10,9 +10,11 @@ $visual1 = New-BTVisual -Element ($text1, $text2, $text3, $image1)
 
 $audio1 = New-BTAudioElement -Source Call6
 
-$action1 = [ToastAction]::new('Open LCTV','https://www.livecoding.tv/livestreams/',[ActivationType]::protocol)
+$action1 = New-BTActionElement -Content 'Open LCTV' -Argument 'https://www.livecoding.tv/livestreams/' -ActivationType protocol
+
 $BurntToastPath = 'C:\Users\King\Documents\GitHub\BurntToast\Media\BurntToast.png'
-$action2 = [ToastAction]::new('Burn Toast',$BurntToastPath,[ActivationType]::protocol)
+$action2 = New-BTActionElement -Content 'Burnt Toast' -Argument $BurntToastPath -ActivationType protocol
+
 $actions1 = [Actions]::new()
 $actions1.AddElement($action1)
 $actions1.AddElement($action2)
