@@ -1,5 +1,0 @@
-﻿enum ImageCrop
-{
-    none
-    circle
-}

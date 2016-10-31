@@ -1,4 +1,4 @@
-﻿using module BurntToast.Class
+﻿using namespace Microsoft.Toolkit.Uwp.Notifications
 
 function New-BTImageElement
 {
@@ -28,38 +28,48 @@ function New-BTImageElement
     #>
 
     [CmdletBinding()]
-    [OutputType([Image])]
+    [OutputType([AdaptiveImage])]
     param
     (
-        [Parameter(Mandatory)]
+        [Parameter()]
         [string] $Source,
 
         [Parameter()]
-        [string] $Alt,
+        [string] $AlternateText,
 
         [Parameter()]
-        [ImagePlacement] $Placement,
+        [AdaptiveImageAlign] $Align,
         
         [Parameter()]
-        [ImageCrop] $Crop
+        [AdaptiveImageCrop] $Crop,
+
+        [Parameter()]
+        [switch] $RemoveMargin
     )
 
-    $Props = @($Source)
-
-    if ($Alt)
+    $Image = [AdaptiveImage]::new()
+    
+    if ($Source)
     {
-        $Props += $Alt
+        $Image.Source = $Source
     }
 
-    if ($Placement)
+    if ($AlternateText)
     {
-        $Props += $Placement
+        $Image.AlternateText = $AlternateText
+    }
+
+    if ($Align)
+    {
+        $Image.HintAlign = $Align
     }
 
     if ($Crop)
     {
-        $Props += $Crop
+        $Image.HintCrop = $Crop
     }
 
-    New-Object -TypeName Image -ArgumentList $Props
+    $Image.HintRemoveMargin = $RemoveMargin
+
+    $Image
 }

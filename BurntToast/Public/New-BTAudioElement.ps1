@@ -1,4 +1,4 @@
-﻿using module BurntToast.Class
+﻿using namespace Microsoft.Toolkit.Uwp.Notifications
 
 function New-BTAudioElement
 {
@@ -48,36 +48,29 @@ function New-BTAudioElement
         https://github.com/Windos/BurntToast
     #>
 
-    [CmdletBinding(DefaultParameterSetName = 'BuiltIn')]
-    [OutputType([Audio])]
+    [CmdletBinding()]
+    [OutputType([ToastAudio])]
     param
     (
-        [Parameter(ParameterSetName = 'BuiltIn')]
-        [alias('Sound')]
-        [AudioSource] $Source = 'Default',
+        [Parameter()]
+        [uri] $Source,
 
-        [Parameter(ParameterSetName = 'Custom')]
-        [ValidateScript({Test-BTAudioPath -Path $_})]
-        [String] $Path,
+        [Parameter()]
+        [switch] $Loop,
 
-        [Parameter(Mandatory,
-                   ParameterSetName = 'Silent')]
-        [Switch] $Silent
+        [Parameter()]
+        [switch] $Silent
     )
 
-    if ($Silent)
+    $Audio = [ToastAudio]::new()
+    
+    if ($uri)
     {
-        [Audio]::new($true)
+        $Audio.Src = $uri
     }
-    else
-    {
-        if ($Path)
-        {
-            [Audio]::new($Path)
-        }
-        else
-        {
-            [Audio]::new($Source)
-        }
-    }
+
+    $Audio.Loop = $Loop
+    $Audio.Silent = $Silent
+
+    $Audio
 }

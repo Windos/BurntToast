@@ -9,15 +9,11 @@ CompanyName = 'king.geek.nz'
 Copyright = '(c) 2015 Joshua (Windos) King. All rights reserved.'
 Description = 'Module for creating and displaying Toast Notifications on Microsoft Windows 10.'
 PowerShellVersion = '5.0'
-RequiredModules = @('BurntToast.Class')
 FunctionsToExport = '*'
 CmdletsToExport = @()
 AliasesToExport = @()
-
 PrivateData = @{
-
     PSData = @{
-
         Tags = @('Notifications', 'Utilities', 'Windows10')
         LicenseUri = 'https://github.com/Windos/BurntToast/blob/master/LICENSE'
         ProjectUri = 'https://github.com/Windos/BurntToast'
@@ -25,7 +21,7 @@ PrivateData = @{
         ReleaseNotes = '
 ## 0.5.0 (2016-??-??)
 
-* Re-written from ground up, now PS Class based
+* Re-written from ground up, now using Microsoft.Toolkit.Uwp.Notifications library
 * Developed for and tested on Windows 10 only
 '
     }
