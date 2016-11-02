@@ -1,6 +1,6 @@
 ﻿using namespace Microsoft.Toolkit.Uwp.Notifications
 
-function New-BTAudioElement
+function New-BTAudio
 {
     <#
         .SYNOPSIS

@@ -26,4 +26,6 @@ Foreach($Type in $Library)
     }
 }
 
+$null = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+
 Export-ModuleMember -Function @($Public.BaseName)

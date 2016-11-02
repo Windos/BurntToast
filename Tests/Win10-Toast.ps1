@@ -1,15 +1,15 @@
 
 
-$text1 = New-BTTextElement -Content 'This is a test'
-$text2 = New-BTTextElement
-$text3 = New-BTTextElement -Content 'This more testing'
-$text4 = New-BTTextElement -Text "RAWR"
+$text1 = New-BTText -Content 'This is a test'
+$text2 = New-BTText
+$text3 = New-BTText -Content 'This more testing'
+$text4 = New-BTText -Text "RAWR"
 
-$image1 = New-BTImageElement -Source 'C:\Users\King\Documents\GitHub\BurntToast\Media\BurntToast.png'
+$image1 = New-BTImage -Source 'C:\Users\King\Documents\GitHub\BurntToast\Media\BurntToast.png'
 
 #$visual1 = New-BTVisual -Element ($text1, $text2, $text3, $image1)
 
-$audio1 = New-BTAudioElement -Source 'ms-winsoundevent:Notification.SMS'
+$audio1 = New-BTAudio -Source 'ms-winsoundevent:Notification.Reminder'
 
 $binding1 = New-BTBinding -Children $text1, $text2, $text3, $text4, $image1
 

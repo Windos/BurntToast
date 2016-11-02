@@ -1,6 +1,6 @@
 ﻿using namespace Microsoft.Toolkit.Uwp.Notifications
 
-function New-BTTextElement
+function New-BTText
 {
     <#
         .SYNOPSIS
@@ -50,11 +50,13 @@ function New-BTTextElement
 
         [int] $MinLines,
 
-        [bool] $Wrap,
+        [switch] $Wrap,
 
         [AdaptiveTextAlign] $Align,
 
-        [AdaptiveTextStyle] $Style
+        [AdaptiveTextStyle] $Style,
+
+        [string] $Language
     )
 
     $TextObj = [AdaptiveText]::new()
@@ -87,6 +89,11 @@ function New-BTTextElement
     if ($Style)
     {
         $TextObj.HintStyle = $Style
+    }
+
+    if ($Language)
+    {
+        $TextObj.Language = $Language
     }
 
     $TextObj
