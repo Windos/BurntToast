@@ -1,6 +1,4 @@
-﻿using namespace Microsoft.Toolkit.Uwp.Notifications
-
-function New-BTButton
+﻿function New-BTButton
 {
     <#
         .SYNOPSIS
@@ -24,9 +22,9 @@ function New-BTButton
     #>
 
     [CmdletBinding(DefaultParametersetName = 'Button')]
-    [OutputType([ToastButton], ParameterSetName = 'Button')]
-    [OutputType([ToastButtonDismiss], ParameterSetName = 'Dismiss')]
-    [OutputType([ToastButtonSnooze], ParameterSetName = 'Snooze')]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastButton], ParameterSetName = 'Button')]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastButtonDismiss], ParameterSetName = 'Dismiss')]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze], ParameterSetName = 'Snooze')]
 
     param
     (
@@ -49,7 +47,7 @@ function New-BTButton
         [string] $Arguments,
 
         [Parameter(ParameterSetName = 'Button')]
-        [ToastActivationType] $ActivationType,
+        [Microsoft.Toolkit.Uwp.Notifications.ToastActivationType] $ActivationType,
 
         [Parameter()]
         [string] $ImageUri,
@@ -64,7 +62,7 @@ function New-BTButton
     {
         'Button'
         {
-            $Button = [ToastButton]::new($Content, $Arguments)
+            $Button = [Microsoft.Toolkit.Uwp.Notifications.ToastButton]::new($Content, $Arguments)
             
             if ($ActivationType)
             {
@@ -78,7 +76,7 @@ function New-BTButton
         }
         'Snooze'
         {
-            $Button = [ToastButtonSnooze]::new()
+            $Button = [Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze]::new()
 
             if ($Content)
             {
@@ -92,7 +90,7 @@ function New-BTButton
         }
         'Dismiss'
         {
-            $Button = [ToastButtonDismiss]::new()
+            $Button = [Microsoft.Toolkit.Uwp.Notifications.ToastButtonDismiss]::new()
 
             if ($Content)
             {

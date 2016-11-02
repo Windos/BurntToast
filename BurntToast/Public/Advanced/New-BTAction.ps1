@@ -1,6 +1,4 @@
-﻿using namespace Microsoft.Toolkit.Uwp.Notifications
-
-function New-BTAction
+﻿function New-BTAction
 {
     <#
         .SYNOPSIS
@@ -24,26 +22,26 @@ function New-BTAction
     #>
 
     [CmdletBinding()]
-    [OutputType([IToastActions])]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.IToastActions])]
     param
     (
         [Parameter()]
-        [IToastButton[]] $Buttons,
+        [Microsoft.Toolkit.Uwp.Notifications.IToastButton[]] $Buttons,
 
-        [ToastContextMenuItem[]] $ContextMenuItems,
+        [Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem[]] $ContextMenuItems,
 
-        [IToastInput[]] $Inputs,
+        [Microsoft.Toolkit.Uwp.Notifications.IToastInput[]] $Inputs,
 
         [switch] $SnoozeAndDismiss
     )
 
     if ($SnoozeAndDismiss)
     {
-        $ToastActions = [ToastActionsSnoozeAndDismiss]::new()
+        $ToastActions = [Microsoft.Toolkit.Uwp.Notifications.ToastActionsSnoozeAndDismiss]::new()
     }
     else
     {
-        $ToastActions = [ToastActionsCustom]::new()
+        $ToastActions = [Microsoft.Toolkit.Uwp.Notifications.ToastActionsCustom]::new()
 
         if ($Buttons)
         {

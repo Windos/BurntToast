@@ -1,6 +1,4 @@
-﻿using namespace Microsoft.Toolkit.Uwp.Notifications
-
-function New-BTBinding
+﻿function New-BTBinding
 {
     <#
         .SYNOPSIS
@@ -24,26 +22,26 @@ function New-BTBinding
     #>
 
     [CmdletBinding()]
-    [OutputType([ToastBindingGeneric])]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastBindingGeneric])]
     param
     (
         [Parameter()]
-        [IToastBindingGenericChild[]] $Children,
+        [Microsoft.Toolkit.Uwp.Notifications.IToastBindingGenericChild[]] $Children,
 
         [switch] $AddImageQuery,
 
-        [ToastGenericAppLogo] $AppLogoOverride,
+        [Microsoft.Toolkit.Uwp.Notifications.ToastGenericAppLogo] $AppLogoOverride,
 
-        [ToastGenericAttributionText] $Attribution,
+        [Microsoft.Toolkit.Uwp.Notifications.ToastGenericAttributionText] $Attribution,
 
         [uri] $BaseUri,
 
-        [ToastGenericHeroImage] $HeroImage,
+        [Microsoft.Toolkit.Uwp.Notifications.ToastGenericHeroImage] $HeroImage,
 
         [string] $Language
     )
 
-    $Binding = [ToastBindingGeneric]::new()
+    $Binding = [Microsoft.Toolkit.Uwp.Notifications.ToastBindingGeneric]::new()
 
     if ($Children)
     {

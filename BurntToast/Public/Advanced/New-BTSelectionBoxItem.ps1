@@ -1,6 +1,4 @@
-﻿using namespace Microsoft.Toolkit.Uwp.Notifications
-
-function New-BTSelectionBoxItem
+﻿function New-BTSelectionBoxItem
 {
     <#
         .SYNOPSIS
@@ -24,7 +22,7 @@ function New-BTSelectionBoxItem
     #>
 
     [CmdletBinding()]
-    [OutputType([ToastSelectionBoxItem])]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem])]
 
     param
     (
@@ -35,5 +33,5 @@ function New-BTSelectionBoxItem
         [string] $Content
     )
 
-    [ToastSelectionBoxItem]::new($Id, $Content)
+    [Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem]::new($Id, $Content)
 }

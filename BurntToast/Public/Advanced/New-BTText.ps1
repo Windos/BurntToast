@@ -1,6 +1,4 @@
-﻿using namespace Microsoft.Toolkit.Uwp.Notifications
-
-function New-BTText
+﻿function New-BTText
 {
     <#
         .SYNOPSIS
@@ -39,7 +37,7 @@ function New-BTText
     #>
 
     [CmdletBinding()]
-    [OutputType([AdaptiveText])]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.AdaptiveText])]
     param
     (
         [Parameter()]
@@ -52,14 +50,14 @@ function New-BTText
 
         [switch] $Wrap,
 
-        [AdaptiveTextAlign] $Align,
+        [Microsoft.Toolkit.Uwp.Notifications.AdaptiveTextAlign] $Align,
 
-        [AdaptiveTextStyle] $Style,
+        [Microsoft.Toolkit.Uwp.Notifications.AdaptiveTextStyle] $Style,
 
         [string] $Language
     )
 
-    $TextObj = [AdaptiveText]::new()
+    $TextObj = [Microsoft.Toolkit.Uwp.Notifications.AdaptiveText]::new()
 
     if ($Text)
     {

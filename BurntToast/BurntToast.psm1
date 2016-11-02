@@ -1,8 +1,12 @@
-$Public  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue )
+$PublicBasic  = @( Get-ChildItem -Path $PSScriptRoot\Public\Basic\*.ps1 -ErrorAction SilentlyContinue )
+$PublicAdvanced  = @( Get-ChildItem -Path $PSScriptRoot\Public\Advanced\*.ps1 -ErrorAction SilentlyContinue )
 $Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue )
-$Library = @( Get-ChildItem -Path $PSScriptRoot\lib\ -Filter *.dll -Recurse -ErrorAction SilentlyContinue )
+$Library = @( Get-ChildItem -Path $PSScriptRoot\lib\*.dll -Recurse -ErrorAction SilentlyContinue )
 
-Foreach($Import in @($Public + $Private))
+$Script:Config = Get-Content -Path $PSScriptRoot\config.json -ErrorAction SilentlyContinue | ConvertFrom-Json
+$Script:DefaultImage = "$PSScriptRoot$($Script:Config.AppLogo)"
+
+Foreach($Import in @($PublicBasic + $PublicAdvanced + $Private))
 {
     Try
     {
@@ -26,6 +30,11 @@ Foreach($Type in $Library)
     }
 }
 
-$null = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$ModuleMembers = $PublicBasic.BaseName
 
-Export-ModuleMember -Function @($Public.BaseName)
+if ($Script:Config.FunctionLevel -eq 'Advanced')
+{
+    $ModuleMembers = $ModuleMembers + $PublicAdvanced.BaseName
+}
+
+Export-ModuleMember -Function $ModuleMembers

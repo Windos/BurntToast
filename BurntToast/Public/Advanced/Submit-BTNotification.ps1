@@ -1,6 +1,4 @@
-﻿using namespace Microsoft.Toolkit.Uwp.Notifications
-
-function Submit-BTNotification
+﻿function Submit-BTNotification
 {
     <#
         .SYNOPSIS
@@ -32,13 +30,16 @@ function Submit-BTNotification
     param
     (
         [Parameter()]
-        [ToastContent] $Content,
+        [Microsoft.Toolkit.Uwp.Notifications.ToastContent] $Content,
 
         [Parameter()]
-        [string] $AppId = 'BurntToast'
+        [string] $AppId = $Script:Config.AppId
     )
 
     #TODO: Add checking for valid AppId in registry
+
+    $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
+    $null = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
 
     $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::new()
     $ToastXml.LoadXml($Content.GetContent())

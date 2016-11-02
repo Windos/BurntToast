@@ -1,6 +1,4 @@
-﻿using namespace Microsoft.Toolkit.Uwp.Notifications
-
-function New-BTContent
+﻿function New-BTContent
 {
     <#
         .SYNOPSIS
@@ -24,26 +22,26 @@ function New-BTContent
     #>
 
     [CmdletBinding()]
-    [OutputType([ToastContent])]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastContent])]
     param
     (
         [Parameter()]
-        [IToastActions] $Actions,
+        [Microsoft.Toolkit.Uwp.Notifications.IToastActions] $Actions,
 
-        [ToastActivationType] $ActivationType,
+        [Microsoft.Toolkit.Uwp.Notifications.ToastActivationType] $ActivationType,
 
-        [ToastAudio] $Audio,
+        [Microsoft.Toolkit.Uwp.Notifications.ToastAudio] $Audio,
 
-        [ToastDuration] $Duration,
+        [Microsoft.Toolkit.Uwp.Notifications.ToastDuration] $Duration,
 
         [string] $Launch,
 
-        [ToastScenario] $Scenario,
+        [Microsoft.Toolkit.Uwp.Notifications.ToastScenario] $Scenario,
 
-        [ToastVisual] $Visual
+        [Microsoft.Toolkit.Uwp.Notifications.ToastVisual] $Visual
     )
 
-    $ToastContent = [ToastContent]::new()
+    $ToastContent = [Microsoft.Toolkit.Uwp.Notifications.ToastContent]::new()
 
     if ($Actions)
     {

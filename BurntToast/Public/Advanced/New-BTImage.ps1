@@ -1,6 +1,4 @@
-﻿using namespace Microsoft.Toolkit.Uwp.Notifications
-
-function New-BTImage
+﻿function New-BTImage
 {
     <#
         .SYNOPSIS
@@ -28,9 +26,9 @@ function New-BTImage
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'Image')]
-    [OutputType([AdaptiveImage], ParameterSetName = 'Image')]
-    [OutputType([ToastGenericAppLogo], ParameterSetName = 'AppLogo')]
-    [OutputType([ToastGenericHeroImage], ParameterSetName = 'Hero')]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.AdaptiveImage], ParameterSetName = 'Image')]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastGenericAppLogo], ParameterSetName = 'AppLogo')]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastGenericHeroImage], ParameterSetName = 'Hero')]
 
     param
     (
@@ -49,11 +47,11 @@ function New-BTImage
         [switch] $HeroImage,
         
         [Parameter(ParameterSetName = 'Image')]
-        [AdaptiveImageAlign] $Align,
+        [Microsoft.Toolkit.Uwp.Notifications.AdaptiveImageAlign] $Align,
         
         [Parameter(ParameterSetName = 'Image')]
         [Parameter(ParameterSetName = 'AppLogo')]
-        [AdaptiveImageCrop] $Crop,
+        [Microsoft.Toolkit.Uwp.Notifications.AdaptiveImageCrop] $Crop,
 
         [Parameter(ParameterSetName = 'Image')]
         [switch] $RemoveMargin,
@@ -66,7 +64,7 @@ function New-BTImage
     {
         'Image'
         {
-            $Image = [AdaptiveImage]::new()
+            $Image = [Microsoft.Toolkit.Uwp.Notifications.AdaptiveImage]::new()
 
             if ($Align)
             {
@@ -82,7 +80,7 @@ function New-BTImage
         }
         'AppLogo'
         {
-            $Image = [ToastGenericAppLogo]::new()
+            $Image = [Microsoft.Toolkit.Uwp.Notifications.ToastGenericAppLogo]::new()
 
             if ($Crop)
             {
@@ -91,7 +89,7 @@ function New-BTImage
         }
         'Hero'
         {
-            $Image = [ToastGenericHeroImage]::new()
+            $Image = [Microsoft.Toolkit.Uwp.Notifications.ToastGenericHeroImage]::new()
         }
     }
     

@@ -1,6 +1,4 @@
-﻿using namespace Microsoft.Toolkit.Uwp.Notifications
-
-function New-BTInput
+﻿function New-BTInput
 {
     <#
         .SYNOPSIS
@@ -24,8 +22,8 @@ function New-BTInput
     #>
 
     [CmdletBinding(DefaultParametersetName = 'Text')]
-    [OutputType([ToastTextBox], ParametersetName = 'Text')]
-    [OutputType([ToastSelectionBox], ParametersetName = 'Text')]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastTextBox], ParametersetName = 'Text')]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBox], ParametersetName = 'Text')]
 
     param
     (
@@ -46,14 +44,14 @@ function New-BTInput
 
         [Parameter(Mandatory,
                    ParametersetName = 'Selection')]
-        [ToastSelectionBoxItem[]] $Items
+        [Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem[]] $Items
     )
 
     switch ($PsCmdlet.ParameterSetName)
     {
         'Text'
         {
-            $ToastInput = [ToastTextBox]::new($Id)
+            $ToastInput = [Microsoft.Toolkit.Uwp.Notifications.ToastTextBox]::new($Id)
 
             if ($PlaceholderContent)
             {
@@ -67,7 +65,7 @@ function New-BTInput
         }
         'Selection'
         {
-            $ToastInput = [ToastSelectionBox]::new($Id)
+            $ToastInput = [Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBox]::new($Id)
 
             if ($DefaultSelectionBoxItemId)
             {

@@ -1,6 +1,4 @@
-﻿using namespace Microsoft.Toolkit.Uwp.Notifications
-
-function New-BTAudio
+﻿function New-BTAudio
 {
     <#
         .SYNOPSIS
@@ -49,7 +47,7 @@ function New-BTAudio
     #>
 
     [CmdletBinding()]
-    [OutputType([ToastAudio])]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastAudio])]
     param
     (
         [Parameter()]
@@ -64,7 +62,7 @@ function New-BTAudio
 
     #TODO: Add ability to select 'ms-winsoundevent:Notification' sounds
 
-    $Audio = [ToastAudio]::new()
+    $Audio = [Microsoft.Toolkit.Uwp.Notifications.ToastAudio]::new()
     
     if ($Source)
     {

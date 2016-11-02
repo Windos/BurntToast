@@ -1,6 +1,4 @@
-﻿using namespace Microsoft.Toolkit.Uwp.Notifications
-
-function New-BTContextMenuItem
+﻿function New-BTContextMenuItem
 {
     <#
         .SYNOPSIS
@@ -24,7 +22,7 @@ function New-BTContextMenuItem
     #>
 
     [CmdletBinding()]
-    [OutputType([ToastContextMenuItem])]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem])]
 
     param
     (
@@ -35,10 +33,10 @@ function New-BTContextMenuItem
         [string] $Arguments,
 
         [Parameter()]
-        [ToastActivationType] $ActivationType
+        [Microsoft.Toolkit.Uwp.Notifications.ToastActivationType] $ActivationType
     )
 
-    $MenuItem = [ToastContextMenuItem]::new($Content, $Arguments)
+    $MenuItem = [Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem]::new($Content, $Arguments)
     
     if ($ActivationType)
     {

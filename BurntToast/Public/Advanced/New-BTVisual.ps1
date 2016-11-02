@@ -1,6 +1,4 @@
-﻿using namespace Microsoft.Toolkit.Uwp.Notifications
-
-function New-BTVisual
+﻿function New-BTVisual
 {
     <#
         .SYNOPSIS
@@ -24,11 +22,11 @@ function New-BTVisual
     #>
 
     [CmdletBinding()]
-    [OutputType([ToastVisual])]
+    [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastVisual])]
     param
     (
         [Parameter()]
-        [ToastBindingGeneric] $BindingGeneric,
+        [Microsoft.Toolkit.Uwp.Notifications.ToastBindingGeneric] $BindingGeneric,
 
         [switch] $AddImageQuery,
 
@@ -37,7 +35,7 @@ function New-BTVisual
         [string] $Language
     )
 
-    $Visual = [ToastVisual]::new()
+    $Visual = [Microsoft.Toolkit.Uwp.Notifications.ToastVisual]::new()
 
     if ($BindingGeneric)
     {
