@@ -1,4 +1,4 @@
-﻿using module BurntToast.Class
+﻿using namespace Microsoft.Toolkit.Uwp.Notifications
 
 function New-BTVisual
 {
@@ -24,19 +24,40 @@ function New-BTVisual
     #>
 
     [CmdletBinding()]
-    [OutputType([Visual])]
+    [OutputType([ToastVisual])]
     param
     (
-        [Parameter(Mandatory)]
-        [object[]] $Element
+        [Parameter()]
+        [ToastBindingGeneric] $BindingGeneric,
+
+        [switch] $AddImageQuery,
+
+        [uri] $BaseUri,
+
+        [string] $Language
     )
 
-    $Binding = [Binding]::new()
+    $Visual = [ToastVisual]::new()
 
-    foreach ($Ele in $Element)
+    if ($BindingGeneric)
     {
-        $Binding.AddElement($Ele)
+        $Visual.BindingGeneric = $BindingGeneric
     }
 
-    [Visual]::new($Binding)
+    if ($AddImageQuery)
+    {
+        $Visual.AddImageQuery = $AddImageQuery
+    }
+
+    if ($BaseUri)
+    {
+        $Visual.BaseUri = $BaseUri
+    }
+
+    if ($Language)
+    {
+        $Visual.Language = $Language
+    }
+
+    $Visual
 }

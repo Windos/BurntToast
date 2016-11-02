@@ -1,4 +1,4 @@
-﻿using module BurntToast.Class
+﻿using namespace Microsoft.Toolkit.Uwp.Notifications
 
 function New-BTTextElement
 {
@@ -39,20 +39,55 @@ function New-BTTextElement
     #>
 
     [CmdletBinding()]
-    [OutputType([Text])]
+    [OutputType([AdaptiveText])]
     param
     (
         [Parameter()]
-        [alias('Text')]
-        [String] $Content = ''
+        [alias('Content')]
+        [string] $Text,
+
+        [int] $MaxLines,
+
+        [int] $MinLines,
+
+        [bool] $Wrap,
+
+        [AdaptiveTextAlign] $Align,
+
+        [AdaptiveTextStyle] $Style
     )
 
-    if ($Content)
+    $TextObj = [AdaptiveText]::new()
+
+    if ($Text)
     {
-        [Text]::new($Content)
+        $TextObj.Text = $Text
     }
-    else
+    
+    if ($MaxLines)
     {
-        [Text]::new($true)
+        $TextObj.HintMaxLines = $MaxLines
     }
+
+    if ($MinLines)
+    {
+        $TextObj.HintMinLines = $MinLines
+    }
+
+    if ($Wrap)
+    {
+        $TextObj.HintWrap = $Wrap
+    }
+
+    if ($Align)
+    {
+        $TextObj.HintAlign = $Align
+    }
+
+    if ($Style)
+    {
+        $TextObj.HintStyle = $Style
+    }
+
+    $TextObj
 }

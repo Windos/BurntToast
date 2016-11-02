@@ -64,9 +64,9 @@ function New-BTAudioElement
 
     $Audio = [ToastAudio]::new()
     
-    if ($uri)
+    if ($Source)
     {
-        $Audio.Src = $uri
+        $Audio.Src = $Source
     }
 
     $Audio.Loop = $Loop
