@@ -62,6 +62,8 @@ function New-BTAudio
         [switch] $Silent
     )
 
+    #TODO: Add ability to select 'ms-winsoundevent:Notification' sounds
+
     $Audio = [ToastAudio]::new()
     
     if ($Source)

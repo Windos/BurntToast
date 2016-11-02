@@ -27,8 +27,11 @@ function New-BTImage
         https://github.com/Windos/BurntToast
     #>
 
-    [CmdletBinding()]
-    [OutputType([AdaptiveImage])]
+    [CmdletBinding(DefaultParameterSetName = 'Image')]
+    [OutputType([AdaptiveImage], ParameterSetName = 'Image')]
+    [OutputType([ToastGenericAppLogo], ParameterSetName = 'AppLogo')]
+    [OutputType([ToastGenericHeroImage], ParameterSetName = 'Hero')]
+
     param
     (
         [Parameter()]
@@ -37,17 +40,60 @@ function New-BTImage
         [Parameter()]
         [string] $AlternateText,
 
-        [Parameter()]
+        [Parameter(Mandatory,
+                   ParameterSetName = 'AppLogo')]
+        [switch] $AppLogoOverride,
+
+        [Parameter(Mandatory,
+                   ParameterSetName = 'Hero')]
+        [switch] $HeroImage,
+        
+        [Parameter(ParameterSetName = 'Image')]
         [AdaptiveImageAlign] $Align,
         
-        [Parameter()]
+        [Parameter(ParameterSetName = 'Image')]
+        [Parameter(ParameterSetName = 'AppLogo')]
         [AdaptiveImageCrop] $Crop,
 
+        [Parameter(ParameterSetName = 'Image')]
+        [switch] $RemoveMargin,
+
         [Parameter()]
-        [switch] $RemoveMargin
+        [switch] $AddImageQuery
     )
 
-    $Image = [AdaptiveImage]::new()
+    switch ($PsCmdlet.ParameterSetName)
+    {
+        'Image'
+        {
+            $Image = [AdaptiveImage]::new()
+
+            if ($Align)
+            {
+                $Image.HintAlign = $Align
+            }
+
+            if ($Crop)
+            {
+                $Image.HintCrop = $Crop
+            }
+
+            $Image.HintRemoveMargin = $RemoveMargin
+        }
+        'AppLogo'
+        {
+            $Image = [ToastGenericAppLogo]::new()
+
+            if ($Crop)
+            {
+                $Image.HintCrop = $Crop
+            }
+        }
+        'Hero'
+        {
+            $Image = [ToastGenericHeroImage]::new()
+        }
+    }
     
     if ($Source)
     {
@@ -59,17 +105,10 @@ function New-BTImage
         $Image.AlternateText = $AlternateText
     }
 
-    if ($Align)
+    if ($AddImageQuery)
     {
-        $Image.HintAlign = $Align
+        $Image.AddImageQuery = $AddImageQuery
     }
-
-    if ($Crop)
-    {
-        $Image.HintCrop = $Crop
-    }
-
-    $Image.HintRemoveMargin = $RemoveMargin
 
     $Image
 }
