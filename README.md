@@ -1,10 +1,20 @@
-** UNDER RE-CONSTRUCTION **
-
 # BurntToast
 PowerShell Module for displaying Windows 10 Toast Notifications
 
+## Install
+
+### PowerShell Gallery Install (Requires PowerShell v5)
+
+    Install-Module -Name BurntToast
+
+See the [PowerShell Gallery](http://www.powershellgallery.com/packages/BurntToast/) for the complete details and instructions.
+
+### Manual Install
+
+Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download/v0.5.0/BurntToast.zip) and extract the contents into `C:\Users\[User]\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
+
 ## Releases
-* [Bleeding Edge](https://github.com/Windos/BurntToast/archive/master.zip) (Development/Raw Repo - **CAUTION**)
+* [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.5.1.zip) (Development/Raw Repo - **CAUTION**)
 * [v0.5.0](https://github.com/Windos/BurntToast/releases/download/v0.5.0/BurntToast.zip)
     * Converted to using the UWP Community Toolkit.
     * Snooze and Dismiss now available and working.
