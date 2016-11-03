@@ -35,27 +35,14 @@
         This command creates and displays a Toast Notification with all default values.
         
         .EXAMPLE
-        New-BurntToastNotification -FirstLine 'Example Script' -SecondLine 'The example script has run successfully.'
+        New-BurntToastNotification -Text 'Example Script', 'The example script has run successfully.'
         
-        This command creates and displays a Toast Notification with customized title and display text, but with the default image.
+        This command creates and displays a Toast Notification with customized title and display text.
 
         .EXAMPLE
-        New-BurntToastNotification -Template 'ToastText01' -FirstLine 'The example script has run successfully. This toast has no title.'
-
-        This command creates and displays a Toast Notification using an imageless template and no embolden title.
-
-        .EXAMPLE
-        New-BurntToastNotification -FirstLine 'WAKE UP!' -Sound 'Alarm2'
+        New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2'
 
         This command creates and displays a Toast Notification which plays a looping alarm sound and lasts longer than a default Toast.
-
-        .EXAMPLE
-        $cred = Get-Credential
-        PS C:\>New-BurntToastNotification -FirstLine 'Admin Example Script' -SecondLine 'The administrative example script has run successfully.' -Credential $cred
-
-        This example prompts for a username and password and supplies the resulting object to the New-BurntToastNotification.
-
-        This enables being able to run a script as an admin user while still being able to display a toast notification to the regular user that is logged into Windows.
         
         .LINK
         https://github.com/Windos/BurntToast
@@ -76,8 +63,7 @@
         #[ValidateScript({ Test-ToastAppId -Id $_ })]
         [String] $AppId,
 
-        [Parameter(Mandatory = $false,
-                   ParameterSetName = 'Sound')]
+        [Parameter(ParameterSetName = 'Sound')]
         [ValidateSet('Default',
                      'IM',
                      'Mail',
