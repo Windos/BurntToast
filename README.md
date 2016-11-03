@@ -13,6 +13,26 @@ See the [PowerShell Gallery](http://www.powershellgallery.com/packages/BurntToas
 
 Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download/v0.5.0/BurntToast.zip) and extract the contents into `C:\Users\[User]\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
 
+## Examples
+
+### Default Toast
+
+    New-BurntToastNotification
+
+![BurntToast Notification Example Default](/Media/Example1-Default.png)
+
+### Customized Toast
+
+    New-BurntToastNotification -Text "Don't forget to smile!", 'Your script ran successfully, celebrate!' -AppLogo C:\smile.jpg
+
+![BurntToast Notification Example Custom](/Media/Example2-Custom.png)
+
+### Alarm Clock
+
+    New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2' -SnoozeAndDismiss
+
+![BurntToast Notification Example Alarm](/Media/Example3-Alarm.png)
+
 ## Releases
 * [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.5.1.zip) (Development/Raw Repo - **CAUTION**)
 * [v0.5.0](https://github.com/Windos/BurntToast/releases/download/v0.5.0/BurntToast.zip)
@@ -31,10 +51,10 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 ## Contributors
 * [Windos](https://github.com/Windos)
 
-## TODO 
+## TODO
 * see [TODO](TODO.md) file
 
-## License 
+## License
 * see [LICENSE](LICENSE.md) file
 
 ## Image Credit
