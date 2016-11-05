@@ -1,4 +1,5 @@
-# BurntToast
+![BurntToast Logo Banner](/Media/BurntToast-Wide.png)
+
 PowerShell Module for displaying Windows 10 Toast Notifications
 
 ## Install
