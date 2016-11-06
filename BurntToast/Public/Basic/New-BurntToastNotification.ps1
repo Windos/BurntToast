@@ -45,7 +45,7 @@
         This command creates and displays a Toast Notification which plays a looping alarm sound and lasts longer than a default Toast.
         
         .LINK
-        https://github.com/Windos/BurntToast
+        https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastNotification.md
     #>
     [alias('Toast')]
     [CmdletBinding(DefaultParameterSetName = 'Sound')]

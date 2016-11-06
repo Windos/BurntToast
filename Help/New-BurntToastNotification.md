@@ -1,6 +1,6 @@
 ---
 external help file: BurntToast-help.xml
-online version: https://github.com/Windos/BurntToast
+online version: https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastNotification.md
 schema: 2.0.0
 ---
 
@@ -166,5 +166,5 @@ In this situation you should use the Credential parameter to specify Example\Use
 
 ## RELATED LINKS
 
-[https://github.com/Windos/BurntToast](https://github.com/Windos/BurntToast)
+[https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastNotification.md](https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastNotification.md)
 
