@@ -26,4 +26,6 @@ PrivateData = @{
 
 }
 
+HelpInfoURI = 'https://github.com/Windos/BurntToast/raw/master/'
+
 }
