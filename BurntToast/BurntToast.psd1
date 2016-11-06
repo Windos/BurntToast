@@ -26,6 +26,6 @@ PrivateData = @{
 
 }
 
-HelpInfoURI = 'http://github.com/Windos/BurntToast/raw/master/'
+HelpInfoURI = 'http://pshelpcontent.king.geek.nz'
 
 }
