@@ -41,4 +41,4 @@ You cannot pipe input to Get-BTFunctionLevel.
 
 ## RELATED LINKS
 
-[https://github.com/Windos/BurntToast/blob/master/Help/Get-BTFunctionLevel.md](https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastNotification.md)
+[Set-BTFunctionLevel](https://github.com/Windos/BurntToast/blob/master/Help/Set-BTFunctionLevel.md)
