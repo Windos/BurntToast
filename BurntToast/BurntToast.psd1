@@ -18,9 +18,9 @@ PrivateData = @{
         Tags = @('Notifications', 'Utilities', 'Windows10', 'Toast')
         LicenseUri = 'https://github.com/Windos/BurntToast/blob/master/LICENSE'
         ProjectUri = 'https://github.com/Windos/BurntToast'
-        IconUri = 'https://cdn.rawgit.com/Windos/BurntToast/master/Media/BurntToast.png'
+        IconUri = 'https://cdn.rawgit.com/Windos/BurntToast/master/Media/BurntToast-Logo.png'
         ReleaseNotes = '
-* 
+* BurntToast now has its own, original, logo!
 '
     }
 
