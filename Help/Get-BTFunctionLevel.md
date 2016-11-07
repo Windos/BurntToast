@@ -1,12 +1,13 @@
 ---
 external help file: BurntToast-help.xml
-online version: https://github.com/Windos/BurntToast
+online version: https://github.com/Windos/BurntToast/blob/master/Help/Get-BTFunctionLevel.md
 schema: 2.0.0
 ---
 
 # Get-BTFunctionLevel
 
 ## SYNOPSIS
+Displays the current Function Level of the BurntToast module.
 
 ## SYNTAX
 
@@ -15,14 +16,16 @@ Get-BTFunctionLevel
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+The Get-BTFunctionLevel function returns the current function level of the BurntToast module as defined in config.json.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-Get-BTFunctionLevel
+PS C:\> Get-BTFunctionLevel
 ```
+
+This command returns the function level of the BurntToast module as a string.
 
 ## PARAMETERS
 
@@ -30,13 +33,12 @@ Get-BTFunctionLevel
 
 ### None
 
-You cannot pipe input to this cmdlet.
+You cannot pipe input to Get-BTFunctionLevel.
 
 ## OUTPUTS
 
-## NOTES
+### System.String
 
 ## RELATED LINKS
 
-[https://github.com/Windos/BurntToast](https://github.com/Windos/BurntToast)
-
+[Set-BTFunctionLevel](https://github.com/Windos/BurntToast/blob/master/Help/Set-BTFunctionLevel.md)
