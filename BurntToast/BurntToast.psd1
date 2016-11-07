@@ -26,6 +26,6 @@ PrivateData = @{
 
 }
 
-HelpInfoURI = 'http://pshelpcontent.king.geek.nz'
+HelpInfoURI = 'http://pshelpcontent.king.geek.nz/'
 
 }
