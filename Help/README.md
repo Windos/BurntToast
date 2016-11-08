@@ -51,7 +51,13 @@ The Get-BTFunctionLevel function returns the current function level of the Burnt
 {{Manually Enter New-BurntToastNotification Description Here}}
 
 ### [Set-BTFunctionLevel](Set-BTFunctionLevel.md)
-{{Manually Enter Set-BTFunctionLevel Description Here}}
+The Set-BTFunctionLevel function changes the function level of the BurntToast module as defined in config.json.
+
+To use Set-BTFunctionLevel, use the FunctionLevel parameter to identify the desired FunctionLevel. The only valid inputs to the FunctionLevel parameter are 'Basic' and 'Advanced.'
+
+As the confirguration for the BurntToast module is saved into a file, PowerShell must be run as an Administrator in order to set a new function level if the module is saved to a location other than the users' home directory. This function will issue an error if this is the case.
+
+The BurntToast module needs to be re-imported in order for a new function level to take effect and this function will issue a warning when it runs successfully.
 
 ### [Submit-BTNotification](Submit-BTNotification.md)
 {{Manually Enter Submit-BTNotification Description Here}}

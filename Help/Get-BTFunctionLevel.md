@@ -7,7 +7,7 @@ schema: 2.0.0
 # Get-BTFunctionLevel
 
 ## SYNOPSIS
-Displays the current Function Level of the BurntToast module.
+Displays the current function level of the BurntToast module.
 
 ## SYNTAX
 

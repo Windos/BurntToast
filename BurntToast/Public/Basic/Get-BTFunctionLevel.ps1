@@ -2,7 +2,7 @@ function Get-BTFunctionLevel
 {
     <#
         .SYNOPSIS
-        Displays the current Function Level of the BurntToast module.
+        Displays the current function level of the BurntToast module.
         
         .DESCRIPTION
         The Get-BTFunctionLevel function returns the current function level of the BurntToast module as defined in config.json.
@@ -19,10 +19,9 @@ function Get-BTFunctionLevel
         The Get-BTFunctionLevel function is classified as: Basic
 
         .EXAMPLE
-        Set-BTFunctionLevel
+        Get-BTFunctionLevel
 
-        .EXAMPLE
-        Set-BTFunctionLevel -FunctionLevel Advanced
+        This command returns the function level of the BurntToast module as a string.
         
         .LINK
         https://github.com/Windos/BurntToast/blob/master/Help/Get-BTFunctionLevel.md
