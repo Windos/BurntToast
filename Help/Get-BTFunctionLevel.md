@@ -1,9 +1,3 @@
----
-external help file:
-online version: https://github.com/Windos/BurntToast/blob/master/Help/Get-BTFunctionLevel.md
-schema: 2.0.0
----
-
 # Get-BTFunctionLevel
 
 ## SYNOPSIS

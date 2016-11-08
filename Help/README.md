@@ -1,12 +1,4 @@
----
-Module Name: BurntToast
-Module Guid: 751a2aeb-a68f-422e-a2ea-376bdd81612a
-Download Help Link: http://pshelpcontent.king.geek.nz/
-Help Version: 1.0.0.2
-Locale: en-US
----
-
-# BurntToast Module
+# BurntToast Help
 ## Description
 {{Manually Enter Description Here}}
 
