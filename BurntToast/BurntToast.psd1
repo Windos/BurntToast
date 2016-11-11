@@ -21,6 +21,7 @@
             ReleaseNotes = '
 * Confirmed: Now **ONLY** works on Windows 10
 * BurntToast now has its own, original, logo!
+* New public function to adjust function level of module: Set-BTFunctionLevel
 '
         }
     }
