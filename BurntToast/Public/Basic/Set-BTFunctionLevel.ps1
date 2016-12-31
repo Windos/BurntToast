@@ -48,7 +48,6 @@ function Set-BTFunctionLevel
         Get-BTFunctionLevel
     #>
 
-    [OutputType($null)]
     param
     (
         [Parameter()]

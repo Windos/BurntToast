@@ -26,7 +26,6 @@
     #>
 
     [CmdletBinding()]
-    [OutputType($null)]
     param
     (
         [Parameter()]

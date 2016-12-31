@@ -43,6 +43,7 @@
         .LINK
         https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastNotification.md
     #>
+
     [alias('Toast')]
     [CmdletBinding(DefaultParameterSetName = 'Sound')]
     param
