@@ -2,18 +2,14 @@
 {
     <#
         .SYNOPSIS
-        Creates a new Image Element for Toast Notifications.
 
         .DESCRIPTION
-        The New-BTImageElement cmdlet creates a new Image Element for Toast Notifications.
-    
-        You can use the parameters of New-BTImageElement to specify the source image, alt text, placement on the Toast Notification and crop shape.
 
         .INPUTS
         None
 
         .OUTPUTS
-        Image
+        None
         
         .EXAMPLE
 
