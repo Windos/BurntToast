@@ -58,7 +58,7 @@
 
         [Parameter()]
         #[ValidateScript({ Test-ToastAppId -Id $_ })]
-        [String] $AppId,
+        [String] $AppId = $Script:Config.AppId,
 
         [Parameter(ParameterSetName = 'Sound')]
         [ValidateSet('Default',
@@ -160,5 +160,5 @@
         }
     }
 
-    Submit-BTNotification -Content $Content
+    Submit-BTNotification -Content $Content -AppId $AppId
 }

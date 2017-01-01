@@ -22,6 +22,7 @@
 * Confirmed: Now **ONLY** works on Windows 10
 * BurntToast now has its own, original, logo!
 * New public function to adjust function level of module: Set-BTFunctionLevel
+* Implemented checking for and registering of AppId in the registry to ensure proper Toast behaviour in the Action Center
 '
         }
     }
