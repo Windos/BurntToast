@@ -12,7 +12,7 @@ See the [PowerShell Gallery](http://www.powershellgallery.com/packages/BurntToas
 
 ### Manual Install
 
-Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download/v0.5.0/BurntToast.zip) and extract the contents into `C:\Users\[User]\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
+Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download/v0.5.1/BurntToast.zip) and extract the contents into `C:\Users\[User]\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
 
 ## Examples
 
@@ -38,7 +38,13 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
 
-* [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.5.1.zip) (Development/Raw Repo - **CAUTION**)
+* [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.5.2.zip) (Development/Raw Repo - **CAUTION**)
+* [v0.5.1](https://github.com/Windos/BurntToast/releases/download/v0.5.1/BurntToast.zip)
+    * Small bug fixes (thanks for opening issues!)
+    * Confirmed: Now **ONLY** works on Windows 10
+    * BurntToast now has its own, original, logo!
+    * New public function to adjust function level of module: Set-BTFunctionLevel
+    * Implemented checking for and registering of AppId in the registry to ensure proper Toast behaviour in the Action Center
 * [v0.5.0](https://github.com/Windos/BurntToast/releases/download/v0.5.0/BurntToast.zip)
     * Converted to using the UWP Community Toolkit.
     * Snooze and Dismiss now available and working.
