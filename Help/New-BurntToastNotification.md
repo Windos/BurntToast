@@ -1,9 +1,3 @@
----
-external help file: BurntToast-help.xml
-online version: https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastNotification.md
-schema: 2.0.0
----
-
 # New-BurntToastNotification
 
 ## SYNOPSIS
@@ -24,7 +18,7 @@ New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <Strin
 ```
 
 ## DESCRIPTION
-The New-BurntToastNotification cmdlet creates and displays a Toast Notification on Microsoft Windows 8 and Windows 10 operating systems.
+The New-BurntToastNotification cmdlet creates and displays a Toast Notification on Microsoft Windows 10.
 
 You can specify the text and/or image displayed as well as selecting the sound that is played when the Toast Notification is displayed.
 

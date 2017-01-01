@@ -2,18 +2,14 @@
 {
     <#
         .SYNOPSIS
-        Creates a new Image Element for Toast Notifications.
 
         .DESCRIPTION
-        The New-BTImageElement cmdlet creates a new Image Element for Toast Notifications.
-    
-        You can use the parameters of New-BTImageElement to specify the source image, alt text, placement on the Toast Notification and crop shape.
 
         .INPUTS
         None
 
         .OUTPUTS
-        Image
+        None
         
         .EXAMPLE
 
@@ -26,7 +22,6 @@
     #>
 
     [CmdletBinding()]
-    [OutputType($null)]
     param
     (
         [Parameter()]
@@ -36,7 +31,10 @@
         [string] $AppId = $Script:Config.AppId
     )
 
-    #TODO: Add checking for valid AppId in registry
+    if (!(Test-Path -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\$AppId"))
+    {
+        Write-Warning -Message "The AppId $AppId is not present in the registry, please run New-BTAppId to avoid inconsistent Toast behaviour."
+    }
 
     $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
     $null = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]

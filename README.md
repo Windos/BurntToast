@@ -1,6 +1,6 @@
 ![BurntToast Logo Banner](/Media/BurntToast-Wide.png)
 
-PowerShell Module for displaying Windows 10 Toast Notifications
+PowerShell Module for displaying **Windows 10** Toast Notifications
 
 ## Install
 
@@ -35,12 +35,15 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 ![BurntToast Notification Example Alarm](/Media/Example3-Alarm.png)
 
 ## Releases
+
+**Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
+
 * [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.5.1.zip) (Development/Raw Repo - **CAUTION**)
 * [v0.5.0](https://github.com/Windos/BurntToast/releases/download/v0.5.0/BurntToast.zip)
     * Converted to using the UWP Community Toolkit.
     * Snooze and Dismiss now available and working.
     * Documentation is out of date, this will be polished in the next release.
-* [v0.4.0](https://github.com/Windos/BurntToast/releases/download/v0.4.0/BurntToast.zip)
+* [v0.4.0](https://github.com/Windos/BurntToast/releases/download/v0.4.0/BurntToast.zip) - Last version that supports Windows 8
     * Credential parameter added so toasts can be generated for regular user when running PowerShell host as a different (e.g. Admin) account.
 * [v0.3.0](https://github.com/Windos/BurntToast/releases/download/v0.3.0/BurntToast.zip)
     * Help has been added

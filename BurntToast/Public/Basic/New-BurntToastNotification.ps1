@@ -5,14 +5,14 @@
         Creates and displays a Toast Notification.
         
         .DESCRIPTION
-        The New-BurntToastNotification cmdlet creates and displays a Toast Notification on Microsoft Windows 8 and Windows 10 operating systems.
+        The New-BurntToastNotification cmdlet creates and displays a Toast Notification on Microsoft Windows 10.
 
         You can specify the text and/or image displayed as well as selecting the sound that is played when the Toast Notification is displayed.
 
         You can optionally call the New-BurntToastNotification cmdlet with the Toast alias.
         
         .INPUTS
-        None
+        System.String
 
         You cannot pipe input to this cmdlet.
 
@@ -23,11 +23,7 @@
         
         .NOTES
 
-        Assume that you have logged into Windows as Example\User01 and have run a PowerShell host as Example\Admin01.
-
-        When you run the New-BurntToastNotification cmdlet a toast would attempt to be displayed using Admin01's notification manager but this does not exist.
-
-        In this situation you should use the Credential parameter to specify Example\User01 as the user for which notifications should be displayed.
+        The New-BurntToastNotification function is classified as: Basic
         
         .EXAMPLE
         New-BurntToastNotification
@@ -47,6 +43,7 @@
         .LINK
         https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastNotification.md
     #>
+
     [alias('Toast')]
     [CmdletBinding(DefaultParameterSetName = 'Sound')]
     param
@@ -61,7 +58,7 @@
 
         [Parameter()]
         #[ValidateScript({ Test-ToastAppId -Id $_ })]
-        [String] $AppId,
+        [String] $AppId = $Script:Config.AppId,
 
         [Parameter(ParameterSetName = 'Sound')]
         [ValidateSet('Default',
@@ -163,5 +160,5 @@
         }
     }
 
-    Submit-BTNotification -Content $Content
+    Submit-BTNotification -Content $Content -AppId $AppId
 }
