@@ -1,6 +1,6 @@
 ﻿@{
     RootModule = 'BurntToast.psm1'
-    ModuleVersion = '0.5.1'
+    ModuleVersion = '0.5.2'
     # Can only use CompatiblePSEditions if PowerShellVersion is set to 5.1, not sure about limiting this to that version yet.
     # CompatiblePSEditions = @('Desktop')
     GUID = '751a2aeb-a68f-422e-a2ea-376bdd81612a'
@@ -19,10 +19,7 @@
             ProjectUri = 'https://github.com/Windos/BurntToast'
             IconUri = 'https://cdn.rawgit.com/Windos/BurntToast/master/Media/BurntToast-Logo.png'
             ReleaseNotes = '
-* Confirmed: Now **ONLY** works on Windows 10
-* BurntToast now has its own, original, logo!
-* New public function to adjust function level of module: Set-BTFunctionLevel
-* Implemented checking for and registering of AppId in the registry to ensure proper Toast behaviour in the Action Center
+* 
 '
         }
     }
