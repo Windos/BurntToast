@@ -31,6 +31,7 @@ function Get-BTFunctionLevel
     #>
 
     [OutputType([string])]
+    [CmdletBinding()]
     param ()
     
     $Script:Config.FunctionLevel

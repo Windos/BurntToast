@@ -14,7 +14,7 @@ function Set-BTFunctionLevel
         The BurntToast module needs to be re-imported in order for a new function level to take effect and this function will issue a warning when it runs successfully.
         
         .PARAMETER FunctionLevel
-        Specifies the function level to set. Valid inputs are 'Basic' and 'Advanced' and 'Basic' is the default option.
+        Specifies the function level to set. Valid inputs are 'Basic' and 'Advanced', and 'Basic' is the default option.
 
         .INPUTS
         System.String
@@ -48,11 +48,11 @@ function Set-BTFunctionLevel
         Get-BTFunctionLevel
     #>
 
+    [CmdletBinding()]
     param
     (
-        [Parameter()]
         [ValidateSet('Basic','Advanced')] 
-        [string] $FunctionLevel = 'Basic'
+        [String] $FunctionLevel = 'Basic'
     )
     
     $ConfigPath = "$PSScriptRoot\..\..\config.json"
