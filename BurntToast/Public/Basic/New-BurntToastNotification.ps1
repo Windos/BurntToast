@@ -22,7 +22,6 @@
         New-BurntToastNotification displays the Toast Notification that is created.
         
         .NOTES
-
         The New-BurntToastNotification function is classified as: Basic
         
         .EXAMPLE
@@ -48,16 +47,13 @@
     [CmdletBinding(DefaultParameterSetName = 'Sound')]
     param
     (
-        [Parameter()]
         [ValidateCount(0,3)]
         [String[]] $Text = 'Default Notification',
 
-        [Parameter()]
-        #[ValidateScript({ Test-ToastImage -Path $_ })]
+        #TODO: [ValidateScript({ Test-ToastImage -Path $_ })]
         [String] $AppLogo,
 
-        [Parameter()]
-        #[ValidateScript({ Test-ToastAppId -Id $_ })]
+        #TODO: [ValidateScript({ Test-ToastAppId -Id $_ })]
         [String] $AppId = $Script:Config.AppId,
 
         [Parameter(ParameterSetName = 'Sound')]
@@ -92,7 +88,6 @@
                    ParameterSetName = 'Silent')]
         [Switch] $Silent,
 
-        [Parameter()]
         [Switch] $SnoozeAndDismiss
     )
     
