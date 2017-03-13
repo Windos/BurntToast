@@ -9,7 +9,20 @@
     Copyright = '(c) 2015 Joshua (Windos) King. All rights reserved.'
     Description = 'Module for creating and displaying Toast Notifications on Microsoft Windows 10.'
     PowerShellVersion = '5.0'
-    FunctionsToExport = '*'
+    FunctionsToExport = 'New-BTAction',
+                        'New-BTAppId',
+                        'New-BTAudio',
+                        'New-BTBinding',
+                        'New-BTButton',
+                        'New-BTContent',
+                        'New-BTContextMenuItem',
+                        'New-BTImage',
+                        'New-BTInput',
+                        'New-BTSelectionBoxItem',
+                        'New-BTText',
+                        'New-BTVisual',
+                        'New-BurntToastNotification',
+                        'Submit-BTNotification'
     CmdletsToExport = @()
     AliasesToExport = @()
     PrivateData = @{
@@ -19,7 +32,7 @@
             ProjectUri = 'https://github.com/Windos/BurntToast'
             IconUri = 'https://cdn.rawgit.com/Windos/BurntToast/master/Media/BurntToast-Logo.png'
             ReleaseNotes = '
-* 
+* Fixed module commands not auto-loading by removing Basic/Advanced function designation ( :( ).
 '
         }
     }
