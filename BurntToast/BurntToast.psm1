@@ -33,6 +33,7 @@ if ($WinMajorVersion -ge 10)
         }
     }
     
+    Export-ModuleMember -Alias 'Toast'
     Export-ModuleMember -Function $Public.BaseName
 }
 else

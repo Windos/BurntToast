@@ -24,7 +24,7 @@
                         'New-BurntToastNotification',
                         'Submit-BTNotification'
     CmdletsToExport = @()
-    AliasesToExport = @()
+    AliasesToExport = @('Toast')
     PrivateData = @{
         PSData = @{
             Tags = @('Notifications', 'Utilities', 'Windows10', 'Toast')
@@ -35,6 +35,7 @@
 * Fixed module commands not auto-loading by removing Basic/Advanced function designation ( :( ).
 * Exposed ability to have custom buttons via New-BurntToastNotification, passing result from New-BTButton to the -Button parameter.
 * Help created for New-BTButton, and the function has had a pass to ensure it works as per the community toolkit.
+* Help completed for New-BurntToastNotification, and Toast alias now exporting correctly.
 '
         }
     }
