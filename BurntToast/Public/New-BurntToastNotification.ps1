@@ -41,7 +41,7 @@
         This exmaple creates a Toast Notification with a button which will open a link to "http://king.geek.nz" when clicked.
         
         .NOTES
-        I'm *really* sorry about the number of Parameter Sets. The best explination is:
+        I'm *really* sorry about the number of Parameter Sets. The best explanation is:
 
         * You cannot specify a sound and mark the toast as silent at the same time.
         * You cannot specify SnoozeAndDismiss and custom buttons at the same time.

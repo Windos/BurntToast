@@ -224,7 +224,7 @@ You cannot pipe input to this cmdlet.
 New-BurntToastNotification displays the Toast Notification that is created.
 
 ## NOTES
-I'm *really* sorry about the number of Parameter Sets. The best explination is:
+I'm *really* sorry about the number of Parameter Sets. The best explanation is:
 
 * You cannot specify a sound and mark the toast as silent at the same time.
 * You cannot specify SnoozeAndDismiss and custom buttons at the same time.
