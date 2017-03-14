@@ -110,7 +110,7 @@
                    ParameterSetName = 'Silent-Button')]
         [Parameter(Mandatory = $true,
                    ParameterSetName = 'Sound-Button')]
-        [Microsoft.Toolkit.Uwp.Notifications.ToastButton] $Button
+        [Microsoft.Toolkit.Uwp.Notifications.ToastButton[]] $Button
     )
     
     $TextObjects = @()
@@ -163,6 +163,19 @@
         else
         {
             $Content = New-BTContent -Audio $Audio -Visual $Visual -Actions $SnoozeAction
+        }
+    }
+    elseif ($Button)
+    {
+        $ToastActions = New-BTAction -Buttons $Button
+        
+        if ($Long)
+        {
+            $Content = New-BTContent -Audio $Audio -Visual $Visual -Actions $ToastActions -Duration Long
+        }
+        else
+        {
+            $Content = New-BTContent -Audio $Audio -Visual $Visual -Actions $ToastActions
         }
     }
     else
