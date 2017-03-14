@@ -21,9 +21,6 @@
 
         New-BurntToastNotification displays the Toast Notification that is created.
         
-        .NOTES
-        The New-BurntToastNotification function is classified as: Basic
-        
         .EXAMPLE
         New-BurntToastNotification
         
@@ -110,7 +107,7 @@
                    ParameterSetName = 'Silent-Button')]
         [Parameter(Mandatory = $true,
                    ParameterSetName = 'Sound-Button')]
-        [Microsoft.Toolkit.Uwp.Notifications.ToastButton[]] $Button
+        [Microsoft.Toolkit.Uwp.Notifications.IToastButton[]] $Button
     )
     
     $TextObjects = @()
