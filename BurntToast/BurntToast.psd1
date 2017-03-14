@@ -32,8 +32,9 @@
             ProjectUri = 'https://github.com/Windos/BurntToast'
             IconUri = 'https://cdn.rawgit.com/Windos/BurntToast/master/Media/BurntToast-Logo.png'
             ReleaseNotes = '
-* Fixed module commands not auto-loading by removing Basic/Advanced function designation ( :( ).
 * Exposed ability to have custom buttons via New-BurntToastNotification, passing result from New-BTButton to the -Button parameter.
+    * Expect a blog post soon covering some cool ways to use these buttons. Keep an eye out on [king.geek.nz](http://king.geek.nz).
+* Fixed module commands not auto-loading by removing Basic/Advanced function designation ( :( ).
 * Help created for New-BTButton, and the function has had a pass to ensure it works as per the community toolkit.
 * Help completed for New-BurntToastNotification, and Toast alias now exporting correctly.
 '
