@@ -152,43 +152,25 @@
     $Binding = New-BTBinding -Children $TextObjects -AppLogoOverride $AppLogoImage
     $Visual = New-BTVisual -BindingGeneric $Binding
 
+    $ContentSplat = @{'Audio' = $Audio
+                      'Visual' = $Visual
+    }
+    
+    if ($Long)
+    {
+        $ContentSplat.Add('Duration', [Microsoft.Toolkit.Uwp.Notifications.ToastDuration]::Long)
+    }
+    
     if ($SnoozeAndDismiss)
     {
-        $SnoozeAction = New-BTAction -SnoozeAndDismiss
-
-        if ($Long)
-        {
-            $Content = New-BTContent -Audio $Audio -Visual $Visual -Actions $SnoozeAction -Duration Long
-        }
-        else
-        {
-            $Content = New-BTContent -Audio $Audio -Visual $Visual -Actions $SnoozeAction
-        }
+        $ContentSplat.Add('Actions', (New-BTAction -SnoozeAndDismiss))
     }
     elseif ($Button)
     {
-        $ToastActions = New-BTAction -Buttons $Button
-        
-        if ($Long)
-        {
-            $Content = New-BTContent -Audio $Audio -Visual $Visual -Actions $ToastActions -Duration Long
-        }
-        else
-        {
-            $Content = New-BTContent -Audio $Audio -Visual $Visual -Actions $ToastActions
-        }
+        $ContentSplat.Add('Actions', (New-BTAction -Buttons $Button))
     }
-    else
-    {
-        if ($Long)
-        {
-            $Content = New-BTContent -Audio $Audio -Visual $Visual -Duration Long
-        }
-        else
-        {
-            $Content = New-BTContent -Audio $Audio -Visual $Visual
-        }
-    }
+    
+    $Content = New-BTContent @ContentSplat
 
     Submit-BTNotification -Content $Content -AppId $AppId
 }
