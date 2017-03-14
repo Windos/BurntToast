@@ -34,6 +34,7 @@
             ReleaseNotes = '
 * Fixed module commands not auto-loading by removing Basic/Advanced function designation ( :( ).
 * Exposed ability to have custom buttons via New-BurntToastNotification, passing result from New-BTButton to the -Button parameter.
+* Help created for New-BTButton, and the function has had a pass to ensure it works as per the community toolkit.
 '
         }
     }
