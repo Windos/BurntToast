@@ -57,6 +57,10 @@
         [String] $AppId = $Script:Config.AppId,
 
         [Parameter(ParameterSetName = 'Sound')]
+        [Parameter(Mandatory = $true,
+                   ParameterSetName = 'Sound-SnD')]
+        [Parameter(Mandatory = $true,
+                   ParameterSetName = 'Sound-Button')]
         [ValidateSet('Default',
                      'IM',
                      'Mail',
@@ -86,9 +90,27 @@
 
         [Parameter(Mandatory = $true,
                    ParameterSetName = 'Silent')]
+        [Parameter(Mandatory = $true,
+                   ParameterSetName = 'Silent-SnD')]
+        [Parameter(Mandatory = $true,
+                   ParameterSetName = 'Silent-Button')]
         [Switch] $Silent,
 
-        [Switch] $SnoozeAndDismiss
+        [Parameter(Mandatory = $true,
+                   ParameterSetName = 'SnD')]
+        [Parameter(Mandatory = $true,
+                   ParameterSetName = 'Silent-SnD')]
+        [Parameter(Mandatory = $true,
+                   ParameterSetName = 'Sound-SnD')]
+        [Switch] $SnoozeAndDismiss,
+        
+        [Parameter(Mandatory = $true,
+                   ParameterSetName = 'Button')]
+        [Parameter(Mandatory = $true,
+                   ParameterSetName = 'Silent-Button')]
+        [Parameter(Mandatory = $true,
+                   ParameterSetName = 'Sound-Button')]
+        [Microsoft.Toolkit.Uwp.Notifications.ToastButton] $Button
     )
     
     $TextObjects = @()
