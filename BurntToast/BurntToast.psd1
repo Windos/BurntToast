@@ -33,6 +33,7 @@
             IconUri = 'https://cdn.rawgit.com/Windos/BurntToast/master/Media/BurntToast-Logo.png'
             ReleaseNotes = '
 * Fixed module commands not auto-loading by removing Basic/Advanced function designation ( :( ).
+* Exposed ability to have custom buttons via New-BurntToastNotification, passing result from New-BTButton to the -Button parameter.
 '
         }
     }
