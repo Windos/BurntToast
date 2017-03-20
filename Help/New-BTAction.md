@@ -1,49 +1,65 @@
 ---
-external help file: BurntToast-help.xml
-online version: https://github.com/Windos/BurntToast
+online version: https://github.com/Windos/BurntToast/blob/master/Help/New-BTAction.md
 schema: 2.0.0
 ---
 
 # New-BTAction
 
 ## SYNOPSIS
+Creates an action object for a Toast Notification.
 
 ## SYNTAX
 
+### Custom Actions (Default)
+
 ```
-New-BTAction [[-Buttons] <IToastButton[]>] [[-ContextMenuItems] <ToastContextMenuItem[]>]
- [[-Inputs] <IToastInput[]>] [-SnoozeAndDismiss]
+New-BTAction [[-Buttons] <IToastButton[]>] [[-ContextMenuItems] <ToastContextMenuItem[]>] [[-Inputs] <IToastInput[]>]
+```
+
+### SnoozeAndDismiss
+
+```
+New-BTAction -SnoozeAndDismiss
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+The New-BTAction function creates an 'action' object which contains defines the controls displayed at the bottom of a Toast Notification.
+
+Actions can either be system handeled and automatically localized Snooze and Dismiss buttons or a custom collection of inputs.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-
+PS C:\>New-BTAction -SnoozeAndDismiss
 ```
+
+This command creates an action element using the system handled snooze and dismiss modal.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-
+New-BTAction -Buttons (New-BTButton -Content 'Google' -Arguments 'https://google.com')
 ```
+
+This command creates an action element with a single clickable button.
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
+$Button = New-BTButton -Content 'Google' -Arguments 'https://google.com'
+$ContextMenuItem = New-BTContextMenuItem -Content 'Bing' -Arguments 'https://bing.com'
+New-BTAction -Buttons $Button -ContextMenuItems $ContextMenuItem
 
 ```
 
 ## PARAMETERS
 
 ### -Buttons
-{{Fill Buttons Description}}
+Button objects created with the New-BTButton function. Up to five can be included, or less if Context Menu Items are also included.
 
 ```yaml
 Type: IToastButton[]
-Parameter Sets: (All)
-Aliases: 
+Parameter Sets: Custom Actions
+Aliases:
 
 Required: False
 Position: 1
@@ -53,12 +69,12 @@ Accept wildcard characters: False
 ```
 
 ### -ContextMenuItems
-{{Fill ContextMenuItems Description}}
+Right click context menu item objects created with the New-BTContextMenuItem function. Up to five can be included, or less if Buttons are also included.
 
 ```yaml
 Type: ToastContextMenuItem[]
-Parameter Sets: (All)
-Aliases: 
+Parameter Sets: Custom Actions
+Aliases:
 
 Required: False
 Position: 2
@@ -68,12 +84,12 @@ Accept wildcard characters: False
 ```
 
 ### -Inputs
-{{Fill Inputs Description}}
+Input objects created via the New-BTText and New-BTSelectionBoxItem functions. Up to five can be included.
 
 ```yaml
 Type: IToastInput[]
-Parameter Sets: (All)
-Aliases: 
+Parameter Sets: Custom Actions
+Aliases:
 
 Required: False
 Position: 3
@@ -83,14 +99,14 @@ Accept wildcard characters: False
 ```
 
 ### -SnoozeAndDismiss
-{{Fill SnoozeAndDismiss Description}}
+Creates a system handeled snooze and dismiss action. Cannot be included inconjunction with custom actions.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: 
+Parameter Sets: SnoozeAndDismiss
+Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: False
 Accept pipeline input: False
@@ -100,14 +116,14 @@ Accept wildcard characters: False
 ## INPUTS
 
 ### None
+You cannot pipe input to this function.
 
 ## OUTPUTS
 
-### Image
+### Microsoft.Toolkit.Uwp.Notifications.IToastActions
 
 ## NOTES
 
 ## RELATED LINKS
 
-[https://github.com/Windos/BurntToast](https://github.com/Windos/BurntToast)
-
+[New-BTAction](https://github.com/Windos/BurntToast/blob/master/Help/New-BTAction.md)
