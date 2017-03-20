@@ -1,6 +1,6 @@
 ﻿@{
     RootModule = 'BurntToast.psm1'
-    ModuleVersion = '0.5.2'
+    ModuleVersion = '0.5.3'
     # Can only use CompatiblePSEditions if PowerShellVersion is set to 5.1, not sure about limiting this to that version yet.
     # CompatiblePSEditions = @('Desktop')
     GUID = '751a2aeb-a68f-422e-a2ea-376bdd81612a'
@@ -32,11 +32,7 @@
             ProjectUri = 'https://github.com/Windos/BurntToast'
             IconUri = 'https://cdn.rawgit.com/Windos/BurntToast/master/Media/BurntToast-Logo.png'
             ReleaseNotes = '
-* Exposed ability to have custom buttons via New-BurntToastNotification, passing result from New-BTButton to the -Button parameter.
-    * Expect a blog post soon covering some cool ways to use these buttons. Keep an eye out on [king.geek.nz](http://king.geek.nz).
-* Fixed module commands not auto-loading by removing Basic/Advanced function designation ( :( ).
-* Help created for New-BTButton, and the function has had a pass to ensure it works as per the community toolkit.
-* Help completed for New-BurntToastNotification, and Toast alias now exporting correctly.
+* 
 '
         }
     }
