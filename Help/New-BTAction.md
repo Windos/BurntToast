@@ -38,18 +38,19 @@ This command creates an action element using the system handled snooze and dismi
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-New-BTAction -Buttons (New-BTButton -Content 'Google' -Arguments 'https://google.com')
+PS C:\>New-BTAction -Buttons (New-BTButton -Content 'Google' -Arguments 'https://google.com')
 ```
 
 This command creates an action element with a single clickable button.
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-$Button = New-BTButton -Content 'Google' -Arguments 'https://google.com'
-$ContextMenuItem = New-BTContextMenuItem -Content 'Bing' -Arguments 'https://bing.com'
-New-BTAction -Buttons $Button -ContextMenuItems $ContextMenuItem
-
+PS C:\>$Button = New-BTButton -Content 'Google' -Arguments 'https://google.com'
+PS C:\>$ContextMenuItem = New-BTContextMenuItem -Content 'Bing' -Arguments 'https://bing.com'
+PS C:\>New-BTAction -Buttons $Button -ContextMenuItems $ContextMenuItem
 ```
+
+This example creates an action elemnt with both a clickable button and a right click context menu item.
 
 ## PARAMETERS
 
