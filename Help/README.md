@@ -1,13 +1,13 @@
 # BurntToast Help
 ## Checklist
-- [ ] New-BTAction
-    - [ ] Comment based help
-    - [ ] Markdown file
-    - [ ] Content/Index Entry
-- [ ] New-BTAppId
-    - [ ] Comment based help
-    - [ ] Markdown file
-    - [ ] Content/Index Entry
+- [X] New-BTAction
+    - [X] Comment based help
+    - [X] Markdown file
+    - [X] Content/Index Entry
+- [X] New-BTAppId
+    - [X] Comment based help
+    - [X] Markdown file
+    - [X] Content/Index Entry
 - [ ] New-BTAudio
     - [ ] Comment based help
     - [ ] Markdown file
@@ -48,10 +48,10 @@
     - [ ] Comment based help
     - [ ] Markdown file
     - [ ] Content/Index Entry
-- [ ] New-BurntToastNotification
-    - [ ] Comment based help
-    - [ ] Markdown file
-    - [ ] Content/Index Entry
+- [X] New-BurntToastNotification
+    - [X] Comment based help
+    - [X] Markdown file
+    - [X] Content/Index Entry
 - [ ] Submit-BTNotification
     - [ ] Comment based help
     - [ ] Markdown file
@@ -61,53 +61,22 @@
 {{Manually Enter Description Here}}
 
 ## BurntToast Cmdlets
-### [Get-BTFunctionLevel](Get-BTFunctionLevel.md)
-The Get-BTFunctionLevel function returns the current function level of the BurntToast module as defined in config.json.
-
 ### [New-BTAction](New-BTAction.md)
-{{Manually Enter New-BTAction Description Here}}
+The New-BTAction function creates an 'action' object which contains defines the controls displayed at the bottom of a Toast Notification.
 
-### [New-BTAudio](New-BTAudio.md)
-{{Manually Enter New-BTAudio Description Here}}
+Actions can either be system handeled and automatically localized Snooze and Dismiss buttons or a custom collection of inputs.
 
-### [New-BTBinding](New-BTBinding.md)
-{{Manually Enter New-BTBinding Description Here}}
+### [New-BTAppId](New-BTAppId.md)
+The New-BTAppId function create a new AppId registry key in the Current User's Registery Hive. If the desired AppId is already present in the Registry then no changes are made.
 
-### [New-BTButton](New-BTButton.md)
-{{Manually Enter New-BTButton Description Here}}
-
-### [New-BTContent](New-BTContent.md)
-{{Manually Enter New-BTContent Description Here}}
-
-### [New-BTContextMenuItem](New-BTContextMenuItem.md)
-{{Manually Enter New-BTContextMenuItem Description Here}}
-
-### [New-BTImage](New-BTImage.md)
-{{Manually Enter New-BTImage Description Here}}
-
-### [New-BTInput](New-BTInput.md)
-{{Manually Enter New-BTInput Description Here}}
-
-### [New-BTSelectionBoxItem](New-BTSelectionBoxItem.md)
-{{Manually Enter New-BTSelectionBoxItem Description Here}}
-
-### [New-BTText](New-BTText.md)
-{{Manually Enter New-BTText Description Here}}
-
-### [New-BTVisual](New-BTVisual.md)
-{{Manually Enter New-BTVisual Description Here}}
+If no AppId is specified then the AppId specified in the config.json file in the BurntToast module's root directory is used.
 
 ### [New-BurntToastNotification](New-BurntToastNotification.md)
-{{Manually Enter New-BurntToastNotification Description Here}}
+The New-BurntToastNotification cmdlet creates and displays a Toast Notification on Microsoft Windows 10.
 
-### [Set-BTFunctionLevel](Set-BTFunctionLevel.md)
-The Set-BTFunctionLevel function changes the function level of the BurntToast module as defined in config.json.
+You can specify the text and/or image displayed as well as selecting the sound that is played when the Toast Notification is displayed.
 
-To use Set-BTFunctionLevel, use the FunctionLevel parameter to identify the desired FunctionLevel. The only valid inputs to the FunctionLevel parameter are 'Basic' and 'Advanced.'
+You can optionally call the New-BurntToastNotification cmdlet with the Toast alias.
 
-As the confirguration for the BurntToast module is saved into a file, PowerShell must be run as an Administrator in order to set a new function level if the module is saved to a location other than the users' home directory. This function will issue an error if this is the case.
-
-The BurntToast module needs to be re-imported in order for a new function level to take effect and this function will issue a warning when it runs successfully.
-
-### [Submit-BTNotification](Submit-BTNotification.md)
-{{Manually Enter Submit-BTNotification Description Here}}
+### [New-BTFunction](New-BTFunction.md)
+{{Manually Enter New-BTAction Description Here}}
