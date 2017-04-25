@@ -32,7 +32,8 @@
             ProjectUri = 'https://github.com/Windos/BurntToast'
             IconUri = 'https://cdn.rawgit.com/Windos/BurntToast/master/Media/BurntToast-Logo.png'
             ReleaseNotes = '
-*
+* Updated bundled UWP Toolkit to 1.4.1
+* Hero Images working now (Thanks to Creators Update)
 '
         }
     }
