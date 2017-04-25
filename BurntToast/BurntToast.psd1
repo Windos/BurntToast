@@ -16,6 +16,7 @@
                         'New-BTButton',
                         'New-BTContent',
                         'New-BTContextMenuItem',
+                        'New-BTHeader',
                         'New-BTImage',
                         'New-BTInput',
                         'New-BTSelectionBoxItem',
@@ -34,6 +35,7 @@
             ReleaseNotes = '
 * Updated bundled UWP Toolkit to 1.4.1
 * Hero Images working now (Thanks to Creators Update)
+* Headers can now included (Creators Update feature)
 '
         }
     }

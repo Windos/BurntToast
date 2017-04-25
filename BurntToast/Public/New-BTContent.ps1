@@ -10,7 +10,7 @@
 
         .OUTPUTS
         Image
-        
+
         .EXAMPLE
 
         .EXAMPLE
@@ -33,6 +33,8 @@
         [Microsoft.Toolkit.Uwp.Notifications.ToastAudio] $Audio,
 
         [Microsoft.Toolkit.Uwp.Notifications.ToastDuration] $Duration,
+
+        [Microsoft.Toolkit.Uwp.Notifications.ToastHeader] $Header,
 
         [string] $Launch,
 
@@ -61,6 +63,11 @@
     if ($Duration)
     {
         $ToastContent.Duration = $Duration
+    }
+
+    if ($Header)
+    {
+        $ToastContent.Header = $Header
     }
 
     if ($Launch)
