@@ -40,7 +40,7 @@
     $null = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
 
     $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::new()
-    $ToastXml.LoadXml($Content.GetContent())
+    $ToastXml.LoadXml($Content.GetContent().Replace('<text>{','<text>').Replace('}</text>','</text>'))
     $Toast = [Windows.UI.Notifications.ToastNotification]::new($ToastXml)
     [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show($Toast)
 }

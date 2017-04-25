@@ -105,6 +105,63 @@
             Image is cropped to a circle shape.
             </summary>
         </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBar">
+            <summary>
+            New in Creators Update: A progress bar. Only supported on toasts on Desktop, build 15007 or newer.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBar.Title">
+            <summary>
+            Gets or sets an optional title string. Supports data binding.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBar.Value">
+            <summary>
+            Gets or sets the value of the progress bar. Supports data binding. Defaults to 0.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBar.ValueStringOverride">
+            <summary>
+            Gets or sets an optional string to be displayed instead of the default percentage string. If this isn't provided, something like "70%" will be displayed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBar.Status">
+            <summary>
+            Required. Gets or sets a status string, which is displayed underneath the progress bar. This string should reflect the status of the operation, like "Downloading..." or "Installing..."
+            </summary>
+        </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBarValue">
+            <summary>
+            A class that represents the progress bar's value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBarValue.Value">
+            <summary>
+            Gets or sets the value (0-1) representing the percent complete.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBarValue.IsIndeterminate">
+            <summary>
+            Gets or sets whether the progress bar is indeterminate.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBarValue.#ctor">
+            <summary>
+            Private constructor
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBarValue.Indeterminate">
+            <summary>
+            Returns an indeterminate progress bar value.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBarValue.FromValue(System.Double)">
+            <summary>
+            Returns a progress bar value using the specified value (0-1) representing the percent complete.
+            </summary>
+            <param name="d">The value, 0-1, inclusive.</param>
+            <returns>A progress bar value.</returns>
+        </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.AdaptiveSubgroup">
             <summary>
             Subgroups are vertical columns that can contain text and images. Supported on Tiles since RTM. Supported on Toasts since Anniversary Update.
@@ -157,7 +214,7 @@
         </member>
         <member name="P:Microsoft.Toolkit.Uwp.Notifications.AdaptiveText.Text">
             <summary>
-            The text to display.
+            The text to display. Data binding support added in Creators Update, only works for toast top-level text elements.
             </summary>
         </member>
         <member name="P:Microsoft.Toolkit.Uwp.Notifications.AdaptiveText.Language">
@@ -325,6 +382,84 @@
             <summary>
             Default value
             </summary>
+        </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue">
+            <summary>
+            A binding value for doubles.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue.RawValue">
+            <summary>
+            Raw value is used for the implicit converter case, where dev provided a raw double. We store the raw value,
+            so that later on when generating the XML, we can provide this value rather than binding syntax.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue.BindingName">
+            <summary>
+            The name that maps to your binding data value.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue.#ctor(System.String)">
+            <summary>
+            Initializes a new binding for a double value, with the required binding value name. Do NOT include surrounding {} brackets.
+            </summary>
+            <param name="bindingName">The name that maps to your binding data value.</param>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue.#ctor">
+            <summary>
+            Private constructor used by the implicit converter to assign the raw value.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue.op_Implicit(Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBarValue)~Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue">
+            <summary>
+            Creates a <see cref="T:Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue"/> that has a raw value assigned.
+            </summary>
+            <param name="v">The raw value</param>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue.op_Implicit(Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue)~Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBarValue">
+            <summary>
+            Returns the raw value of the <see cref="T:Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue"/>.
+            </summary>
+            <param name="b">The <see cref="T:Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue"/> to obtain the raw value from.</param>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue.op_Implicit(System.Double)~Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue">
+            <summary>
+            Creates an <see cref="T:Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue"/> that has tbe raw double value.
+            </summary>
+            <param name="d">The raw value</param>
+        </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.BindableString">
+            <summary>
+            A binding value for strings.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.BindableString.BindingName">
+            <summary>
+            The name that maps to your binding data value.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.BindableString.#ctor(System.String)">
+            <summary>
+            Initializes a new binding for a string value, with the required binding name. Do NOT include surrounding {} brackets.
+            </summary>
+            <param name="bindingName">The name that maps to your data binding value.</param>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.BindableString.#ctor">
+            <summary>
+            Private constructor used by the implicit converter to assign the raw value.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.BindableString.op_Implicit(System.String)~Microsoft.Toolkit.Uwp.Notifications.BindableString">
+            <summary>
+            Creates a <see cref="T:Microsoft.Toolkit.Uwp.Notifications.BindableString"/> that has a raw value assigned.
+            </summary>
+            <param name="d">The raw value</param>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.BindableString.op_Implicit(Microsoft.Toolkit.Uwp.Notifications.BindableString)~System.String">
+            <summary>
+            Returns the raw value of the <see cref="T:Microsoft.Toolkit.Uwp.Notifications.BindableString"/>.
+            </summary>
+            <param name="b">The <see cref="T:Microsoft.Toolkit.Uwp.Notifications.BindableString"/> to obtain the raw value from.</param>
         </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.IAdaptiveSubgroupChild">
             <summary>
@@ -538,6 +673,16 @@
             <summary>
             This attribute should be specified at most one time on an Element class. The property's value will be written as a string in the element's body.
             </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.XmlWriterHelper.GetBindingOrAbsoluteXmlValue``1(System.Collections.Generic.IDictionary{``0,System.String},``0,System.String)">
+            <summary>
+            Gets the provided binding value, if it exists. Otherwise, falls back to the absolute value.
+            </summary>
+            <typeparam name="T">The type of the enum of the class properties.</typeparam>
+            <param name="bindings">The collection of data-bound values.</param>
+            <param name="bindableProperty">The property to obtain.</param>
+            <param name="absoluteValue">The absolute value, if any.</param>
+            <returns>The provided binding value, if it exists. Otherwise, falls back to the absolute value.</returns>
         </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.ITileBindingContentAdaptiveChild">
             <summary>
@@ -1021,6 +1166,21 @@
             <param name="binding">The binding to look in for matches.</param>
             <returns>True if could re-use existing text element, otherwise false.</returns>
         </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.ToastActivationOptions">
+            <summary>
+            New in Creators Update: Additional options relating to activation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastActivationOptions.ProtocolActivationTargetApplicationPfn">
+            <summary>
+            If you are using <see cref="F:Microsoft.Toolkit.Uwp.Notifications.ToastActivationType.Protocol"/>, you can optionally specify the target PFN, so that regardless of whether multiple apps are registered to handle the same protocol uri, your desired app will always be launched.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastActivationOptions.AfterActivationBehavior">
+            <summary>
+            Not supported on Windows: Specifies the behavior that the toast should use when the user invokes this action. Note that this option only works on <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastButton"/> and <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem"/>.
+            </summary>
+        </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.IToastBindingGenericChild">
             <summary>
             Elements that can be direct children of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastBindingGeneric"/>, including (<see cref="T:Microsoft.Toolkit.Uwp.Notifications.AdaptiveText"/>, <see cref="T:Microsoft.Toolkit.Uwp.Notifications.AdaptiveImage"/>, and <see cref="T:Microsoft.Toolkit.Uwp.Notifications.AdaptiveGroup"/>).
@@ -1131,6 +1291,21 @@
         <member name="F:Microsoft.Toolkit.Uwp.Notifications.ToastActivationType.Protocol">
             <summary>
             Launch a different app using protocol activation.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.ToastAfterActivationBehavior">
+            <summary>
+            Specifies the behavior that the toast should use when the user takes action on the toast.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Toolkit.Uwp.Notifications.ToastAfterActivationBehavior.Default">
+            <summary>
+            Default behavior. The toast will be dismissed when the user takes action on the toast.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Toolkit.Uwp.Notifications.ToastAfterActivationBehavior.PendingUpdate">
+            <summary>
+            After the user clicks a button on your toast, the notification will remain present, in a "pending update" visual state. You should immediately update your toast from a background task so that the user does not see this "pending update" visual state for too long.
             </summary>
         </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.ToastDuration">
@@ -1386,6 +1561,11 @@
             Controls what type of activation this button will use when clicked. Defaults to Foreground.
             </summary>
         </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastButton.ActivationOptions">
+            <summary>
+            New in Creators Update: Additional options relating to activation of the toast button.
+            </summary>
+        </member>
         <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastButton.ImageUri">
             <summary>
             An optional image icon for the button to display (required for buttons adjacent to inputs like quick reply).
@@ -1416,6 +1596,11 @@
             Optionally create custom actions with buttons and inputs (using <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastActionsCustom"/>) or optionally use the system-default snooze/dismiss controls (with <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastActionsSnoozeAndDismiss"/>).
             </summary>
         </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastContent.Header">
+            <summary>
+            New in Creators Update: Gets or sets an optional header for the toast notification.
+            </summary>
+        </member>
         <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastContent.Scenario">
             <summary>
             Specify the scenario, to make the Toast behave like an alarm, reminder, or more.
@@ -1434,6 +1619,16 @@
         <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastContent.ActivationType">
             <summary>
             Specifies what activation type will be used when the user clicks the body of this Toast.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastContent.ActivationOptions">
+            <summary>
+            New in Creators Update: Additional options relating to activation of the toast notification.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastContent.DisplayTimestamp">
+            <summary>
+            New in Creators Update: An optional custom time to use for the notification's timestamp, visible within Action Center. If provided, this date/time will be used on the notification instead of the date/time that the notification was received.
             </summary>
         </member>
         <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContent.GetContent">
@@ -1467,6 +1662,11 @@
         <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem.ActivationType">
             <summary>
             Controls what type of activation this menu item will use when clicked. Defaults to Foreground.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem.ActivationOptions">
+            <summary>
+            New in Creators Update: Additional options relating to activation of the toast context menu item.
             </summary>
         </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.ToastGenericAppLogo">
@@ -1562,6 +1762,44 @@
         <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastGenericHeroImage.AddImageQuery">
             <summary>
             Set to true to allow Windows to append a query string to the image URI supplied in the Tile notification. Use this attribute if your server hosts images and can handle query strings, either by retrieving an image variant based on the query strings or by ignoring the query string and returning the image as specified without the query string. This query string specifies scale, contrast setting, and language.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.ToastHeader">
+            <summary>
+            Defines a visual header for the toast notification.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastHeader.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructs a toast header with all the required properties.
+            </summary>
+            <param name="id">A developer-created identifier that uniquely identifies this header. If two notifications have the same header id, they will be displayed underneath the same header in Action Center.</param>
+            <param name="title">A title for the header.</param>
+            <param name="arguments">A developer-defined string of arguments that is returned to the app when the user clicks this header.</param>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastHeader.Id">
+            <summary>
+            Gets or sets a developer-created identifier that uniquely identifies this header. If two notifications have the same header id, they will be displayed underneath the same header in Action Center. Cannot be null.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastHeader.Title">
+            <summary>
+            Gets or sets a title for the header. Cannot be null.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastHeader.Arguments">
+            <summary>
+            Gets or sets a developer-defined string of arguments that is returned to the app when the user clicks this header. Cannot be null.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastHeader.ActivationType">
+            <summary>
+            Gets or sets the type of activation this header will use when clicked. Defaults to Foreground. Note that only Foreground and Protocol are supported.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastHeader.ActivationOptions">
+            <summary>
+            New in Creators Update: Additional options relating to activation of the toast header.
             </summary>
         </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBox">
