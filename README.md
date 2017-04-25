@@ -39,7 +39,7 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
 
 * [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.5.2.zip) (Development/Raw Repo - **CAUTION**)
-* [v0.5.3](https://github.com/Windos/BurntToast/releases/download/v0.5.3/BurntToast.zip)
+* [v0.6.0](https://github.com/Windos/BurntToast/releases/download/v0.6.0/BurntToast.zip)
     *
 * [v0.5.2](https://github.com/Windos/BurntToast/releases/download/v0.5.2/BurntToast.zip)
     * Exposed ability to have custom buttons via New-BurntToastNotification, passing result from New-BTButton to the -Button parameter.
