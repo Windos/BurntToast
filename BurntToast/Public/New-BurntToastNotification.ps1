@@ -1,5 +1,4 @@
-﻿function New-BurntToastNotification
-{
+﻿function New-BurntToastNotification {
     <#
         .SYNOPSIS
         Creates and displays a Toast Notification.
@@ -70,10 +69,9 @@
 
     [alias('Toast')]
     [CmdletBinding(DefaultParameterSetName = 'Sound')]
-    param
-    (
+    param (
         # Specifies the text to show on the Toast Notification. Up to three strings can be displayed, the first of which will be embolden as a title.
-        [ValidateCount(0,3)]
+        [ValidateCount(0, 3)]
         [String[]] $Text = 'Default Notification',
 
         #TODO: [ValidateScript({ Test-ToastImage -Path $_ })]
@@ -164,8 +162,7 @@
 
     $ChildObjects = @()
 
-    foreach ($Txt in $Text)
-    {
+    foreach ($Txt in $Text) {
         $ChildObjects += New-BTText -Text $Txt
     }
 
@@ -173,30 +170,20 @@
         $ChildObjects += $ProgressBar
     }
 
-    if ($AppLogo)
-    {
+    if ($AppLogo) {
         $AppLogoImage = New-BTImage -Source $AppLogo -AppLogoOverride -Crop Circle
-    }
-    else
-    {
+    } else {
         $AppLogoImage = New-BTImage -AppLogoOverride -Crop Circle
     }
 
-    if ($Silent)
-    {
+    if ($Silent) {
         $Audio = New-BTAudio -Silent
-    }
-    else
-    {
-        if ($Sound -ne 'Default')
-        {
-            if ($Sound -like 'Alarm*' -or $Sound -like 'Call*')
-            {
+    } else {
+        if ($Sound -ne 'Default') {
+            if ($Sound -like 'Alarm*' -or $Sound -like 'Call*') {
                 $Audio = New-BTAudio -Source "ms-winsoundevent:Notification.Looping.$Sound" -Loop
                 $Long = $True
-            }
-            else
-            {
+            } else {
                 $Audio = New-BTAudio -Source "ms-winsoundevent:Notification.$Sound" -Loop
             }
         }
@@ -206,25 +193,20 @@
     $Visual = New-BTVisual -BindingGeneric $Binding
 
     $ContentSplat = @{'Audio' = $Audio
-                      'Visual' = $Visual
+        'Visual' = $Visual
     }
 
-    if ($Long)
-    {
+    if ($Long) {
         $ContentSplat.Add('Duration', [Microsoft.Toolkit.Uwp.Notifications.ToastDuration]::Long)
     }
 
-    if ($SnoozeAndDismiss)
-    {
+    if ($SnoozeAndDismiss) {
         $ContentSplat.Add('Actions', (New-BTAction -SnoozeAndDismiss))
-    }
-    elseif ($Button)
-    {
+    } elseif ($Button) {
         $ContentSplat.Add('Actions', (New-BTAction -Buttons $Button))
     }
 
-    if ($Header)
-    {
+    if ($Header) {
         $ContentSplat.Add('Header', $Header)
     }
 

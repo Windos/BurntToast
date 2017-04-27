@@ -1,5 +1,4 @@
-﻿function New-BTSelectionBoxItem
-{
+﻿function New-BTSelectionBoxItem {
     <#
         .SYNOPSIS
 
@@ -10,7 +9,7 @@
 
         .OUTPUTS
         Image
-        
+
         .EXAMPLE
 
         .EXAMPLE
@@ -24,11 +23,10 @@
     [CmdletBinding()]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem])]
 
-    param
-    (
+    param (
         [Parameter(Mandatory)]
         [string] $Id,
-        
+
         [Parameter(Mandatory)]
         [string] $Content
     )

@@ -1,5 +1,4 @@
-﻿function New-BTHeader
-{
+﻿function New-BTHeader {
     <#
         .SYNOPSIS
         Creates a new toast notification header.
@@ -34,8 +33,7 @@
 
     [CmdletBinding()]
 
-    param
-    (
+    param (
         # Unique string that identifies a header. If a new Id is provided, the system will treat the header as a new header even if it has the same display text as a previous header.
         #
         # It is possible to update a header's display text by re-using the Id but changing the title.
@@ -61,8 +59,7 @@
 
     $Header = [Microsoft.Toolkit.Uwp.Notifications.ToastHeader]::new($Id, $Title, $Arguments)
 
-    if ($ActivationType)
-    {
+    if ($ActivationType) {
         $Header.ActivationType = $ActivationType
     }
 

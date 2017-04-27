@@ -1,5 +1,4 @@
-﻿function New-BTInput
-{
+﻿function New-BTInput {
     <#
         .SYNOPSIS
 
@@ -10,7 +9,7 @@
 
         .OUTPUTS
         Image
-        
+
         .EXAMPLE
 
         .EXAMPLE
@@ -25,11 +24,10 @@
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastTextBox], ParametersetName = 'Text')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBox], ParametersetName = 'Text')]
 
-    param
-    (
+    param (
         [Parameter(Mandatory)]
         [string] $Id,
-        
+
         [Parameter()]
         [string] $Title,
 
@@ -47,40 +45,32 @@
         [Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem[]] $Items
     )
 
-    switch ($PsCmdlet.ParameterSetName)
-    {
-        'Text'
-        {
+    switch ($PsCmdlet.ParameterSetName) {
+        'Text' {
             $ToastInput = [Microsoft.Toolkit.Uwp.Notifications.ToastTextBox]::new($Id)
 
-            if ($PlaceholderContent)
-            {
+            if ($PlaceholderContent) {
                 $ToastInput.PlaceholderContent = $PlaceholderContent
             }
 
-            if ($DefaultInput)
-            {
+            if ($DefaultInput) {
                 $ToastInput.DefaultInput = $DefaultInput
             }
         }
-        'Selection'
-        {
+        'Selection' {
             $ToastInput = [Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBox]::new($Id)
 
-            if ($DefaultSelectionBoxItemId)
-            {
+            if ($DefaultSelectionBoxItemId) {
                 $ToastInput.DefaultSelectionBoxItemId = $DefaultSelectionBoxItemId
             }
 
-            foreach ($Item in $Items)
-            {
+            foreach ($Item in $Items) {
                 $ToastInput.Items.Add($Item)
             }
         }
     }
 
-    if ($Title)
-    {
+    if ($Title) {
         $ToastInput.Title = $Title
     }
 

@@ -1,5 +1,4 @@
-﻿function Submit-BTNotification
-{
+﻿function Submit-BTNotification {
     <#
         .SYNOPSIS
 
@@ -22,8 +21,7 @@
     #>
 
     [CmdletBinding()]
-    param
-    (
+    param (
         [Parameter()]
         [Microsoft.Toolkit.Uwp.Notifications.ToastContent] $Content,
 
@@ -37,8 +35,7 @@
         [string] $AppId = $Script:Config.AppId
     )
 
-    if (!(Test-Path -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\$AppId"))
-    {
+    if (!(Test-Path -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\$AppId")) {
         Write-Warning -Message "The AppId $AppId is not present in the registry, please run New-BTAppId to avoid inconsistent Toast behaviour."
     }
 
@@ -47,10 +44,10 @@
 
     $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::new()
 
-    $CleanContent = $Content.GetContent().Replace('<text>{','<text>')
-    $CleanContent = $CleanContent.Replace('}</text>','</text>')
-    $CleanContent = $CleanContent.Replace('="{','="')
-    $CleanContent = $CleanContent.Replace('}" ','" ')
+    $CleanContent = $Content.GetContent().Replace('<text>{', '<text>')
+    $CleanContent = $CleanContent.Replace('}</text>', '</text>')
+    $CleanContent = $CleanContent.Replace('="{', '="')
+    $CleanContent = $CleanContent.Replace('}" ', '" ')
 
     $ToastXml.LoadXml($CleanContent)
     $Toast = [Windows.UI.Notifications.ToastNotification]::new($ToastXml)

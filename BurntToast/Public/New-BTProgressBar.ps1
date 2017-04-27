@@ -1,5 +1,4 @@
-﻿function New-BTProgressBar
-{
+﻿function New-BTProgressBar {
     <#
         .SYNOPSIS
         Creates a new Progress Bar Element for Toast Notifications.
@@ -44,8 +43,7 @@
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'Determinate')]
-    param
-    (
+    param (
         # The text displayed above the progress bar. Generally used to give context around what the bar represents.
         [string] $Title,
 

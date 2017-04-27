@@ -1,5 +1,4 @@
-﻿function New-BTBinding
-{
+﻿function New-BTBinding {
     <#
         .SYNOPSIS
 
@@ -10,7 +9,7 @@
 
         .OUTPUTS
         Image
-        
+
         .EXAMPLE
 
         .EXAMPLE
@@ -23,8 +22,7 @@
 
     [CmdletBinding()]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastBindingGeneric])]
-    param
-    (
+    param (
         [Parameter()]
         [Microsoft.Toolkit.Uwp.Notifications.IToastBindingGenericChild[]] $Children,
 
@@ -43,41 +41,33 @@
 
     $Binding = [Microsoft.Toolkit.Uwp.Notifications.ToastBindingGeneric]::new()
 
-    if ($Children)
-    {
-        foreach ($Child in $Children)
-        {
+    if ($Children) {
+        foreach ($Child in $Children) {
             $Binding.Children.Add($Child)
         }
     }
 
-    if ($AddImageQuery)
-    {
+    if ($AddImageQuery) {
         $Binding.AddImageQuery = $AddImageQuery
     }
 
-    if ($AppLogoOverride)
-    {
+    if ($AppLogoOverride) {
         $Binding.AppLogoOverride = $AppLogoOverride
     }
 
-    if ($Attribution)
-    {
+    if ($Attribution) {
         $Binding.Attribution = $Attribution
     }
 
-    if ($BaseUri)
-    {
+    if ($BaseUri) {
         $Binding.BaseUri = $BaseUri
     }
 
-    if ($HeroImage)
-    {
+    if ($HeroImage) {
         $Binding.HeroImage = $HeroImage
     }
 
-    if ($Language)
-    {
+    if ($Language) {
         $Binding.Language = $Language
     }
 

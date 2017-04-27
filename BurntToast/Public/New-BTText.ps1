@@ -1,12 +1,11 @@
-﻿function New-BTText
-{
+﻿function New-BTText {
     <#
         .SYNOPSIS
         Creates a new Text Element for Toast Notifications.
 
         .DESCRIPTION
         The New-BTTextElement cmdlet creates a new Text Element for Toast Notifications.
-    
+
         You can specify the text you want displayed in a Toast Notification as a string, or run the cmdlet without a paramter for a blank line.
 
         Each Text Element is the equivalent of one line in on a Toast Notification, long lines will wrap.
@@ -18,7 +17,7 @@
 
         .OUTPUTS
         Text
-        
+
         .EXAMPLE
         New-BTTextElement -Content 'This is a line with text!'
 
@@ -38,8 +37,7 @@
 
     [CmdletBinding()]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.AdaptiveText])]
-    param
-    (
+    param (
         [Parameter()]
         [alias('Content')]
         [string] $Text,
@@ -59,38 +57,31 @@
 
     $TextObj = [Microsoft.Toolkit.Uwp.Notifications.AdaptiveText]::new()
 
-    if ($Text)
-    {
+    if ($Text) {
         $TextObj.Text = $Text
     }
-    
-    if ($MaxLines)
-    {
+
+    if ($MaxLines) {
         $TextObj.HintMaxLines = $MaxLines
     }
 
-    if ($MinLines)
-    {
+    if ($MinLines) {
         $TextObj.HintMinLines = $MinLines
     }
 
-    if ($Wrap)
-    {
+    if ($Wrap) {
         $TextObj.HintWrap = $Wrap
     }
 
-    if ($Align)
-    {
+    if ($Align) {
         $TextObj.HintAlign = $Align
     }
 
-    if ($Style)
-    {
+    if ($Style) {
         $TextObj.HintStyle = $Style
     }
 
-    if ($Language)
-    {
+    if ($Language) {
         $TextObj.Language = $Language
     }
 

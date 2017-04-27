@@ -1,5 +1,4 @@
-﻿function New-BTContextMenuItem
-{
+﻿function New-BTContextMenuItem {
     <#
         .SYNOPSIS
 
@@ -10,7 +9,7 @@
 
         .OUTPUTS
         Image
-        
+
         .EXAMPLE
 
         .EXAMPLE
@@ -24,11 +23,10 @@
     [CmdletBinding()]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem])]
 
-    param
-    (
+    param (
         [Parameter(Mandatory)]
         [string] $Content,
-        
+
         [Parameter(Mandatory)]
         [string] $Arguments,
 
@@ -37,9 +35,8 @@
     )
 
     $MenuItem = [Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem]::new($Content, $Arguments)
-    
-    if ($ActivationType)
-    {
+
+    if ($ActivationType) {
         $MenuItem.ActivationType = $ActivationType
     }
 

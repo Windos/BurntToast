@@ -1,12 +1,11 @@
-﻿function New-BTAudio
-{
+﻿function New-BTAudio {
     <#
         .SYNOPSIS
         Creates a new Audio Element for Toast Notifications.
 
         .DESCRIPTION
         The New-BTAudioElement cmdlet creates a new Audio Element for Toast Notifications.
-    
+
         You can use the parameters of New-BTAudioElement to select an audio file or a standard notification sound (including alarms). Alternativly you can specify that a Toast Notification should be silent.
 
         .INPUTS
@@ -16,7 +15,7 @@
 
         .OUTPUTS
         Audio
-        
+
         .EXAMPLE
         New-BTAudioElement -Source SMS
 
@@ -48,8 +47,7 @@
 
     [CmdletBinding()]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastAudio])]
-    param
-    (
+    param (
         [Parameter()]
         [uri] $Source,
 
@@ -63,9 +61,8 @@
     #TODO: Add ability to select 'ms-winsoundevent:Notification' sounds
 
     $Audio = [Microsoft.Toolkit.Uwp.Notifications.ToastAudio]::new()
-    
-    if ($Source)
-    {
+
+    if ($Source) {
         $Audio.Src = $Source
     }
 

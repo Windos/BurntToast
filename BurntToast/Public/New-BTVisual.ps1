@@ -1,5 +1,4 @@
-﻿function New-BTVisual
-{
+﻿function New-BTVisual {
     <#
         .SYNOPSIS
 
@@ -10,7 +9,7 @@
 
         .OUTPUTS
         Image
-        
+
         .EXAMPLE
 
         .EXAMPLE
@@ -23,8 +22,7 @@
 
     [CmdletBinding()]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastVisual])]
-    param
-    (
+    param (
         [Parameter()]
         [Microsoft.Toolkit.Uwp.Notifications.ToastBindingGeneric] $BindingGeneric,
 
@@ -37,23 +35,19 @@
 
     $Visual = [Microsoft.Toolkit.Uwp.Notifications.ToastVisual]::new()
 
-    if ($BindingGeneric)
-    {
+    if ($BindingGeneric) {
         $Visual.BindingGeneric = $BindingGeneric
     }
 
-    if ($AddImageQuery)
-    {
+    if ($AddImageQuery) {
         $Visual.AddImageQuery = $AddImageQuery
     }
 
-    if ($BaseUri)
-    {
+    if ($BaseUri) {
         $Visual.BaseUri = $BaseUri
     }
 
-    if ($Language)
-    {
+    if ($Language) {
         $Visual.Language = $Language
     }
 

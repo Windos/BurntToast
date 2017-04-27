@@ -1,5 +1,4 @@
-﻿function New-BTButton
-{
+﻿function New-BTButton {
     <#
         .SYNOPSIS
         Creates a new clickable button for a Toast Notification.
@@ -17,7 +16,7 @@
         Microsoft.Toolkit.Uwp.Notifications.ToastButton
         Microsoft.Toolkit.Uwp.Notifications.ToastButtonDismiss
         Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze
-        
+
         .EXAMPLE
         New-BTButton -Dismiss
 
@@ -53,8 +52,7 @@
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastButtonDismiss], ParameterSetName = 'Dismiss')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze], ParameterSetName = 'Snooze')]
 
-    param
-    (
+    param (
         # Specifies a system handled snooze button. When paired with a selection box the snooze time is customizable and user selectable, otherwise the system default snooze time is used.
         #
         # Display text defaults to a localized 'Snooze', but this can be overridden with the Content parameter.
@@ -68,14 +66,14 @@
         [Parameter(Mandatory,
                    ParameterSetName = 'Dismiss')]
         [switch] $Dismiss,
-        
+
         # Specifies the text to display on the button.
         [Parameter(Mandatory,
                    ParameterSetName = 'Button')]
         [Parameter(ParameterSetName = 'Dismiss')]
         [Parameter(ParameterSetName = 'Snooze')]
         [string] $Content,
-        
+
         # Specifies an app defined string.
         #
         # For the purposes of BurntToast notifications this is generally the path to a file or URI and paired with the Protocol ActivationType.
@@ -104,49 +102,36 @@
         [string] $Id
     )
 
-    switch ($PsCmdlet.ParameterSetName)
-    {
-        'Button'
-        {
+    switch ($PsCmdlet.ParameterSetName) {
+        'Button' {
             $Button = [Microsoft.Toolkit.Uwp.Notifications.ToastButton]::new($Content, $Arguments)
-            
+
             $Button.ActivationType = $ActivationType
 
-            if ($Id)
-            {
+            if ($Id) {
                 $Button.TextBoxId = $Id
             }
-            
-            if ($ImageUri)
-            {
+
+            if ($ImageUri) {
                 $Button.ImageUri = $ImageUri
             }
         }
-        'Snooze'
-        {
+        'Snooze' {
 
-            if ($Content)
-            {
+            if ($Content) {
                 $Button = [Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze]::new($Content)
-            }
-            else
-            {
+            } else {
                 $Button = [Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze]::new()
             }
-            
-            if ($Id)
-            {
+
+            if ($Id) {
                 $Button.SelectionBoxId = $Id
             }
         }
-        'Dismiss'
-        {
-            if ($Content)
-            {
+        'Dismiss' {
+            if ($Content) {
                 $Button = [Microsoft.Toolkit.Uwp.Notifications.ToastButtonDismiss]::new($Content)
-            }
-            else
-            {
+            } else {
                 $Button = [Microsoft.Toolkit.Uwp.Notifications.ToastButtonDismiss]::new()
             }
         }
