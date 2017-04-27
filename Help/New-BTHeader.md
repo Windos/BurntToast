@@ -120,4 +120,4 @@ You cannot pipe input to this function.
 
 ## RELATED LINKS
 
-[New-BTAction](https://github.com/Windos/BurntToast/blob/master/Help/New-BTHeader.md)
+[New-BTHeader](https://github.com/Windos/BurntToast/blob/master/Help/New-BTHeader.md)
