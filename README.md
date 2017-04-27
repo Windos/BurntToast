@@ -43,6 +43,7 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
     * Updated bundled UWP Toolkit to 1.4.1
     * Hero Images working now (Thanks to Creators Update)
     * Headers can now be included (Creators Update feature)
+    * Progress bars can now be included (Creators Update feature)
 * [v0.5.2](https://github.com/Windos/BurntToast/releases/download/v0.5.2/BurntToast.zip)
     * Exposed ability to have custom buttons via New-BurntToastNotification, passing result from New-BTButton to the -Button parameter.
         * Expect a blog post soon covering some cool ways to use these buttons. Keep an eye out on [king.geek.nz](http://king.geek.nz).

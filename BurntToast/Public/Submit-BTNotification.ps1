@@ -28,6 +28,9 @@
         [Microsoft.Toolkit.Uwp.Notifications.ToastContent] $Content,
 
         [Parameter()]
+        [uint64] $SequenceNumber,
+
+        [Parameter()]
         [string] $AppId = $Script:Config.AppId
     )
 
@@ -48,5 +51,11 @@
 
     $ToastXml.LoadXml($CleanContent)
     $Toast = [Windows.UI.Notifications.ToastNotification]::new($ToastXml)
+
+    if ($SequenceNumber) {
+        $Toast.Data = [Windows.UI.Notifications.NotificationData]::new()
+        $Toast.Data.SequenceNumber = $SequenceNumber
+    }
+
     [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show($Toast)
 }
