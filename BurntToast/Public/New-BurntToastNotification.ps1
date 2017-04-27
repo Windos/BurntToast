@@ -44,7 +44,13 @@
         $ToastHeader = New-BTHeader -Id '001' -Title 'Stack Overflow Questions'
         New-BurntToastNotification -Text 'New Stack Overflow Question!', 'More details!' -Header $ToastHeader
 
-        This exmaple creates a Toast Notification which will be tisplayed under the header 'Stack Overflow Questions.'
+        This example creates a Toast Notification which will be displayed under the header 'Stack Overflow Questions.'
+
+        .EXAMPLE
+        $Progress = New-BTProgressBar -Status 'Copying files' -Value 0.2
+        New-BurntToastNotification -Text 'File copy script running', 'More details!' -ProgressBar $Progress
+
+        This example creates a Toast Notification which will include a progress bar.
 
         .NOTES
         I'm *really* sorry about the number of Parameter Sets. The best explanation is:
@@ -139,14 +145,21 @@
         [Microsoft.Toolkit.Uwp.Notifications.IToastButton[]] $Button,
 
         # Specify the Toast Header object created using the New-BTHeader function, for seperation/categorization of toasts from the same AppId.
-        [Microsoft.Toolkit.Uwp.Notifications.ToastHeader] $Header
+        [Microsoft.Toolkit.Uwp.Notifications.ToastHeader] $Header,
+
+        # Specify the Progress Bar object created using the New-BTProgressBar function.
+        [Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBar] $ProgressBar
     )
 
-    $TextObjects = @()
+    $ChildObjects = @()
 
     foreach ($Txt in $Text)
     {
-        $TextObjects += New-BTText -Text $Txt
+        $ChildObjects += New-BTText -Text $Txt
+    }
+
+    if ($ProgressBar) {
+        $ChildObjects += $ProgressBar
     }
 
     if ($AppLogo)
@@ -178,7 +191,7 @@
         }
     }
 
-    $Binding = New-BTBinding -Children $TextObjects -AppLogoOverride $AppLogoImage
+    $Binding = New-BTBinding -Children $ChildObjects -AppLogoOverride $AppLogoImage
     $Visual = New-BTVisual -BindingGeneric $Binding
 
     $ContentSplat = @{'Audio' = $Audio

@@ -12,42 +12,42 @@ Creates and displays a Toast Notification.
 
 ### Sound (Default)
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] [-Header <ToastHeader>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Silent
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] [-Header <ToastHeader>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Snooze and Dismiss
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] -SnoozeAndDismiss [-Header <ToastHeader>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] -SnoozeAndDismiss [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Custom Buttons
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] -Button <IToastButton[]> [-Header <ToastHeader>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] -Button <IToastButton[]> [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Silent and Snooze and Dismiss
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] -SnoozeAndDismiss [-Header <ToastHeader>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] -SnoozeAndDismiss [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Silent and Custom Buttons
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] -Button <IToastButton[]> [-Header <ToastHeader>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] -Button <IToastButton[]> [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Sound and Snooze and Dismiss
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] -SnoozeAndDismiss [-Header <ToastHeader>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] -SnoozeAndDismiss [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Sound and Custom Buttons
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] -Button <IToastButton[]> [-Header <ToastHeader>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] -Button <IToastButton[]> [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ## DESCRIPTION
@@ -88,13 +88,21 @@ PS C:\>New-BurntToastNotification -Text 'New Blog Post!' -Button $BlogButton
 
 This exmaple creates a Toast Notification with a button which will open a link to "http://king.geek.nz" when clicked.
 
-### -------------------------- EXAMPLE 4 --------------------------
+### -------------------------- EXAMPLE 5 --------------------------
 ```
 PS C:\>$ToastHeader = New-BTHeader -Id '001' -Title 'Stack Overflow Questions'
 PS C:\>New-BurntToastNotification -Text 'New Stack Overflow Question!', 'More details!' -Header $ToastHeader
 ```
 
-This exmaple creates a Toast Notification which will be tisplayed under the header 'Stack Overflow Questions.'
+This exmaple creates a Toast Notification which will be displayed under the header 'Stack Overflow Questions.'
+
+### -------------------------- EXAMPLE 6 --------------------------
+```
+PS C:\>$Progress = New-BTProgressBar -Status 'Copying files' -Value 0.2
+PS C:\>New-BurntToastNotification -Text 'File copy script running', 'More details!' -ProgressBar $Progress
+```
+
+This exmaple creates a Toast Notification which will include a progress bar.
 
 ## PARAMETERS
 
@@ -144,10 +152,25 @@ Accept wildcard characters: False
 ```
 
 ### -Header
-# Specify the Toast Header object created using the New-BTHeader function, for seperation/categorization of toasts from the same AppId.
+Specify the Toast Header object created using the New-BTHeader function, for seperation/categorization of toasts from the same AppId.
 
 ```yaml
 Type: ToastHeader
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressBar
+Specify the Progress Bar object created using the New-BTProgressBar function.
+
+```yaml
+Type: AdaptiveProgressBar
 Parameter Sets: (All)
 Aliases:
 
