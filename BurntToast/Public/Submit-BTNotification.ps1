@@ -10,7 +10,7 @@
 
         .OUTPUTS
         None
-        
+
         .EXAMPLE
 
         .EXAMPLE
@@ -40,7 +40,13 @@
     $null = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
 
     $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::new()
-    $ToastXml.LoadXml($Content.GetContent().Replace('<text>{','<text>').Replace('}</text>','</text>'))
+
+    $CleanContent = $Content.GetContent().Replace('<text>{','<text>')
+    $CleanContent = $CleanContent.Replace('}</text>','</text>')
+    $CleanContent = $CleanContent.Replace('="{','="')
+    $CleanContent = $CleanContent.Replace('}" ','" ')
+
+    $ToastXml.LoadXml($CleanContent)
     $Toast = [Windows.UI.Notifications.ToastNotification]::new($ToastXml)
     [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show($Toast)
 }

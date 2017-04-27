@@ -1,6 +1,7 @@
 $text1 = New-BTText -Content 'This is a test'
 $text2 = New-BTText
 $text3 = New-BTText -Content 'This more testing'
+$progress = New-BTProgressBar -Title 'Things are happening' -Status 'Working on it' -Value 0.01 -ValueDisplay '1%'
 
 $image1 = New-BTImage -Source 'C:\_git\BurntToast\Media\BurntToast.png'
 $image2 = New-BTImage -Source 'C:\_git\BurntToast\Media\BurntToast.png' -AppLogoOverride -Crop Circle
@@ -8,7 +9,7 @@ $image3 = New-BTImage -Source 'C:\_git\BurntToast\Media\BurntToast.png' -HeroIma
 
 $audio1 = New-BTAudio -Source 'ms-winsoundevent:Notification.Reminder'
 
-$binding1 = New-BTBinding -Children $text1, $text2, $text3 -AppLogoOverride $image2 -HeroImage $image3
+$binding1 = New-BTBinding -Children $text1, $text2, $text3, $progress -AppLogoOverride $image2 #-HeroImage $image3
 
 $visual1 = New-BTVisual -BindingGeneric $binding1
 

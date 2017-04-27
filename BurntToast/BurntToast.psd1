@@ -19,6 +19,7 @@
                         'New-BTHeader',
                         'New-BTImage',
                         'New-BTInput',
+                        'New-BTProgressBar',
                         'New-BTSelectionBoxItem',
                         'New-BTText',
                         'New-BTVisual',
