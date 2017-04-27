@@ -52,6 +52,12 @@
 
         This example creates a Toast Notification which will include a progress bar.
 
+        .EXAMPLE
+        New-BurntToastNotification -Text 'Professional Content', 'And gr8 spelling' -UniqueIdentifier 'Toast001'
+        New-BurntToastNotification -Text 'Professional Content', 'And great spelling' -UniqueIdentifier 'Toast001'
+
+        This example will show a toast with a spelling error, which is replaced by a second toast because they both shared a unique identifier.
+
         .NOTES
         I'm *really* sorry about the number of Parameter Sets. The best explanation is:
 
@@ -148,7 +154,12 @@
         [Microsoft.Toolkit.Uwp.Notifications.ToastHeader] $Header,
 
         # Specify the Progress Bar object created using the New-BTProgressBar function.
-        [Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBar] $ProgressBar
+        [Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBar] $ProgressBar,
+
+        # A string that uniquely identifies a toast notification. Submitting a new toast with the same identifier as a previous toast will replace the previous toast.
+        #
+        # This is useful when updating the progress of a process, using a progress bar, or otherwise correcting/updating the information on a toast.
+        [string] $UniqueIdentifier
     )
 
     $ChildObjects = @()
@@ -219,5 +230,9 @@
 
     $Content = New-BTContent @ContentSplat
 
-    Submit-BTNotification -Content $Content -AppId $AppId
+    if ($UniqueIdentifier) {
+        Submit-BTNotification -Content $Content -AppId $AppId -UniqueIdentifier $UniqueIdentifier
+    } else {
+        Submit-BTNotification -Content $Content -AppId $AppId
+    }
 }

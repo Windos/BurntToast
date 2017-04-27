@@ -67,6 +67,7 @@
         # For example 0.4 is 40%, 1 is 100%.
         [Parameter(Mandatory,
                    ParameterSetName = 'Determinate')]
+        [ValidateRange(0.0, 1.0)]
         [double] $Value,
 
         # A string that replaces the default text representation of the percentage complete.

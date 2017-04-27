@@ -31,6 +31,9 @@
         [uint64] $SequenceNumber,
 
         [Parameter()]
+        [string] $UniqueIdentifier,
+
+        [Parameter()]
         [string] $AppId = $Script:Config.AppId
     )
 
@@ -55,6 +58,11 @@
     if ($SequenceNumber) {
         $Toast.Data = [Windows.UI.Notifications.NotificationData]::new()
         $Toast.Data.SequenceNumber = $SequenceNumber
+    }
+
+    if ($UniqueIdentifier) {
+        $Toast.Group = $UniqueIdentifier
+        $Toast.Tag = $UniqueIdentifier
     }
 
     [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show($Toast)

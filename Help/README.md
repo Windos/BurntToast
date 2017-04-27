@@ -28,6 +28,10 @@
     - [ ] Comment based help
     - [ ] Markdown file
     - [ ] Content/Index Entry
+- [X] New-BTHeader
+    - [X] Comment based help
+    - [X] Markdown file
+    - [X] Content/Index Entry
 - [ ] New-BTImage
     - [ ] Comment based help
     - [ ] Markdown file
@@ -36,6 +40,10 @@
     - [ ] Comment based help
     - [ ] Markdown file
     - [ ] Content/Index Entry
+- [X] New-BTProgressBar
+    - [X] Comment based help
+    - [X] Markdown file
+    - [X] Content/Index Entry
 - [ ] New-BTSelectionBoxItem
     - [ ] Comment based help
     - [ ] Markdown file
@@ -70,6 +78,16 @@ Actions can either be system handeled and automatically localized Snooze and Dis
 The New-BTAppId function create a new AppId registry key in the Current User's Registery Hive. If the desired AppId is already present in the Registry then no changes are made.
 
 If no AppId is specified then the AppId specified in the config.json file in the BurntToast module's root directory is used.
+
+### [New-BTHeader](New-BTHeader.md)
+The New-BTHeader function creates a new toast notification header for a Toast Notification.
+
+These headers are diaplyed at the top of a toast and are also used to categorize toasts in the Action Center.
+
+### [New-BTProgressBar](New-BTProgressBar.md)
+The New-BTProgressBar function creates a new Progress Bar Element for Toast Notifications.
+
+You must specify the status and value for the progress bar and can optionally give the bar a title and override the automatic text representiation of the progress.
 
 ### [New-BurntToastNotification](New-BurntToastNotification.md)
 The New-BurntToastNotification cmdlet creates and displays a Toast Notification on Microsoft Windows 10.

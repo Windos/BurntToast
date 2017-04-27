@@ -104,6 +104,14 @@ PS C:\>New-BurntToastNotification -Text 'File copy script running', 'More detail
 
 This exmaple creates a Toast Notification which will include a progress bar.
 
+### -------------------------- EXAMPLE 7 --------------------------
+```
+PS C:\>New-BurntToastNotification -Text 'Professional Content', 'And gr8 spelling' -UniqueIdentifier 'Toast001'
+PS C:\>New-BurntToastNotification -Text 'Professional Content', 'And great spelling' -UniqueIdentifier 'Toast001'
+```
+
+This example will show a toast with a spelling error, which is replaced by a second toast because they both shared a unique identifier.
+
 ## PARAMETERS
 
 ### -AppId
@@ -253,6 +261,23 @@ Aliases:
 Required: False
 Position: Named
 Default value: Default Notification
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UniqueIdentifier
+A string that uniquely identifies a toast notification. Submitting a new toast with the same identifier as a previous toast will replace the previous toast.
+
+This is useful when updating the progress of a process, using a progress bar, or otherwise correcting/updating the information on a toast.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value:
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
