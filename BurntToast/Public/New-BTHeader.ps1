@@ -17,7 +17,16 @@
         Microsoft.Toolkit.Uwp.Notifications.ToastHeader
 
         .EXAMPLE
-        New-BTHeader
+        New-BTHeader -Id 'primary header' -Title 'First Category'
+
+        This command creates a Toast Header object, which will be displayed with the text "First Category."
+
+        .EXAMPLE
+        New-BTHeader -Id '001' -Title 'Stack Overflow Questions' -Arguments 'http://stackoverflow.com/'
+
+        This command creates a Toast Header object, which will be displayed with the text "First Category."
+
+        Clicking the header will take the user to the Stack Overflow website.
 
         .LINK
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTHeader.md
