@@ -12,42 +12,42 @@ Creates and displays a Toast Notification.
 
 ### Sound (Default)
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] [-Header <ToastHeader>]
 ```
 
 ### Silent
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] [-Header <ToastHeader>]
 ```
 
 ### Snooze and Dismiss
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] -SnoozeAndDismiss
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] -SnoozeAndDismiss [-Header <ToastHeader>]
 ```
 
 ### Custom Buttons
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] -Button <IToastButton[]>
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] -Button <IToastButton[]> [-Header <ToastHeader>]
 ```
 
 ### Silent and Snooze and Dismiss
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] -SnoozeAndDismiss
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] -SnoozeAndDismiss [-Header <ToastHeader>]
 ```
 
 ### Silent and Custom Buttons
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] -Button <IToastButton[]>
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] -Button <IToastButton[]> [-Header <ToastHeader>]
 ```
 
 ### Sound and Snooze and Dismiss
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] -SnoozeAndDismiss
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] -SnoozeAndDismiss [-Header <ToastHeader>]
 ```
 
 ### Sound and Custom Buttons
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] -Button <IToastButton[]>
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] -Button <IToastButton[]> [-Header <ToastHeader>]
 ```
 
 ## DESCRIPTION
@@ -88,6 +88,14 @@ PS C:\>New-BurntToastNotification -Text 'New Blog Post!' -Button $BlogButton
 
 This exmaple creates a Toast Notification with a button which will open a link to "http://king.geek.nz" when clicked.
 
+### -------------------------- EXAMPLE 4 --------------------------
+```
+PS C:\>$ToastHeader = New-BTHeader -Id '001' -Title 'Stack Overflow Questions'
+PS C:\>New-BurntToastNotification -Text 'New Stack Overflow Question!', 'More details!' -Header $ToastHeader
+```
+
+This exmaple creates a Toast Notification which will be tisplayed under the header 'Stack Overflow Questions.'
+
 ## PARAMETERS
 
 ### -AppId
@@ -96,7 +104,7 @@ Specifies a string that identifies the source of the Toast Notification. Differe
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -111,7 +119,7 @@ Specifies the path to an image that will override the default image displayed wi
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -126,7 +134,22 @@ Allows up to five buttons to be added to the bottom of the Toast Notification. T
 ```yaml
 Type: IToastButton[]
 Parameter Sets: Custom Buttons, Silent and Custom Buttons, Sound and Custom Buttons
-Aliases: 
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Header
+# Specify the Toast Header object created using the New-BTHeader function, for seperation/categorization of toasts from the same AppId.
+
+```yaml
+Type: ToastHeader
+Parameter Sets: (All)
+Aliases:
 
 Required: False
 Position: Named
@@ -143,7 +166,7 @@ Cannot be used in conjunction with the 'Sound' parameter.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: Silent, Silent and Snooze and Dismiss, Silent and Custom Buttons
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -158,7 +181,7 @@ Adds a default selection box and snooze/dismiss buttons to the bottom of the Toa
 ```yaml
 Type: SwitchParameter
 Parameter Sets: Snooze and Dismiss, Silent and Snooze and Dismiss, Sound and Snooze and Dismiss
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -175,7 +198,7 @@ Cannot be used in conjunction with the 'Silent' switch.
 ```yaml
 Type: String
 Parameter Sets: Sound
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -187,7 +210,7 @@ Accept wildcard characters: False
 ```yaml
 Type: String
 Parameter Sets: Sound and Snooze and Dismiss, Sound and Custom Buttons
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -202,7 +225,7 @@ Specifies the text to show on the Toast Notification. Up to three strings can be
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named

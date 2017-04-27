@@ -3,14 +3,14 @@
     <#
         .SYNOPSIS
         Creates and displays a Toast Notification.
-        
+
         .DESCRIPTION
         The New-BurntToastNotification cmdlet creates and displays a Toast Notification on Microsoft Windows 10.
 
         You can specify the text and/or image displayed as well as selecting the sound that is played when the Toast Notification is displayed.
 
         You can optionally call the New-BurntToastNotification cmdlet with the Toast alias.
-        
+
         .INPUTS
         None
             You cannot pipe input to this cmdlet.
@@ -18,15 +18,15 @@
         .OUTPUTS
         None
             New-BurntToastNotification displays the Toast Notification that is created.
-        
+
         .EXAMPLE
         New-BurntToastNotification
-        
+
         This command creates and displays a Toast Notification with all default values.
-        
+
         .EXAMPLE
         New-BurntToastNotification -Text 'Example Script', 'The example script has run successfully.'
-        
+
         This command creates and displays a Toast Notification with customized title and display text.
 
         .EXAMPLE
@@ -39,7 +39,13 @@
         New-BurntToastNotification -Text 'New Blog Post!' -Button $BlogButton
 
         This exmaple creates a Toast Notification with a button which will open a link to "http://king.geek.nz" when clicked.
-        
+
+        .EXAMPLE
+        $ToastHeader = New-BTHeader -Id '001' -Title 'Stack Overflow Questions'
+        New-BurntToastNotification -Text 'New Stack Overflow Question!', 'More details!' -Header $ToastHeader
+
+        This exmaple creates a Toast Notification which will be tisplayed under the header 'Stack Overflow Questions.'
+
         .NOTES
         I'm *really* sorry about the number of Parameter Sets. The best explanation is:
 
@@ -59,12 +65,12 @@
         [String[]] $Text = 'Default Notification',
 
         #TODO: [ValidateScript({ Test-ToastImage -Path $_ })]
-        
+
         # Specifies the path to an image that will override the default image displayed with a Toast Notification.
         [String] $AppLogo,
 
         #TODO: [ValidateScript({ Test-ToastAppId -Id $_ })]
-        
+
         # Specifies a string that identifies the source of the Toast Notification. Different AppIds allow different types of Toasts to be grouped in the Action Centre.
         [String] $AppId = $Script:Config.AppId,
 
@@ -122,7 +128,7 @@
         [Parameter(Mandatory = $true,
                    ParameterSetName = 'Sound-SnD')]
         [Switch] $SnoozeAndDismiss,
-        
+
         # Allows up to five buttons to be added to the bottom of the Toast Notification. These buttons should be created using the New-BTButton function.
         [Parameter(Mandatory = $true,
                    ParameterSetName = 'Button')]
@@ -130,9 +136,12 @@
                    ParameterSetName = 'Silent-Button')]
         [Parameter(Mandatory = $true,
                    ParameterSetName = 'Sound-Button')]
-        [Microsoft.Toolkit.Uwp.Notifications.IToastButton[]] $Button
+        [Microsoft.Toolkit.Uwp.Notifications.IToastButton[]] $Button,
+
+        # Specify the Toast Header object created using the New-BTHeader function, for seperation/categorization of toasts from the same AppId.
+        [Microsoft.Toolkit.Uwp.Notifications.ToastHeader] $Header
     )
-    
+
     $TextObjects = @()
 
     foreach ($Txt in $Text)
@@ -156,7 +165,7 @@
     else
     {
         if ($Sound -ne 'Default')
-        {     
+        {
             if ($Sound -like 'Alarm*' -or $Sound -like 'Call*')
             {
                 $Audio = New-BTAudio -Source "ms-winsoundevent:Notification.Looping.$Sound" -Loop
@@ -175,12 +184,12 @@
     $ContentSplat = @{'Audio' = $Audio
                       'Visual' = $Visual
     }
-    
+
     if ($Long)
     {
         $ContentSplat.Add('Duration', [Microsoft.Toolkit.Uwp.Notifications.ToastDuration]::Long)
     }
-    
+
     if ($SnoozeAndDismiss)
     {
         $ContentSplat.Add('Actions', (New-BTAction -SnoozeAndDismiss))
@@ -189,7 +198,12 @@
     {
         $ContentSplat.Add('Actions', (New-BTAction -Buttons $Button))
     }
-    
+
+    if ($Header)
+    {
+        $ContentSplat.Add('Header', $Header)
+    }
+
     $Content = New-BTContent @ContentSplat
 
     Submit-BTNotification -Content $Content -AppId $AppId
