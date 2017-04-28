@@ -1,13 +1,11 @@
-﻿function Test-BTAudioPath
-{
-    param
-    (
+﻿function Test-BTAudioPath {
+    param (
         [Parameter(Mandatory)]
         [String] $Path
     )
 
     $Extension = [IO.Path]::GetExtension($Path)
-    
+
     $ValidExtensions = @(
         '.aac'
         '.flac'
@@ -17,19 +15,13 @@
         '.wma'
     )
 
-    if ($Extension -in $ValidExtensions)
-    {
-        if (Test-Path -Path $Path) 
-        {
+    if ($Extension -in $ValidExtensions) {
+        if (Test-Path -Path $Path) {
             $true
-        }
-        else 
-        {
+        } else {
             throw "The file '$Path' doesn't exist in the specified location. Please provide a valid path and try again."
         }
-    }
-    else
-    {
+    } else {
         throw "The file extension '$Extension' is not supported. Please provide a valid path and try again."
     }
 }

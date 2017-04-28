@@ -38,6 +38,8 @@
 * Hero Images working now (Thanks to Creators Update)
 * Headers can now be included (Creators Update feature)
 * Progress bars can now be included (Creators Update feature)
+* Specify a unique identifier in order to replace existing toasts
+* You can specify a custom sound file using the -Path parameter of the New-BTAudio function. This hasn''t been exposed through the main function... that poor thing is getting bloated.
 '
         }
     }

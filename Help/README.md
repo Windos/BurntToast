@@ -8,10 +8,10 @@
     - [X] Comment based help
     - [X] Markdown file
     - [X] Content/Index Entry
-- [ ] New-BTAudio
-    - [ ] Comment based help
-    - [ ] Markdown file
-    - [ ] Content/Index Entry
+- [X] New-BTAudio
+    - [X] Comment based help
+    - [X] Markdown file
+    - [X] Content/Index Entry
 - [ ] New-BTBinding
     - [ ] Comment based help
     - [ ] Markdown file
@@ -78,6 +78,11 @@ Actions can either be system handeled and automatically localized Snooze and Dis
 The New-BTAppId function create a new AppId registry key in the Current User's Registery Hive. If the desired AppId is already present in the Registry then no changes are made.
 
 If no AppId is specified then the AppId specified in the config.json file in the BurntToast module's root directory is used.
+
+### [New-BTAudio](New-BTAudio.md)
+The New-BTAudioElement function creates a new Audio Element for Toast Notifications.
+
+You can use the parameters of New-BTAudioElement to select an audio file or a standard notification sound (including alarms). Alternativly you can specify that a Toast Notification should be silent.
 
 ### [New-BTHeader](New-BTHeader.md)
 The New-BTHeader function creates a new toast notification header for a Toast Notification.
