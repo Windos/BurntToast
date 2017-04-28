@@ -20,10 +20,10 @@
     - [X] Comment based help
     - [X] Markdown file
     - [X] Content/Index Entry
-- [ ] New-BTContent
-    - [ ] Comment based help
-    - [ ] Markdown file
-    - [ ] Content/Index Entry
+- [X] New-BTContent
+    - [X] Comment based help
+    - [X] Markdown file
+    - [X] Content/Index Entry
 - [ ] New-BTContextMenuItem
     - [ ] Comment based help
     - [ ] Markdown file
@@ -91,6 +91,9 @@ The New-BTBinding funcation creates a new Generic Toast Binding, where you provi
 The New-BTButton function creates a new clickable button for a Toast Notification. Up to five buttons can be added to one Toast.
 
 Buttons can be fully customized with display text, images and arguments or system handled 'Snooze' and 'Dismiss' buttons.
+
+### [New-BTContent](New-BTContent.md)
+The New-BTContent funcation creates a new Toast Content object which is the Base Toast element, which contains at least a visual element.
 
 ### [New-BTHeader](New-BTHeader.md)
 The New-BTHeader function creates a new toast notification header for a Toast Notification.
