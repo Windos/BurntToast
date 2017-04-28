@@ -41,11 +41,13 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 * [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.5.2.zip) (Development/Raw Repo - **CAUTION**)
 * [v0.6.0](https://github.com/Windos/BurntToast/releases/download/v0.6.0/BurntToast.zip)
     * Updated bundled UWP Toolkit to 1.4.1
+        * Note that this caused an issue where strings were being wrapped with curly braces in end results. A workaround has been implemented, but could mean that if you legitimatly use some rather obscure strings, they may have the braces removed.
     * Hero Images working now (Thanks to Creators Update)
     * Headers can now be included (Creators Update feature)
     * Progress bars can now be included (Creators Update feature)
     * Specify a unique identifier in order to replace existing toasts
     * You can specify a custom sound file using the -Path parameter of the New-BTAudio function. This hasn''t been exposed through the main function... that poor thing is getting bloated.
+    * There is now help for every public function, and the online version for each of them can be found on github. Specify the -Online switch when using Get-Help to be taken directly there.
 * [v0.5.2](https://github.com/Windos/BurntToast/releases/download/v0.5.2/BurntToast.zip)
     * Exposed ability to have custom buttons via New-BurntToastNotification, passing result from New-BTButton to the -Button parameter.
         * Expect a blog post soon covering some cool ways to use these buttons. Keep an eye out on [king.geek.nz](http://king.geek.nz).
