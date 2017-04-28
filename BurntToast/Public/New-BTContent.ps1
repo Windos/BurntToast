@@ -4,7 +4,7 @@
         Creates a new Toast Content object.
 
         .DESCRIPTION
-        The New-BTContent funcation creates a new Toast Content object which is the Base Toast element, which contains at least a visual element.
+        The New-BTContent function creates a new Toast Content object which is the Base Toast element, which contains at least a visual element.
 
         .INPUTS
         None
@@ -25,7 +25,7 @@
         $content1 = New-BTContent -Visual $visual1 -ActivationType Protocol -Launch 'https://google.com'
 
         This command takes a pre-existing visual object and also specifies options required to launch a browser on the Google homepage when clicking the toast.
-        
+
         .NOTES
         Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
 

@@ -85,7 +85,7 @@ The New-BTAudioElement function creates a new Audio Element for Toast Notificati
 You can use the parameters of New-BTAudioElement to select an audio file or a standard notification sound (including alarms). Alternativly you can specify that a Toast Notification should be silent.
 
 ### [New-BTBinding](New-BTBinding.md)
-The New-BTBinding funcation creates a new Generic Toast Binding, where you provide text, images, and other visual elements for your Toast notification.
+The New-BTBinding function creates a new Generic Toast Binding, where you provide text, images, and other visual elements for your Toast notification.
 
 ### [New-BTButton](New-BTButton.md)
 The New-BTButton function creates a new clickable button for a Toast Notification. Up to five buttons can be added to one Toast.
@@ -93,7 +93,10 @@ The New-BTButton function creates a new clickable button for a Toast Notificatio
 Buttons can be fully customized with display text, images and arguments or system handled 'Snooze' and 'Dismiss' buttons.
 
 ### [New-BTContent](New-BTContent.md)
-The New-BTContent funcation creates a new Toast Content object which is the Base Toast element, which contains at least a visual element.
+The New-BTContent function creates a new Toast Content object which is the Base Toast element, which contains at least a visual element.
+
+### [New-BTContextMenuItem](New-BTContextMenuItem.md)
+The New-BTContextMenuItem function creates a Context Menu Item object.
 
 ### [New-BTHeader](New-BTHeader.md)
 The New-BTHeader function creates a new toast notification header for a Toast Notification.

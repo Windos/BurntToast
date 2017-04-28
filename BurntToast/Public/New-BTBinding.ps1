@@ -4,7 +4,7 @@
         Creates a new Generic Toast Binding object.
 
         .DESCRIPTION
-        The New-BTBinding funcation creates a new Generic Toast Binding, where you provide text, images, and other visual elements for your Toast notification.
+        The New-BTBinding function creates a new Generic Toast Binding, where you provide text, images, and other visual elements for your Toast notification.
 
         .INPUTS
         None

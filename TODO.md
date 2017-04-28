@@ -12,3 +12,5 @@
 - [ ] See if anything from UWP Community Toolkit has been included that doesn't apply to Toasts and/or desktop only apps. No point exposing mobile only features, for example.
 - [ ] AdaptiveGroup
 - [ ] ToastGenericAttributionText
+- [ ] Ensure ContextMenuItems and SelectionBoxes actually work.
+- [ ] ActivationOptions

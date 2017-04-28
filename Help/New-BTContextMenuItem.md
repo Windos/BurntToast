@@ -1,12 +1,12 @@
 ---
-external help file: BurntToast-help.xml
-online version: https://github.com/Windos/BurntToast
+online version: https://github.com/Windos/BurntToast/blob/master/Help/New-BTContextMenuItem.md
 schema: 2.0.0
 ---
 
 # New-BTContextMenuItem
 
 ## SYNOPSIS
+Creates a Context Menu Item object.
 
 ## SYNTAX
 
@@ -15,34 +15,26 @@ New-BTContextMenuItem [-Content] <String> [-Arguments] <String> [[-ActivationTyp
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+The New-BTContextMenuItem function creates a Context Menu Item object.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-
+PS C:\>New-BTContextMenuItem -Content 'Google' -Arguments 'https://google.com' -ActivationType Protocol
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
-```
-
-```
-
-### -------------------------- EXAMPLE 3 --------------------------
-```
-
-```
+This command creates a new Context Menu Item object with the specified properties.
 
 ## PARAMETERS
 
 ### -ActivationType
-{{Fill ActivationType Description}}
+Controls what type of activation this menu item will use when clicked. Defaults to Foreground.
 
 ```yaml
 Type: ToastActivationType
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 Accepted values: Foreground, Background, Protocol
 
 Required: False
@@ -53,12 +45,12 @@ Accept wildcard characters: False
 ```
 
 ### -Arguments
-{{Fill Arguments Description}}
+App-defined string of arguments that the app can later retrieve once it is activated when the user clicks the menu item.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 2
@@ -68,12 +60,12 @@ Accept wildcard characters: False
 ```
 
 ### -Content
-{{Fill Content Description}}
+The text to display on the menu item.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
@@ -88,11 +80,13 @@ Accept wildcard characters: False
 
 ## OUTPUTS
 
-### Image
+### ToastContextMenuItem
 
 ## NOTES
+Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
+
+Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
 
 ## RELATED LINKS
 
-[https://github.com/Windos/BurntToast](https://github.com/Windos/BurntToast)
-
+[New-BTContextMenuItem](https://github.com/Windos/BurntToast/blob/master/Help/New-BTContextMenuItem.md)

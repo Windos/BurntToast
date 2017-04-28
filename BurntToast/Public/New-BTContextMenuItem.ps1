@@ -1,35 +1,44 @@
 ﻿function New-BTContextMenuItem {
     <#
         .SYNOPSIS
+        Creates a Context Menu Item object.
 
         .DESCRIPTION
+        The New-BTContextMenuItem function creates a Context Menu Item object.
 
         .INPUTS
         None
 
         .OUTPUTS
-        Image
+        ToastContextMenuItem
 
         .EXAMPLE
+        New-BTContextMenuItem -Content 'Google' -Arguments 'https://google.com' -ActivationType Protocol
 
-        .EXAMPLE
+        This command creates a new Context Menu Item object with the specified properties.
 
-        .EXAMPLE
+        .NOTES
+        Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
+
+        Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
 
         .LINK
-        https://github.com/Windos/BurntToast
+        https://github.com/Windos/BurntToast/blob/master/Help/New-BTContextMenuItem.md
     #>
 
     [CmdletBinding()]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem])]
 
     param (
+        # The text to display on the menu item.
         [Parameter(Mandatory)]
         [string] $Content,
 
+        # App-defined string of arguments that the app can later retrieve once it is activated when the user clicks the menu item.
         [Parameter(Mandatory)]
         [string] $Arguments,
 
+        # Controls what type of activation this menu item will use when clicked. Defaults to Foreground.
         [Parameter()]
         [Microsoft.Toolkit.Uwp.Notifications.ToastActivationType] $ActivationType
     )
