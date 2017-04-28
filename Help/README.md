@@ -1,55 +1,77 @@
 # BurntToast Help
+
 ## Description
-{{Manually Enter Description Here}}
+Module for creating and displaying Toast Notifications on Microsoft Windows 10.
 
-## BurntToast Cmdlets
-### [Get-BTFunctionLevel](Get-BTFunctionLevel.md)
-The Get-BTFunctionLevel function returns the current function level of the BurntToast module as defined in config.json.
-
+## BurntToast Functions
 ### [New-BTAction](New-BTAction.md)
-{{Manually Enter New-BTAction Description Here}}
+The New-BTAction function creates an 'action' object which contains defines the controls displayed at the bottom of a Toast Notification.
+
+Actions can either be system handeled and automatically localized Snooze and Dismiss buttons or a custom collection of inputs.
+
+### [New-BTAppId](New-BTAppId.md)
+The New-BTAppId function create a new AppId registry key in the Current User's Registery Hive. If the desired AppId is already present in the Registry then no changes are made.
+
+If no AppId is specified then the AppId specified in the config.json file in the BurntToast module's root directory is used.
 
 ### [New-BTAudio](New-BTAudio.md)
-{{Manually Enter New-BTAudio Description Here}}
+The New-BTAudioElement function creates a new Audio Element for Toast Notifications.
+
+You can use the parameters of New-BTAudioElement to select an audio file or a standard notification sound (including alarms). Alternativly you can specify that a Toast Notification should be silent.
 
 ### [New-BTBinding](New-BTBinding.md)
-{{Manually Enter New-BTBinding Description Here}}
+The New-BTBinding function creates a new Generic Toast Binding, where you provide text, images, and other visual elements for your Toast notification.
 
 ### [New-BTButton](New-BTButton.md)
-{{Manually Enter New-BTButton Description Here}}
+The New-BTButton function creates a new clickable button for a Toast Notification. Up to five buttons can be added to one Toast.
+
+Buttons can be fully customized with display text, images and arguments or system handled 'Snooze' and 'Dismiss' buttons.
 
 ### [New-BTContent](New-BTContent.md)
-{{Manually Enter New-BTContent Description Here}}
+The New-BTContent function creates a new Toast Content object which is the Base Toast element, which contains at least a visual element.
 
 ### [New-BTContextMenuItem](New-BTContextMenuItem.md)
-{{Manually Enter New-BTContextMenuItem Description Here}}
+The New-BTContextMenuItem function creates a Context Menu Item object.
+
+### [New-BTHeader](New-BTHeader.md)
+The New-BTHeader function creates a new toast notification header for a Toast Notification.
+
+These headers are diaplyed at the top of a toast and are also used to categorize toasts in the Action Center.
 
 ### [New-BTImage](New-BTImage.md)
-{{Manually Enter New-BTImage Description Here}}
+The New-BTImageElement function creates a new Image Element for Toast Notifications.
+
+You can use the parameters of New-BTImageElement to specify the source image, alt text, placement on the Toast Notification and crop shape.
 
 ### [New-BTInput](New-BTInput.md)
-{{Manually Enter New-BTInput Description Here}}
+The New-BTInput function creates an input element on a Toast notification.
+
+Returned object is either a TextBox for users to type text into or SelectionBox to users to select from a list of options.
+
+### [New-BTProgressBar](New-BTProgressBar.md)
+The New-BTProgressBar function creates a new Progress Bar Element for Toast Notifications.
+
+You must specify the status and value for the progress bar and can optionally give the bar a title and override the automatic text representiation of the progress.
 
 ### [New-BTSelectionBoxItem](New-BTSelectionBoxItem.md)
-{{Manually Enter New-BTSelectionBoxItem Description Here}}
+The New-BTSelectionBoxItem function creates a selection box item, for inclusion in a selection box created with New-BTInput.
 
 ### [New-BTText](New-BTText.md)
-{{Manually Enter New-BTText Description Here}}
+The New-BTTextElement function creates a new Text Element for Toast Notifications.
+
+You can specify the text you want displayed in a Toast Notification as a string, or run the function without a paramter for a blank line.
+
+Each Text Element is the equivalent of one line in on a Toast Notification, long lines will wrap.
 
 ### [New-BTVisual](New-BTVisual.md)
-{{Manually Enter New-BTVisual Description Here}}
+The New-BTVisual function creates a new visual element for toast notifications, which defines all of the visual aspects of a toast.
 
 ### [New-BurntToastNotification](New-BurntToastNotification.md)
-{{Manually Enter New-BurntToastNotification Description Here}}
+The New-BurntToastNotification function creates and displays a Toast Notification on Microsoft Windows 10.
 
-### [Set-BTFunctionLevel](Set-BTFunctionLevel.md)
-The Set-BTFunctionLevel function changes the function level of the BurntToast module as defined in config.json.
+You can specify the text and/or image displayed as well as selecting the sound that is played when the Toast Notification is displayed.
 
-To use Set-BTFunctionLevel, use the FunctionLevel parameter to identify the desired FunctionLevel. The only valid inputs to the FunctionLevel parameter are 'Basic' and 'Advanced.'
-
-As the confirguration for the BurntToast module is saved into a file, PowerShell must be run as an Administrator in order to set a new function level if the module is saved to a location other than the users' home directory. This function will issue an error if this is the case.
-
-The BurntToast module needs to be re-imported in order for a new function level to take effect and this function will issue a warning when it runs successfully.
+You can optionally call the New-BurntToastNotification function with the Toast alias.
 
 ### [Submit-BTNotification](Submit-BTNotification.md)
-{{Manually Enter Submit-BTNotification Description Here}}
+The Submit-BTNotification function submits a completed toast notification to the operating systems' notification manager for display.

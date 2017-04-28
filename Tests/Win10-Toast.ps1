@@ -1,24 +1,27 @@
 $text1 = New-BTText -Content 'This is a test'
 $text2 = New-BTText
 $text3 = New-BTText -Content 'This more testing'
+$progress = New-BTProgressBar -Title 'Things are happening' -Status 'Working on it' -Value 0.01 -ValueDisplay '1%'
 
-$image1 = New-BTImage -Source 'C:\Users\King\Documents\GitHub\BurntToast\Media\BurntToast.png'
-$image2 = New-BTImage -Source 'C:\Users\King\Documents\GitHub\BurntToast\Media\BurntToast.png' -AppLogoOverride -Crop Circle
-$image3 = New-BTImage -Source 'C:\Users\King\Documents\GitHub\BurntToast\Media\BurntToast.png' -HeroImage
+$image1 = New-BTImage -Source 'C:\_git\BurntToast\Media\BurntToast.png'
+$image2 = New-BTImage -Source 'C:\_git\BurntToast\Media\BurntToast.png' -AppLogoOverride -Crop Circle
+$image3 = New-BTImage -Source 'C:\_git\BurntToast\Media\BurntToast.png' -HeroImage
 
 $audio1 = New-BTAudio -Source 'ms-winsoundevent:Notification.Reminder'
 
-$binding1 = New-BTBinding -Children $text1, $text2, $text3, $image1 -AppLogoOverride $image2 -HeroImage $image3
+$binding1 = New-BTBinding -Children $text1, $text2, $text3, $progress -AppLogoOverride $image2 #-HeroImage $image3
 
 $visual1 = New-BTVisual -BindingGeneric $binding1
 
 $button3 = New-BTButton -Content 'Open LCTV' -Argument 'https://www.livecoding.tv/livestreams/' -ActivationType Protocol
-$BurntToastPath = 'C:\Users\King\Documents\GitHub\BurntToast\Media\BurntToast.png'
+$BurntToastPath = 'C:\_git\BurntToast\Media\BurntToast.png'
 $button4 = New-BTButton -Content 'Burnt Toast' -Argument $BurntToastPath -ActivationType Protocol
 
 $action3 = New-BTAction -Buttons $button3, $button4
 
-$content1 = New-BTContent -Audio $audio1 -Visual $visual1 -Actions $action3
+$Header = New-BTHeader -Id 001 -Title 'Google header' -Arguments 'https://google.com'
+
+$content1 = New-BTContent -Audio $audio1 -Visual $visual1 -Actions $action3 -Header $Header
 
 Submit-BTNotification -Content $content1
 
@@ -86,12 +89,12 @@ $visual1 = New-BTVisual -BindingGeneric $binding1
 # $Select3 = New-BTSelectionBoxItem -Id 3 -Content '3 Minutes'
 # $Select4 = New-BTSelectionBoxItem -Id 4 -Content '4 Minutes'
 # $Select5 = New-BTSelectionBoxItem -Id 5 -Content '5 Minutes'
-# 
+#
 # $Input1 = New-BTInput -Id 'snoozeTime' -DefaultSelectionBoxItemId 3 -Items $Select1, $Select2, $Select3, $Select4, $Select5
-# 
+#
 # $button1 = New-BTButton -Snooze -Id 'snoozeTime'
 # $button2 = New-BTButton -Dismiss
-# 
+#
 # $action2 = New-BTAction -Buttons $button1, $button2 -Inputs $Input1
 
 $button3 = New-BTButton -Content 'Open LCTV' -Argument 'https://www.livecoding.tv/livestreams/' -ActivationType Protocol
@@ -103,7 +106,7 @@ $action3 = New-BTAction -Buttons $button3, $button4
 $content1 = New-BTContent -Audio $audio1 -Visual $visual1 -Actions $action3
 
 # $null = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
-# 
+#
 # $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::new()
 # $ToastXml.LoadXml($content1.GetContent())
 # $Toast = [Windows.UI.Notifications.ToastNotification]::new($ToastXml)
@@ -175,7 +178,7 @@ $Toast = [Windows.UI.Notifications.ToastNotification]::new($ToastXml)
 
                         $AudioElement = $ToastTemplate.CreateElement('audio')
                         $AudioElement.SetAttribute('src', "ms-winsoundevent:Notification.$SoundEvent")
-                    
+
                         if ($SoundEvent -like 'Looping*')
                         {
                             $AudioElement.SetAttribute('loop', 'true')

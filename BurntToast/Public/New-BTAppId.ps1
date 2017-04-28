@@ -1,5 +1,4 @@
-﻿function New-BTAppId
-{
+﻿function New-BTAppId {
     <#
         .SYNOPSIS
         Creates a new AppId Registry Key.
@@ -9,11 +8,6 @@
 
         If no AppId is specified then the AppId specified in the config.json file in the BurntToast module's root directory is used.
 
-        .PARAMETER AppId
-        Specifies the new AppId. You can use any alphanumeric characters.
-
-        Defaults to the AppId specified in the config.json file in the BurntToast module's root directoy if not provided.
-
         .INPUTS
         System.String
 
@@ -21,9 +15,6 @@
 
         .OUTPUTS
         None
-
-        .NOTES
-        The New-BTAppId function is classified as: Basic
 
         .EXAMPLE
         New-BTAppId
@@ -34,27 +25,26 @@
         New-BTAppId -AppId 'Script Checker'
 
         This command create an AppId registry key called 'Script Checker.'
-        
+
         .LINK
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTAppId.md
     #>
 
     [CmdletBinding()]
-    param
-    (
-        [ValidateNotNullOrEmpty()] 
+    param (
+        # Specifies the new AppId. You can use any alphanumeric characters.
+        #
+        # Defaults to the AppId specified in the config.json file in the BurntToast module's root directoy if not provided.
+        [ValidateNotNullOrEmpty()]
         [string] $AppId = $Script:Config.AppId
     )
-    
+
     $RegPath = 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings'
-    
-    if (!(Test-Path -Path "$RegPath\$AppId"))
-    {
+
+    if (!(Test-Path -Path "$RegPath\$AppId")) {
         $null = New-Item -Path $RegPath -Name $AppId
         $null = New-ItemProperty -Path "$RegPath\$AppId" -Name 'ShowInActionCenter' -Value 1 -PropertyType 'DWORD'
-    }
-    else
-    {
+    } else {
         Write-Warning -Message 'Specified AppId is already present in the registry.'
     }
 }

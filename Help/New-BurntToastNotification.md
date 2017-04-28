@@ -12,50 +12,50 @@ Creates and displays a Toast Notification.
 
 ### Sound (Default)
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Silent
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Snooze and Dismiss
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] -SnoozeAndDismiss
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] -SnoozeAndDismiss [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Custom Buttons
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] -Button <IToastButton[]>
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] -Button <IToastButton[]> [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Silent and Snooze and Dismiss
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] -SnoozeAndDismiss
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] -SnoozeAndDismiss [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Silent and Custom Buttons
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] -Button <IToastButton[]>
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] -Button <IToastButton[]> [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Sound and Snooze and Dismiss
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] -SnoozeAndDismiss
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] -SnoozeAndDismiss [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Sound and Custom Buttons
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] -Button <IToastButton[]>
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] -Button <IToastButton[]> [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ## DESCRIPTION
-The New-BurntToastNotification cmdlet creates and displays a Toast Notification on Microsoft Windows 10.
+The New-BurntToastNotification function creates and displays a Toast Notification on Microsoft Windows 10.
 
 You can specify the text and/or image displayed as well as selecting the sound that is played when the Toast Notification is displayed.
 
-You can optionally call the New-BurntToastNotification cmdlet with the Toast alias.
+You can optionally call the New-BurntToastNotification function with the Toast alias.
 
 ## EXAMPLES
 
@@ -88,6 +88,30 @@ PS C:\>New-BurntToastNotification -Text 'New Blog Post!' -Button $BlogButton
 
 This exmaple creates a Toast Notification with a button which will open a link to "http://king.geek.nz" when clicked.
 
+### -------------------------- EXAMPLE 5 --------------------------
+```
+PS C:\>$ToastHeader = New-BTHeader -Id '001' -Title 'Stack Overflow Questions'
+PS C:\>New-BurntToastNotification -Text 'New Stack Overflow Question!', 'More details!' -Header $ToastHeader
+```
+
+This exmaple creates a Toast Notification which will be displayed under the header 'Stack Overflow Questions.'
+
+### -------------------------- EXAMPLE 6 --------------------------
+```
+PS C:\>$Progress = New-BTProgressBar -Status 'Copying files' -Value 0.2
+PS C:\>New-BurntToastNotification -Text 'File copy script running', 'More details!' -ProgressBar $Progress
+```
+
+This exmaple creates a Toast Notification which will include a progress bar.
+
+### -------------------------- EXAMPLE 7 --------------------------
+```
+PS C:\>New-BurntToastNotification -Text 'Professional Content', 'And gr8 spelling' -UniqueIdentifier 'Toast001'
+PS C:\>New-BurntToastNotification -Text 'Professional Content', 'And great spelling' -UniqueIdentifier 'Toast001'
+```
+
+This example will show a toast with a spelling error, which is replaced by a second toast because they both shared a unique identifier.
+
 ## PARAMETERS
 
 ### -AppId
@@ -96,7 +120,7 @@ Specifies a string that identifies the source of the Toast Notification. Differe
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -111,7 +135,7 @@ Specifies the path to an image that will override the default image displayed wi
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -126,7 +150,37 @@ Allows up to five buttons to be added to the bottom of the Toast Notification. T
 ```yaml
 Type: IToastButton[]
 Parameter Sets: Custom Buttons, Silent and Custom Buttons, Sound and Custom Buttons
-Aliases: 
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Header
+Specify the Toast Header object created using the New-BTHeader function, for seperation/categorization of toasts from the same AppId.
+
+```yaml
+Type: ToastHeader
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressBar
+Specify the Progress Bar object created using the New-BTProgressBar function.
+
+```yaml
+Type: AdaptiveProgressBar
+Parameter Sets: (All)
+Aliases:
 
 Required: False
 Position: Named
@@ -143,7 +197,7 @@ Cannot be used in conjunction with the 'Sound' parameter.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: Silent, Silent and Snooze and Dismiss, Silent and Custom Buttons
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -158,7 +212,7 @@ Adds a default selection box and snooze/dismiss buttons to the bottom of the Toa
 ```yaml
 Type: SwitchParameter
 Parameter Sets: Snooze and Dismiss, Silent and Snooze and Dismiss, Sound and Snooze and Dismiss
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -175,7 +229,7 @@ Cannot be used in conjunction with the 'Silent' switch.
 ```yaml
 Type: String
 Parameter Sets: Sound
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -187,7 +241,7 @@ Accept wildcard characters: False
 ```yaml
 Type: String
 Parameter Sets: Sound and Snooze and Dismiss, Sound and Custom Buttons
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -202,7 +256,7 @@ Specifies the text to show on the Toast Notification. Up to three strings can be
 ```yaml
 Type: String[]
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -211,11 +265,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -UniqueIdentifier
+A string that uniquely identifies a toast notification. Submitting a new toast with the same identifier as a previous toast will replace the previous toast.
+
+This is useful when updating the progress of a process, using a progress bar, or otherwise correcting/updating the information on a toast.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value:
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ## INPUTS
 
 ### None
 
-You cannot pipe input to this cmdlet.
+You cannot pipe input to this function.
 
 ## OUTPUTS
 
@@ -232,4 +303,3 @@ I'm *really* sorry about the number of Parameter Sets. The best explanation is:
 ## RELATED LINKS
 
 [New-BurntToastNotification](https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastNotification.md)
-

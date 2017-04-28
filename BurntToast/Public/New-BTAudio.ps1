@@ -1,12 +1,11 @@
-﻿function New-BTAudio
-{
+﻿function New-BTAudio {
     <#
         .SYNOPSIS
         Creates a new Audio Element for Toast Notifications.
 
         .DESCRIPTION
-        The New-BTAudioElement cmdlet creates a new Audio Element for Toast Notifications.
-    
+        The New-BTAudioElement function creates a new Audio Element for Toast Notifications.
+
         You can use the parameters of New-BTAudioElement to select an audio file or a standard notification sound (including alarms). Alternativly you can specify that a Toast Notification should be silent.
 
         .INPUTS
@@ -15,8 +14,8 @@
         You cannot pipe input to this cmdlet.
 
         .OUTPUTS
-        Audio
-        
+        Microsoft.Toolkit.Uwp.Notifications.ToastAudio
+
         .EXAMPLE
         New-BTAudioElement -Source SMS
 
@@ -32,41 +31,77 @@
 
         Creates an Audio Element which will cause a Toast Notification to be silent.
 
-        .PARAMETER Path
-        The full path to an audio file. Supported file types include:
-
-        *.aac
-        *.flac
-        *.m4a
-        *.mp3
-        *.wav
-        *.wma
-
         .LINK
-        https://github.com/Windos/BurntToast
+        https://github.com/Windos/BurntToast/blob/master/Help/New-BTAudio.md
     #>
 
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'StandardSound')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastAudio])]
-    param
-    (
-        [Parameter()]
+    param (
+        # Specifies one of the built in Microsoft notification sounds.
+        #
+        # This paramater takes the full form of the sounds, in the form of a uri. The New-BurntToastNotification function simplifies this, so be aware of the difference.
+        [Parameter(Mandatory,
+                   ParameterSetName = 'StandardSound')]
+        [ValidateSet('ms-winsoundevent:Notification.Default',
+                     'ms-winsoundevent:Notification.IM',
+                     'ms-winsoundevent:Notification.Mail',
+                     'ms-winsoundevent:Notification.Reminder',
+                     'ms-winsoundevent:Notification.SMS',
+                     'ms-winsoundevent:Notification.Looping.Alarm',
+                     'ms-winsoundevent:Notification.Looping.Alarm2',
+                     'ms-winsoundevent:Notification.Looping.Alarm3',
+                     'ms-winsoundevent:Notification.Looping.Alarm4',
+                     'ms-winsoundevent:Notification.Looping.Alarm5',
+                     'ms-winsoundevent:Notification.Looping.Alarm6',
+                     'ms-winsoundevent:Notification.Looping.Alarm7',
+                     'ms-winsoundevent:Notification.Looping.Alarm8',
+                     'ms-winsoundevent:Notification.Looping.Alarm9',
+                     'ms-winsoundevent:Notification.Looping.Alarm10',
+                     'ms-winsoundevent:Notification.Looping.Call',
+                     'ms-winsoundevent:Notification.Looping.Call2',
+                     'ms-winsoundevent:Notification.Looping.Call3',
+                     'ms-winsoundevent:Notification.Looping.Call4',
+                     'ms-winsoundevent:Notification.Looping.Call5',
+                     'ms-winsoundevent:Notification.Looping.Call6',
+                     'ms-winsoundevent:Notification.Looping.Call7',
+                     'ms-winsoundevent:Notification.Looping.Call8',
+                     'ms-winsoundevent:Notification.Looping.Call9',
+                     'ms-winsoundevent:Notification.Looping.Call10')]
         [uri] $Source,
 
-        [Parameter()]
+        # The full path to an audio file. Supported file types include:
+        #
+        # *.aac
+        # *.flac
+        # *.m4a
+        # *.mp3
+        # *.wav
+        # *.wma
+        [Parameter(Mandatory,
+                   ParameterSetName = 'CustomSound')]
+        [ValidateScript({Test-BTAudioPath $_})]
+        [string] $Path,
+
+        # Specifies that the slected sound should play multiple times if its duration is shorter than that of the toast it accompanies.
+        [Parameter(ParameterSetName = 'CustomSound')]
+        [Parameter(ParameterSetName = 'StandardSound')]
         [switch] $Loop,
 
-        [Parameter()]
+        # Specifies that the toast should be displayed without sound.
+        [Parameter(Mandatory,
+                   ParameterSetName = 'Silent')]
         [switch] $Silent
     )
 
-    #TODO: Add ability to select 'ms-winsoundevent:Notification' sounds
-
     $Audio = [Microsoft.Toolkit.Uwp.Notifications.ToastAudio]::new()
-    
-    if ($Source)
-    {
+
+    if ($Source) {
         $Audio.Src = $Source
+    }
+
+    if ($Path) {
+        $Audio.Src = $Path
     }
 
     $Audio.Loop = $Loop

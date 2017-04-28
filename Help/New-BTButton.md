@@ -27,8 +27,8 @@ New-BTButton -Dismiss [-Content <String>]
 
 ## DESCRIPTION
 The New-BTButton function creates a new clickable button for a Toast Notification. Up to five buttons can be added to one Toast.
-    
-Buttons can be fully customized with display text, images and arguments or system handled 'Snooze' and 'Dismiss' buttons.    
+
+Buttons can be fully customized with display text, images and arguments or system handled 'Snooze' and 'Dismiss' buttons.
 
 ## EXAMPLES
 
@@ -78,7 +78,7 @@ Defaults to Protocol which will open the file or URI specified in with the Argum
 ```yaml
 Type: ToastActivationType
 Parameter Sets: Button
-Aliases: 
+Aliases:
 Accepted values: Foreground, Background, Protocol
 
 Required: False
@@ -96,7 +96,7 @@ For the purposes of BurntToast notifications this is generally the path to a fil
 ```yaml
 Type: String
 Parameter Sets: Button
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -111,7 +111,7 @@ Specifies the text to display on the button.
 ```yaml
 Type: String
 Parameter Sets: Button
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -123,7 +123,7 @@ Accept wildcard characters: False
 ```yaml
 Type: String
 Parameter Sets: Snooze, Dismiss
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -140,7 +140,7 @@ Display text defaults to a localized 'Dismiss', but this can be overridden with 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: Dismiss
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -174,7 +174,7 @@ Specifies an image icon to display on the button.
 ```yaml
 Type: String
 Parameter Sets: Button
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
@@ -191,7 +191,7 @@ Display text defaults to a localized 'Snooze', but this can be overridden with t
 ```yaml
 Type: SwitchParameter
 Parameter Sets: Snooze
-Aliases: 
+Aliases:
 
 Required: True
 Position: Named
@@ -218,4 +218,3 @@ You cannot pipe input to this function.
 ## RELATED LINKS
 
 [New-BTButton](https://github.com/Windos/BurntToast/blob/master/Help/New-BTButton.md)
-
