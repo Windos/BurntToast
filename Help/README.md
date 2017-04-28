@@ -1,12 +1,7 @@
 # BurntToast Help
-## Checklist
-- [ ] Submit-BTNotification
-    - [ ] Comment based help
-    - [ ] Markdown file
-    - [ ] Content/Index Entry
 
 ## Description
-{{Manually Enter Description Here}}
+Module for creating and displaying Toast Notifications on Microsoft Windows 10.
 
 ## BurntToast Functions
 ### [New-BTAction](New-BTAction.md)
@@ -78,5 +73,5 @@ You can specify the text and/or image displayed as well as selecting the sound t
 
 You can optionally call the New-BurntToastNotification function with the Toast alias.
 
-### [New-BTFunction](New-BTFunction.md)
-{{Manually Enter New-BTFunction Description Here}}
+### [Submit-BTNotification](Submit-BTNotification.md)
+The Submit-BTNotification function submits a completed toast notification to the operating systems' notification manager for display.
