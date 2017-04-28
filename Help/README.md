@@ -1,49 +1,5 @@
 # BurntToast Help
 ## Checklist
-- [X] New-BTAction
-    - [X] Comment based help
-    - [X] Markdown file
-    - [X] Content/Index Entry
-- [X] New-BTAppId
-    - [X] Comment based help
-    - [X] Markdown file
-    - [X] Content/Index Entry
-- [X] New-BTAudio
-    - [X] Comment based help
-    - [X] Markdown file
-    - [X] Content/Index Entry
-- [X] New-BTBinding
-    - [X] Comment based help
-    - [X] Markdown file
-    - [X] Content/Index Entry
-- [X] New-BTButton
-    - [X] Comment based help
-    - [X] Markdown file
-    - [X] Content/Index Entry
-- [X] New-BTContent
-    - [X] Comment based help
-    - [X] Markdown file
-    - [X] Content/Index Entry
-- [X] New-BTContextMenuItem
-    - [X] Comment based help
-    - [X] Markdown file
-    - [X] Content/Index Entry
-- [X] New-BTHeader
-    - [X] Comment based help
-    - [X] Markdown file
-    - [X] Content/Index Entry
-- [X] New-BTImage
-    - [X] Comment based help
-    - [X] Markdown file
-    - [X] Content/Index Entry
-- [ ] New-BTInput
-    - [ ] Comment based help
-    - [ ] Markdown file
-    - [ ] Content/Index Entry
-- [X] New-BTProgressBar
-    - [X] Comment based help
-    - [X] Markdown file
-    - [X] Content/Index Entry
 - [ ] New-BTSelectionBoxItem
     - [ ] Comment based help
     - [ ] Markdown file
@@ -56,10 +12,6 @@
     - [ ] Comment based help
     - [ ] Markdown file
     - [ ] Content/Index Entry
-- [X] New-BurntToastNotification
-    - [X] Comment based help
-    - [X] Markdown file
-    - [X] Content/Index Entry
 - [ ] Submit-BTNotification
     - [ ] Comment based help
     - [ ] Markdown file
@@ -107,6 +59,11 @@ These headers are diaplyed at the top of a toast and are also used to categorize
 The New-BTImageElement function creates a new Image Element for Toast Notifications.
 
 You can use the parameters of New-BTImageElement to specify the source image, alt text, placement on the Toast Notification and crop shape.
+
+### [New-BTInput](New-BTInput.md)
+The New-BTInput function creates an input element on a Toast notification.
+
+Returned object is either a TextBox for users to type text into or SelectionBox to users to select from a list of options.
 
 ### [New-BTProgressBar](New-BTProgressBar.md)
 The New-BTProgressBar function creates a new Progress Bar Element for Toast Notifications.
