@@ -38,7 +38,7 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
 
-* [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.5.2.zip) (Development/Raw Repo - **CAUTION**)
+* [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.6.1.zip) (Development/Raw Repo - **CAUTION**)
 * [v0.6.0](https://github.com/Windos/BurntToast/releases/download/v0.6.0/BurntToast.zip)
     * Updated bundled UWP Toolkit to 1.4.1
         * Note that this caused an issue where strings were being wrapped with curly braces in end results. A workaround has been implemented, but could mean that if you legitimatly use some rather obscure strings, they may have the braces removed.
