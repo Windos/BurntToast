@@ -16,10 +16,10 @@
     - [X] Comment based help
     - [X] Markdown file
     - [X] Content/Index Entry
-- [ ] New-BTButton
-    - [ ] Comment based help
-    - [ ] Markdown file
-    - [ ] Content/Index Entry
+- [X] New-BTButton
+    - [X] Comment based help
+    - [X] Markdown file
+    - [X] Content/Index Entry
 - [ ] New-BTContent
     - [ ] Comment based help
     - [ ] Markdown file
@@ -86,6 +86,11 @@ You can use the parameters of New-BTAudioElement to select an audio file or a st
 
 ### [New-BTBinding](New-BTBinding.md)
 The New-BTBinding funcation creates a new Generic Toast Binding, where you provide text, images, and other visual elements for your Toast notification.
+
+### [New-BTButton](New-BTButton.md)
+The New-BTButton function creates a new clickable button for a Toast Notification. Up to five buttons can be added to one Toast.
+
+Buttons can be fully customized with display text, images and arguments or system handled 'Snooze' and 'Dismiss' buttons.
 
 ### [New-BTHeader](New-BTHeader.md)
 The New-BTHeader function creates a new toast notification header for a Toast Notification.
