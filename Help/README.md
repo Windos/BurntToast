@@ -32,10 +32,10 @@
     - [X] Comment based help
     - [X] Markdown file
     - [X] Content/Index Entry
-- [ ] New-BTImage
-    - [ ] Comment based help
-    - [ ] Markdown file
-    - [ ] Content/Index Entry
+- [X] New-BTImage
+    - [X] Comment based help
+    - [X] Markdown file
+    - [X] Content/Index Entry
 - [ ] New-BTInput
     - [ ] Comment based help
     - [ ] Markdown file
@@ -102,6 +102,11 @@ The New-BTContextMenuItem function creates a Context Menu Item object.
 The New-BTHeader function creates a new toast notification header for a Toast Notification.
 
 These headers are diaplyed at the top of a toast and are also used to categorize toasts in the Action Center.
+
+### [New-BTImage](New-BTImage.md)
+The New-BTImageElement function creates a new Image Element for Toast Notifications.
+
+You can use the parameters of New-BTImageElement to specify the source image, alt text, placement on the Toast Notification and crop shape.
 
 ### [New-BTProgressBar](New-BTProgressBar.md)
 The New-BTProgressBar function creates a new Progress Bar Element for Toast Notifications.
