@@ -1,9 +1,5 @@
 # BurntToast Help
 ## Checklist
-- [ ] New-BTVisual
-    - [ ] Comment based help
-    - [ ] Markdown file
-    - [ ] Content/Index Entry
 - [ ] Submit-BTNotification
     - [ ] Comment based help
     - [ ] Markdown file
@@ -71,6 +67,9 @@ The New-BTTextElement function creates a new Text Element for Toast Notification
 You can specify the text you want displayed in a Toast Notification as a string, or run the function without a paramter for a blank line.
 
 Each Text Element is the equivalent of one line in on a Toast Notification, long lines will wrap.
+
+### [New-BTVisual](New-BTVisual.md)
+The New-BTVisual function creates a new visual element for toast notifications, which defines all of the visual aspects of a toast.
 
 ### [New-BurntToastNotification](New-BurntToastNotification.md)
 The New-BurntToastNotification function creates and displays a Toast Notification on Microsoft Windows 10.

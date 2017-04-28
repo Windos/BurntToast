@@ -31,8 +31,12 @@
         .NOTES
         TODO: Implement hint-style (https://blogs.msdn.microsoft.com/tiles_and_toasts/2015/06/30/adaptive-tile-templates-schema-and-documentation/)
 
+        Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
+
+        Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
+
         .LINK
-        https://github.com/Windos/BurntToast
+        https://github.com/Windos/BurntToast/blob/master/Help/New-BTText.md
     #>
 
     [CmdletBinding()]
