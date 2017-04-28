@@ -1,12 +1,12 @@
 ---
-external help file: BurntToast-help.xml
-online version: https://github.com/Windos/BurntToast
+online version: https://github.com/Windos/BurntToast/blob/master/Help/New-BTSelectionBoxItem.md
 schema: 2.0.0
 ---
 
 # New-BTSelectionBoxItem
 
 ## SYNOPSIS
+Creates a selection box item.
 
 ## SYNTAX
 
@@ -15,34 +15,26 @@ New-BTSelectionBoxItem [-Id] <String> [-Content] <String>
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+The New-BTSelectionBoxItem function creates a selection box item, for inclusion in a selection box created with New-BTInput.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-
+PS C:\>$Select1 = New-BTSelectionBoxItem -Id 'Item1' -Content 'First option in the list'
 ```
 
-### -------------------------- EXAMPLE 2 --------------------------
-```
-
-```
-
-### -------------------------- EXAMPLE 3 --------------------------
-```
-
-```
+This command creates a new Selection Box Item object which can now be used with the New-BTInput function.
 
 ## PARAMETERS
 
 ### -Content
-{{Fill Content Description}}
+String that is displayed on the selection item. This is what the user sees.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 2
@@ -52,12 +44,14 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-{{Fill Id Description}}
+Developer-provided ID that the developer uses later to retrieve input when the Toast is interacted with.
+
+Can also be provided to a selection box to identify the default selection.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
@@ -72,11 +66,13 @@ Accept wildcard characters: False
 
 ## OUTPUTS
 
-### Image
+### ToastSelectionBoxItem
 
 ## NOTES
+Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
+
+Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
 
 ## RELATED LINKS
 
-[https://github.com/Windos/BurntToast](https://github.com/Windos/BurntToast)
-
+[New-BTSelectionBoxItem](https://github.com/Windos/BurntToast/blob/master/Help/New-BTSelectionBoxItem.md)

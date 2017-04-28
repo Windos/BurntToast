@@ -1,9 +1,5 @@
 # BurntToast Help
 ## Checklist
-- [ ] New-BTSelectionBoxItem
-    - [ ] Comment based help
-    - [ ] Markdown file
-    - [ ] Content/Index Entry
 - [ ] New-BTText
     - [ ] Comment based help
     - [ ] Markdown file
@@ -69,6 +65,9 @@ Returned object is either a TextBox for users to type text into or SelectionBox 
 The New-BTProgressBar function creates a new Progress Bar Element for Toast Notifications.
 
 You must specify the status and value for the progress bar and can optionally give the bar a title and override the automatic text representiation of the progress.
+
+### [New-BTSelectionBoxItem](New-BTSelectionBoxItem.md)
+The New-BTSelectionBoxItem function creates a selection box item, for inclusion in a selection box created with New-BTInput.
 
 ### [New-BurntToastNotification](New-BurntToastNotification.md)
 The New-BurntToastNotification cmdlet creates and displays a Toast Notification on Microsoft Windows 10.
