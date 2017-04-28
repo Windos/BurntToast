@@ -24,10 +24,10 @@
     - [X] Comment based help
     - [X] Markdown file
     - [X] Content/Index Entry
-- [ ] New-BTContextMenuItem
-    - [ ] Comment based help
-    - [ ] Markdown file
-    - [ ] Content/Index Entry
+- [X] New-BTContextMenuItem
+    - [X] Comment based help
+    - [X] Markdown file
+    - [X] Content/Index Entry
 - [X] New-BTHeader
     - [X] Comment based help
     - [X] Markdown file
