@@ -84,6 +84,9 @@ The New-BTAudioElement function creates a new Audio Element for Toast Notificati
 
 You can use the parameters of New-BTAudioElement to select an audio file or a standard notification sound (including alarms). Alternativly you can specify that a Toast Notification should be silent.
 
+### [New-BTBinding](New-BTBinding.md)
+The New-BTBinding funcation creates a new Generic Toast Binding, where you provide text, images, and other visual elements for your Toast notification.
+
 ### [New-BTHeader](New-BTHeader.md)
 The New-BTHeader function creates a new toast notification header for a Toast Notification.
 
@@ -102,4 +105,4 @@ You can specify the text and/or image displayed as well as selecting the sound t
 You can optionally call the New-BurntToastNotification cmdlet with the Toast alias.
 
 ### [New-BTFunction](New-BTFunction.md)
-{{Manually Enter New-BTAction Description Here}}
+{{Manually Enter New-BTFunction Description Here}}

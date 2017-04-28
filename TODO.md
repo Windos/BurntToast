@@ -10,3 +10,5 @@
 - [ ] Credential parameter was removed during re-write, is it actually needed? Consider just checking and warning, leave to user to re-run as correct account.
 - [X] Check if app id is valid, and offer to create - or otherwise provide guidance - the required registry item.
 - [ ] See if anything from UWP Community Toolkit has been included that doesn't apply to Toasts and/or desktop only apps. No point exposing mobile only features, for example.
+- [ ] AdaptiveGroup
+- [ ] ToastGenericAttributionText

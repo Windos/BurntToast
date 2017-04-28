@@ -35,21 +35,21 @@ Alternativly you can specify that a Toast Notification should be silent.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
-New-BTAudioElement -Source SMS
+PS C:\>New-BTAudioElement -Source SMS
 ```
 
 Creates an Audio Element which will cause a Toast Notification to play the standard Microsoft 'SMS' sound.
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
-New-BTAudioElement -Path 'C:\Music\FavSong.mp3'
+PS C:\>New-BTAudioElement -Path 'C:\Music\FavSong.mp3'
 ```
 
 Creates an Audio Element which will cause a Toast Notification to play the specified song.
 
 ### -------------------------- EXAMPLE 3 --------------------------
 ```
-New-BTAudioElement -Silent
+PS C:\>New-BTAudioElement -Silent
 ```
 
 Creates an Audio Element which will cause a Toast Notification to be silent.
