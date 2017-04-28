@@ -4,15 +4,15 @@
         Creates and displays a Toast Notification.
 
         .DESCRIPTION
-        The New-BurntToastNotification cmdlet creates and displays a Toast Notification on Microsoft Windows 10.
+        The New-BurntToastNotification function creates and displays a Toast Notification on Microsoft Windows 10.
 
         You can specify the text and/or image displayed as well as selecting the sound that is played when the Toast Notification is displayed.
 
-        You can optionally call the New-BurntToastNotification cmdlet with the Toast alias.
+        You can optionally call the New-BurntToastNotification function with the Toast alias.
 
         .INPUTS
         None
-            You cannot pipe input to this cmdlet.
+            You cannot pipe input to this function.
 
         .OUTPUTS
         None

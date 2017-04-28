@@ -51,11 +51,11 @@ New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <Strin
 ```
 
 ## DESCRIPTION
-The New-BurntToastNotification cmdlet creates and displays a Toast Notification on Microsoft Windows 10.
+The New-BurntToastNotification function creates and displays a Toast Notification on Microsoft Windows 10.
 
 You can specify the text and/or image displayed as well as selecting the sound that is played when the Toast Notification is displayed.
 
-You can optionally call the New-BurntToastNotification cmdlet with the Toast alias.
+You can optionally call the New-BurntToastNotification function with the Toast alias.
 
 ## EXAMPLES
 
@@ -286,7 +286,7 @@ Accept wildcard characters: False
 
 ### None
 
-You cannot pipe input to this cmdlet.
+You cannot pipe input to this function.
 
 ## OUTPUTS
 
@@ -303,4 +303,3 @@ I'm *really* sorry about the number of Parameter Sets. The best explanation is:
 ## RELATED LINKS
 
 [New-BurntToastNotification](https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastNotification.md)
-

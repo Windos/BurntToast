@@ -1,9 +1,5 @@
 # BurntToast Help
 ## Checklist
-- [ ] New-BTText
-    - [ ] Comment based help
-    - [ ] Markdown file
-    - [ ] Content/Index Entry
 - [ ] New-BTVisual
     - [ ] Comment based help
     - [ ] Markdown file
@@ -16,7 +12,7 @@
 ## Description
 {{Manually Enter Description Here}}
 
-## BurntToast Cmdlets
+## BurntToast Functions
 ### [New-BTAction](New-BTAction.md)
 The New-BTAction function creates an 'action' object which contains defines the controls displayed at the bottom of a Toast Notification.
 
@@ -69,12 +65,19 @@ You must specify the status and value for the progress bar and can optionally gi
 ### [New-BTSelectionBoxItem](New-BTSelectionBoxItem.md)
 The New-BTSelectionBoxItem function creates a selection box item, for inclusion in a selection box created with New-BTInput.
 
+### [New-BTText](New-BTText.md)
+The New-BTTextElement function creates a new Text Element for Toast Notifications.
+
+You can specify the text you want displayed in a Toast Notification as a string, or run the function without a paramter for a blank line.
+
+Each Text Element is the equivalent of one line in on a Toast Notification, long lines will wrap.
+
 ### [New-BurntToastNotification](New-BurntToastNotification.md)
-The New-BurntToastNotification cmdlet creates and displays a Toast Notification on Microsoft Windows 10.
+The New-BurntToastNotification function creates and displays a Toast Notification on Microsoft Windows 10.
 
 You can specify the text and/or image displayed as well as selecting the sound that is played when the Toast Notification is displayed.
 
-You can optionally call the New-BurntToastNotification cmdlet with the Toast alias.
+You can optionally call the New-BurntToastNotification function with the Toast alias.
 
 ### [New-BTFunction](New-BTFunction.md)
 {{Manually Enter New-BTFunction Description Here}}
