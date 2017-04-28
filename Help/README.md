@@ -12,10 +12,10 @@
     - [X] Comment based help
     - [X] Markdown file
     - [X] Content/Index Entry
-- [ ] New-BTBinding
-    - [ ] Comment based help
-    - [ ] Markdown file
-    - [ ] Content/Index Entry
+- [X] New-BTBinding
+    - [X] Comment based help
+    - [X] Markdown file
+    - [X] Content/Index Entry
 - [ ] New-BTButton
     - [ ] Comment based help
     - [ ] Markdown file
