@@ -42,7 +42,7 @@
     $RegPath = 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings'
 
     if (!(Test-Path -Path "$RegPath\$AppId")) {
-        $null = New-Item -Path $RegPath -Name $AppId
+        $null = New-Item -Path "$RegPath\$AppId" -Force
         $null = New-ItemProperty -Path "$RegPath\$AppId" -Name 'ShowInActionCenter' -Value 1 -PropertyType 'DWORD'
     } else {
         Write-Warning -Message 'Specified AppId is already present in the registry.'
