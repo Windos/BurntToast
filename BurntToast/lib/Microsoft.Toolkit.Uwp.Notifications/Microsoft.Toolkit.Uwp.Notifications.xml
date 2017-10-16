@@ -1178,7 +1178,7 @@
         </member>
         <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastActivationOptions.AfterActivationBehavior">
             <summary>
-            Not supported on Windows: Specifies the behavior that the toast should use when the user invokes this action. Note that this option only works on <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastButton"/> and <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem"/>.
+            New in Fall Creators Update: Specifies the behavior that the toast should use when the user invokes this action. Note that this option only works on <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastButton"/> and <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem"/>. Desktop-only, supported in builds 16251 or higher.
             </summary>
         </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.IToastBindingGenericChild">
@@ -1236,6 +1236,11 @@
             Custom text displayed on the button that overrides the default localized "Dismiss" text.
             </summary>
         </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastButtonDismiss.ImageUri">
+            <summary>
+            An optional image icon for the button to display.
+            </summary>
+        </member>
         <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastButtonDismiss.#ctor">
             <summary>
             Initializes a system-handled dismiss button that displays localized "Dismiss" text on the button.
@@ -1255,6 +1260,11 @@
         <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze.CustomContent">
             <summary>
             Custom text displayed on the button that overrides the default localized "Snooze" text.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze.ImageUri">
+            <summary>
+            An optional image icon for the button to display.
             </summary>
         </member>
         <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze.SelectionBoxId">

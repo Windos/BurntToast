@@ -39,9 +39,15 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
 
 * [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.6.1.zip) (Development/Raw Repo - **CAUTION**)
+* [v0.6.1](https://github.com/Windos/BurntToast/releases/download/v0.6.1/BurntToast.zip)
+    * Customizable AppId removed from the New-BurntToastNotification function as a quick fix for Fall Creators Update.
+        * If you''re using a customized AppId and are not upgrading to the Fall Creators Update, then stay on version 0.6.0.
+    * Default AppId changed to match PowerShell.exe.
+    * Registry entry for AppId is now automatically created when the module loads.
+    * Included UWPCommunityToolkit library updated to v2.0.0.
 * [v0.6.0](https://github.com/Windos/BurntToast/releases/download/v0.6.0/BurntToast.zip)
     * Updated bundled UWP Toolkit to 1.4.1
-        * Note that this caused an issue where strings were being wrapped with curly braces in end results. A workaround has been implemented, but could mean that if you legitimatly use some rather obscure strings, they may have the braces removed.
+        * Note that this caused an issue where strings were being wrapped with curly braces in end results. A workaround has been implemented, but could mean that if you legitimately use some rather obscure strings, they may have the braces removed.
     * Hero Images working now (Thanks to Creators Update)
     * Headers can now be included (Creators Update feature)
     * Progress bars can now be included (Creators Update feature)

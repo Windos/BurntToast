@@ -79,11 +79,6 @@
         # Specifies the path to an image that will override the default image displayed with a Toast Notification.
         [String] $AppLogo,
 
-        #TODO: [ValidateScript({ Test-ToastAppId -Id $_ })]
-
-        # Specifies a string that identifies the source of the Toast Notification. Different AppIds allow different types of Toasts to be grouped in the Action Centre.
-        [String] $AppId = $Script:Config.AppId,
-
         # Selects the sound to acompany the Toast Notification. Any 'Alarm' or 'Call' tones will automatically loop and extent the amount of time that a Toast is displayed on screen.
         #
         # Cannot be used in conjunction with the 'Silent' switch.
@@ -213,8 +208,8 @@
     $Content = New-BTContent @ContentSplat
 
     if ($UniqueIdentifier) {
-        Submit-BTNotification -Content $Content -AppId $AppId -UniqueIdentifier $UniqueIdentifier
+        Submit-BTNotification -Content $Content -AppId $Script:Config.AppId -UniqueIdentifier $UniqueIdentifier
     } else {
-        Submit-BTNotification -Content $Content -AppId $AppId
+        Submit-BTNotification -Content $Content -AppId $Script:Config.AppId
     }
 }

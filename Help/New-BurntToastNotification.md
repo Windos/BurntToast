@@ -12,42 +12,42 @@ Creates and displays a Toast Notification.
 
 ### Sound (Default)
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-Sound <String>] [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Silent
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-Silent] [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Snooze and Dismiss
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] -SnoozeAndDismiss [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] -SnoozeAndDismiss [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Custom Buttons
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] -Button <IToastButton[]> [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] -Button <IToastButton[]> [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Silent and Snooze and Dismiss
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] -SnoozeAndDismiss [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-Silent] -SnoozeAndDismiss [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Silent and Custom Buttons
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Silent] -Button <IToastButton[]> [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-Silent] -Button <IToastButton[]> [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Sound and Snooze and Dismiss
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] -SnoozeAndDismiss [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-Sound <String>] -SnoozeAndDismiss [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ### Sound and Custom Buttons
 ```
-New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-AppId <String>] [-Sound <String>] -Button <IToastButton[]> [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
+New-BurntToastNotification [-Text <String[]>] [-AppLogo <String>] [-Sound <String>] -Button <IToastButton[]> [-Header <ToastHeader>] [-ProgressBar <AdaptiveProgressBar>]
 ```
 
 ## DESCRIPTION
@@ -113,21 +113,6 @@ PS C:\>New-BurntToastNotification -Text 'Professional Content', 'And great spell
 This example will show a toast with a spelling error, which is replaced by a second toast because they both shared a unique identifier.
 
 ## PARAMETERS
-
-### -AppId
-Specifies a string that identifies the source of the Toast Notification. Different AppIds allow different types of Toasts to be grouped in the Action Centre.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: $Script:Config.AppId
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -AppLogo
 Specifies the path to an image that will override the default image displayed with a Toast Notification.
