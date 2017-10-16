@@ -45,6 +45,6 @@
         $null = New-Item -Path "$RegPath\$AppId" -Force
         $null = New-ItemProperty -Path "$RegPath\$AppId" -Name 'ShowInActionCenter' -Value 1 -PropertyType 'DWORD'
     } else {
-        Write-Warning -Message 'Specified AppId is already present in the registry.'
+        Write-Verbose -Message 'Specified AppId is already present in the registry.'
     }
 }
