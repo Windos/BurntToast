@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product Id="*" UpgradeCode="a6155506-4ca7-4d2a-ae94-d203f520ca34" Version="1.0.0.0" Language="1033" Name="BurntToast" Manufacturer="King.Geek.NZ">
+        <Package InstallerVersion="300" Compressed="yes"/>
+        <Media Id="1" Cabinet="BurntToast.cab" EmbedCab="yes" />
+
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFilesFolder">
+                <Directory Id="APPLICATIONROOTDIRECTORY" Name="BurntToast"/>
+            </Directory>
+            <!-- Step 1: Define the directory structure -->
+            <Directory Id="ProgramMenuFolder">
+                <Directory Id="ApplicationProgramsFolder" Name="BurntToast"/>
+            </Directory>
+        </Directory>
+
+        <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+            <Component Id="BurntToast.png" Guid="a6155506-4ca7-4d2a-ae94-d203f520ca35">
+                <File Id="BurntToast.png" Source="BurntToast.png" KeyPath="yes" Checksum="yes"/>
+            </Component>
+        </DirectoryRef>
+
+        <!-- Step 2: Add the shortcut to your installer package -->
+        <Icon Id="BurntToast.ico" SourceFile="BurntToast.ico" />
+        <DirectoryRef Id="ApplicationProgramsFolder">
+            <Component Id="ApplicationShortcut" Guid="a6155506-4ca7-4d2a-ae94-d203f520ca31">
+                <Shortcut Id="ApplicationStartMenuShortcut" 
+                    Name="BurntToast" 
+                    Description="Shortcut that enables Toast Notifications"
+                    Target="[#BurntToast.png]"
+                    WorkingDirectory="APPLICATIONROOTDIRECTORY"
+                    Icon="BurntToast.ico">
+                    <ShortcutProperty Key="System.AppUserModel.ID" Value="King.Geek.NZ!BurntToast" />
+                    <ShortcutProperty Key="System.AppUserModel.ToastActivatorCLSID" Value="{6d5e0952-903a-4514-a91b-a3f62546b74a}"></ShortcutProperty>
+		        </Shortcut>
+                <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+		
+                <RegistryValue Root="HKCU" Key="Software\Microsoft\BurntToast" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+           </Component>
+        </DirectoryRef>
+
+        <Feature Id="MainApplication" Title="Main Application" Level="1">
+            <ComponentRef Id="BurntToast.png" />
+            <!-- Step 3: Tell WiX to install the shortcut -->
+            <ComponentRef Id="ApplicationShortcut" />   
+        </Feature>
+    </Product>
+</Wix>
