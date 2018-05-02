@@ -37,6 +37,7 @@
 * Updated UWP Toolkit to 2.2.0
 * Fixed an issue with sound looping
 * New-BurntToastNotification now accepts multiple ProgressBar objects
+* Fixed Issue #28 on GitHub, ProgressBars should now work for all locales.
 '
         }
     }
