@@ -179,7 +179,7 @@
                 $Audio = New-BTAudio -Source "ms-winsoundevent:Notification.Looping.$Sound" -Loop
                 $Long = $True
             } else {
-                $Audio = New-BTAudio -Source "ms-winsoundevent:Notification.$Sound" -Loop
+                $Audio = New-BTAudio -Source "ms-winsoundevent:Notification.$Sound"
             }
         }
     }
