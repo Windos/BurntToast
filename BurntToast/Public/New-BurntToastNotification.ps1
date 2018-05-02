@@ -146,8 +146,8 @@
         # Specify the Toast Header object created using the New-BTHeader function, for seperation/categorization of toasts from the same AppId.
         [Microsoft.Toolkit.Uwp.Notifications.ToastHeader] $Header,
 
-        # Specify the Progress Bar object created using the New-BTProgressBar function.
-        [Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBar] $ProgressBar,
+        # Specify one or more Progress Bar object created using the New-BTProgressBar function.
+        [Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBar[]] $ProgressBar,
 
         # A string that uniquely identifies a toast notification. Submitting a new toast with the same identifier as a previous toast will replace the previous toast.
         #
@@ -162,7 +162,9 @@
     }
 
     if ($ProgressBar) {
-        $ChildObjects += $ProgressBar
+        foreach ($Bar in $ProgressBar) {
+            $ChildObjects += $Bar
+        }
     }
 
     if ($AppLogo) {

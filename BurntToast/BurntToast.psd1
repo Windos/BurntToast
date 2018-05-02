@@ -36,6 +36,7 @@
             ReleaseNotes = '
 * Updated UWP Toolkit to 2.2.0
 * Fixed an issue with sound looping
+* New-BurntToastNotification now accepts multiple ProgressBar objects
 '
         }
     }
