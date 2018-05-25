@@ -44,6 +44,8 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
     * Fixed an issue with sound looping
     * New-BurntToastNotification now accepts multiple ProgressBar objects
     * Fixed [Issue #28](https://github.com/Windos/BurntToast/issues/28), ProgressBars should now work for all locales.
+    * Fixed Issue #18 on GitHub, Images from the internet will now be downloaded locally
+      * Supports regular images, hero images, and applogo
 * [v0.6.1](https://github.com/Windos/BurntToast/releases/download/v0.6.1/BurntToast.zip)
     * Customizable AppId removed from the New-BurntToastNotification function as a quick fix for Fall Creators Update.
         * If you''re using a customized AppId and are not upgrading to the Fall Creators Update, then stay on version 0.6.0.

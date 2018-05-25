@@ -54,12 +54,12 @@
 
         # Specifies that the image is to be used as the logo on the toast.
         [Parameter(Mandatory,
-                   ParameterSetName = 'AppLogo')]
+            ParameterSetName = 'AppLogo')]
         [switch] $AppLogoOverride,
 
         # Specifies that the image is to be used as the hero image on the toast.
         [Parameter(Mandatory,
-                   ParameterSetName = 'Hero')]
+            ParameterSetName = 'Hero')]
         [switch] $HeroImage,
 
         # The horizontal alignment of the image. For Toast, this is only supported when inside a group (not yet implemented.)
@@ -106,7 +106,19 @@
     }
 
     if ($Source) {
-        $Image.Source = $Source
+        if ($Source -like 'http?://*') {
+            $RemoteFileName = $Source.Split('/')[-1]
+
+            $NewFilePath = '{0}\{1}' -f $Env:TEMP, $RemoteFileName
+
+            if (!(Test-Path -Path $NewFilePath)) {
+                Invoke-WebRequest -Uri $Source -OutFile $NewFilePath
+            }
+
+            $Image.Source = $NewFilePath
+        } else {
+            $Image.Source = $Source
+        }
     }
 
     if ($AlternateText) {
