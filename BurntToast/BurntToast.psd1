@@ -40,7 +40,7 @@
 * Fixed Issue #28 on GitHub, ProgressBars should now work for all locales
 * Fixed Issue #18 on GitHub, Images from the internet will now be downloaded locally
   * Supports regular images, hero images, and applogo
-# All functions now included in .psm1 for release (Thanks @HalbaradKenafin)
+* All functions now included in .psm1 for release (Thanks @HalbaradKenafin)
 '
         }
     }
