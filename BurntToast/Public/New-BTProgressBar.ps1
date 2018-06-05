@@ -79,7 +79,7 @@
     $ProgressBar.Status = $Status
 
     if ($PSCmdlet.ParameterSetName -eq 'Determinate') {
-        $ProgressBar.Value = $Value
+        $ProgressBar.Value = [Microsoft.Toolkit.Uwp.Notifications.BindableProgressBarValue]::new($Value)
     } else {
         $ProgressBar.Value = 'indeterminate'
     }

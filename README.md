@@ -38,7 +38,15 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
 
-* [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.6.1.zip) (Development/Raw Repo - **CAUTION**)
+* [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.6.2.zip) (Development/Raw Repo - **CAUTION**)
+* [v0.6.2](https://github.com/Windos/BurntToast/releases/download/v0.6.2/BurntToast.zip)
+    * Updated UWP Toolkit to 2.2.0
+    * Fixed an issue with sound looping
+    * New-BurntToastNotification now accepts multiple ProgressBar objects
+    * Fixed Issue #28, ProgressBars should now work for all locales
+    * Fixed Issue #18, Images from the internet will now be downloaded locally
+        * Supports regular images, hero images, and applogo
+    * All functions now included in .psm1 for release (Thanks @chrislgardner)
 * [v0.6.1](https://github.com/Windos/BurntToast/releases/download/v0.6.1/BurntToast.zip)
     * Customizable AppId removed from the New-BurntToastNotification function as a quick fix for Fall Creators Update.
         * If you''re using a customized AppId and are not upgrading to the Fall Creators Update, then stay on version 0.6.0.
