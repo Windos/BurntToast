@@ -12,7 +12,9 @@ See the [PowerShell Gallery](http://www.powershellgallery.com/packages/BurntToas
 
 ### Manual Install
 
-Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download/v0.6.1/BurntToast.zip) and extract the contents into `C:\Users\[User]\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
+Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download/v0.6.2/BurntToast.zip) and extract the contents into `C:\Users\[User]\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
+
+*Please remember to "**unblock**" the zip files before extracting the contents. Not doing so will result in the module not working correctly. This can be done via the file properties or with `Unblock-File`.*
 
 ## Examples
 
