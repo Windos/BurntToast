@@ -29,7 +29,8 @@ New-BurntToastNotification
 ### [Customized Toast](/Examples/Example02/)
 
 ```powershell
-New-BurntToastNotification -Text "Don't forget to smile!", 'Your script ran successfully, celebrate!' -AppLogo C:\smile.jpg
+New-BurntToastNotification -AppLogo C:\smile.jpg -Text "Don't forget to smile!",
+                                                       'Your script ran successfully, celebrate!' 
 ```
 
 ![BurntToast Notification Example Custom](/Examples/Example02/Example2-Custom.png)
