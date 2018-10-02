@@ -18,23 +18,29 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 
 ## Examples
 
-### Default Toast
+### [Default Toast](/Examples/Example01/)
 
-    New-BurntToastNotification
+```powershell
+New-BurntToastNotification
+```
 
-![BurntToast Notification Example Default](/Media/Example1-Default.png)
+![BurntToast Notification Example Default](/Examples/Example01/Example1-Default.png)
 
-### Customized Toast
+### [Customized Toast](/Examples/Example02/)
 
-    New-BurntToastNotification -Text "Don't forget to smile!", 'Your script ran successfully, celebrate!' -AppLogo C:\smile.jpg
+```powershell
+New-BurntToastNotification -Text "Don't forget to smile!", 'Your script ran successfully, celebrate!' -AppLogo C:\smile.jpg
+```
 
-![BurntToast Notification Example Custom](/Media/Example2-Custom.png)
+![BurntToast Notification Example Custom](/Examples/Example02/Example2-Custom.png)
 
-### Alarm Clock
+### [Alarm Clock](/Examples/Example03/)
 
-    New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2' -SnoozeAndDismiss
+```powershell
+New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2' -SnoozeAndDismiss
+```
 
-![BurntToast Notification Example Alarm](/Media/Example3-Alarm.png)
+![BurntToast Notification Example Alarm](/Examples/Example03/Example3-Alarm.png)
 
 ## Releases
 
