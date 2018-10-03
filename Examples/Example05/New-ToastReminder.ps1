@@ -51,3 +51,5 @@ Function New-ToastReminder {
     End {}
 
 }
+
+New-ToastReminder -Minutes 30 -ReminderTitle 'Hey you' -ReminderText 'The coffee is brewed'
