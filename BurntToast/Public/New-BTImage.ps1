@@ -107,7 +107,7 @@
 
     if ($Source) {
         if ($Source -like 'http?://*') {
-            $RemoteFileName = $Source.Split('/')[-1]
+            $RemoteFileName = $Source.Split('/')[-1] -replace '[\[\]*?]',''
 
             $NewFilePath = '{0}\{1}' -f $Env:TEMP, $RemoteFileName
 
