@@ -41,7 +41,26 @@ New-BurntToastNotification -AppLogo C:\smile.jpg -Text "Don't forget to smile!",
 New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2' -SnoozeAndDismiss
 ```
 
+
+
 ![BurntToast Notification Example Alarm](/Examples/Example03/Example3-Alarm.png)
+
+### [Engine Events](/Examples/Example04/)
+
+```powershell
+Register-EngineEvent -SourceIdentifier Powershell.Exiting -Action {
+    $Header = New-BTHeader -Id 1 -Title "Automation Done"
+    New-BurntToastNotification -Text "Hey there! That script you wrote is finished." -Silent -Header $Header
+}
+```
+
+### [Toast Reminders](/Examples/Example05/)
+
+_Find the `New-ToastReminder` function in the linked example_
+
+```powershell
+New-ToastReminder -Minutes 30 -ReminderTitle 'Hey you' -ReminderText 'The coffee is brewed'
+```
 
 ## Releases
 
