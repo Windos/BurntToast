@@ -62,6 +62,17 @@ _Find the `New-ToastReminder` function in the linked example_
 New-ToastReminder -Minutes 30 -ReminderTitle 'Hey you' -ReminderText 'The coffee is brewed'
 ```
 
+### [Toast Job Notifications](/Examples/Example06/)
+
+```powershell
+$BurntJob = Start-Job -ScriptBlock {Start-Sleep 5;Get-date} -Name "BurntJob"
+
+$BurntEvent = Register-ObjectEvent $BurntJob StateChanged -Action {
+    New-BurntToastNotification -Text "Job: $($BurntJob.Name) completed"
+    $BurntEvent | Unregister-Event
+}
+```
+
 ## Releases
 
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
