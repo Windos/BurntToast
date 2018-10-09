@@ -41,8 +41,6 @@ New-BurntToastNotification -AppLogo C:\smile.jpg -Text "Don't forget to smile!",
 New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2' -SnoozeAndDismiss
 ```
 
-
-
 ![BurntToast Notification Example Alarm](/Examples/Example03/Example3-Alarm.png)
 
 ### [Engine Events](/Examples/Example04/)
@@ -72,6 +70,8 @@ $BurntEvent = Register-ObjectEvent $BurntJob StateChanged -Action {
     $BurntEvent | Unregister-Event
 }
 ```
+
+[Toast Job Notification (gif)](/Examples/Example06/Example06_Get-ToastJobNotification.gif)
 
 ## Releases
 
