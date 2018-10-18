@@ -4,7 +4,7 @@
         Creates a new Text Element for Toast Notifications.
 
         .DESCRIPTION
-        The New-BTTextElement function creates a new Text Element for Toast Notifications.
+        The New-BTText function creates a new Text Element for Toast Notifications.
 
         You can specify the text you want displayed in a Toast Notification as a string, or run the function without a paramter for a blank line.
 
@@ -19,12 +19,12 @@
         Text
 
         .EXAMPLE
-        New-BTTextElement -Content 'This is a line with text!'
+        New-BTText -Content 'This is a line with text!'
 
         Creates a Text Element that will show the string 'This is a line with text!' on a Toast Notification.
 
         .EXAMPLE
-        New-BTTextElement
+        New-BTText
 
         Creates a Text Element that will show a blank line on a Toast Notification.
 
