@@ -7,6 +7,8 @@
 #######################################################
 
 $JobScript = {
+    try
+    {
     Import-Module BurntToast
     
     $Listener = [System.Net.HttpListener]::new()
@@ -18,9 +20,22 @@ $JobScript = {
     {
         $context = $Listener.GetContext()
         $Reader = [System.IO.StreamReader]::new($context.Request.InputStream)
-        $ReadObject = $Reader.ReadToEnd() | ConvertFrom-Json
-        New-BurntToastNotification @ReadObject
+        $ReadJson = $Reader.ReadToEnd()
+        if ($ReadJson -eq "Exit") {break}
+        $ReadObject = $ReadJson | ConvertFrom-Json
+        New-BurntToastNotification -Text $ReadObject.Text
         $context.Response.Close()
+    }
+    }
+    catch
+    {
+        Write-Error $_
+    }
+    finally
+    {
+        $Listener.Stop()
+        $Listener.Prefixes.Clear()
+        $Listener.Close()
     }
 }
 
@@ -32,4 +47,7 @@ $Body = @{
 
 Invoke-RestMethod -Method Post -Body ($Body | ConvertTo-Json) -Uri "http://localhost:9000/"
 
-$ToastJob | Stop-job
+# Causes shutdown of the listener
+Invoke-RestMethod -Method Post -Body "Exit" -Uri "http://localhost:9000/"
+
+
