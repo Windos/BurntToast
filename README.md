@@ -99,7 +99,7 @@ Start-Job -Name $Destination -ScriptBlock $ScriptBlock
 # Click the heading link...
 ```
 
-[Example: API Call](/Examples/Example08/ApiToast.png)
+![Example: API Call](/Examples/Example08/ApiToast.png)
 
 ## Releases
 
