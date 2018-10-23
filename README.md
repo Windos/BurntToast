@@ -93,6 +93,14 @@ Start-Job -Name $Destination -ScriptBlock $ScriptBlock
 
 [Toast Job Notification (gif)](/Examples/Example06/Example06_Get-ToastJobNotification.gif)
 
+### [HTTP Listener](/Examples/Example08/)
+
+```powershell
+# Click the heading link...
+```
+
+[Example: API Call](/Examples/Example08/ApiToast.png)
+
 ## Releases
 
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
