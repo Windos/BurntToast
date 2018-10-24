@@ -1,12 +1,49 @@
 Function New-ToastReminder {
+<#
+.SYNOPSIS
+Schedules a toast reminder for some point in the future
 
+.PARAMETER ReminderTitle
+The title of the toast when it appears
+
+.PARAMETER ReminderText
+The main text body for the reminder
+
+.PARAMETER Seconds
+The number of seconds to wait before showing the reminder.
+This parameter is additive with the -Minutes and -Hours parameters
+
+.PARAMETER Minutes
+The number of minutes to wait before showing the reminder.
+This parameter is additive with the -Seconds and -Hours parameters
+
+.PARAMETER Hours
+The number of hours to wait before showing the reminder.
+This parameter is additive with the -Seconds and -Minutes parameters
+
+.PARAMETER PassThru
+If this parameter is specified, a reference to the event registration will be written to the pipeline
+(e.g. to allow the subscription to be cancelled). By default, this cmdlet produces no output
+
+.EXAMPLE
+New-ToastReminder -Hours 1 -Minutes 30 -ReminderTitle "Heads up" -ReminderText "Time to take a break!"
+This example sets a reminder for 1h30min from now with the specified title and text
+
+.NOTES
+As this cmdlet functions via an event registration, the PowerShell session that launched it must
+remain open for the reminder to trigger.
+#>
     [cmdletBinding()]
     Param(
         [Parameter(Mandatory, Position = 0)]
+        [Alias("Title")]
+        [ValidateNotNullOrEmpty()]
         [string]
         $ReminderTitle,
 
         [Parameter(Mandatory, Position = 1)]
+        [Alias("Text")]
+        [ValidateNotNullOrEmpty()]
         [string]
         $ReminderText,
 
@@ -20,36 +57,46 @@ Function New-ToastReminder {
 
         [Parameter(Position = 4)]
         [Int]
-        $Hours
+        $Hours,
+
+        [switch]
+        $Passthru
     )
 
     Begin {}
 
     Process {
 
-        Start-Job -ArgumentList $ReminderTitle,$ReminderText,$Seconds,$Minutes,$Hours -ScriptBlock {
-            #Countdown reminders
-            $watch = New-Object System.Diagnostics.Stopwatch
-            $watch.Start()
+        $Timer = [System.Timers.Timer]::new()
+        $IntervalSpan = [timespan]::Zero
+        $Intervalspan = $IntervalSpan.Add([timespan]::FromHours($Hours))
+        $Intervalspan = $IntervalSpan.Add([timespan]::FromMinutes($Minutes))
+        $Intervalspan = $IntervalSpan.Add([timespan]::FromSeconds($Seconds))
+        $Timer.Interval = $IntervalSpan.TotalMilliseconds
+        $Timer.AutoReset = $false
+        $Data = [pscustomobject]@{
+            Title = $ReminderTitle
+            Text = $ReminderText
+        }
+        $ElapsedAction = {
+            $Data = $event.MessageData
+            $Header = New-BTHeader -ID 1 -Title $Data.Title
+            New-BurntToastNotification -Text $Data.Text -Header $Header -AppLogo $null -SnoozeAndDismiss
+            $Event | Unregister-Event
+            $Timer.Dispose()
+        }
 
-            Switch ($true) {
+        $ElapsedObjectEvent = Register-ObjectEvent -InputObject $Timer -EventName "Elapsed" -MaxTriggerCount 1 -Action $ElapsedAction -MessageData $Data
+        
+        $Timer.Start()
 
-                $args[4] { $seconds = $hours * 60 * 60}
-                $args[3] {$seconds = $minutes * 60}
-                $args[2] { >$null }
-            }
-            While ($watch.Elapsed.TotalSeconds -lt $args[2]) {
-
-                Out-Null
-            }
-            $watch.Stop()
-            $Head = New-BTHeader -ID 1 -Title $args[0]
-            Toast -Text $args[1] -Header $Head -AppLogo $null
-        } > $null
+        if ($Passthru)
+        {
+            Write-Output $ElapsedObjectEvent
+        }
     }
 
     End {}
-
 }
 
 New-ToastReminder -Minutes 30 -ReminderTitle 'Hey you' -ReminderText 'The coffee is brewed'
