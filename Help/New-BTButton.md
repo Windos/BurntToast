@@ -71,7 +71,7 @@ This example creates a button with the display text "View Picture" with a pictur
 ## PARAMETERS
 
 ### -ActivationType
-Defines tne ActivationType that is trigger when the button is pressed.
+Defines the ActivationType that is trigger when the button is pressed.
 
 Defaults to Protocol which will open the file or URI specified in with the Arguments parameter in the rlevant system default application.
 
