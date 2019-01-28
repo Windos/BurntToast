@@ -41,8 +41,6 @@ New-BurntToastNotification -AppLogo C:\smile.jpg -Text "Don't forget to smile!",
 New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2' -SnoozeAndDismiss
 ```
 
-
-
 ![BurntToast Notification Example Alarm](/Examples/Example03/Example3-Alarm.png)
 
 ### [Engine Events](/Examples/Example04/)
@@ -61,6 +59,47 @@ _Find the `New-ToastReminder` function in the linked example_
 ```powershell
 New-ToastReminder -Minutes 30 -ReminderTitle 'Hey you' -ReminderText 'The coffee is brewed'
 ```
+
+### [Toast Job Notifications](/Examples/Example06/)
+
+```powershell
+$BurntJob = Start-Job -ScriptBlock {Start-Sleep 5;Get-date} -Name "BurntJob"
+
+$BurntEvent = Register-ObjectEvent $BurntJob StateChanged -Action {
+    New-BurntToastNotification -Text "Job: $($BurntJob.Name) completed"
+    $BurntEvent | Unregister-Event
+}
+```
+
+### [Toast Job Notifications](/Examples/Example07/)
+
+```powershell
+$Destination = "8.8.8.8"
+$ScriptBlock = {
+	$TimesLooped = 0
+	while ( $Duration -le $TimesLooped) {
+		if ( Test-Connection -ComputerName $using:Destination -Count 1 -Quiet ) {
+			New-BurntToastNotification -Text ($using:Destination + " is online"), ("Last checked :" + (Get-Date).ToString()) -UniqueIdentifier $using:Destination
+		}#if
+		else {
+			New-BurntToastNotification -Text ($using:Destination + " is offline"), ("Last checked :" + (Get-Date).ToString()) -UniqueIdentifier $using:Destination
+		}#else
+		Start-Sleep -Seconds 5
+		$TimesLooped++
+	}#while
+}#Scriptblock
+Start-Job -Name $Destination -ScriptBlock $ScriptBlock
+```
+
+[Toast Job Notification (gif)](/Examples/Example06/Example06_Get-ToastJobNotification.gif)
+
+### [HTTP Listener](/Examples/Example08/)
+
+```powershell
+# Click the heading link...
+```
+
+![Example: API Call](/Examples/Example08/ApiToast.png)
 
 ## Releases
 
