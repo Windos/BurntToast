@@ -573,6 +573,12 @@
             </summary>
             <returns>The notification XML content as a string.</returns>
         </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.BadgeGlyphContent.GetXml">
+            <summary>
+            Retrieves the notification XML content as a WinRT Xml document.
+            </summary>
+            <returns>The notification XML content as a WinRT Xml document.</returns>
+        </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.BadgeGlyphValue">
             <summary>
             The types of glyphs that can be placed on a badge.
@@ -683,11 +689,23 @@
             </summary>
             <returns>The notification Xml content as a string.</returns>
         </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.BadgeNumericContent.GetXml">
+            <summary>
+            Retrieves the notification Xml content as a WinRT Xml document.
+            </summary>
+            <returns>The notification Xml content as a WinRT Xml document.</returns>
+        </member>
         <member name="M:Microsoft.Toolkit.Uwp.Notifications.BaseElement.GetContent">
             <summary>
             Retrieves the notification XML content as a string.
             </summary>
             <returns>The notification XML content as a string.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.BaseElement.GetXml">
+            <summary>
+            Retrieves the notification XML content as a WinRT XML document.
+            </summary>
+            <returns>The notification XML content as a WinRT XML document.</returns>
         </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.INotificationContent">
             <summary>
@@ -699,6 +717,12 @@
             Retrieves the notification Xml content as a string.
             </summary>
             <returns>The notification Xml content as a string.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.INotificationContent.GetXml">
+            <summary>
+            Retrieves the notification Xml content as a WinRT Xml document.
+            </summary>
+            <returns>The notification Xml content as a WinRT Xml document.</returns>
         </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.NotificationContentValidationException">
             <summary>
@@ -1022,6 +1046,12 @@
             Retrieves the notification XML content as a string, so that it can be sent with a HTTP POST in a push notification.
             </summary>
             <returns>The notification XML content as a string.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContent.GetXml">
+            <summary>
+            Retrieves the notification XML content as a WinRT XmlDocument, so that it can be used with a local Tile notification's constructor on either <see cref="T:Windows.UI.Notifications.TileNotification"/> or <see cref="T:Windows.UI.Notifications.ScheduledTileNotification"/>.
+            </summary>
+            <returns>The notification XML content as a WinRT XmlDocument.</returns>
         </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.TileBackgroundImageCrop">
             <summary>
@@ -1800,6 +1830,12 @@
             Retrieves the notification XML content as a string, so that it can be sent with a HTTP POST in a push notification.
             </summary>
             <returns>The notification XML content as a string.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContent.GetXml">
+            <summary>
+            Retrieves the notification XML content as a WinRT XmlDocument, so that it can be used with a local Toast notification's constructor on either <see cref="T:Windows.UI.Notifications.ToastNotification"/> or <see cref="T:Windows.UI.Notifications.ScheduledToastNotification"/>.
+            </summary>
+            <returns>The notification XML content as a WinRT XmlDocument.</returns>
         </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem">
             <summary>

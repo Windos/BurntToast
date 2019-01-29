@@ -106,6 +106,9 @@ Start-Job -Name $Destination -ScriptBlock $ScriptBlock
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
 
 * [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.6.2.zip) (Development/Raw Repo - **CAUTION**)
+* [v0.7.0](https://github.com/Windos/BurntToast/releases/download/v0.7.0/BurntToast.zip)
+    * Update Windows Community Toolkit (UWP Notifications) to 5.0.0.
+        * Also switched to the UAP variant, as the .NET Standard one was causing issues for some users.
 * [v0.6.2](https://github.com/Windos/BurntToast/releases/download/v0.6.2/BurntToast.zip)
     * Updated UWP Toolkit to 2.2.0
     * Fixed an issue with sound looping
