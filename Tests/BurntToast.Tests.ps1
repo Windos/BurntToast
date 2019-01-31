@@ -1,4 +1,4 @@
-Import-Module "$PSScriptRoot/../BurntToast/PoshNotify.psd1" -Force
+Import-Module "$PSScriptRoot/../BurntToast/BurntToast.psd1" -Force
 
 Describe 'Set-BTFunctionLevel' {
     Mock Out-File {}
