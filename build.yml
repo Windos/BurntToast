@@ -1,0 +1,12 @@
+steps:
+- task: PowerShell@2
+  displayName: 'Run tests'
+  inputs:
+    targetType: Inline
+    script: ./build.ps1 -Bootstrap -Test
+
+- task: PublishTestResults@2
+  inputs:
+    testRunner: NUnit
+    testResultsFiles: '**/TestResults.xml'
+  condition: succeededOrFailed()
