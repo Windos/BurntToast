@@ -7,7 +7,7 @@ jobs:
     displayName: 'Run tests'
     inputs:
       targetType: Inline
-      script: ./build.ps1 -Bootstrap -Test
+      script: ./build/build.ps1 -Bootstrap -Test
 
   - task: PublishTestResults@2
     inputs:
