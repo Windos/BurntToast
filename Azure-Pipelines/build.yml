@@ -10,7 +10,18 @@ jobs:
       script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
 
   - task: PublishTestResults@2
+    displayName: 'Publish test results'
     inputs:
       testRunner: NUnit
       testResultsFiles: '**/TestResults.xml'
     condition: succeededOrFailed()
+
+  - task: Bash@3
+    displayName: 'Upload coverage to Codecov'
+    inputs:
+      targetType: 'filePath' # Optional. Options: filePath, inline
+      filePath: ./codecov.sh
+      arguments: -f coverage.json -t $(CODECOV_TOKEN)
+      #script: '# Write your commands here# Use the environment variables input below to pass secret variables to this script' # Required when targetType == Inline
+      #workingDirectory: # Optional
+      #failOnStderr: false # Optional
