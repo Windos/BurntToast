@@ -16,6 +16,11 @@ if ($Bootstrap.IsPresent) {
         Write-Warning "Module 'Pester' is missing. Installing 'Pester' ..."
         Install-Module -Name Pester -Scope CurrentUser -Force
     }
+
+    if (-not (Get-Module -Name PSCodeCovIo -ListAvailable)) {
+        Write-Warning "Module 'PSCodeCovIo' is missing. Installing 'PSCodeCovIo' ..."
+        Install-Module -Name PSCodeCovIo -Scope CurrentUser -Force
+    }
 }
 
 # Test step
