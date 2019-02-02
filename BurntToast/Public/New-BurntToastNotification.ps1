@@ -159,7 +159,7 @@
     $ChildObjects = @()
 
     foreach ($Txt in $Text) {
-        $ChildObjects += New-BTText -Text $Txt
+        $ChildObjects += New-BTText -Text $Txt -WhatIf:$false
     }
 
     if ($ProgressBar) {
@@ -169,26 +169,26 @@
     }
 
     if ($AppLogo) {
-        $AppLogoImage = New-BTImage -Source $AppLogo -AppLogoOverride -Crop Circle
+        $AppLogoImage = New-BTImage -Source $AppLogo -AppLogoOverride -Crop Circle -WhatIf:$false
     } else {
-        $AppLogoImage = New-BTImage -AppLogoOverride -Crop Circle
+        $AppLogoImage = New-BTImage -AppLogoOverride -Crop Circle -WhatIf:$false
     }
 
     if ($Silent) {
-        $Audio = New-BTAudio -Silent
+        $Audio = New-BTAudio -Silent -WhatIf:$false
     } else {
         if ($Sound -ne 'Default') {
             if ($Sound -like 'Alarm*' -or $Sound -like 'Call*') {
-                $Audio = New-BTAudio -Source "ms-winsoundevent:Notification.Looping.$Sound" -Loop
+                $Audio = New-BTAudio -Source "ms-winsoundevent:Notification.Looping.$Sound" -Loop -WhatIf:$false
                 $Long = $True
             } else {
-                $Audio = New-BTAudio -Source "ms-winsoundevent:Notification.$Sound"
+                $Audio = New-BTAudio -Source "ms-winsoundevent:Notification.$Sound" -WhatIf:$false
             }
         }
     }
 
-    $Binding = New-BTBinding -Children $ChildObjects -AppLogoOverride $AppLogoImage
-    $Visual = New-BTVisual -BindingGeneric $Binding
+    $Binding = New-BTBinding -Children $ChildObjects -AppLogoOverride $AppLogoImage -WhatIf:$false
+    $Visual = New-BTVisual -BindingGeneric $Binding -WhatIf:$false
 
     $ContentSplat = @{'Audio' = $Audio
         'Visual' = $Visual
@@ -199,23 +199,23 @@
     }
 
     if ($SnoozeAndDismiss) {
-        $ContentSplat.Add('Actions', (New-BTAction -SnoozeAndDismiss))
+        $ContentSplat.Add('Actions', (New-BTAction -SnoozeAndDismiss -WhatIf:$false))
     } elseif ($Button) {
-        $ContentSplat.Add('Actions', (New-BTAction -Buttons $Button))
+        $ContentSplat.Add('Actions', (New-BTAction -Buttons $Button -WhatIf:$false))
     }
 
     if ($Header) {
         $ContentSplat.Add('Header', $Header)
     }
 
-    $Content = New-BTContent @ContentSplat
+    $Content = New-BTContent @ContentSplat -WhatIf:$false
 
     if ($UniqueIdentifier) {
-        if($PSCmdlet.ShouldProcess( "submitting: [$($Content.GetType().Name)] with AppId $Script:Config.AppId, Id $UniqueIdentifier, and XML: $($ToastContent.GetContent())" )) {
+        if($PSCmdlet.ShouldProcess( "submitting: [$($Content.GetType().Name)] with AppId $Script:Config.AppId, Id $UniqueIdentifier, and XML: $($Content.GetContent())" )) {
             Submit-BTNotification -Content $Content -AppId $Script:Config.AppId -UniqueIdentifier $UniqueIdentifier
         }
     } else {
-        if($PSCmdlet.ShouldProcess( "submitting: [$($Content.GetType().Name)] with AppId $Script:Config.AppId and XML: $($ToastContent.GetContent())" )) {
+        if($PSCmdlet.ShouldProcess( "submitting: [$($Content.GetType().Name)] with AppId $Script:Config.AppId and XML: $($Content.GetContent())" )) {
             Submit-BTNotification -Content $Content -AppId $Script:Config.AppId
         }
     }
