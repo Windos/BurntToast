@@ -15,7 +15,9 @@ PowerShell Module for displaying **Windows 10** Toast Notifications
 
 ### PowerShell Gallery Install (Requires PowerShell v5)
 
+```powershell
     Install-Module -Name BurntToast
+```
 
 See the [PowerShell Gallery](http://www.powershellgallery.com/packages/BurntToast/) for the complete details and instructions.
 
@@ -30,7 +32,7 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 ### [Default Toast](/Examples/Example01/)
 
 ```powershell
-New-BurntToastNotification
+    New-BurntToastNotification
 ```
 
 ![BurntToast Notification Example Default](/Examples/Example01/Example1-Default.png)
@@ -38,8 +40,8 @@ New-BurntToastNotification
 ### [Customized Toast](/Examples/Example02/)
 
 ```powershell
-New-BurntToastNotification -AppLogo C:\smile.jpg -Text "Don't forget to smile!",
-                                                       'Your script ran successfully, celebrate!'
+    New-BurntToastNotification -AppLogo C:\smile.jpg -Text "Don't forget to smile!",
+                                                           'Your script ran successfully, celebrate!'
 ```
 
 ![BurntToast Notification Example Custom](/Examples/Example02/Example2-Custom.png)
@@ -47,7 +49,7 @@ New-BurntToastNotification -AppLogo C:\smile.jpg -Text "Don't forget to smile!",
 ### [Alarm Clock](/Examples/Example03/)
 
 ```powershell
-New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2' -SnoozeAndDismiss
+    New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2' -SnoozeAndDismiss
 ```
 
 ![BurntToast Notification Example Alarm](/Examples/Example03/Example3-Alarm.png)
@@ -55,10 +57,10 @@ New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2' -SnoozeAndDismiss
 ### [Engine Events](/Examples/Example04/)
 
 ```powershell
-Register-EngineEvent -SourceIdentifier Powershell.Exiting -Action {
-    $Header = New-BTHeader -Id 1 -Title "Automation Done"
-    New-BurntToastNotification -Text "Hey there! That script you wrote is finished." -Silent -Header $Header
-}
+    Register-EngineEvent -SourceIdentifier Powershell.Exiting -Action {
+        $Header = New-BTHeader -Id 1 -Title "Automation Done"
+        New-BurntToastNotification -Text "Hey there! That script you wrote is finished." -Silent -Header $Header
+    }
 ```
 
 ### [Toast Reminders](/Examples/Example05/)
@@ -66,18 +68,18 @@ Register-EngineEvent -SourceIdentifier Powershell.Exiting -Action {
 *Find the `New-ToastReminder` function in the linked example*
 
 ```powershell
-New-ToastReminder -Minutes 30 -ReminderTitle 'Hey you' -ReminderText 'The coffee is brewed'
+    New-ToastReminder -Minutes 30 -ReminderTitle 'Hey you' -ReminderText 'The coffee is brewed'
 ```
 
 ### [Toast Event Notifications](/Examples/Example06/)
 
 ```powershell
-$BurntJob = Start-Job -ScriptBlock {Start-Sleep 5;Get-date} -Name "BurntJob"
+    $BurntJob = Start-Job -ScriptBlock {Start-Sleep 5;Get-date} -Name "BurntJob"
 
-$BurntEvent = Register-ObjectEvent $BurntJob StateChanged -Action {
-    New-BurntToastNotification -Text "Job: $($BurntJob.Name) completed"
-    $BurntEvent | Unregister-Event
-}
+    $BurntEvent = Register-ObjectEvent $BurntJob StateChanged -Action {
+        New-BurntToastNotification -Text "Job: $($BurntJob.Name) completed"
+        $BurntEvent | Unregister-Event
+    }
 ```
 
 ### [Toast Job Notifications](/Examples/Example07/)
@@ -179,13 +181,9 @@ $BurntEvent = Register-ObjectEvent $BurntJob StateChanged -Action {
 - [v0.5.1](https://github.com/Windos/BurntToast/releases/download/v0.5.1/BurntToast.zip)
 
   - Small bug fixes (thanks for opening issues!)
-
   - Confirmed: Now **ONLY** works on Windows 10
-
   - BurntToast now has its own, original, logo!
-
   - New public function to adjust function level of module: Set-BTFunctionLevel
-
   - Implemented checking for and registering of AppId in the registry to ensure proper Toast behaviour in the Action Center
 
 - [v0.5.0](https://github.com/Windos/BurntToast/releases/download/v0.5.0/BurntToast.zip)
