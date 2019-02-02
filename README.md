@@ -126,6 +126,8 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 
   - Added WhatIf support to all functions, laying ground work for expanded (read: any) Pester tests.
 
+  - Functions all in .psm1 now, instead of separate .ps1 files. SPEED!
+
 - [v0.6.2](https://github.com/Windos/BurntToast/releases/download/v0.6.2/BurntToast.zip)
 
   - Updated UWP Toolkit to 2.2.0

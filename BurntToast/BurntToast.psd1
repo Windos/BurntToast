@@ -40,6 +40,7 @@
 * (BACKEND) Implemented CI pester tests on Azure DevOps Pipelines, including code coverage stats.
 * Fixed style issues flagged by Codacy, mainly Markdown headers.
 * Added WhatIf support to all functions, laying ground work for expanded (read: any) Pester tests.
+* Functions all in .psm1 now, instead of separate .ps1 files. SPEED!
 '
         }
     }
