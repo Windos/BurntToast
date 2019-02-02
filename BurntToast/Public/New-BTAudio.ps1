@@ -35,7 +35,8 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTAudio.md
     #>
 
-    [CmdletBinding(DefaultParameterSetName = 'StandardSound')]
+    [CmdletBinding(DefaultParameterSetName = 'StandardSound',
+                   SupportsShouldProcess   = $true)]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastAudio])]
     param (
         # Specifies one of the built in Microsoft notification sounds.
@@ -107,5 +108,7 @@
     $Audio.Loop = $Loop
     $Audio.Silent = $Silent
 
-    $Audio
+    if($PSCmdlet.ShouldProcess("returning: [$($Audio.GetType().Name)]:Src=$($Audio.Src):Loop=$($Audio.Loop):Silent=$($Audio.Silent)")) {
+        $Audio
+    }
 }

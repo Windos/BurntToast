@@ -7,7 +7,7 @@ Creates a new visual element for toast notifications.
 ## SYNTAX
 
 ```powershell
-New-BTVisual [[-BindingGeneric] <ToastBindingGeneric>] [-AddImageQuery] [[-BaseUri] <Uri>]
+New-BTVisual [-BindingGeneric] <ToastBindingGeneric> [-AddImageQuery] [[-BaseUri] <Uri>]
  [[-Language] <String>]
 ```
 
@@ -68,7 +68,7 @@ Type: ToastBindingGeneric
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 1
 Default value: None
 Accept pipeline input: False

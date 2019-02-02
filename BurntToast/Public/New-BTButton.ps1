@@ -47,7 +47,8 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTButton.md
     #>
 
-    [CmdletBinding(DefaultParametersetName = 'Button')]
+    [CmdletBinding(DefaultParametersetName = 'Button',
+                   SupportsShouldProcess   = $true)]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastButton], ParameterSetName = 'Button')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastButtonDismiss], ParameterSetName = 'Dismiss')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze], ParameterSetName = 'Snooze')]
@@ -137,5 +138,13 @@
         }
     }
 
-    $Button
+    if($PSCmdlet.ShouldProcess(
+        switch ($Button.GetType().Name) {
+            ToastButton { "returning: [$($Button.GetType().Name)]:Content=$($Button.Content):Arguments=$($Button.Arguments):ActivationType=$($Button.ActivationType):ImageUri=$($Button.ImageUri):TextBoxId=$($Button.TextBoxId)" }
+            ToastButtonSnooze { "returning: [$($Button.GetType().Name)]:CustomContent=$($Button.CustomContent):ImageUri=$($Button.ImageUri):SelectionBoxId=$($Button.SelectionBoxId)" }
+            ToastButtonDismiss { "returning: [$($Button.GetType().Name)]:CustomContent=$($Button.CustomContent):ImageUri=$($Button.ImageUri)" }
+        }
+    ) {
+        $Button
+    }
 }

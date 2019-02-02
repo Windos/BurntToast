@@ -40,7 +40,8 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTImage.md
     #>
 
-    [CmdletBinding(DefaultParameterSetName = 'Image')]
+    [CmdletBinding(DefaultParameterSetName = 'Image',
+                   SupportsShouldProcess   = $true)]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.AdaptiveImage], ParameterSetName = 'Image')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastGenericAppLogo], ParameterSetName = 'AppLogo')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastGenericHeroImage], ParameterSetName = 'Hero')]
@@ -129,5 +130,13 @@
         $Image.AddImageQuery = $AddImageQuery
     }
 
-    $Image
+    if($PSCmdlet.ShouldProcess(
+        switch ($Image.GetType().Name) {
+            AdaptiveImage { "returning: [$($Image.GetType().Name)]:Source=$($Image.Source):AlternateText=$($Image.AlternateText):HintCrop=$($Image.HintCrop):HintRemoveMargin=$($Image.HintRemoveMargin):HintAlign=$($Image.HintAlign):AddImageQuery=$($Image.AddImageQuery)" }
+            ToastGenericAppLogo { "returning: [$($Image.GetType().Name)]:Source=$($Image.Source):AlternateText=$($Image.AlternateText):HintCrop=$($Image.HintCrop):AddImageQuery=$($Image.AddImageQuery)" }
+            ToastGenericHeroImage { "returning: [$($Image.GetType().Name)]:Source=$($Image.Source):AlternateText=$($Image.AlternateText):AddImageQuery=$($Image.AddImageQuery)" }
+        }
+    ) {
+        $Image
+    }
 }

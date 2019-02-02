@@ -21,7 +21,7 @@
         https://github.com/Windos/BurntToast/blob/master/Help/Submit-BTNotification.md
     #>
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param (
         # A Toast Content object which is the Base Toast element, created using the New-BTContent function.
         [Microsoft.Toolkit.Uwp.Notifications.ToastContent] $Content,
@@ -67,5 +67,7 @@
         $Toast.Tag = $UniqueIdentifier
     }
 
-    [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show($Toast)
+    if($PSCmdlet.ShouldProcess( "submitting: [$($Toast.GetType().Name)] with AppId $AppId, Id $UniqueIdentifier, Sequence Number $($Toast.Data.SequenceNumber) and XML: $CleanContent" ) {
+        [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show($Toast)
+    }
 }

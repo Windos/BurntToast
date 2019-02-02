@@ -68,7 +68,8 @@
     #>
 
     [alias('Toast')]
-    [CmdletBinding(DefaultParameterSetName = 'Sound')]
+    [CmdletBinding(DefaultParameterSetName = 'Sound',
+                   SupportsShouldProcess   = $true)]
     param (
         # Specifies the text to show on the Toast Notification. Up to three strings can be displayed, the first of which will be embolden as a title.
         [ValidateCount(0, 3)]
@@ -210,8 +211,12 @@
     $Content = New-BTContent @ContentSplat
 
     if ($UniqueIdentifier) {
-        Submit-BTNotification -Content $Content -AppId $Script:Config.AppId -UniqueIdentifier $UniqueIdentifier
+        if($PSCmdlet.ShouldProcess( "submitting: [$($Content.GetType().Name)] with AppId $Script:Config.AppId, Id $UniqueIdentifier, and XML: $($ToastContent.GetContent())" ) {
+            Submit-BTNotification -Content $Content -AppId $Script:Config.AppId -UniqueIdentifier $UniqueIdentifier
+        }
     } else {
-        Submit-BTNotification -Content $Content -AppId $Script:Config.AppId
+        if($PSCmdlet.ShouldProcess( "submitting: [$($Content.GetType().Name)] with AppId $Script:Config.AppId and XML: $($ToastContent.GetContent())" ) {
+            Submit-BTNotification -Content $Content -AppId $Script:Config.AppId
+        }
     }
 }

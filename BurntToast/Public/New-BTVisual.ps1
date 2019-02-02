@@ -26,11 +26,11 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTVisual.md
     #>
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastVisual])]
     param (
         # The generic Toast binding, which can be rendered on all devices. This binding is created using the New-BTBinding function.
-        [Parameter()]
+        [Parameter(Mandatory)]
         [Microsoft.Toolkit.Uwp.Notifications.ToastBindingGeneric] $BindingGeneric,
 
         # Specify this switch to allow Windows to append a query string to the image URI supplied in the Toast notification. Use this attribute if your server hosts images and can handle query strings, either by retrieving an image variant based on the query strings or by ignoring the query string and returning the image as specified without the query string. This query string specifies scale, contrast setting, and language.
@@ -44,10 +44,7 @@
     )
 
     $Visual = [Microsoft.Toolkit.Uwp.Notifications.ToastVisual]::new()
-
-    if ($BindingGeneric) {
-        $Visual.BindingGeneric = $BindingGeneric
-    }
+    $Visual.BindingGeneric = $BindingGeneric
 
     if ($AddImageQuery) {
         $Visual.AddImageQuery = $AddImageQuery
@@ -61,5 +58,7 @@
         $Visual.Language = $Language
     }
 
-    $Visual
+    if($PSCmdlet.ShouldProcess("returning: [$($Visual.GetType().Name)]:BindingGeneric=$($Visual.BindingGeneric.Children.Count):BaseUri=$($Visual.BaseUri):Language=$($Visual.Language)")) {
+        $Visual
+    }
 }

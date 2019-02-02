@@ -35,7 +35,7 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTContent.md
     #>
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastContent])]
     param (
         # Optionally create custom actions with buttons and inputs (New-BTAction.)
@@ -98,5 +98,7 @@
         $ToastContent.Visual = $Visual
     }
 
-    $ToastContent
+    if($PSCmdlet.ShouldProcess( "returning: [$($ToastContent.GetType().Name)] with XML: $($ToastContent.GetContent())" ) {
+        $ToastContent
+    }
 }

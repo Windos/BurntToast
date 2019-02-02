@@ -33,7 +33,7 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTBinding.md
     #>
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastBindingGeneric])]
     param (
         # The contents of the body of the Toast, which can include Text (New-BTText), Image (New-BTImage), Group (not yet implemented), and Progress Bar (New-BTProgressBar).
@@ -100,5 +100,7 @@
         $Binding.Language = $Language
     }
 
-    $Binding
+    if($PSCmdlet.ShouldProcess("returning: [$($Binding.GetType().Name)]:Children=$($Binding.Children.Count):AddImageQuery=$($Binding.AddImageQuery.Count):AppLogoOverride=$($Binding.AppLogoOverride.Count):Attribution=$($Binding.Attribution.Count):BaseUri=$($Binding.BaseUri.Count):HeroImage=$($Binding.HeroImage.Count):Language=$($Binding.Language.Count)")) {
+        $Binding
+    }
 }

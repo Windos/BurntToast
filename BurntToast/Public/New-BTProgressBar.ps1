@@ -42,7 +42,8 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTProgressBar.md
     #>
 
-    [CmdletBinding(DefaultParameterSetName = 'Determinate')]
+    [CmdletBinding(DefaultParameterSetName = 'Determinate',
+                   SupportsShouldProcess   = $true)]
     param (
         # The text displayed above the progress bar. Generally used to give context around what the bar represents.
         [string] $Title,
@@ -93,5 +94,7 @@
         $ProgressBar.ValueStringOverride = $ValueDisplay
     }
 
-    $ProgressBar
+    if($PSCmdlet.ShouldProcess("returning: [$($ProgressBar.GetType().Name)]:Status=$($ProgressBar.Status):Title=$($ProgressBar.Title):Value=$($ProgressBar.Value):ValueStringOverride=$($ProgressBar.ValueStringOverride)")) {
+        $ProgressBar
+    }
 }

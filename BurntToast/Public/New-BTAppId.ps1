@@ -30,7 +30,7 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTAppId.md
     #>
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param (
         # Specifies the new AppId. You can use any alphanumeric characters.
         #
@@ -42,8 +42,10 @@
     $RegPath = 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings'
 
     if (!(Test-Path -Path "$RegPath\$AppId")) {
-        $null = New-Item -Path "$RegPath\$AppId" -Force
-        $null = New-ItemProperty -Path "$RegPath\$AppId" -Name 'ShowInActionCenter' -Value 1 -PropertyType 'DWORD'
+        if($PSCmdlet.ShouldProcess("creating: '$RegPath\$AppId' with property 'ShowInActionCenter' set to '1' (DWORD)") {
+            $null = New-Item -Path "$RegPath\$AppId" -Force
+            $null = New-ItemProperty -Path "$RegPath\$AppId" -Name 'ShowInActionCenter' -Value 1 -PropertyType 'DWORD'
+        }
     } else {
         Write-Verbose -Message 'Specified AppId is already present in the registry.'
     }

@@ -36,7 +36,8 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTAction.md
     #>
 
-    [CmdletBinding(DefaultParametersetName = 'Custom Actions')]
+    [CmdletBinding(DefaultParametersetName = 'Custom Actions',
+                   SupportsShouldProcess   = $true)]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.IToastActions])]
     param (
         # Button objects created with the New-BTButton function. Up to five can be included, or less if Context Menu Items are also included.
@@ -90,6 +91,8 @@
             }
         }
 
-        $ToastActions
+        if($PSCmdlet.ShouldProcess("returning: [$($ToastActions.GetType().Name)] with $($ToastActions.Inputs.Count) Inputs, $($ToastActions.Buttons.Count) Buttons, and $($ToastActions.ContextMenuItems.Count) ContextMenuItems")) {
+            $ToastActions
+        }
     }
 }
