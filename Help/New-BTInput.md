@@ -1,22 +1,26 @@
 # New-BTInput
 
 ## SYNOPSIS
+
 Creates an input element on a Toast notification.
 
 ## SYNTAX
 
 ### Text (Default)
-```
+
+```powershell
 New-BTInput -Id <String> [-Title <String>] [-PlaceholderContent <String>] [-DefaultInput <String>]
 ```
 
 ### Selection
-```
+
+```powershell
 New-BTInput -Id <String> [-Title <String>] [-DefaultSelectionBoxItemId <String>]
  -Items <ToastSelectionBoxItem[]>
 ```
 
 ## DESCRIPTION
+
 The New-BTInput function creates an input element on a Toast notification.
 
 Returned object is either a TextBox for users to type text into or SelectionBox to users to select from a list of options.
@@ -24,14 +28,16 @@ Returned object is either a TextBox for users to type text into or SelectionBox 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-```
+
+```powershell
 PS C:\>New-BTInput -Id Reply001 -Title 'Type a reply:'
 ```
 
 This command creates a new text box for a user to type a reply. (n.b. this sort of functionality probably won't work through BurntToast as PowerShell cannot, currently, subscribe to WinRT events.)
 
 ### -------------------------- EXAMPLE 2 --------------------------
-```
+
+```powershell
 PS C:\>New-BTInput -Id 'Selection001' -DefaultSelectionBoxItemId 'Item5' -Items $Select1, $Select2, $Select3, $Select4, $Select5
 ```
 
@@ -40,6 +46,7 @@ This command creates a new selection box containing five options and specifying 
 ## PARAMETERS
 
 ### -DefaultInput
+
 The initial text to place in the text box. Leave this null for a blank text box.
 
 ```yaml
@@ -55,6 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -DefaultSelectionBoxItemId
+
 This controls which item is selected by default, and refers to the Id property of a Selection Box Item (New-BTSelectionBoxItem.)
 
 If you do not provide this, the default selection will be empty (user sees nothing).
@@ -72,6 +80,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
+
 Used so that developers can retrieve user input once the app is activated.
 
 ```yaml
@@ -87,6 +96,7 @@ Accept wildcard characters: False
 ```
 
 ### -Items
+
 The selection items that the user can pick from in this SelectionBox. Only 5 items can be added.
 
 ```yaml
@@ -102,6 +112,7 @@ Accept wildcard characters: False
 ```
 
 ### -PlaceholderContent
+
 Placeholder text to be displayed on the text box when the user hasn't typed any text yet.
 
 ```yaml
@@ -117,6 +128,7 @@ Accept wildcard characters: False
 ```
 
 ### -Title
+
 Title text to display above the element
 
 ```yaml
@@ -133,18 +145,19 @@ Accept wildcard characters: False
 
 ## INPUTS
 
-### None
+TODO
 
 ## OUTPUTS
 
-### ToastTextBox
+ToastTextBox
 
-### ToastSelectionBox
+ToastSelectionBox
 
 ## NOTES
+
 Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
 
-Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
+Please see the [originating repo](https://github.com/Microsoft/UWPCommunityToolkit).
 
 ## RELATED LINKS
 
