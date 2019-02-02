@@ -12,13 +12,13 @@ Creates a new Audio Element for Toast Notifications.
 New-BTAudio -Source <Uri> [-Loop]
 ```
 
-### StandardSound (Default)
+### CustomSound
 
 ```powershell
 New-BTAudio -Path <String> [-Loop]
 ```
 
-### StandardSound (Default)
+### Silent
 
 ```powershell
 New-BTAudio -Silent
