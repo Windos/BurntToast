@@ -1,26 +1,24 @@
----
-online version: https://github.com/Windos/BurntToast/blob/master/Help/New-BTContextMenuItem.md
-schema: 2.0.0
----
-
 # New-BTContextMenuItem
 
 ## SYNOPSIS
+
 Creates a Context Menu Item object.
 
 ## SYNTAX
 
-```
+```powershell
 New-BTContextMenuItem [-Content] <String> [-Arguments] <String> [[-ActivationType] <ToastActivationType>]
 ```
 
 ## DESCRIPTION
+
 The New-BTContextMenuItem function creates a Context Menu Item object.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-```
+
+```powershell
 PS C:\>New-BTContextMenuItem -Content 'Google' -Arguments 'https://google.com' -ActivationType Protocol
 ```
 
@@ -29,6 +27,7 @@ This command creates a new Context Menu Item object with the specified propertie
 ## PARAMETERS
 
 ### -ActivationType
+
 Controls what type of activation this menu item will use when clicked. Defaults to Foreground.
 
 ```yaml
@@ -45,6 +44,7 @@ Accept wildcard characters: False
 ```
 
 ### -Arguments
+
 App-defined string of arguments that the app can later retrieve once it is activated when the user clicks the menu item.
 
 ```yaml
@@ -60,6 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -Content
+
 The text to display on the menu item.
 
 ```yaml
@@ -76,16 +77,17 @@ Accept wildcard characters: False
 
 ## INPUTS
 
-### None
+TODO
 
 ## OUTPUTS
 
-### ToastContextMenuItem
+ToastContextMenuItem
 
 ## NOTES
+
 Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
 
-Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
+Please see the [originating repo](https://github.com/windows-toolkit/WindowsCommunityToolkit).
 
 ## RELATED LINKS
 

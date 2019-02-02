@@ -9,7 +9,7 @@ param(
 
 # Bootstrap step
 if ($Bootstrap.IsPresent) {
-    Write-Host "Validate and install missing prerequisits for building ..."
+    Write-Information "Validate and install missing prerequisits for building ..."
 
     # For testing Pester
     if (-not (Get-Module -Name Pester -ListAvailable)) {

@@ -1,27 +1,25 @@
----
-online version: https://github.com/Windos/BurntToast/blob/master/Help/New-BTContent.md
-schema: 2.0.0
----
-
 # New-BTContent
 
 ## SYNOPSIS
+
 Creates a new Toast Content object.
 
 ## SYNTAX
 
-```
+```powershell
 New-BTContent [[-Actions] <IToastActions>] [[-ActivationType] <ToastActivationType>] [[-Audio] <ToastAudio>]
  [[-Duration] <ToastDuration>] [[-Launch] <String>] [[-Scenario] <ToastScenario>] [-Visual] <ToastVisual>
 ```
 
 ## DESCRIPTION
+
 The New-BTContent function creates a new Toast Content object which is the Base Toast element, which contains at least a visual element.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-```
+
+```powershell
 PS C:\>$binding1 = New-BTBinding -Children $text1, $text2 -AppLogoOverride $image2
 PS C:\>$visual1 = New-BTVisual -BindingGeneric $binding1
 PS C:\>$content1 = New-BTContent -Visual $visual1
@@ -32,7 +30,8 @@ This example combines numerous objects created via BurntToast functions into a b
 The resultant object can now be displayed using the Submit-BTNotification function.
 
 ### -------------------------- EXAMPLE 2 --------------------------
-```
+
+```powershell
 PS C:\>$content1 = New-BTContent -Visual $visual1 -ActivationType Protocol -Launch 'https://google.com'
 ```
 
@@ -41,6 +40,7 @@ This command takes a pre-existing visual object and also specifies options requi
 ## PARAMETERS
 
 ### -Actions
+
 Optionally create custom actions with buttons and inputs (New-BTAction.)
 
 ```yaml
@@ -56,6 +56,7 @@ Accept wildcard characters: False
 ```
 
 ### -ActivationType
+
 Specifies what activation type will be used when the user clicks the body of this Toast.
 
 ```yaml
@@ -72,6 +73,7 @@ Accept wildcard characters: False
 ```
 
 ### -Audio
+
 Specify custom audio options (New-BTAudio.)
 
 ```yaml
@@ -87,6 +89,7 @@ Accept wildcard characters: False
 ```
 
 ### -Duration
+
 The amount of time the Toast should display. You typically should use the Scenario attribute instead, which impacts how long a Toast stays on screen.
 
 ```yaml
@@ -103,6 +106,7 @@ Accept wildcard characters: False
 ```
 
 ### -Header
+
 New in Creators Update: Specifies an optional header for the toast notification (New-BTHeader.)
 
 ```yaml
@@ -118,6 +122,7 @@ Accept wildcard characters: False
 ```
 
 ### -Launch
+
 A string that is passed to the application when it is activated by the Toast. The format and contents of this string are defined by the app for its own use. When the user taps or clicks the Toast to launch its associated app, the launch string provides the context to the app that allows it to show the user a view relevant to the Toast content, rather than launching in its default way.
 
 ```yaml
@@ -133,6 +138,7 @@ Accept wildcard characters: False
 ```
 
 ### -Scenario
+
 Specify the scenario, to make the Toast behave like an alarm, reminder, or more.
 
 ```yaml
@@ -149,6 +155,7 @@ Accept wildcard characters: False
 ```
 
 ### -Visual
+
 Specify the visual element object, created with the New-BTVisual function.
 
 ```yaml
@@ -165,16 +172,17 @@ Accept wildcard characters: False
 
 ## INPUTS
 
-### None
+TODO
 
 ## OUTPUTS
 
-### ToastContent
+ToastContent
 
 ## NOTES
+
 Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
 
-Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
+Please see the Please see the [originating repo](https://github.com/windows-toolkit/WindowsCommunityToolkit).
 
 ## RELATED LINKS
 

@@ -26,7 +26,7 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTContextMenuItem.md
     #>
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem])]
 
     param (
@@ -49,5 +49,7 @@
         $MenuItem.ActivationType = $ActivationType
     }
 
-    $MenuItem
+    if($PSCmdlet.ShouldProcess("returning: [$($MenuItem.GetType().Name)]:Content=$($MenuItem.Content):Arguments=$($MenuItem.Arguments):ActivationType=$($MenuItem.ActivationType)")) {
+        $MenuItem
+    }
 }

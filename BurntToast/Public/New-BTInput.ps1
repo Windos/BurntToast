@@ -34,7 +34,8 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTInput.md
     #>
 
-    [CmdletBinding(DefaultParametersetName = 'Text')]
+    [CmdletBinding(DefaultParametersetName = 'Text',
+                   SupportsShouldProcess   = $true)]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastTextBox], ParametersetName = 'Text')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBox], ParametersetName = 'Text')]
 
@@ -96,5 +97,8 @@
         $ToastInput.Title = $Title
     }
 
-    $ToastInput
+    switch ($Image.GetType().Name) {
+        ToastTextBox { if($PSCmdlet.ShouldProcess("returning: [$($ToastInput.GetType().Name)]:Id=$($ToastInput.Id):Title=$($ToastInput.Title):PlaceholderContent=$($ToastInput.PlaceholderContent):DefaultInput=$($ToastInput.DefaultInput)")) { $ToastInput } }
+        ToastSelectionBox { if($PSCmdlet.ShouldProcess("returning: [$($ToastInput.GetType().Name)]:Id=$($ToastInput.Id):Title=$($ToastInput.Title):DefaultSelectionBoxItemId=$($ToastInput.DefaultSelectionBoxItemId):DefaultInput=$($ToastInput.Items.Count)")) { $ToastInput } }
+    }
 }

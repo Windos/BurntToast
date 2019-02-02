@@ -39,7 +39,7 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTText.md
     #>
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.AdaptiveText])]
     param (
         # The text to display. Data binding support added in Creators Update, only works for toast top-level text elements (But appears to not be working via PowerShell yet.)
@@ -100,5 +100,7 @@
         $TextObj.Language = $Language
     }
 
-    $TextObj
+    if($PSCmdlet.ShouldProcess("returning: [$($TextObj.GetType().Name)]:Text=$($TextObj.Text):HintMaxLines=$($TextObj.HintMaxLines):HintMinLines=$($TextObj.HintMinLines):HintWrap=$($TextObj.HintWrap):HintAlign=$($TextObj.HintAlign):HintStyle=$($TextObj.HintStyle):Language=$($TextObj.Language)")) {
+        $TextObj
+    }
 }

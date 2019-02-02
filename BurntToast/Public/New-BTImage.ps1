@@ -40,7 +40,8 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTImage.md
     #>
 
-    [CmdletBinding(DefaultParameterSetName = 'Image')]
+    [CmdletBinding(DefaultParameterSetName = 'Image',
+                   SupportsShouldProcess   = $true)]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.AdaptiveImage], ParameterSetName = 'Image')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastGenericAppLogo], ParameterSetName = 'AppLogo')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastGenericHeroImage], ParameterSetName = 'Hero')]
@@ -107,7 +108,7 @@
 
     if ($Source) {
         if ($Source -like 'http?://*') {
-            $RemoteFileName = $Source.Split('/')[-1]
+            $RemoteFileName = $Source.Split('/')[-1] -replace '[\[\]*?]',''
 
             $NewFilePath = '{0}\{1}' -f $Env:TEMP, $RemoteFileName
 
@@ -129,5 +130,9 @@
         $Image.AddImageQuery = $AddImageQuery
     }
 
-    $Image
+    switch ($Image.GetType().Name) {
+        AdaptiveImage { if($PSCmdlet.ShouldProcess("returning: [$($Image.GetType().Name)]:Source=$($Image.Source):AlternateText=$($Image.AlternateText):HintCrop=$($Image.HintCrop):HintRemoveMargin=$($Image.HintRemoveMargin):HintAlign=$($Image.HintAlign):AddImageQuery=$($Image.AddImageQuery)")) { $Image } }
+        ToastGenericAppLogo { if($PSCmdlet.ShouldProcess("returning: [$($Image.GetType().Name)]:Source=$($Image.Source):AlternateText=$($Image.AlternateText):HintCrop=$($Image.HintCrop):AddImageQuery=$($Image.AddImageQuery)")) { $Image } }
+        ToastGenericHeroImage { if($PSCmdlet.ShouldProcess("returning: [$($Image.GetType().Name)]:Source=$($Image.Source):AlternateText=$($Image.AlternateText):AddImageQuery=$($Image.AddImageQuery)")) { $Image } }
+    }
 }

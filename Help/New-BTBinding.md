@@ -1,28 +1,26 @@
----
-online version: https://github.com/Windos/BurntToast/blob/master/Help/New-BTBinding.md
-schema: 2.0.0
----
-
 # New-BTBinding
 
 ## SYNOPSIS
+
 Creates a new Generic Toast Binding object.
 
 ## SYNTAX
 
-```
+```powershell
 New-BTBinding [[-Children] <IToastBindingGenericChild[]>] [-AddImageQuery]
  [[-AppLogoOverride] <ToastGenericAppLogo>] [[-Attribution] <ToastGenericAttributionText>] [[-BaseUri] <Uri>]
  [[-HeroImage] <ToastGenericHeroImage>] [[-Language] <String>]
 ```
 
 ## DESCRIPTION
+
 The New-BTBinding function creates a new Generic Toast Binding, where you provide text, images, and other visual elements for your Toast notification.
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-```
+
+```powershell
 PS C:\>$text1 = New-BTText -Content 'This is a test'
 PS C:\>$text2 = New-BTText
 PS C:\>$text3 = New-BTText -Content 'This more testing'
@@ -38,6 +36,7 @@ This example uses various BurntToast functions to create a number of objects, an
 ## PARAMETERS
 
 ### -AddImageQuery
+
 Set to "true" to allow Windows to append a query string to the image URI supplied in the Toast notification. Use this attribute if your server hosts images and can handle query strings, either by retrieving an image variant based on the query strings or by ignoring the query string and returning the image as specified without the query string. This query string specifies scale, contrast setting, and language.
 
 ```yaml
@@ -53,6 +52,7 @@ Accept wildcard characters: False
 ```
 
 ### -AppLogoOverride
+
 An optional override of the logo displayed on the Toast notification.
 
 Created using the New-BTImage function with the 'AppLogoOverride' switch.
@@ -70,6 +70,7 @@ Accept wildcard characters: False
 ```
 
 ### -Attribution
+
 New in Anniversary Update: An optional text element that is displayed as attribution text.
 
 On devices without the Anniversary Update, this text will appear as if it's another Text element at the end of your Children list.
@@ -87,6 +88,7 @@ Accept wildcard characters: False
 ```
 
 ### -BaseUri
+
 A default base URI that is combined with relative URIs in image source attributes.
 
 ```yaml
@@ -102,6 +104,7 @@ Accept wildcard characters: False
 ```
 
 ### -Children
+
 The contents of the body of the Toast, which can include Text (New-BTText), Image (New-BTImage), Group (not yet implemented), and Progress Bar (New-BTProgressBar).
 
 Also, Text elements must come before any other elements. If a Text element is placed after any other element, an exception will be thrown when you try to retrieve the Toast XML content.
@@ -121,6 +124,7 @@ Accept wildcard characters: False
 ```
 
 ### -HeroImage
+
 New in Anniversary Update: An optional hero image (a visually impactful image displayed on the Toast notification).
 
 On devices without the Anniversary Update, the hero image will simply be ignored.
@@ -138,6 +142,7 @@ Accept wildcard characters: False
 ```
 
 ### -Language
+
 The target locale of the XML payload, specified as BCP-47 language tags such as "en-US" or "fr-FR". This locale is overridden by any locale specified in binding or text. If this value is a literal string, this attribute defaults to the user's UI language. If this value is a string reference, this attribute defaults to the locale chosen by Windows Runtime in resolving the string.
 
 ```yaml
@@ -154,16 +159,17 @@ Accept wildcard characters: False
 
 ## INPUTS
 
-### None
+TODO
 
 ## OUTPUTS
 
-### ToastBindingGeneric
+ToastBindingGeneric
 
 ## NOTES
+
 Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
 
-Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
+Please see the Please see the [originating repo](https://github.com/windows-toolkit/WindowsCommunityToolkit).
 
 ## RELATED LINKS
 

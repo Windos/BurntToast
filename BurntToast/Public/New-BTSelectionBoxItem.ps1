@@ -26,7 +26,7 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTSelectionBoxItem.md
     #>
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem])]
 
     param (
@@ -41,5 +41,9 @@
         [string] $Content
     )
 
-    [Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem]::new($Id, $Content)
+    $SelectionBoxItem = [Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem]::new($Id, $Content)
+
+    if($PSCmdlet.ShouldProcess("returning: [$($SelectionBoxItem.GetType().Name)]:Id=$($SelectionBoxItem.Id):Content=$($SelectionBoxItem.Content)")) {
+        $SelectionBoxItem
+    }
 }

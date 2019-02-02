@@ -31,7 +31,7 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTHeader.md
     #>
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true)]
 
     param (
         # Unique string that identifies a header. If a new Id is provided, the system will treat the header as a new header even if it has the same display text as a previous header.
@@ -63,5 +63,7 @@
         $Header.ActivationType = $ActivationType
     }
 
-    $Header
+    if($PSCmdlet.ShouldProcess("returning: [$($Header.GetType().Name)]:Id=$($Header.Id):Title=$($Header.Title):Arguments=$($Header.Arguments):ActivationType=$($Header.ActivationType)")) {
+        $Header
+    }
 }

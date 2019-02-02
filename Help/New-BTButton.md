@@ -1,31 +1,31 @@
----
-online version: https://github.com/Windos/BurntToast/blob/master/Help/New-BTButton.md
-schema: 2.0.0
----
-
 # New-BTButton
 
 ## SYNOPSIS
+
 Creates a new clickable button for a Toast Notification.
 
 ## SYNTAX
 
 ### Button (Default)
-```
+
+```powershell
 New-BTButton -Content <String> -Arguments <String> [-ActivationType {Foreground | Background | Protocol}] [-ImageUri <String>] [-Id <String>]
 ```
 
 ### Snooze
-```
+
+```powershell
 New-BTButton -Snooze [-Content <String>] [-Id <String>]
 ```
 
 ### Dismiss
-```
+
+```powershell
 New-BTButton -Dismiss [-Content <String>]
 ```
 
 ## DESCRIPTION
+
 The New-BTButton function creates a new clickable button for a Toast Notification. Up to five buttons can be added to one Toast.
 
 Buttons can be fully customized with display text, images and arguments or system handled 'Snooze' and 'Dismiss' buttons.
@@ -33,35 +33,40 @@ Buttons can be fully customized with display text, images and arguments or syste
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
-```
+
+```powershell
 PS C:\>New-BTButton -Dismiss
 ```
 
 This command creates a button which mimmicks the act of 'swiping away' the Toast when clicked.
 
 ### -------------------------- EXAMPLE 2 --------------------------
-```
+
+```powershell
 PS C:\>New-BTButton -Snooze
 ```
 
 This command creates a button which will snooze the Toast for the system default snooze time (often 10 minutes).
 
 ### -------------------------- EXAMPLE 3 --------------------------
-```
+
+```powershell
 PS C:\>New-BTButton -Snooze -Content 'Sleep' -Id 'TimeSelection'
 ```
 
 This command creates a button which will snooze the Toast for the time selected in the SelectionBox with the ID 'TimeSelection'. The button will show the text 'Sleep' rather than 'Dismiss.'
 
 ### -------------------------- EXAMPLE 4 --------------------------
-```
-PS C:\>New-BTButton -Content 'Blog' -Arguments 'http://king.geek.nz'
+
+```powershell
+PS C:\>New-BTButton -Content 'Blog' -Arguments 'https://king.geek.nz'
 ```
 
-This command creates a button with the display text "Blog", which will launch a browser window to "http://king.geek.nz" when clicked.
+This command creates a button with the display text "Blog", which will launch a browser window to ["https://king.geek.nz"](https://king.geek.nz) when clicked.
 
 ### -------------------------- EXAMPLE 5 --------------------------
-```
+
+```powershell
 PS C:\>$Picture = 'C:\temp\example.png'
 PS C:\>New-BTButton -Content 'View Picture' -Arguments $Picture -ImageUri $Picture
 ```
@@ -71,6 +76,7 @@ This example creates a button with the display text "View Picture" with a pictur
 ## PARAMETERS
 
 ### -ActivationType
+
 Defines the ActivationType that is trigger when the button is pressed.
 
 Defaults to Protocol which will open the file or URI specified in with the Arguments parameter in the rlevant system default application.
@@ -89,6 +95,7 @@ Accept wildcard characters: False
 ```
 
 ### -Arguments
+
 Specifies an app defined string.
 
 For the purposes of BurntToast notifications this is generally the path to a file or URI and paired with the Protocol ActivationType.
@@ -106,6 +113,7 @@ Accept wildcard characters: False
 ```
 
 ### -Content
+
 Specifies the text to display on the button.
 
 ```yaml
@@ -133,6 +141,7 @@ Accept wildcard characters: False
 ```
 
 ### -Dismiss
+
 Specifies a system handled dismiss button. Clicking the resulting button has the same affect as 'swiping away' or otherwise dismissing the Toast.
 
 Display text defaults to a localized 'Dismiss', but this can be overridden with the Content parameter.
@@ -150,6 +159,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
+
 Specifies the ID of a relevant Toast control.
 
 Standard buttons can be paried with a text box which makes the button appear to the right of it.
@@ -169,6 +179,7 @@ Accept wildcard characters: False
 ```
 
 ### -ImageUri
+
 Specifies an image icon to display on the button.
 
 ```yaml
@@ -184,6 +195,7 @@ Accept wildcard characters: False
 ```
 
 ### -Snooze
+
 Specifies a system handled snooze button. When paired with a selection box the snooze time is customizable and user selectable, otherwise the system default snooze time is used.
 
 Display text defaults to a localized 'Snooze', but this can be overridden with the Content parameter.
@@ -202,16 +214,17 @@ Accept wildcard characters: False
 
 ## INPUTS
 
-### None
+TODO
+
 You cannot pipe input to this function.
 
 ## OUTPUTS
 
-### Microsoft.Toolkit.Uwp.Notifications.ToastButton
+Microsoft.Toolkit.Uwp.Notifications.ToastButton
 
-### Microsoft.Toolkit.Uwp.Notifications.ToastButtonDismiss
+Microsoft.Toolkit.Uwp.Notifications.ToastButtonDismiss
 
-### Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze
+Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze
 
 ## NOTES
 
