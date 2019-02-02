@@ -104,10 +104,6 @@ $BurntEvent = Register-ObjectEvent $BurntJob StateChanged -Action {
 
 ### [HTTP Listener](/Examples/Example08/)
 
-```powershell
-    # Click the heading link...
-```
-
 ![Example: API Call](/Examples/Example08/ApiToast.png)
 
 ## Releases
@@ -195,9 +191,7 @@ $BurntEvent = Register-ObjectEvent $BurntJob StateChanged -Action {
 - [v0.5.0](https://github.com/Windos/BurntToast/releases/download/v0.5.0/BurntToast.zip)
 
   - Converted to using the UWP Community Toolkit.
-
   - Snooze and Dismiss now available and working.
-
   - Documentation is out of date, this will be polished in the next release.
 
 - [v0.4.0](https://github.com/Windos/BurntToast/releases/download/v0.4.0/BurntToast.zip) - Last version that supports Windows 8
