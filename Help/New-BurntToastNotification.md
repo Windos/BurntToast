@@ -91,11 +91,11 @@ This command creates and displays a Toast Notification which plays a looping ala
 ### -------------------------- EXAMPLE 4 --------------------------
 
 ```powershell
-PS C:\>$BlogButton = New-BTButton -Content 'Open Blog' -Arguments 'http://king.geek.nz'
+PS C:\>$BlogButton = New-BTButton -Content 'Open Blog' -Arguments 'https://king.geek.nz'
 PS C:\>New-BurntToastNotification -Text 'New Blog Post!' -Button $BlogButton
 ```
 
-This exmaple creates a Toast Notification with a button which will open a link to "http://king.geek.nz" when clicked.
+This exmaple creates a Toast Notification with a button which will open a link to ["https://king.geek.nz"](https://king.geek.nz) when clicked.
 
 ### -------------------------- EXAMPLE 5 --------------------------
 

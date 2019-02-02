@@ -59,10 +59,10 @@ This command creates a button which will snooze the Toast for the time selected 
 ### -------------------------- EXAMPLE 4 --------------------------
 
 ```powershell
-PS C:\>New-BTButton -Content 'Blog' -Arguments 'http://king.geek.nz'
+PS C:\>New-BTButton -Content 'Blog' -Arguments 'https://king.geek.nz'
 ```
 
-This command creates a button with the display text "Blog", which will launch a browser window to "http://king.geek.nz" when clicked.
+This command creates a button with the display text "Blog", which will launch a browser window to ["https://king.geek.nz"](https://king.geek.nz) when clicked.
 
 ### -------------------------- EXAMPLE 5 --------------------------
 
