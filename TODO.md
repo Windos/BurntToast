@@ -3,7 +3,6 @@
 - [ ] Update comment passed help for all functions
 
   - [ ] Grab/use/adapt parameter help from the UWP Community Toolkit
-
   - [ ] Consider Markdown/External help (platyPS), help link could then link to MD file on GitHub for online viewing (noice!)
 
 - [X] Include public function to toggle functionlevel between basic/advanced

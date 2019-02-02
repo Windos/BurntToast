@@ -104,10 +104,6 @@ Start-Job -Name $Destination -ScriptBlock $ScriptBlock
 
 ### [HTTP Listener](/Examples/Example08/)
 
-```powershell
-    # Click the heading link...
-```
-
 ![Example: API Call](/Examples/Example08/ApiToast.png)
 
 ## Releases
@@ -213,7 +209,6 @@ Start-Job -Name $Destination -ScriptBlock $ScriptBlock
   - General bug fixes
 
 - [v0.2.0](https://github.com/Windos/BurntToast/releases/download/v0.2.0/BurntToast.zip)
-
 - [v0.1.0](https://github.com/Windos/BurntToast/releases/download/v0.1.0/BurntToast.zip)
 
 ## Contributors
