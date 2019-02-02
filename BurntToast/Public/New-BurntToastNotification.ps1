@@ -34,10 +34,10 @@
         This command creates and displays a Toast Notification which plays a looping alarm sound and lasts longer than a default Toast.
 
         .EXAMPLE
-        $BlogButton = New-BTButton -Content 'Open Blog' -Arguments 'http://king.geek.nz'
+        $BlogButton = New-BTButton -Content 'Open Blog' -Arguments 'https://king.geek.nz'
         New-BurntToastNotification -Text 'New Blog Post!' -Button $BlogButton
 
-        This exmaple creates a Toast Notification with a button which will open a link to "http://king.geek.nz" when clicked.
+        This exmaple creates a Toast Notification with a button which will open a link to "https://king.geek.nz" when clicked.
 
         .EXAMPLE
         $ToastHeader = New-BTHeader -Id '001' -Title 'Stack Overflow Questions'

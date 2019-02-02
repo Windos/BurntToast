@@ -112,13 +112,19 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
 
-- [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.6.2.zip) (Development/Raw Repo)
+- [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.7.0.zip) (Development/Raw Repo)
 
-- [v0.7.0](https://github.com/Windos/BurntToast/releases/download/v0.7.0/BurntToast.zip)
+- [v0.6.3](https://github.com/Windos/BurntToast/releases/download/v0.6.3/BurntToast.zip)
 
   - Update Windows Community Toolkit (UWP Notifications) to 5.0.0.
 
     - Also switched to the UAP variant, as the .NET Standard one was causing issues for some users.
+
+  - [BACKEND] Implemented CI pester tests on Azure DevOps Pipelines, including code coverage stats.
+
+  - Fixed style issues flagged by Codacy, mainly Markdown headers.
+
+  - Added WhatIf support to all functions, laying ground work for expanded (read: any) Pester tests.
 
 - [v0.6.2](https://github.com/Windos/BurntToast/releases/download/v0.6.2/BurntToast.zip)
 
