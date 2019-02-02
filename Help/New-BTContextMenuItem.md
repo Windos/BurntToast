@@ -1,8 +1,3 @@
----
-online version: https://github.com/Windos/BurntToast/blob/master/Help/New-BTContextMenuItem.md
-schema: 2.0.0
----
-
 # New-BTContextMenuItem
 
 ## SYNOPSIS

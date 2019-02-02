@@ -1,8 +1,3 @@
----
-online version: https://github.com/Windos/BurntToast/blob/master/Help/New-BTAudio.md
-schema: 2.0.0
----
-
 # New-BTAudio
 
 ## SYNOPSIS
