@@ -37,7 +37,7 @@
 
 * Update Windows Community Toolkit (UWP Notifications) to 5.0.0.
   * Also switched to the UAP variant, as the .NET Standard one was causing issues for some users.
-* [BACKEND] Implemented CI pester tests on Azure DevOps Pipelines, including code coverage stats.
+* (BACKEND) Implemented CI pester tests on Azure DevOps Pipelines, including code coverage stats.
 * Fixed style issues flagged by Codacy, mainly Markdown headers.
 * Added WhatIf support to all functions, laying ground work for expanded (read: any) Pester tests.
 '
