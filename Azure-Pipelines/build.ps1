@@ -7,9 +7,11 @@ param(
     $Test
 )
 
+$VerbosePreference = Continue
+
 # Bootstrap step
 if ($Bootstrap.IsPresent) {
-    Write-Host "Validate and install missing prerequisits for building ..."
+    Write-Verbose "Validate and install missing prerequisits for building ..."
 
     # For testing Pester
     if (-not (Get-Module -Name Pester -ListAvailable)) {
