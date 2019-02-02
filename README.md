@@ -110,7 +110,7 @@ Start-Job -Name $Destination -ScriptBlock $ScriptBlock
 
 ## Releases
 
-**Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
+__Please note:__ as of v0.5.0, BurntToast no longer works on Windows 8.
 
 * [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.6.2.zip) (Development/Raw Repo - **CAUTION**)
 * [v0.7.0](https://github.com/Windos/BurntToast/releases/download/v0.7.0/BurntToast.zip)
