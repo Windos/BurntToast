@@ -98,7 +98,7 @@
         $ToastContent.Visual = $Visual
     }
 
-    if($PSCmdlet.ShouldProcess( "returning: [$($ToastContent.GetType().Name)] with XML: $($ToastContent.GetContent())" ) {
+    if($PSCmdlet.ShouldProcess( "returning: [$($ToastContent.GetType().Name)] with XML: $($ToastContent.GetContent())" )) {
         $ToastContent
     }
 }
