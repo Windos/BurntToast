@@ -1,3 +1,10 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/828836a2a70b4c998de8127fd2150fbc)](https://www.codacy.com/app/Windos/BurntToast?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Windos/BurntToast&amp;utm_campaign=Badge_Grade)
+[![codecov](https://codecov.io/gh/Windos/BurntToast/branch/master/graph/badge.svg)](https://codecov.io/gh/Windos/BurntToast)
+[![Build Status](https://dev.azure.com/windosnz/BurntToast/_apis/build/status/Windos.BurntToast-Build?branchName=master)](https://dev.azure.com/windosnz/BurntToast/_build/latest?definitionId=2&branchName=master)
+[![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/BurntToast.svg)](https://www.powershellgallery.com/packages/BurntToast)
+[![PowerShell Gallery Downloads](https://img.shields.io/powershellgallery/dt/BurntToast.svg)](https://www.powershellgallery.com/packages/BurntToast)
+[![Open Issues](https://img.shields.io/github/issues-raw/Windos/BurntToast.svg)](https://github.com/Windos/BurntToast/issues)
+
 ![BurntToast Logo Banner](/Media/BurntToast-Wide.png)
 
 PowerShell Module for displaying **Windows 10** Toast Notifications
@@ -30,7 +37,7 @@ New-BurntToastNotification
 
 ```powershell
 New-BurntToastNotification -AppLogo C:\smile.jpg -Text "Don't forget to smile!",
-                                                       'Your script ran successfully, celebrate!' 
+                                                       'Your script ran successfully, celebrate!'
 ```
 
 ![BurntToast Notification Example Custom](/Examples/Example02/Example2-Custom.png)
