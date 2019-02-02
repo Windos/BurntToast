@@ -32,7 +32,7 @@
             Tags         = @('Notifications', 'Utilities', 'Windows10', 'Toast')
             LicenseUri   = 'https://github.com/Windos/BurntToast/blob/master/LICENSE'
             ProjectUri   = 'https://github.com/Windos/BurntToast'
-            IconUri      = 'https://cdn.rawgit.com/Windos/BurntToast/master/Media/BurntToast-Logo.png'
+            IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/master/Media/BurntToast-Logo.png'
             ReleaseNotes = '# 0.6.3
 
 * Update Windows Community Toolkit (UWP Notifications) to 5.0.0.
