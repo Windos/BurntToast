@@ -17,7 +17,7 @@
         Microsoft.Toolkit.Uwp.Notifications.ToastAudio
 
         .EXAMPLE
-        New-BTAudio -Source SMS
+        New-BTAudio -Source ms-winsoundevent:Notification.SMS
 
         Creates an Audio  which will cause a Toast Notification to play the standard Microsoft 'SMS' sound.
 

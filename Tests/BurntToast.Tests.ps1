@@ -115,6 +115,65 @@ Describe 'New-BTAppId' {
     }
 }
 
+Describe 'New-BTAudio' {
+    Context 'built in audio source' {
+        It 'returns a [ToastAudio] object' {
+            New-BTAudio -Source ms-winsoundevent:Notification.SMS | should BeOfType 'Microsoft.Toolkit.Uwp.Notifications.ToastAudio'
+        }
+
+        Start-Transcript tmp.log
+        try {
+            New-BTAudio -Source ms-winsoundevent:Notification.SMS -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'has consitent WhatIf response' {
+            $Expected = 'What if: Performing the operation "New-BTAudio" on target "returning: [ToastAudio]:Src=ms-winsoundevent:Notification.SMS:Loop=False:Silent=False".'
+            $Log -join [System.Environment]::NewLine | should Be $Expected
+        }
+    }
+    Context 'custom audio source' {
+        It 'returns a [ToastAudio] object' {
+            New-BTAudio -Path 'C:\Windows\media\tada.wav' | should BeOfType 'Microsoft.Toolkit.Uwp.Notifications.ToastAudio'
+        }
+
+        Start-Transcript tmp.log
+        try {
+            New-BTAudio -Path 'C:\Windows\media\tada.wav' -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'has consitent WhatIf response' {
+            $Expected = 'What if: Performing the operation "New-BTAudio" on target "returning: [ToastAudio]:Src=file:///C:/Windows/media/tada.wav:Loop=False:Silent=False".'
+            $Log -join [System.Environment]::NewLine | should Be $Expected
+        }
+    }
+    Context 'Silent switch' {
+        It 'returns a [ToastAudio] object' {
+            New-BTAudio -Silent | should BeOfType 'Microsoft.Toolkit.Uwp.Notifications.ToastAudio'
+        }
+
+        Start-Transcript tmp.log
+        try {
+            New-BTAudio -Silent -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'has consitent WhatIf response' {
+            $Expected = 'What if: Performing the operation "New-BTAudio" on target "returning: [ToastAudio]:Src=:Loop=False:Silent=True".'
+            $Log -join [System.Environment]::NewLine | should Be $Expected
+        }
+    }
+}
 
 
 
