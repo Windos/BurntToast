@@ -83,24 +83,10 @@ Describe 'New-BTAction' {
 }
 
 Describe 'New-BTAppId' {
-    Mock 'New-Item' {}
-    Mock 'New-ItemProperty' {}
-    Mock 'Test-Path' {}
-
     Context 'running without arguments' {
-        It 'checks the mock' {
-            Test-Path 'C:\Demos\01_chatter.ps1' | should Be $false
-        }
-        It 'attempts to add item to the registry' {
-            New-BTAppId
-
-            Assert-MockCalled 'New-Item' -Exactly 1 -Scope It
-            Assert-MockCalled 'New-ItemProperty' -Exactly 1 -Scope It
-        }
-
         Start-Transcript tmp.log
         try {
-            New-BTAppId -WhatIf
+            New-BTAppId -DryFire -WhatIf
         }
         finally {
             Stop-Transcript
@@ -113,16 +99,9 @@ Describe 'New-BTAppId' {
         }
     }
     Context 'running with custom AppId' {
-        It 'attempts to add item to the registry' {
-            New-BTAppId -AppId 'Script Checker'
-
-            Assert-MockCalled 'New-Item' -Exactly 1 -Scope It
-            Assert-MockCalled 'New-ItemProperty' -Exactly 1 -Scope It
-        }
-
         Start-Transcript tmp.log
         try {
-            New-BTAppId -AppId 'Script Checker'
+            New-BTAppId -AppId 'Script Checker' -DryFire -WhatIf
         }
         finally {
             Stop-Transcript
