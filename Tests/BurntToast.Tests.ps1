@@ -114,9 +114,9 @@ Describe 'New-BTAction' {
 
 Describe 'New-BTAppId' {
     Context 'running without arguments' {
-        Mock New-Item {}
-        Mock New-ItemProperty {}
-        Mock Test-Path {return $false}
+        Mock 'New-Item' {}
+        Mock 'New-ItemProperty' {}
+        Mock 'Test-Path' {return $false}
 
         It 'runs without errors' {
             { New-BTAppId } | Should Not Throw
@@ -125,8 +125,8 @@ Describe 'New-BTAppId' {
         It 'attempts to add item to the registry' {
             New-BTAppId
 
-            Assert-MockCalled New-Item -Exactly 1 -Scope It
-            Assert-MockCalled New-ItemProperty -Exactly 1 -Scope It
+            Assert-MockCalled 'New-Item' -Exactly 1 -Scope It
+            Assert-MockCalled 'New-ItemProperty' -Exactly 1 -Scope It
         }
 
         if ($env:TF_BUILD) {
@@ -147,10 +147,10 @@ Describe 'New-BTAppId' {
         }
     }
     Context 'running with custom AppId' {
-        Mock New-Item {}
-        Mock New-ItemProperty {}
-        Mock Test-Path {return $false}
-        
+        Mock 'New-Item' {}
+        Mock 'New-ItemProperty' {}
+        Mock 'Test-Path' {return $false}
+
         It 'runs without errors' {
             { New-BTAppId -AppId 'Script Checker' } | Should Not Throw
         }
@@ -158,8 +158,8 @@ Describe 'New-BTAppId' {
         It 'attempts to add item to the registry' {
             New-BTAppId -AppId 'Script Checker'
 
-            Assert-MockCalled New-Item -Exactly 1 -Scope It
-            Assert-MockCalled New-ItemProperty -Exactly 1 -Scope It
+            Assert-MockCalled 'New-Item' -Exactly 1 -Scope It
+            Assert-MockCalled 'New-ItemProperty' -Exactly 1 -Scope It
         }
 
         if ($env:TF_BUILD) {
