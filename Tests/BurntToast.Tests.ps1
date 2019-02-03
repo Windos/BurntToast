@@ -113,11 +113,10 @@ Describe 'New-BTAction' {
 }
 
 Describe 'New-BTAppId' {
-    Mock New-Item {}
-    Mock New-ItemProperty {}
-    Mock Test-Path {return $false}
-
     Context 'running without arguments' {
+        Mock New-Item {}
+        Mock New-ItemProperty {}
+        Mock Test-Path {return $false}
 
         It 'runs without errors' {
             { New-BTAppId } | Should Not Throw
@@ -148,6 +147,10 @@ Describe 'New-BTAppId' {
         }
     }
     Context 'running with custom AppId' {
+        Mock New-Item {}
+        Mock New-ItemProperty {}
+        Mock Test-Path {return $false}
+        
         It 'runs without errors' {
             { New-BTAppId -AppId 'Script Checker' } | Should Not Throw
         }
