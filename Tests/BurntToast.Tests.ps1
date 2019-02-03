@@ -114,22 +114,26 @@ Describe 'New-BTAction' {
 
 Describe 'New-BTAppId' {
     Context 'running without arguments' {
-        Mock 'New-Item' {}
-        Mock 'New-ItemProperty' {}
-        Mock 'Test-Path' {return $false}
-
         It 'runs without errors' {
             { New-BTAppId } | Should Not Throw
         }
 
         It 'attempts to add item to the registry' {
+            Mock 'New-Item' {}
+            Mock 'New-ItemProperty' {}
+            Mock 'Test-Path' {return $false}
+
             New-BTAppId
 
-            Assert-MockCalled 'New-Item' -Exactly 1 -Scope It
-            Assert-MockCalled 'New-ItemProperty' -Exactly 1 -Scope It
+            Assert-MockCalled 'New-Item' -Exactly 1
+            Assert-MockCalled 'New-ItemProperty' -Exactly 1
         }
 
         if ($env:TF_BUILD) {
+            Mock 'New-Item' {}
+            Mock 'New-ItemProperty' {}
+            Mock 'Test-Path' {return $false}
+
             Start-Transcript tmp.log
             try {
                 New-BTAppId -WhatIf
