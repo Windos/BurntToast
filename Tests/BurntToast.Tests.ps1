@@ -115,15 +115,15 @@ Describe 'New-BTAction' {
 Describe 'New-BTAppId' {
     Mock New-Item {}
     Mock New-ItemProperty {}
+    Mock Test-Path {return $false}
 
     Context 'running without arguments' {
+
         It 'runs without errors' {
             { New-BTAppId } | Should Not Throw
         }
 
         It 'attempts to add item to the registry' {
-            Mock Test-Path {return $false}
-
             New-BTAppId
 
             Assert-MockCalled New-Item -Exactly 1 -Scope It
@@ -152,7 +152,7 @@ Describe 'New-BTAppId' {
             { New-BTAppId -AppId 'Script Checker' } | Should Not Throw
         }
 
-        It 'returns a [ToastActionsSnoozeAndDismiss] object' {
+        It 'attempts to add item to the registry' {
             New-BTAppId -AppId 'Script Checker'
 
             Assert-MockCalled New-Item -Exactly 1 -Scope It
