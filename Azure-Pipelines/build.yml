@@ -4,10 +4,22 @@ jobs:
     vmImage: 'VS2017-Win2016'
   steps:
   - task: PowerShell@2
-    displayName: 'Run tests'
+    displayName: 'Run tests (individual .ps1 files)'
     inputs:
       targetType: Inline
       script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
+
+  - task: PowerShell@2
+    displayName: 'Compile module'
+    inputs:
+      targetType: Inline
+      script: ./Azure-Pipelines/build.ps1 -Compile
+
+  - task: PowerShell@2
+    displayName: 'Run tests (compiled .psm1)'
+    inputs:
+      targetType: Inline
+      script: ./Azure-Pipelines/build.ps1 -TestCompile
 
   - task: PublishTestResults@2
     displayName: 'Publish test results'
@@ -25,4 +37,10 @@ jobs:
       #script: '# Write your commands here# Use the environment variables input below to pass secret variables to this script' # Required when targetType == Inline
       #workingDirectory: # Optional
       #failOnStderr: false # Optional
-      
+
+  - task: PublishPipelineArtifact@0
+    displayName: 'Publish compile module artifact'
+    inputs:
+      artifactName: 'BurntToastCompiled'
+      targetPath: ./Output
+    condition: succeededOrFailed()

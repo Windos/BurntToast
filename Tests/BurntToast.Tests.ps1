@@ -1,4 +1,8 @@
-Import-Module "$PSScriptRoot/../BurntToast/BurntToast.psd1" -Force
+if (!($Global:TestOutput)) {
+    Import-Module "$PSScriptRoot/../BurntToast/BurntToast.psd1" -Force
+} else {
+    Import-Module "$PSScriptRoot/../Output/BurntToast.psd1" -Force
+}
 
 Describe 'New-BTAppId' {
     Context 'running without arguments' {
