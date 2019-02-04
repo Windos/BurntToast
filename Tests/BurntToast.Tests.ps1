@@ -549,6 +549,8 @@ Describe 'New-BTContent' {
 }
 
 Describe 'New-BurntToastNotification' {
+    $ImagePath = Resolve-Path -Path $PSScriptRoot\..\BurntToast\Images\BurntToast.png
+
     Context 'running without arguments (default toast)' {
         Start-Transcript tmp.log
         try {
@@ -560,7 +562,7 @@ Describe 'New-BurntToastNotification' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = 'What if: Performing the operation "New-BurntToastNotification" on target "submitting: [ToastContent] with AppId @{AppId={1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe; AppLogo=\Images\BurntToast.png}.AppId and XML: <?xml version="1.0" encoding="utf-8"?><toast><visual><binding template="ToastGeneric"><text>{Default Notification}</text><image src="C:\Users\joshuak\Documents\GitHub\BurntToast\BurntToast\Images\BurntToast.png" placement="appLogoOverride" hint-crop="circle" /></binding></visual></toast>".'
+            $Expected = "What if: Performing the operation ""New-BurntToastNotification"" on target ""submitting: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{Default Notification}</text><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
             $Log | should Be $Expected
         }
     }
@@ -575,7 +577,7 @@ Describe 'New-BurntToastNotification' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = 'What if: Performing the operation "New-BurntToastNotification" on target "submitting: [ToastContent] with AppId @{AppId={1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe; AppLogo=\Images\BurntToast.png}.AppId and XML: <?xml version="1.0" encoding="utf-8"?><toast><visual><binding template="ToastGeneric"><text>{Example Script}</text><text>{The example script has run successfully.}</text><image src="C:\Users\joshuak\Documents\GitHub\BurntToast\BurntToast\Images\BurntToast.png" placement="appLogoOverride" hint-crop="circle" /></binding></visual></toast>".'
+            $Expected = "What if: Performing the operation ""New-BurntToastNotification"" on target ""submitting: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{Example Script}</text><text>{The example script has run successfully.}</text><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
             $Log | should Be $Expected
         }
     }
@@ -590,8 +592,7 @@ Describe 'New-BurntToastNotification' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = 'What if: Performing the operation "New-BurntToastNotification" on target "submitting: [ToastContent] with AppId @{AppId={1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe; AppLogo=\Images\BurntToast.png}.AppId and XML: <?xml version="1.0" encoding="utf-8"?><toast duration="long"><visual><binding template="ToastGeneric"><text>{WAKE UP!}</text><image src="C:\Users\joshuak\Documents\GitHub\BurntToast\BurntToast\Images\BurntToast.png" placement="appLogoOverride" hint-crop="circle" /></binding></visual><audio src="ms-winsoundevent:Notification.Looping.Alarm2"
-            loop="true" /></toast>".'
+            $Expected = "What if: Performing the operation ""New-BurntToastNotification"" on target ""submitting: <?xml version=""1.0"" encoding=""utf-8""?><toast duration=""long""><visual><binding template=""ToastGeneric""><text>{WAKE UP!}</text><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual><audio src=""ms-winsoundevent:Notification.Looping.Alarm2"" loop=""true"" /></toast>""."
             $Log | should Be $Expected
         }
     }
@@ -607,15 +608,15 @@ Describe 'New-BurntToastNotification' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = 'What if: Performing the operation "New-BurntToastNotification" on target "submitting: [ToastContent] with AppId @{AppId={1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe; AppLogo=\Images\BurntToast.png}.AppId and XML: <?xml version="1.0" encoding="utf-8"?><toast><visual><binding template="ToastGeneric"><text>{New Blog Post!}</text><image src="C:\Users\joshuak\Documents\GitHub\BurntToast\BurntToast\Images\BurntToast.png" placement="appLogoOverride" hint-crop="circle" /></binding></visual><actions><action content="Open Blog" arguments="https://king.geek.nz" activationType="protocol" /></actions></toast>".'
+            $Expected = "What if: Performing the operation ""New-BurntToastNotification"" on target ""submitting: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{New Blog Post!}</text><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual><actions><action content=""Open Blog"" arguments=""https://king.geek.nz"" activationType=""protocol"" /></actions></toast>""."
             $Log | should Be $Expected
         }
     }
     Context 'include a header' {
         Start-Transcript tmp.log
         try {
-            $ToastHeader = New-BTHeader -Id '001' -Title 'Stack Overflow Questions'
-            New-BurntToastNotification -Text 'New Stack Overflow Question!', 'More details!' -Header $ToastHeader -WhatIf
+            $ToastHeader = New-BTHeader -Id '001' -Title 'SO Questions'
+            New-BurntToastNotification -Text 'New SO Question', 'Details...' -Header $ToastHeader  -WhatIf
         }
         finally {
             Stop-Transcript
@@ -623,15 +624,15 @@ Describe 'New-BurntToastNotification' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = 'What if: Performing the operation "New-BurntToastNotification" on target "submitting: [ToastContent] with AppId @{AppId={1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe; AppLogo=\Images\BurntToast.png}.AppId and XML: <?xml version="1.0" encoding="utf-8"?><toast><visual><binding template="ToastGeneric"><text>{New Stack Overflow Question!}</text><text>{More details!}</text><image src="C:\Users\joshuak\Documents\GitHub\BurntToast\BurntToast\Images\BurntToast.png" placement="appLogoOverride" hint-crop="circle" /></binding></visual><header id="001" title="Stack Overflow Questions" arguments="" activationType="protocol" /></toast>".'
+            $Expected = "What if: Performing the operation ""New-BurntToastNotification"" on target ""submitting: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{New SO Question}</text><text>{Details...}</text><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual><header id=""001"" title=""SO Questions"" arguments="""" activationType=""protocol"" /></toast>""."
             $Log | should Be $Expected
         }
     }
     Context 'include a progress bar' {
         Start-Transcript tmp.log
         try {
-            $Progress = New-BTProgressBar -Status 'Copying files' -Value 0.2
-            New-BurntToastNotification -Text 'File copy script running', 'More details!' -ProgressBar $Progress -WhatIf
+            $Progress = New-BTProgressBar -Status 'Copying' -Value 0.2
+            New-BurntToastNotification -Text 'File copy running' -ProgressBar $Progress -WhatIf
         }
         finally {
             Stop-Transcript
@@ -639,8 +640,7 @@ Describe 'New-BurntToastNotification' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = 'What if: Performing the operation "New-BurntToastNotification" on target "submitting: [ToastContent] with AppId @{AppId={1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe; AppLogo=\Images\BurntToast.png}.AppId and XML: <?xml version="1.0" encoding="utf-8"?><toast><visual><binding template="ToastGeneric"><text>{File copy script running}</text><text>{More details!}</text><progress value="{0.2}" status="{Copying files}" /><image src="C:\Users\joshuak\Documents\GitHub\BurntToast\BurntToast\Images\BurntToast.png" placement="appLogoOverride" hint-crop="circle"
-            /></binding></visual></toast>".'
+            $Expected = "What if: Performing the operation ""New-BurntToastNotification"" on target ""submitting: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{File copy running}</text><progress value=""{0.2}"" status=""{Copying}"" /><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
             $Log | should Be $Expected
         }
     }
