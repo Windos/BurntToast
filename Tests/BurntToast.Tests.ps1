@@ -2,10 +2,6 @@ Import-Module "$PSScriptRoot/../BurntToast/BurntToast.psd1" -Force
 
 Describe 'New-BTAction' {
     Context 'running without arguments' {
-        It 'returns a [ToastActionsCustom] object' {
-            New-BTAction | should BeOfType 'Microsoft.Toolkit.Uwp.Notifications.ToastActionsCustom'
-        }
-
         Start-Transcript tmp.log
         try {
             New-BTAction -WhatIf
@@ -21,10 +17,6 @@ Describe 'New-BTAction' {
         }
     }
     Context 'snooze and dismiss modal' {
-        It 'returns a [ToastActionsSnoozeAndDismiss] object' {
-            New-BTAction -SnoozeAndDismiss | should BeOfType 'Microsoft.Toolkit.Uwp.Notifications.ToastActionsSnoozeAndDismiss'
-        }
-
         Start-Transcript tmp.log
         try {
             New-BTAction -SnoozeAndDismiss -WhatIf
@@ -40,10 +32,6 @@ Describe 'New-BTAction' {
         }
     }
     Context 'single clickable button' {
-        It 'returns a [ToastActionsCustom] object' {
-            New-BTAction -Buttons (New-BTButton -Content 'Google' -Arguments 'https://google.com') | should BeOfType 'Microsoft.Toolkit.Uwp.Notifications.ToastActionsCustom'
-        }
-
         Start-Transcript tmp.log
         try {
             New-BTAction -Buttons (New-BTButton -Content 'Google' -Arguments 'https://google.com') -WhatIf
@@ -61,10 +49,6 @@ Describe 'New-BTAction' {
     Context 'mixed content: button & context menu' {
         $Button = New-BTButton -Content 'Google' -Arguments 'https://google.com'
         $ContextMenuItem = New-BTContextMenuItem -Content 'Bing' -Arguments 'https://bing.com'
-
-        It 'returns a [ToastActionsCustom] object' {
-            New-BTAction -Buttons $Button -ContextMenuItems $ContextMenuItem | should BeOfType 'Microsoft.Toolkit.Uwp.Notifications.ToastActionsCustom'
-        }
 
         Start-Transcript tmp.log
         try {
@@ -117,10 +101,6 @@ Describe 'New-BTAppId' {
 
 Describe 'New-BTAudio' {
     Context 'built in audio source' {
-        It 'returns a [ToastAudio] object' {
-            New-BTAudio -Source ms-winsoundevent:Notification.SMS | should BeOfType 'Microsoft.Toolkit.Uwp.Notifications.ToastAudio'
-        }
-
         Start-Transcript tmp.log
         try {
             New-BTAudio -Source ms-winsoundevent:Notification.SMS -WhatIf
@@ -136,10 +116,6 @@ Describe 'New-BTAudio' {
         }
     }
     Context 'custom audio source' {
-        It 'returns a [ToastAudio] object' {
-            New-BTAudio -Path 'C:\Windows\media\tada.wav' | should BeOfType 'Microsoft.Toolkit.Uwp.Notifications.ToastAudio'
-        }
-
         Start-Transcript tmp.log
         try {
             New-BTAudio -Path 'C:\Windows\media\tada.wav' -WhatIf
@@ -155,10 +131,6 @@ Describe 'New-BTAudio' {
         }
     }
     Context 'Silent switch' {
-        It 'returns a [ToastAudio] object' {
-            New-BTAudio -Silent | should BeOfType 'Microsoft.Toolkit.Uwp.Notifications.ToastAudio'
-        }
-
         Start-Transcript tmp.log
         try {
             New-BTAudio -Silent -WhatIf
@@ -175,6 +147,38 @@ Describe 'New-BTAudio' {
     }
 }
 
+
+
+
+
+
+
+
+Describe 'New-BTBinding' {
+    Context 'loaded with children' {
+        $Text1 = New-BTText -Content 'This is a test'
+        $Text2 = New-BTText
+        $Text3 = New-BTText -Content 'This more testing'
+        $Progress = New-BTProgressBar -Title 'Things are happening' -Status 'Working on it' -Value 0.01
+        $Image1 = New-BTImage -Source '$PSScriptRoot\Media\BurntToast.png'
+        $Image2 = New-BTImage -Source '$PSScriptRoot\Media\BurntToast.png' -AppLogoOverride -Crop Circle
+        $Image3 = New-BTImage -Source '$PSScriptRoot\Media\BurntToast.png' -HeroImage
+
+        Start-Transcript tmp.log
+        try {
+            New-BTBinding -Children $Text1, $Text2, $Text3, $Image1, $Progress -AppLogoOverride $Image2 -HeroImage $Image3 -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'has consitent WhatIf response' {
+            $Expected = 'What if: Performing the operation "New-BTBinding" on target "returning: [ToastBindingGeneric]:Children=5:AddImageQuery=0:AppLogoOverride=1:Attribution=0:BaseUri=0:HeroImage=1:Language=0".'
+            $Log -join [System.Environment]::NewLine | should Be $Expected
+        }
+    }
+}
 
 
 
