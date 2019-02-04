@@ -163,6 +163,86 @@ Describe 'New-BTContextMenuItem' {
     }
 }
 
+Describe 'New-BTHeader' {
+    Context 'loaded with standard arguments' {
+        Start-Transcript tmp.log
+        try {
+            New-BTHeader -Id 'primary header' -Title 'First Category' -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'has consitent WhatIf response' {
+            $Expected = 'What if: Performing the operation "New-BTHeader" on target "returning: [ToastHeader]:Id=primary header:Title=First Category:Arguments=:ActivationType=Protocol".'
+            $Log -join [System.Environment]::NewLine | should Be $Expected
+        }
+    }
+    Context 'clickable header text' {
+        Start-Transcript tmp.log
+        try {
+            New-BTHeader -Id '001' -Title 'Stack Overflow Questions' -Arguments 'http://stackoverflow.com/' -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'has consitent WhatIf response' {
+            $Expected = 'What if: Performing the operation "New-BTHeader" on target "returning: [ToastHeader]:Id=001:Title=Stack Overflow Questions:Arguments=http://stackoverflow.com/:ActivationType=Protocol".'
+            $Log -join [System.Environment]::NewLine | should Be $Expected
+        }
+    }
+}
+
+Describe 'New-BTImage' {
+    Context 'standard image' {
+        Start-Transcript tmp.log
+        try {
+            New-BTImage -Source $PSScriptRoot\Media\BurntToast.png -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'has consitent WhatIf response' {
+            $Expected = 'What if: Performing the operation "New-BTImage" on target "returning: [AdaptiveImage]:Source=C:\Users\joshuak\Documents\GitHub\BurntToast\Tests\Media\BurntToast.png:AlternateText=:HintCrop=Default:HintRemoveMargin=False:HintAlign=Default:AddImageQuery=".'
+            $Log -join [System.Environment]::NewLine | should Be $Expected
+        }
+    }
+    Context 'application logo override' {
+        Start-Transcript tmp.log
+        try {
+            New-BTImage -Source '$PSScriptRoot\Media\BurntToast.png' -AppLogoOverride -Crop Circle -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'has consitent WhatIf response' {
+            $Expected = 'What if: Performing the operation "New-BTImage" on target "returning: [ToastGenericAppLogo]:Source=$PSScriptRoot\Media\BurntToast.png:AlternateText=:HintCrop=Circle:AddImageQuery=".'
+            $Log -join [System.Environment]::NewLine | should Be $Expected
+        }
+    }
+    Context 'hero image' {
+        Start-Transcript tmp.log
+        try {
+            New-BTImage -Source '$PSScriptRoot\Media\BurntToast.png' -HeroImage -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'has consitent WhatIf response' {
+            $Expected = 'What if: Performing the operation "New-BTImage" on target "returning: [ToastGenericHeroImage]:Source=$PSScriptRoot\Media\BurntToast.png:AlternateText=:AddImageQuery=".'
+            $Log -join [System.Environment]::NewLine | should Be $Expected
+        }
+    }
+}
 
 
 
@@ -309,7 +389,7 @@ Describe 'New-BTContent' {
 #         It 'runs without errors' {
 #             { New-BurntToastNotification } | should Not Throw
 #         }
-# 
+#
 #         It 'does not return anything' {
 #             New-BurntToastNotification | should BeNullOrEmpty
 #         }
