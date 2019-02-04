@@ -51,7 +51,7 @@ if ($Compile.IsPresent) {
 
     $Public | Get-Content | Add-Content .\Output\BurntToast.psm1
 
-    "`$PublicFunctions = $($Public.BaseName -join ', ')" | Add-Content .\Output\BurntToast.psm1
+    "`$PublicFunctions = '$($Public.BaseName -join "', '")'" | Add-Content .\Output\BurntToast.psm1
 
     Get-Content -Path .\Azure-Pipelines\BurntToast-Template.psm1 | Add-Content .\Output\BurntToast.psm1
 }
