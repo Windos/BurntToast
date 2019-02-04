@@ -15,6 +15,20 @@ Describe 'New-BTAppId' {
             $Expected = 'What if: Performing the operation "New-BTAppId" on target "creating: ''HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'' with property ''ShowInActionCenter'' set to ''1'' (DWORD)".'
             $Log | should Be $Expected
         }
+
+        Start-Transcript tmp.log
+        try {
+            New-BTAppId -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'should not attempt to add an already existing AppId' {
+            $Expected = $null
+            $Log | should Be $Expected
+        }
     }
     Context 'running with custom AppId' {
         Start-Transcript tmp.log
@@ -468,6 +482,30 @@ Describe 'New-BTAction' {
             $Log | should Be $Expected
         }
     }
+    Context 'including too many buttons and or context menu items' {
+        $Button = New-BTButton -Content 'Google' -Arguments 'https://google.com'
+        $ContextMenuItem = New-BTContextMenuItem -Content 'Bing' -Arguments 'https://bing.com'
+
+        it 'throws when providing too poolable items' {
+            { $Button = New-BTButton -Content 'Google' -Arguments 'https://google.com'; $ContextMenuItem = New-BTContextMenuItem -Content 'Bing' -Arguments 'https://bing.com'; New-BTAction -Buttons $Button, $Button, $Button, $Button, $Button -ContextMenuItems $ContextMenuItem } | Should Throw 'You have included too many buttons and context menu items. The maximum combined number of these elements is five.'
+        }
+    }
+    Context 'input objects' {
+        Start-Transcript tmp.log
+        try {
+            $Input = New-BTInput -Id Reply001 -Title 'Type a reply:'
+            New-BTAction -Inputs $Input -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'has consitent WhatIf response' {
+            $Expected = 'What if: Performing the operation "New-BTAction" on target "returning: [ToastActionsCustom] with 1 Inputs, 0 Buttons, and 0 ContextMenuItems".'
+            $Log | should Be $Expected
+        }
+    }
 }
 
 Describe 'New-BTBinding' {
@@ -649,6 +687,31 @@ Describe 'New-BurntToastNotification' {
         }
         It 'has consitent WhatIf response' {
             $Expected = "What if: Performing the operation ""New-BurntToastNotification"" on target ""submitting: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{File copy running}</text><progress value=""{0.2}"" status=""{Copying}"" /><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
+            $Log | should Be $Expected
+        }
+    }
+    Context 'attribution text' {
+        Start-Transcript tmp.log
+        try {
+            $Text1 = New-BTText -Content 'Default Notification'
+
+            $Attrib = [Microsoft.Toolkit.Uwp.Notifications.ToastGenericAttributionText]::new()
+
+            $Attrib.Text = 'via Pester'
+
+            $Binding1 = New-BTBinding -Children $Text1 -Attribution $Attrib
+            $Visual1 = New-BTVisual -BindingGeneric $Binding1
+            $Content1 = New-BTContent -Visual $Visual1
+
+            Submit-BTNotification -Content $Content1 -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'has consitent WhatIf response' {
+            $Expected = 'What if: Performing the operation "Submit-BTNotification" on target "submitting: [ToastNotification] with AppId {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe, Id , Sequence Number  and XML: <?xml version="1.0" encoding="utf-8"?><toast><visual><binding template="ToastGeneric"><text>Default Notification</text><text placement="attribution">via Pester</text></binding></visual></toast>".'
             $Log | should Be $Expected
         }
     }
