@@ -33,7 +33,7 @@
         This command creates a button which will snooze the Toast for the time selected in the SelectionBox with the ID 'TimeSelection'. The button will show the text 'Sleep' rather than 'Dismiss.'
 
         .EXAMPLE
-        New-BTButton -Content 'Blog' -Arguments 'http://king.geek.nz'
+        New-BTButton -Content 'Blog' -Arguments 'https://king.geek.nz'
 
         This command creates a button with the display text "Blog", which will launch a browser window to "http://king.geek.nz" when clicked.
 
