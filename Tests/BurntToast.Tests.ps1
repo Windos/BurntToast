@@ -264,6 +264,21 @@ Describe 'New-BTImage' {
             $Log | should Be $Expected
         }
     }
+    Context 'web based image' {
+        Start-Transcript tmp.log
+        try {
+            New-BTImage -Source https://raw.githubusercontent.com/Windos/BurntToast/master/Media/BurntToast.png -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'has consitent WhatIf response' {
+            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [AdaptiveImage]:Source=$($env:TEMP)\BurntToast.png:AlternateText=:HintCrop=Default:HintRemoveMargin=False:HintAlign=Default:AddImageQuery=""."
+            $Log | should Be $Expected
+        }
+    }
 }
 
 Describe 'New-BTProgressBar' {
