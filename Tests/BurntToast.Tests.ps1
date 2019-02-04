@@ -307,6 +307,56 @@ Describe 'New-BTProgressBar' {
     }
 }
 
+Describe 'New-BTSelectionBoxItem' {
+    Context 'loaded with standard arguments' {
+        Start-Transcript tmp.log
+        try {
+            New-BTSelectionBoxItem -Id 'Item1' -Content 'First option in the list' -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'has consitent WhatIf response' {
+            $Expected = 'What if: Performing the operation "New-BTSelectionBoxItem" on target "returning: [ToastSelectionBoxItem]:Id=Item1:Content=First option in the list".'
+            $Log -join [System.Environment]::NewLine | should Be $Expected
+        }
+    }
+}
+
+Describe 'New-BTText' {
+    Context 'blank line' {
+        Start-Transcript tmp.log
+        try {
+            New-BTText -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'has consitent WhatIf response' {
+            $Expected = 'What if: Performing the operation "New-BTText" on target "returning: [AdaptiveText]:Text=:HintMaxLines=:HintMinLines=:HintWrap=:HintAlign=Default:HintStyle=Default:Language=".'
+            $Log -join [System.Environment]::NewLine | should Be $Expected
+        }
+    }
+    Context 'with content' {
+        Start-Transcript tmp.log
+        try {
+            New-BTText -Content 'This is a line with text!' -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'has consitent WhatIf response' {
+            $Expected = 'New-BTText" on target "returning: [AdaptiveText]:Text=This is a line with text!:HintMaxLines=:HintMinLines=:HintWrap=:HintAlign=Default:HintStyle=Default:Language=".'
+            $Log -join [System.Environment]::NewLine | should Be $Expected
+        }
+    }
+}
 
 
 
