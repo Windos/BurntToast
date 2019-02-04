@@ -94,7 +94,7 @@
         $ProgressBar.ValueStringOverride = $ValueDisplay
     }
 
-    if($PSCmdlet.ShouldProcess("returning: [$($ProgressBar.GetType().Name)]:Status=$($ProgressBar.Status):Title=$($ProgressBar.Title):Value=$($ProgressBar.Value):ValueStringOverride=$($ProgressBar.ValueStringOverride)")) {
+    if($PSCmdlet.ShouldProcess("returning: [$($ProgressBar.GetType().Name)]:Status=$($ProgressBar.Status.BindingName):Title=$($ProgressBar.Title.BindingName):Value=$($ProgressBar.Value.BindingName):ValueStringOverride=$($ProgressBar.ValueStringOverride.BindingName)")) {
         $ProgressBar
     }
 }

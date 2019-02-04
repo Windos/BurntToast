@@ -1,12 +1,12 @@
 ﻿function New-BTAudio {
     <#
         .SYNOPSIS
-        Creates a new Audio Element for Toast Notifications.
+        Creates a new Audio object for Toast Notifications.
 
         .DESCRIPTION
-        The New-BTAudioElement function creates a new Audio Element for Toast Notifications.
+        The New-BTAudio function creates a new Audio object for Toast Notifications.
 
-        You can use the parameters of New-BTAudioElement to select an audio file or a standard notification sound (including alarms). Alternativly you can specify that a Toast Notification should be silent.
+        You can use the parameters of New-BTAudio to select an audio file or a standard notification sound (including alarms). Alternativly you can specify that a Toast Notification should be silent.
 
         .INPUTS
         None
@@ -17,19 +17,19 @@
         Microsoft.Toolkit.Uwp.Notifications.ToastAudio
 
         .EXAMPLE
-        New-BTAudioElement -Source SMS
+        New-BTAudio -Source ms-winsoundevent:Notification.SMS
 
-        Creates an Audio Element which will cause a Toast Notification to play the standard Microsoft 'SMS' sound.
-
-        .EXAMPLE
-        New-BTAudioElement -Path 'C:\Music\FavSong.mp3'
-
-        Creates an Audio Element which will cause a Toast Notification to play the specified song.
+        Creates an Audio  which will cause a Toast Notification to play the standard Microsoft 'SMS' sound.
 
         .EXAMPLE
-        New-BTAudioElement -Silent
+        New-BTAudio -Path 'C:\Music\FavSong.mp3'
 
-        Creates an Audio Element which will cause a Toast Notification to be silent.
+        Creates an Audio  which will cause a Toast Notification to play the specified song.
+
+        .EXAMPLE
+        New-BTAudio -Silent
+
+        Creates an Audio  which will cause a Toast Notification to be silent.
 
         .LINK
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTAudio.md

@@ -211,11 +211,11 @@
     $Content = New-BTContent @ContentSplat -WhatIf:$false
 
     if ($UniqueIdentifier) {
-        if($PSCmdlet.ShouldProcess( "submitting: [$($Content.GetType().Name)] with AppId $Script:Config.AppId, Id $UniqueIdentifier, and XML: $($Content.GetContent())" )) {
+        if($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {
             Submit-BTNotification -Content $Content -AppId $Script:Config.AppId -UniqueIdentifier $UniqueIdentifier
         }
     } else {
-        if($PSCmdlet.ShouldProcess( "submitting: [$($Content.GetType().Name)] with AppId $Script:Config.AppId and XML: $($Content.GetContent())" )) {
+        if($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {
             Submit-BTNotification -Content $Content -AppId $Script:Config.AppId
         }
     }
