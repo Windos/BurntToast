@@ -9,7 +9,7 @@ param(
 
 # Define Tag step
 if ($DefineTag.IsPresent) {
-    $ReleaseVersion = Get-Content -Path $(System.ArtifactsDirectory)\PipelinesScripts\release-version.txt
+    $ReleaseVersion = Get-Content -Path $env:ArtifactDir\PipelinesScripts\release-version.txt
     Write-Host "##vso[task.setvariable variable=RELEASETAG]$ReleaseVersion"
 }
 
@@ -18,7 +18,7 @@ if ($Publish.IsPresent) {
     # Publish Module to PowerShell Gallery
     Try {
         $Splat = @{
-            Path        = (Resolve-Path -Path $(System.ArtifactsDirectory)\BurntToast)
+            Path        = (Resolve-Path -Path $env:ArtifactDir\BurntToast)
             NuGetApiKey = $env:PSGallery
             ErrorAction = 'Stop'
         }
