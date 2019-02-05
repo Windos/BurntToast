@@ -49,6 +49,6 @@ jobs:
   - task: PublishPipelineArtifact@0
     displayName: 'Publish Pipelines scripts as artifact'
     inputs:
-      artifactName: 'Pipelines Scripts'
+      artifactName: 'PipelinesScripts'
       targetPath: ./Azure-Pipelines
     condition: succeededOrFailed()
