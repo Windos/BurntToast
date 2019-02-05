@@ -18,7 +18,7 @@ if ($Publish.IsPresent) {
     # Publish Module to PowerShell Gallery
     Try {
         $Splat = @{
-            Path        = (Resolve-Path -Path $PSScriptRoot\..\BurntToast)
+            Path        = (Resolve-Path -Path $(System.ArtifactsDirectory)\BurntToast)
             NuGetApiKey = $env:PSGallery
             ErrorAction = 'Stop'
         }
