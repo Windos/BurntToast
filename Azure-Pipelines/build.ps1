@@ -28,7 +28,9 @@ if ($Bootstrap.IsPresent) {
 
 # Compile step
 if ($Compile.IsPresent) {
-    Remove-Module BurntToast -Force
+    if (Get-Module BurntToast) {
+        Remove-Module BurntToast -Force
+    }
 
     if ((Test-Path ./Output)) {
         Remove-Item -Path ./Output -Recurse -Force
