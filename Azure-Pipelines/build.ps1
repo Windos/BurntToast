@@ -59,10 +59,14 @@ if ($Compile.IsPresent) {
 
     Remove-Item -Path .\BurntToast -Recurse -Force
     Rename-Item -Path .\Output -NewName 'BurntToast'
+
+    # Re-import module, extract release notes
+    Import-Module "$PSScriptRoot/../BurntToast/BurntToast.psd1" -Force
+    (Get-Module BurntToast -ListAvailable).ReleaseNotes | Add-Content .\Azure-Pipelines\release-notes.txt
 }
 
 # Test step
-if($Test.IsPresent -or $TestCompile.IsPresent) {
+if($Test.IsPresent) {
     if (-not (Get-Module -Name Pester -ListAvailable)) {
         throw "Cannot find the 'Pester' module. Please specify '-Bootstrap' to install build dependencies."
     }

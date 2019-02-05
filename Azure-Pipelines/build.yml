@@ -1,5 +1,6 @@
 jobs:
-- job: Windows
+- job: CookToast
+  displayName: 'Cook Toast'
   pool:
     vmImage: 'VS2017-Win2016'
   steps:
