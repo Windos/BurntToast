@@ -41,6 +41,6 @@ jobs:
   - task: PublishPipelineArtifact@0
     displayName: 'Publish compile module artifact'
     inputs:
-      artifactName: 'Compiled Module'
+      artifactName: 'BurntToast'
       targetPath: ./BurntToast
     condition: succeededOrFailed()

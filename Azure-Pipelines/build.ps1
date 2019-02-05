@@ -56,6 +56,8 @@ if ($Compile.IsPresent) {
 
     Get-Content -Path .\Azure-Pipelines\BurntToast-Template.psm1 | Add-Content .\Output\BurntToast.psm1
 
+    Remove-Item -Path .\BurntToast\Private, .\BurntToast\Public -Force
+
     Remove-Item -Path .\BurntToast -Recurse -Force
     Rename-Item -Path .\Output -NewName 'BurntToast'
 }
