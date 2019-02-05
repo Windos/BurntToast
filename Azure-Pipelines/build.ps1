@@ -63,6 +63,9 @@ if ($Compile.IsPresent) {
     # Re-import module, extract release notes
     Import-Module "$PSScriptRoot/../BurntToast/BurntToast.psd1" -Force
     (Get-Module BurntToast -ListAvailable).ReleaseNotes | Add-Content .\Azure-Pipelines\release-notes.txt
+
+    # Compress output, for GitHub release
+    Compress-Archive -Path .\BurntToast\* -DestinationPath .\Azure-Pipelines\BurntToast.zip
 }
 
 # Test step
