@@ -9,7 +9,7 @@ param(
 
 # Define Tag step
 if ($DefineTag.IsPresent) {
-    $ReleaseVersion = Get-Content -Path $PSScriptRoot\..\Azure-Pipelines\release-version.txt
+    $ReleaseVersion = Get-Content -Path $(System.ArtifactsDirectory)\PipelinesScripts\release-version.txt
     Write-Host "##vso[task.setvariable variable=RELEASETAG]$ReleaseVersion"
 }
 
