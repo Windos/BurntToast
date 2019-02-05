@@ -42,6 +42,7 @@ if ($Compile.IsPresent) {
     }
 
     Copy-Item -Path '.\BurntToast\*' -Filter '*.*' -Exclude '*.ps1', '*.psm1' -Recurse -Destination .\Output -Force
+    Remove-Item -Path .\Output\Private, .\Output\Public -Recurse -Force
 
     # Copy Module README file
     Copy-Item -Path '.\README.md' -Destination .\Output -Force
@@ -55,8 +56,6 @@ if ($Compile.IsPresent) {
     "`$PublicFunctions = '$($Public.BaseName -join "', '")'" | Add-Content .\Output\BurntToast.psm1
 
     Get-Content -Path .\Azure-Pipelines\BurntToast-Template.psm1 | Add-Content .\Output\BurntToast.psm1
-
-    Remove-Item -Path .\BurntToast\Private, .\BurntToast\Public -Force -Confirm:$false
 
     Remove-Item -Path .\BurntToast -Recurse -Force
     Rename-Item -Path .\Output -NewName 'BurntToast'
