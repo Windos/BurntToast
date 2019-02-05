@@ -39,8 +39,15 @@ jobs:
       #failOnStderr: false # Optional
 
   - task: PublishPipelineArtifact@0
-    displayName: 'Publish compile module artifact'
+    displayName: 'Publish compiled module artifact'
     inputs:
       artifactName: 'BurntToast'
       targetPath: ./BurntToast
+    condition: succeededOrFailed()
+
+  - task: PublishPipelineArtifact@0
+    displayName: 'Publish Pipelines scripts as artifact'
+    inputs:
+      artifactName: 'Pipelines Scripts'
+      targetPath: ./Azure-Pipelines
     condition: succeededOrFailed()
