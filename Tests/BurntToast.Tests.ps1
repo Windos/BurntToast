@@ -614,7 +614,11 @@ Describe 'New-BTContent' {
 }
 
 Describe 'New-BurntToastNotification' {
-    $ImagePath = Resolve-Path -Path $PSScriptRoot\..\BurntToast\Images\BurntToast.png
+    if (!($Global:TestOutput)) {
+        $ImagePath = Resolve-Path -Path $PSScriptRoot\..\BurntToast\Images\BurntToast.png
+    } else {
+        $ImagePath = Resolve-Path -Path $PSScriptRoot\..\Output\Images\BurntToast.png
+    }
 
     Context 'running without arguments (default toast)' {
         Start-Transcript tmp.log
