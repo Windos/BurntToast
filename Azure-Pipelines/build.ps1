@@ -7,10 +7,7 @@ param(
     $Compile,
 
     [switch]
-    $Test,
-
-    [switch]
-    $TestCompile
+    $Test
 )
 
 # Bootstrap step
@@ -31,6 +28,8 @@ if ($Bootstrap.IsPresent) {
 
 # Compile step
 if ($Compile.IsPresent) {
+    Remove-Module BurntToast -Force
+
     if ((Test-Path ./Output)) {
         Remove-Item -Path ./Output -Recurse -Force
     }
@@ -54,6 +53,9 @@ if ($Compile.IsPresent) {
     "`$PublicFunctions = '$($Public.BaseName -join "', '")'" | Add-Content .\Output\BurntToast.psm1
 
     Get-Content -Path .\Azure-Pipelines\BurntToast-Template.psm1 | Add-Content .\Output\BurntToast.psm1
+
+    Remove-Item -Path .\BurntToast -Recurse -Force
+    Rename-Item -Path .\Output -NewName 'BurntToast'
 }
 
 # Test step
@@ -68,12 +70,7 @@ if($Test.IsPresent -or $TestCompile.IsPresent) {
 
     $RelevantFiles = (Get-ChildItem ./BurntToast -Recurse -Include "*.psm1","*.ps1").FullName
 
-    if (!($TestCompile.IsPresent)) {
-        $RelevantFiles = (Get-ChildItem ./BurntToast -Recurse -Include "*.psm1","*.ps1").FullName
-    } else {
-        $Global:TestOutput = $true
-        $RelevantFiles = (Get-ChildItem ./Output -Recurse -Include "*.psm1","*.ps1").FullName
-    }
+    $RelevantFiles = (Get-ChildItem ./BurntToast -Recurse -Include "*.psm1","*.ps1").FullName
 
     if ($env:TF_BUILD) {
         $res = Invoke-Pester "./Tests" -OutputFormat NUnitXml -OutputFile TestResults.xml -CodeCoverage $RelevantFiles -PassThru

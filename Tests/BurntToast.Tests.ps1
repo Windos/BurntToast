@@ -1,8 +1,4 @@
-if (!($Global:TestOutput)) {
-    Import-Module "$PSScriptRoot/../BurntToast/BurntToast.psd1" -Force
-} else {
-    Import-Module "$PSScriptRoot/../Output/BurntToast.psd1" -Force
-}
+Import-Module "$PSScriptRoot/../BurntToast/BurntToast.psd1" -Force
 
 Describe 'New-BTAppId' {
     Context 'running without arguments' {
@@ -614,11 +610,7 @@ Describe 'New-BTContent' {
 }
 
 Describe 'New-BurntToastNotification' {
-    if (!($Global:TestOutput)) {
-        $ImagePath = Resolve-Path -Path $PSScriptRoot\..\BurntToast\Images\BurntToast.png
-    } else {
-        $ImagePath = Resolve-Path -Path $PSScriptRoot\..\Output\Images\BurntToast.png
-    }
+    $ImagePath = Resolve-Path -Path $PSScriptRoot\..\BurntToast\Images\BurntToast.png
 
     Context 'running without arguments (default toast)' {
         Start-Transcript tmp.log

@@ -19,7 +19,7 @@ jobs:
     displayName: 'Run tests (compiled .psm1)'
     inputs:
       targetType: Inline
-      script: ./Azure-Pipelines/build.ps1 -TestCompile
+      script: ./Azure-Pipelines/build.ps1 -Test
 
   - task: PublishTestResults@2
     displayName: 'Publish test results'
@@ -41,6 +41,6 @@ jobs:
   - task: PublishPipelineArtifact@0
     displayName: 'Publish compile module artifact'
     inputs:
-      artifactName: 'BurntToastCompiled'
-      targetPath: ./Output
+      artifactName: 'Compiled Module'
+      targetPath: ./BurntToast
     condition: succeededOrFailed()
