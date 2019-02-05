@@ -65,8 +65,8 @@ if ($Compile.IsPresent) {
 
     # Re-import module, extract release notes and version
     Import-Module ./BurntToast/BurntToast.psd1 -Force
-    (Get-Module BurntToast -ListAvailable).ReleaseNotes | Add-Content .\Azure-Pipelines\release-notes.txt
-    (Get-Module BurntToast -ListAvailable).Version.ToString() | Add-Content .\Azure-Pipelines\release-version.txt
+    (Get-Module BurntToast)[0].ReleaseNotes | Add-Content .\Azure-Pipelines\release-notes.txt
+    (Get-Module BurntToast)[0].Version.ToString() | Add-Content .\Azure-Pipelines\release-version.txt
 }
 
 # Test step
