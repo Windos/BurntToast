@@ -68,8 +68,11 @@ if($Test.IsPresent -or $TestCompile.IsPresent) {
 
     $RelevantFiles = (Get-ChildItem ./BurntToast -Recurse -Include "*.psm1","*.ps1").FullName
 
-    if ($TestCompile.IsPresent) {
+    if (!($TestCompile.IsPresent)) {
+        $RelevantFiles = (Get-ChildItem ./BurntToast -Recurse -Include "*.psm1","*.ps1").FullName
+    } else {
         $Global:TestOutput = $true
+        $RelevantFiles = (Get-ChildItem ./Output -Recurse -Include "*.psm1","*.ps1").FullName
     }
 
     if ($env:TF_BUILD) {
