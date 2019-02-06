@@ -114,6 +114,10 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 
 - [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.7.0.zip) (Development/Raw Repo)
 
+- [v0.7.0](https://github.com/Windos/BurntToast/releases/download/v0.6.3/BurntToast.zip)
+
+  -
+
 - [v0.6.3](https://github.com/Windos/BurntToast/releases/download/v0.6.3/BurntToast.zip)
 
   - Update Windows Community Toolkit (UWP Notifications) to 5.0.0.
