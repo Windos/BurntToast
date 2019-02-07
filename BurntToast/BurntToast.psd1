@@ -35,7 +35,7 @@
             IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/master/Media/BurntToast-Logo.png'
             ReleaseNotes = '# 0.7.0
 
-* 
+* Can now specify images on the network via UNC paths. Fix for #56
 '
         }
     }

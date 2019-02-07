@@ -107,13 +107,17 @@
     }
 
     if ($Source) {
-        if ($Source -like 'http?://*') {
-            $RemoteFileName = $Source.Split('/')[-1] -replace '[\[\]*?]',''
+        if ([bool]([System.Uri]$Source).IsUnc -or $Source -like 'http?://*') {
+            $RemoteFileName = $Source.Split('/\')[-1] -replace '[\[\]*?]',''
 
             $NewFilePath = '{0}\{1}' -f $Env:TEMP, $RemoteFileName
 
             if (!(Test-Path -Path $NewFilePath)) {
-                Invoke-WebRequest -Uri $Source -OutFile $NewFilePath
+                if ([bool]([System.Uri]$Source).IsUnc) {
+                    Copy-Item -Path $Source -Destination $NewFilePath
+                } else {
+                    Invoke-WebRequest -Uri $Source -OutFile $NewFilePath
+                }
             }
 
             $Image.Source = $NewFilePath

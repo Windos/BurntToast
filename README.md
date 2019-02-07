@@ -116,7 +116,7 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 
 - [v0.7.0](https://github.com/Windos/BurntToast/releases/download/v0.6.3/BurntToast.zip)
 
-  -
+  - Can now specify images on the network via UNC paths. Fix for #56
 
 - [v0.6.3](https://github.com/Windos/BurntToast/releases/download/v0.6.3/BurntToast.zip)
 
