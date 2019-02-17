@@ -1,6 +1,6 @@
 ﻿@{
     RootModule        = 'BurntToast.psm1'
-    ModuleVersion     = '0.6.3.2'
+    ModuleVersion     = '0.6.3.3'
     # Can only use CompatiblePSEditions if PowerShellVersion is set to 5.1, not sure about limiting this to that version yet.
     # CompatiblePSEditions = @('Desktop')
     GUID              = '751a2aeb-a68f-422e-a2ea-376bdd81612a'
