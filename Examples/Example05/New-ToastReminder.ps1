@@ -68,10 +68,17 @@ remain open for the reminder to trigger.
     Process {
 
         $Timer = [System.Timers.Timer]::new()
-        $IntervalSpan = [timespan]::Zero
-        $Intervalspan = $IntervalSpan.Add([timespan]::FromHours($Hours))
-        $Intervalspan = $IntervalSpan.Add([timespan]::FromMinutes($Minutes))
-        $Intervalspan = $IntervalSpan.Add([timespan]::FromSeconds($Seconds))
+        If ($Hours + $Minutes + $Seconds -eq 0)
+        {
+            $IntervalSpan = New-TimeSpan -Seconds 1
+        }
+        Else
+        {
+            $IntervalSpan = [timespan]::Zero
+            $Intervalspan = $IntervalSpan.Add([timespan]::FromHours($Hours))
+            $Intervalspan = $IntervalSpan.Add([timespan]::FromMinutes($Minutes))
+            $Intervalspan = $IntervalSpan.Add([timespan]::FromSeconds($Seconds))
+        }
         $Timer.Interval = $IntervalSpan.TotalMilliseconds
         $Timer.AutoReset = $false
         $Data = [pscustomobject]@{
