@@ -24,7 +24,8 @@
     'New-BTText',
     'New-BTVisual',
     'New-BurntToastNotification',
-    'Submit-BTNotification'
+    'Submit-BTNotification',
+    'Update-BTNotification'
     CmdletsToExport   = @()
     AliasesToExport   = @('Toast')
     PrivateData       = @{
