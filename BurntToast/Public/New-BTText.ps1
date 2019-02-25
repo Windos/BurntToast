@@ -75,9 +75,6 @@
     $TextObj = [Microsoft.Toolkit.Uwp.Notifications.AdaptiveText]::new()
 
     if ($Text) {
-        if (!$Bind.IsPresent) {
-            $Text = '[NOBIND]{0}[/NOBIND]' -f $Text
-        }
         $TextObj.Text = $Text
     }
 
