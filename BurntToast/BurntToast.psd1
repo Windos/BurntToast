@@ -9,23 +9,24 @@
     Copyright         = '(c) 2015 Joshua (Windos) King. All rights reserved.'
     Description       = 'Module for creating and displaying Toast Notifications on Microsoft Windows 10.'
     PowerShellVersion = '5.0'
-    FunctionsToExport = 'New-BTAction',
-    'New-BTAppId',
-    'New-BTAudio',
-    'New-BTBinding',
-    'New-BTButton',
-    'New-BTContent',
-    'New-BTContextMenuItem',
-    'New-BTHeader',
-    'New-BTImage',
-    'New-BTInput',
-    'New-BTProgressBar',
-    'New-BTSelectionBoxItem',
-    'New-BTText',
-    'New-BTVisual',
-    'New-BurntToastNotification',
-    'Submit-BTNotification',
-    'Update-BTNotification'
+    FunctionsToExport = 'Get-BTHistory',
+                        'New-BTAction',
+                        'New-BTAppId',
+                        'New-BTAudio',
+                        'New-BTBinding',
+                        'New-BTButton',
+                        'New-BTContent',
+                        'New-BTContextMenuItem',
+                        'New-BTHeader',
+                        'New-BTImage',
+                        'New-BTInput',
+                        'New-BTProgressBar',
+                        'New-BTSelectionBoxItem',
+                        'New-BTText',
+                        'New-BTVisual',
+                        'New-BurntToastNotification',
+                        'Submit-BTNotification',
+                        'Update-BTNotification'
     CmdletsToExport   = @()
     AliasesToExport   = @('Toast')
     PrivateData       = @{
@@ -38,6 +39,7 @@
 
 * You can now specify images on the network via UNC paths. Fix for #56
 * We''re now properly supporting bindable text, and removing the curly braces more gracefully.
+* Get a list of all toasts you''ve sent, which have not been dismissed by the user, using Get-BTHistory.
 '
         }
     }
