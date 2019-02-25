@@ -120,7 +120,9 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 
   - We're now properly supporting bindable text, and removing the curly braces more gracefully.
 
-  - Get a list of all toasts you''ve sent, which have not been dismissed by the user, using `Get-BTHistory`.
+  - Get a list of all toasts you've sent, which have not been dismissed by the user, using `Get-BTHistory`.
+
+  - Remove toasts you've sent, using `Remove-BTNotification`.
 
 - [v0.6.3](https://github.com/Windos/BurntToast/releases/download/v0.6.3/BurntToast.zip)
 

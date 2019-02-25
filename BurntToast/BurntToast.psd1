@@ -25,6 +25,7 @@
                         'New-BTText',
                         'New-BTVisual',
                         'New-BurntToastNotification',
+                        'Remove-BTNotification',
                         'Submit-BTNotification',
                         'Update-BTNotification'
     CmdletsToExport   = @()
@@ -40,6 +41,7 @@
 * You can now specify images on the network via UNC paths. Fix for #56
 * We''re now properly supporting bindable text, and removing the curly braces more gracefully.
 * Get a list of all toasts you''ve sent, which have not been dismissed by the user, using Get-BTHistory.
+* Remove toasts you''ve sent, using Remove-BTNotification.
 '
         }
     }
