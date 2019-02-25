@@ -705,29 +705,29 @@ Describe 'New-BurntToastNotification' {
             $Log | should Be $Expected
         }
     }
-    Context 'attribution text' {
-        Start-Transcript tmp.log
-        try {
-            $Text1 = New-BTText -Content 'Default Notification'
-
-            $Attrib = [Microsoft.Toolkit.Uwp.Notifications.ToastGenericAttributionText]::new()
-
-            $Attrib.Text = 'via Pester'
-
-            $Binding1 = New-BTBinding -Children $Text1 -Attribution $Attrib
-            $Visual1 = New-BTVisual -BindingGeneric $Binding1
-            $Content1 = New-BTContent -Visual $Visual1
-
-            Submit-BTNotification -Content $Content1 -WhatIf
-        }
-        finally {
-            Stop-Transcript
-            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
-            Remove-Item tmp.log
-        }
-        It 'has consitent WhatIf response' {
-            $Expected = 'What if: Performing the operation "Submit-BTNotification" on target "submitting: [ToastNotification] with AppId {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe, Id , Sequence Number  and XML: <?xml version="1.0" encoding="utf-8"?><toast><visual><binding template="ToastGeneric"><text>Default Notification</text><text placement="attribution">via Pester</text></binding></visual></toast>".'
-            $Log | should Be $Expected
-        }
-    }
+    # Context 'attribution text' {
+    #     Start-Transcript tmp.log
+    #     try {
+    #         $Text1 = New-BTText -Content 'Default Notification'
+    #
+    #         $Attrib = [Microsoft.Toolkit.Uwp.Notifications.ToastGenericAttributionText]::new()
+    #
+    #         $Attrib.Text = 'via Pester'
+    #
+    #         $Binding1 = New-BTBinding -Children $Text1 -Attribution $Attrib
+    #         $Visual1 = New-BTVisual -BindingGeneric $Binding1
+    #         $Content1 = New-BTContent -Visual $Visual1
+    #
+    #         Submit-BTNotification -Content $Content1 -WhatIf
+    #     }
+    #     finally {
+    #         Stop-Transcript
+    #         $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+    #         Remove-Item tmp.log
+    #     }
+    #     It 'has consitent WhatIf response' {
+    #         $Expected = 'What if: Performing the operation "Submit-BTNotification" on target "submitting: [ToastNotification] with AppId {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe, Id , Sequence Number  and XML: <?xml version="1.0" encoding="utf-8"?><toast><visual><binding template="ToastGeneric"><text>Default Notification</text><text placement="attribution">via Pester</text></binding></visual></toast>".'
+    #         $Log | should Be $Expected
+    #     }
+    # }
 }
