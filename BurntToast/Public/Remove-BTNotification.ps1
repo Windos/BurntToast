@@ -21,31 +21,24 @@ function Remove-BTNotification {
 
     param (
         # Specifies the AppId of the 'application' or process that spawned the toast notification.
-        [Parameter(ParameterSetName = 'All')]
         [string] $AppId = $Script:Config.AppId,
 
-        [Parameter(ParameterSetName = 'Targeted')]
         [string] $Tag,
 
-        [Parameter(ParameterSetName = 'Targeted')]
-        [string] $Group,
-
-        [Parameter(ParameterSetName = 'All',
-                   Mandatory)]
-        [switch] $All
+        [string] $Group
     )
 
     if (!(Test-Path -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\$AppId")) {
         Write-Warning -Message "The AppId $AppId is not present in the registry, please run New-BTAppId to avoid inconsistent Toast behaviour."
     }
 
-    if ($All.IsPresent) {
-        [Windows.UI.Notifications.ToastNotificationManager]::History.Clear($AppId)
-    } elseif ($Tag -and $Group) {
-        [Windows.UI.Notifications.ToastNotificationManager]::History.Remove($Tag, $Group)
+    if ($Tag -and $Group) {
+        [Windows.UI.Notifications.ToastNotificationManager]::History.Remove($Tag, $Group, $AppId)
     } elseif ($Tag) {
-        [Windows.UI.Notifications.ToastNotificationManager]::History.Remove($Tag)
+        [Windows.UI.Notifications.ToastNotificationManager]::History.Remove($Tag, $AppId)
     } elseif ($Group) {
-        [Windows.UI.Notifications.ToastNotificationManager]::History.RemoveGroup($Group)
+        [Windows.UI.Notifications.ToastNotificationManager]::History.RemoveGroup($Group, $AppId)
+    } else {
+        [Windows.UI.Notifications.ToastNotificationManager]::History.Clear($AppId)
     }
 }
