@@ -51,11 +51,6 @@
 
     $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::new()
 
-    #$CleanContent = $Content.GetContent().Replace('<text>{', '<text>')
-    #$CleanContent = $CleanContent.Replace('}</text>', '</text>')
-    #$CleanContent = $CleanContent.Replace('="{', '="')
-    #$CleanContent = $CleanContent.Replace('}" ', '" ')
-
     $ToastXml.LoadXml($Content.GetContent())
     $Toast = [Windows.UI.Notifications.ToastNotification]::new($ToastXml)
 
