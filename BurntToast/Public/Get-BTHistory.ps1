@@ -25,8 +25,8 @@ function Get-BTHistory {
     )
 
     if (!(Test-Path -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\$AppId")) {
-        Write-Warning -Message "The AppId $AppId is not present in the registry, please run New-BTAppId to avoid inconsistent Toast behaviour."
+        throw "The AppId $AppId is not present in the registry, please run New-BTAppId to avoid inconsistent Toast behaviour."
+    } else {
+        [Windows.UI.Notifications.ToastNotificationManager]::History.GetHistory($AppId)
     }
-
-    [Windows.UI.Notifications.ToastNotificationManager]::History.GetHistory($AppId)
 }
