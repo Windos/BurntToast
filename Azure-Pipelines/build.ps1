@@ -15,7 +15,7 @@ if ($Bootstrap.IsPresent) {
     Write-Information "Validate and install missing prerequisits for building ..."
 
     # For testing Pester
-    if (-not (Get-Module -Name Pester -ListAvailable)) {
+    if (-not (Get-Module -Name Pester -ListAvailable) -or (Get-Module -Name Pester -ListAvailable)[0].Version -eq [Version]'3.4.0') {
         Write-Warning "Module 'Pester' is missing. Installing 'Pester' ..."
         Install-Module -Name Pester -Scope CurrentUser -Force
     }
