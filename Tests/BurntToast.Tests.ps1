@@ -5,46 +5,17 @@ if (Get-Module -Name 'BurntToast') {
 Import-Module "$PSScriptRoot/../BurntToast/BurntToast.psd1" -Force
 
 Describe 'Get-BTHistory' {
-    $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
-    [Windows.UI.Notifications.ToastNotificationManager]::History.Clear($AppId)
-
-    New-BurntToastNotification
-
     Context 'valid AppId, one previous toast' {
         Mock Test-Path { $true } -ModuleName BurntToast -Verifiable -ParameterFilter {
             $Path -eq 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
         }
 
-        $History = Get-BTHistory
+        It 'should not throw' {
+            { Get-BTHistory -AppId } | Should -Not -Throw
+        }
 
         It 'tested the correct path' {
             Assert-VerifiableMock
-        }
-        It 'should return a ToastNotification object' {
-            $History | Should -BeOfType 'Windows.UI.Notifications.ToastNotification'
-        }
-        It 'should have one toast in history' {
-            ($History | Measure-Object).Count | Should -BeExactly 1
-        }
-    }
-
-    New-BurntToastNotification
-
-    Context 'valid AppId, two previous toasts' {
-        Mock Test-Path { $true } -ModuleName BurntToast -Verifiable -ParameterFilter {
-            $Path -eq 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
-        }
-
-        $History = Get-BTHistory
-
-        It 'tested the correct path' {
-            Assert-VerifiableMock
-        }
-        It 'should return a ToastNotification object' {
-            $History | Should -BeOfType 'Windows.UI.Notifications.ToastNotification'
-        }
-        It 'should have one toast in history' {
-            ($History | Measure-Object).Count | Should -BeExactly 2
         }
     }
 
@@ -61,8 +32,6 @@ Describe 'Get-BTHistory' {
             Assert-VerifiableMock
         }
     }
-
-    [Windows.UI.Notifications.ToastNotificationManager]::History.Clear($AppId)
 }
 
 Describe 'New-BTAppId' {
