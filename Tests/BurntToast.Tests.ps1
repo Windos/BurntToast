@@ -2,20 +2,29 @@ if (Get-Module -Name 'BurntToast') {
     Remove-Module -Name 'BurntToast'
 }
 
+try {
+    [Windows.UI.Notifications.ToastNotificationManager]::History.Clear('{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe')
+    $PlatformAvailable = $true
+} catch {
+    $PlatformAvailable = $false
+}
+
 Import-Module "$PSScriptRoot/../BurntToast/BurntToast.psd1" -Force
 
 Describe 'Get-BTHistory' {
-    Context 'valid AppId, one previous toast' {
-        Mock Test-Path { $true } -ModuleName BurntToast -Verifiable -ParameterFilter {
-            $Path -eq 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
-        }
-
-        It 'should not throw' {
-            { Get-BTHistory } | Should -Not -Throw
-        }
-
-        It 'tested the correct path' {
-            Assert-VerifiableMock
+    if ($PlatformAvailable) {
+        Context 'valid AppId, one previous toast' {
+            Mock Test-Path { $true } -ModuleName BurntToast -Verifiable -ParameterFilter {
+                $Path -eq 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+            }
+        
+            It 'should not throw' {
+                { Get-BTHistory } | Should -Not -Throw
+            }
+        
+            It 'tested the correct path' {
+                Assert-VerifiableMock
+            }
         }
     }
 
