@@ -11,7 +11,7 @@ Describe 'Get-BTHistory' {
         }
 
         It 'should not throw' {
-            { Get-BTHistory -AppId } | Should -Not -Throw
+            { Get-BTHistory } | Should -Not -Throw
         }
 
         It 'tested the correct path' {
