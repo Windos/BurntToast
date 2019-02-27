@@ -1,50 +1,43 @@
 Import-Module "$PSScriptRoot/../BurntToast/BurntToast.psd1" -Force
 
 Describe 'New-BTAppId' {
-    Context 'running without arguments' {
-        Start-Transcript tmp.log
-        try {
-            New-BTAppId -DryFire -WhatIf
-        }
-        finally {
-            Stop-Transcript
-            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
-            Remove-Item tmp.log
-        }
-        It 'has consitent WhatIf response' {
-            $Expected = 'What if: Performing the operation "New-BTAppId" on target "creating: ''HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'' with property ''ShowInActionCenter'' set to ''1'' (DWORD)".'
-            $Log | should Be $Expected
-        }
+    Mock New-Item {} -ModuleName BurntToast
+    Mock New-ItemProperty {} -ModuleName BurntToast
 
-        Start-Transcript tmp.log
-        try {
-            New-BTAppId -WhatIf
+    Context 'executing when AppId already exists' {
+        Mock Test-Path { $true } -ModuleName BurntToast
+
+        New-BTAppId
+
+        It 'should not have called cmdlet: New-Item' {
+            Assert-MockCalled New-Item -Time 0 -Exactly -Scope Context -ModuleName BurntToast
         }
-        finally {
-            Stop-Transcript
-            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
-            Remove-Item tmp.log
-        }
-        It 'should not attempt to add an already existing AppId' {
-            $Expected = $null
-            $Log | should Be $Expected
+        It 'should not have called cmdlet: New-Item' {
+            Assert-MockCalled New-ItemProperty -Time 0 -Exactly -Scope Context -ModuleName BurntToast
         }
     }
-    Context 'running with custom AppId' {
-        Start-Transcript tmp.log
-        try {
-            New-BTAppId -AppId 'Script Checker' -DryFire -WhatIf
+
+    Context 'executing when AppId is unique' {
+        Mock Test-Path { $false } -ModuleName BurntToast
+
+        New-BTAppId -AppId 'Script Checker'
+
+        It 'should have called cmdlet: New-Item' {
+            Assert-MockCalled New-Item -Time 1 -Exactly -Scope Context -ModuleName BurntToast
         }
-        finally {
-            Stop-Transcript
-            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
-            Remove-Item tmp.log
-        }
-        It 'has consitent WhatIf response' {
-            $Expected = 'What if: Performing the operation "New-BTAppId" on target "creating: ''HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Script Checker'' with property ''ShowInActionCenter'' set to ''1'' (DWORD)".'
-            $Log | should Be $Expected
+        It 'should have called cmdlet: New-Item' {
+            Assert-MockCalled New-ItemProperty -Time 1 -Exactly -Scope Context -ModuleName BurntToast
         }
     }
+
+      Context 'Mocking' {
+          Mock New-Item {} -ModuleName BurntToast
+          Mock New-ItemProperty {} -ModuleName BurntToast
+          It 'calls mocked functions' {
+              New-BTAppId -AppId 'No Exist-again!'
+              Assert-MockCalled New-Item -Scope It -ModuleName BurntToast
+          }
+      }
 }
 
 Describe 'New-BTAudio' {

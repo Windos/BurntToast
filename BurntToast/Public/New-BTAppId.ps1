@@ -36,15 +36,12 @@
         #
         # Defaults to the AppId specified in the config.json file in the BurntToast module's root directoy if not provided.
         [ValidateNotNullOrEmpty()]
-        [string] $AppId = $Script:Config.AppId,
-
-        # For testing only, a workaround for an issue with Pester Mocking.
-        [switch] $DryFire
+        [string] $AppId = $Script:Config.AppId
     )
 
     $RegPath = 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings'
 
-    if (!(Test-Path -Path "$RegPath\$AppId") -or $DryFire) {
+    if (!(Test-Path -Path "$RegPath\$AppId")) {
         if($PSCmdlet.ShouldProcess("creating: '$RegPath\$AppId' with property 'ShowInActionCenter' set to '1' (DWORD)")) {
             $null = New-Item -Path "$RegPath\$AppId" -Force
             $null = New-ItemProperty -Path "$RegPath\$AppId" -Name 'ShowInActionCenter' -Value 1 -PropertyType 'DWORD'
