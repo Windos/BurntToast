@@ -1,3 +1,7 @@
+if (Get-Module -Name 'BurntToast') {
+    Remove-Module -Name 'BurntToast'
+}
+
 Import-Module "$PSScriptRoot/../BurntToast/BurntToast.psd1" -Force
 
 Describe 'New-BTAppId' {
@@ -39,15 +43,6 @@ Describe 'New-BTAppId' {
             Assert-MockCalled New-ItemProperty -Time 1 -Exactly -Scope Context -ModuleName BurntToast
         }
     }
-
-      Context 'Mocking' {
-          Mock New-Item {} -ModuleName BurntToast
-          Mock New-ItemProperty {} -ModuleName BurntToast
-          It 'calls mocked functions' {
-              New-BTAppId -AppId 'No Exist-again!'
-              Assert-MockCalled New-Item -Scope It -ModuleName BurntToast
-          }
-      }
 }
 
 Describe 'New-BTAudio' {
@@ -63,7 +58,7 @@ Describe 'New-BTAudio' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTAudio" on target "returning: [ToastAudio]:Src=ms-winsoundevent:Notification.SMS:Loop=False:Silent=False".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'custom audio source' {
@@ -78,7 +73,7 @@ Describe 'New-BTAudio' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTAudio" on target "returning: [ToastAudio]:Src=file:///C:/Windows/media/tada.wav:Loop=False:Silent=False".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'Silent switch' {
@@ -93,15 +88,15 @@ Describe 'New-BTAudio' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTAudio" on target "returning: [ToastAudio]:Src=:Loop=False:Silent=True".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'input validation' {
         It 'throws if audio file doesn''t exist' {
-            { New-BTAudio -Path 'C:\Fake\phantom.wav' } | Should Throw "The file 'C:\Fake\phantom.wav' doesn't exist in the specified location. Please provide a valid path and try again."
+            { New-BTAudio -Path 'C:\Fake\phantom.wav' } | Should -Throw "The file 'C:\Fake\phantom.wav' doesn't exist in the specified location. Please provide a valid path and try again."
         }
         It 'throws if the extension is not supported' {
-            { New-BTAudio -Path 'C:\Fake\phantom.mov' } | Should Throw "The file extension '.mov' is not supported. Please provide a valid path and try again."
+            { New-BTAudio -Path 'C:\Fake\phantom.mov' } | Should -Throw "The file extension '.mov' is not supported. Please provide a valid path and try again."
         }
     }
 }
@@ -119,7 +114,7 @@ Describe 'New-BTButton' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTButton" on target "returning: [ToastButtonDismiss]:CustomContent=:ImageUri=".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'system defined snooze button' {
@@ -134,7 +129,7 @@ Describe 'New-BTButton' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTButton" on target "returning: [ToastButtonSnooze]:CustomContent=:ImageUri=:SelectionBoxId=".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'custom button with text' {
@@ -149,7 +144,7 @@ Describe 'New-BTButton' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTButton" on target "returning: [ToastButton]:Content=Blog:Arguments=https://king.geek.nz:ActivationType=Protocol:ImageUri=:TextBoxId=".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'custom button with image' {
@@ -165,7 +160,7 @@ Describe 'New-BTButton' {
         }
         It 'has consitent WhatIf response' {
             $Expected = "What if: Performing the operation ""New-BTButton"" on target ""returning: [ToastButton]:Content=View Picture:Arguments=$PSScriptRoot\..\Media\BurntToast.png:ActivationType=Protocol:ImageUri=$PSScriptRoot\..\Media\BurntToast.png:TextBoxId=""."
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
 }
@@ -183,7 +178,7 @@ Describe 'New-BTContextMenuItem' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTContextMenuItem" on target "returning: [ToastContextMenuItem]:Content=Google:Arguments=https://google.com:ActivationType=Protocol".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
 }
@@ -201,7 +196,7 @@ Describe 'New-BTHeader' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTHeader" on target "returning: [ToastHeader]:Id=primary header:Title=First Category:Arguments=:ActivationType=Protocol".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'clickable header text' {
@@ -216,7 +211,7 @@ Describe 'New-BTHeader' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTHeader" on target "returning: [ToastHeader]:Id=001:Title=Stack Overflow Questions:Arguments=http://stackoverflow.com/:ActivationType=Protocol".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
 }
@@ -234,7 +229,7 @@ Describe 'New-BTImage' {
         }
         It 'has consitent WhatIf response' {
             $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [AdaptiveImage]:Source=$PSScriptRoot\..\Media\BurntToast.png:AlternateText=:HintCrop=Default:HintRemoveMargin=False:HintAlign=Default:AddImageQuery=""."
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'application logo override' {
@@ -249,7 +244,7 @@ Describe 'New-BTImage' {
         }
         It 'has consitent WhatIf response' {
             $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [ToastGenericAppLogo]:Source=$PSScriptRoot\..\Media\BurntToast.png:AlternateText=:HintCrop=Circle:AddImageQuery=""."
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'hero image' {
@@ -264,7 +259,7 @@ Describe 'New-BTImage' {
         }
         It 'has consitent WhatIf response' {
             $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [ToastGenericHeroImage]:Source=$PSScriptRoot\..\Media\BurntToast.png:AlternateText=:AddImageQuery=""."
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'web based image' {
@@ -279,7 +274,7 @@ Describe 'New-BTImage' {
         }
         It 'has consitent WhatIf response' {
             $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [AdaptiveImage]:Source=$($env:TEMP)\BurntToast.png:AlternateText=:HintCrop=Default:HintRemoveMargin=False:HintAlign=Default:AddImageQuery=""."
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
 }
@@ -297,7 +292,7 @@ Describe 'New-BTProgressBar' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTProgressBar" on target "returning: [AdaptiveProgressBar]:Status=Copying files:Title=:Value=0.2:ValueStringOverride=".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'indeterminate progress' {
@@ -312,7 +307,7 @@ Describe 'New-BTProgressBar' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTProgressBar" on target "returning: [AdaptiveProgressBar]:Status=Copying files:Title=:Value=indeterminate:ValueStringOverride=".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'custom value display override' {
@@ -327,7 +322,7 @@ Describe 'New-BTProgressBar' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTProgressBar" on target "returning: [AdaptiveProgressBar]:Status=Copying files:Title=:Value=0.2:ValueStringOverride=4/20 files complete".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'with title' {
@@ -342,7 +337,7 @@ Describe 'New-BTProgressBar' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTProgressBar" on target "returning: [AdaptiveProgressBar]:Status=Copying files:Title=File Copy:Value=0.2:ValueStringOverride=".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
 }
@@ -360,7 +355,7 @@ Describe 'New-BTSelectionBoxItem' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTSelectionBoxItem" on target "returning: [ToastSelectionBoxItem]:Id=Item1:Content=First option in the list".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
 }
@@ -378,7 +373,7 @@ Describe 'New-BTText' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTText" on target "returning: [AdaptiveText]:Text=:HintMaxLines=:HintMinLines=:HintWrap=:HintAlign=Default:HintStyle=Default:Language=".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'with content' {
@@ -393,7 +388,7 @@ Describe 'New-BTText' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTText" on target "returning: [AdaptiveText]:Text=This is a line with text!:HintMaxLines=:HintMinLines=:HintWrap=:HintAlign=Default:HintStyle=Default:Language=".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
 }
@@ -411,7 +406,7 @@ Describe 'New-BTInput' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTInput" on target "returning: [ToastTextBox]:Id=Reply001:Title=Type a reply::PlaceholderContent=:DefaultInput=".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'selection box with five options' {
@@ -431,7 +426,7 @@ Describe 'New-BTInput' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTInput" on target "returning: [ToastSelectionBox]:Id=Selection001:Title=:DefaultSelectionBoxItemId=Item5:DefaultInput=5".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
 }
@@ -449,7 +444,7 @@ Describe 'New-BTAction' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTAction" on target "returning: [ToastActionsCustom] with 0 Inputs, 0 Buttons, and 0 ContextMenuItems".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'snooze and dismiss modal' {
@@ -464,7 +459,7 @@ Describe 'New-BTAction' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTAction" on target "returning: [ToastActionsSnoozeAndDismiss] with 0 Inputs, 0 Buttons, and 0 ContextMenuItems".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'single clickable button' {
@@ -479,7 +474,7 @@ Describe 'New-BTAction' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTAction" on target "returning: [ToastActionsCustom] with 0 Inputs, 1 Buttons, and 0 ContextMenuItems".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'mixed content: button & context menu' {
@@ -497,7 +492,7 @@ Describe 'New-BTAction' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTAction" on target "returning: [ToastActionsCustom] with 0 Inputs, 1 Buttons, and 1 ContextMenuItems".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'including too many buttons and or context menu items' {
@@ -521,7 +516,7 @@ Describe 'New-BTAction' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTAction" on target "returning: [ToastActionsCustom] with 1 Inputs, 0 Buttons, and 0 ContextMenuItems".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
 }
@@ -547,7 +542,7 @@ Describe 'New-BTBinding' {
         }
         It 'has consitent WhatIf response' {
             $Expected = "What if: Performing the operation ""New-BTBinding"" on target ""returning: [ToastBindingGeneric]:Children=5:AddImageQuery=0:AppLogoOverride=1:Attribution=0:BaseUri=0:HeroImage=1:Language=0""."
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
 }
@@ -568,7 +563,7 @@ Describe 'New-BTVisual' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "New-BTVisual" on target "returning: [ToastVisual]:BindingGeneric=1:BaseUri=:Language=".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
 }
@@ -592,7 +587,7 @@ Describe 'New-BTContent' {
         }
         It 'has consitent WhatIf response' {
             $Expected = "What if: Performing the operation ""New-BTContent"" on target ""returning: [ToastContent] with XML: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{This is a test}</text><text>{This more testing}</text><image src=""$PSScriptRoot\..\Media\BurntToast.png"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'built in activation' {
@@ -607,7 +602,7 @@ Describe 'New-BTContent' {
         }
         It 'has consitent WhatIf response' {
             $Expected = "What if: Performing the operation ""New-BTContent"" on target ""returning: [ToastContent] with XML: <?xml version=""1.0"" encoding=""utf-8""?><toast activationType=""protocol"" launch=""https://google.com""><visual><binding template=""ToastGeneric""><text>{This is a test}</text><text>{This more testing}</text><image src=""$PSScriptRoot\..\Media\BurntToast.png"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
 }
@@ -627,7 +622,7 @@ Describe 'New-BurntToastNotification' {
         }
         It 'has consitent WhatIf response' {
             $Expected = "What if: Performing the operation ""New-BurntToastNotification"" on target ""submitting: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{Default Notification}</text><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'custom text' {
@@ -642,7 +637,7 @@ Describe 'New-BurntToastNotification' {
         }
         It 'has consitent WhatIf response' {
             $Expected = "What if: Performing the operation ""New-BurntToastNotification"" on target ""submitting: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{Example Script}</text><text>{The example script has run successfully.}</text><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'system supplied sound option' {
@@ -657,7 +652,7 @@ Describe 'New-BurntToastNotification' {
         }
         It 'has consitent WhatIf response' {
             $Expected = "What if: Performing the operation ""New-BurntToastNotification"" on target ""submitting: <?xml version=""1.0"" encoding=""utf-8""?><toast duration=""long""><visual><binding template=""ToastGeneric""><text>{WAKE UP!}</text><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual><audio src=""ms-winsoundevent:Notification.Looping.Alarm2"" loop=""true"" /></toast>""."
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'include a button' {
@@ -673,7 +668,7 @@ Describe 'New-BurntToastNotification' {
         }
         It 'has consitent WhatIf response' {
             $Expected = "What if: Performing the operation ""New-BurntToastNotification"" on target ""submitting: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{New Blog Post!}</text><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual><actions><action content=""Open Blog"" arguments=""https://king.geek.nz"" activationType=""protocol"" /></actions></toast>""."
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'include a header' {
@@ -689,7 +684,7 @@ Describe 'New-BurntToastNotification' {
         }
         It 'has consitent WhatIf response' {
             $Expected = "What if: Performing the operation ""New-BurntToastNotification"" on target ""submitting: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{New SO Question}</text><text>{Details...}</text><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual><header id=""001"" title=""SO Questions"" arguments="""" activationType=""protocol"" /></toast>""."
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'include a progress bar' {
@@ -705,7 +700,7 @@ Describe 'New-BurntToastNotification' {
         }
         It 'has consitent WhatIf response' {
             $Expected = "What if: Performing the operation ""New-BurntToastNotification"" on target ""submitting: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{File copy running}</text><progress value=""{0.2}"" status=""{Copying}"" /><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
     Context 'attribution text' {
@@ -730,7 +725,7 @@ Describe 'New-BurntToastNotification' {
         }
         It 'has consitent WhatIf response' {
             $Expected = 'What if: Performing the operation "Submit-BTNotification" on target "submitting: [ToastNotification] with AppId {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe, Id , Sequence Number 0 and XML: <?xml version="1.0" encoding="utf-8"?><toast><visual><binding template="ToastGeneric"><text>{Default Notification}</text><text placement="attribution">via Pester</text></binding></visual></toast>".'
-            $Log | should Be $Expected
+            $Log | Should -Be $Expected
         }
     }
 }
