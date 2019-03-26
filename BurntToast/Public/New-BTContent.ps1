@@ -61,7 +61,9 @@
 
         # Specify the visual element object, created with the New-BTVisual function.
         [Parameter(Mandatory)]
-        [Microsoft.Toolkit.Uwp.Notifications.ToastVisual] $Visual
+        [Microsoft.Toolkit.Uwp.Notifications.ToastVisual] $Visual,
+
+        [datetime] $CustomTimestamp
     )
 
     $ToastContent = [Microsoft.Toolkit.Uwp.Notifications.ToastContent]::new()
@@ -96,6 +98,10 @@
 
     if ($Visual) {
         $ToastContent.Visual = $Visual
+    }
+
+    if ($CustomTimestamp) {
+        $ToastContent.DisplayTimestamp = $CustomTimestamp
     }
 
     if($PSCmdlet.ShouldProcess( "returning: [$($ToastContent.GetType().Name)] with XML: $($ToastContent.GetContent())" )) {

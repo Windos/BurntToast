@@ -45,6 +45,8 @@
 * Set expiration times on toasts using the new ExpirationTime parameter on New-BurntToastNotification and Submit-BTNotification
   * Toasts which have expired are removed from the Action Center
 * Send toasts directly to the Action Center, and avoid showing them on screen, with the new SuppressPopup switch on New-BurntToastNotification and Submit-BTNotification
+* You can now adjust a toasts timestamp (both past and future) using the CustomTimestamp parameter on New-BurntToastNotification and New-BTContent
+  * If not specified, the system uses the time at which the toast was received and this may not accuratly reflect the intent of the notification
 '
         }
     }

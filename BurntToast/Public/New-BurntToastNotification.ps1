@@ -157,7 +157,9 @@
 
         [datetime] $ExpirationTime,
 
-        [switch] $SuppressPopup
+        [switch] $SuppressPopup,
+
+        [datetime] $CustomTimestamp
     )
 
     $ChildObjects = @()
@@ -210,6 +212,10 @@
 
     if ($Header) {
         $ContentSplat.Add('Header', $Header)
+    }
+
+    if ($CustomTimestamp) {
+        $ContentSplat.Add('CustomTimestamp', $CustomTimestamp)
     }
 
     $Content = New-BTContent @ContentSplat -WhatIf:$false
