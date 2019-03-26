@@ -22,6 +22,9 @@
                         'New-BTInput',
                         'New-BTProgressBar',
                         'New-BTSelectionBoxItem',
+                        'New-BTShoulderTapBinding',
+                        'New-BTShoulderTapImage',
+                        'New-BTShoulderTapPeople',
                         'New-BTText',
                         'New-BTVisual',
                         'New-BurntToastNotification',
@@ -38,6 +41,7 @@
             IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/master/Media/BurntToast-Logo.png'
             ReleaseNotes = '# 0.7.0
 
+* HEADLINE FEATURE: My People "Shoulder Tap" notifications have been implemented
 * You can now specify images on the network via UNC paths. Fix for #56
 * We''re now properly supporting bindable text, and removing the curly braces more gracefully
 * Get a list of all toasts you''ve sent, which have not been dismissed by the user, using Get-BTHistory

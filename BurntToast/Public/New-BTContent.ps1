@@ -63,6 +63,8 @@
         [Parameter(Mandatory)]
         [Microsoft.Toolkit.Uwp.Notifications.ToastVisual] $Visual,
 
+        [Microsoft.Toolkit.Uwp.Notifications.ToastPeople] $ToastPeople,
+
         [datetime] $CustomTimestamp
     )
 
@@ -100,8 +102,12 @@
         $ToastContent.Visual = $Visual
     }
 
-    if ($CustomTimestamp) {
-        $ToastContent.DisplayTimestamp = $CustomTimestamp
+    if ($Actions) {
+        $ToastContent.Actions = $Actions
+    }
+
+    if ($ToastPeople) {
+        $ToastContent.HintPeople = $ToastPeople
     }
 
     if($PSCmdlet.ShouldProcess( "returning: [$($ToastContent.GetType().Name)] with XML: $($ToastContent.GetContent())" )) {

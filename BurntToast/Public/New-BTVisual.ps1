@@ -33,6 +33,8 @@
         [Parameter(Mandatory)]
         [Microsoft.Toolkit.Uwp.Notifications.ToastBindingGeneric] $BindingGeneric,
 
+        [Microsoft.Toolkit.Uwp.Notifications.ToastBindingShoulderTap] $BindingShoulderTap,
+
         # Specify this switch to allow Windows to append a query string to the image URI supplied in the Toast notification. Use this attribute if your server hosts images and can handle query strings, either by retrieving an image variant based on the query strings or by ignoring the query string and returning the image as specified without the query string. This query string specifies scale, contrast setting, and language.
         [switch] $AddImageQuery,
 
@@ -45,6 +47,8 @@
 
     $Visual = [Microsoft.Toolkit.Uwp.Notifications.ToastVisual]::new()
     $Visual.BindingGeneric = $BindingGeneric
+
+    $Visual.BindingShoulderTap = $BindingShoulderTap
 
     if ($AddImageQuery) {
         $Visual.AddImageQuery = $AddImageQuery
