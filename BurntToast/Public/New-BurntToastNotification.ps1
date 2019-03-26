@@ -153,7 +153,11 @@
         # A string that uniquely identifies a toast notification. Submitting a new toast with the same identifier as a previous toast will replace the previous toast.
         #
         # This is useful when updating the progress of a process, using a progress bar, or otherwise correcting/updating the information on a toast.
-        [string] $UniqueIdentifier
+        [string] $UniqueIdentifier,
+
+        [datetime] $ExpirationTime,
+
+        [switch] $SuppressPopup
     )
 
     $ChildObjects = @()
@@ -210,13 +214,24 @@
 
     $Content = New-BTContent @ContentSplat -WhatIf:$false
 
+    $ToastSplat = @{
+        Content = $Content
+        AppId = $Script:Config.AppId
+    }
+
     if ($UniqueIdentifier) {
-        if($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {
-            Submit-BTNotification -Content $Content -AppId $Script:Config.AppId -UniqueIdentifier $UniqueIdentifier
-        }
-    } else {
-        if($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {
-            Submit-BTNotification -Content $Content -AppId $Script:Config.AppId
-        }
+        $ToastSplat.Add('UniqueIdentifier', $UniqueIdentifier)
+    }
+
+    if ($ExpirationTime) {
+        $ToastSplat.Add('ExpirationTime', $ExpirationTime)
+    }
+
+    if ($SuppressPopup.IsPresent) {
+        $ToastSplat.Add('SuppressPopup', $true)
+    }
+
+    if($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {
+        Submit-BTNotification @ToastSplat
     }
 }
