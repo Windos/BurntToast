@@ -39,9 +39,12 @@
             ReleaseNotes = '# 0.7.0
 
 * You can now specify images on the network via UNC paths. Fix for #56
-* We''re now properly supporting bindable text, and removing the curly braces more gracefully.
-* Get a list of all toasts you''ve sent, which have not been dismissed by the user, using Get-BTHistory.
-* Remove toasts you''ve sent, using Remove-BTNotification.
+* We''re now properly supporting bindable text, and removing the curly braces more gracefully
+* Get a list of all toasts you''ve sent, which have not been dismissed by the user, using Get-BTHistory
+* Remove toasts you''ve sent, using Remove-BTNotification
+* Set expiration times on toasts using the new ExpirationTime parameter on New-BurntToastNotification and Submit-BTNotification
+  * Toasts which have expired are removed from the Action Center
+* Send toasts directly to the Action Center, and avoid showing them on screen, with the new SuppressPopup switch on New-BurntToastNotification and Submit-BTNotification
 '
         }
     }

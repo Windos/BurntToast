@@ -124,6 +124,12 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 
   - Remove toasts you've sent, using `Remove-BTNotification`.
 
+  - Set expiration times on toasts using the new `ExpirationTime` parameter on `New-BurntToastNotification` and `Submit-BTNotification`.
+
+    - Toasts which have expired are removed from the Action Center.
+
+  - Send toasts directly to the Action Center, and avoid showing them on screen, with the new `SuppressPopup` switch on `New-BurntToastNotification` and `Submit-BTNotification`.
+
 - [v0.6.3](https://github.com/Windos/BurntToast/releases/download/v0.6.3/BurntToast.zip)
 
   - Update Windows Community Toolkit (UWP Notifications) to 5.0.0.
