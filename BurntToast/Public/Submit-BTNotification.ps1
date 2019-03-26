@@ -39,7 +39,11 @@
         # Specifies the AppId of the 'application' or process that spawned the toast notification.
         [string] $AppId = $Script:Config.AppId,
 
-        [hashtable] $DataBinding
+        [hashtable] $DataBinding,
+
+        [datetime] $ExpirationTime,
+
+        [switch] $SuppressPopup
     )
 
     if (!(Test-Path -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\$AppId")) {
@@ -56,6 +60,14 @@
     if ($UniqueIdentifier) {
         $Toast.Group = $UniqueIdentifier
         $Toast.Tag = $UniqueIdentifier
+    }
+
+    if ($ExpirationTime) {
+        $Toast.ExpirationTime = $ExpirationTime
+    }
+
+    if ($SuppressPopup.IsPresent) {
+        $Toast.SuppressPopup = $SuppressPopup
     }
 
     $DataDictionary = New-Object 'system.collections.generic.dictionary[string,string]'
