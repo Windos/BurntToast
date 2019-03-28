@@ -110,6 +110,10 @@
         $ToastContent.HintPeople = $ToastPeople
     }
 
+    if ($CustomTimestamp) {
+        $ToastContent.DisplayTimestamp = $CustomTimestamp
+    }
+
     if($PSCmdlet.ShouldProcess( "returning: [$($ToastContent.GetType().Name)] with XML: $($ToastContent.GetContent())" )) {
         $ToastContent
     }
