@@ -1,19 +1,37 @@
 ﻿function New-BurntToastShoulderTap {
     <#
         .SYNOPSIS
-        TODO
+        Creates and displays a Shoulder Tap notification.
 
         .DESCRIPTION
-        TODO
+        The New-BurntToastShoulderTap function creates and displays a Shoulder Tap notification on Microsoft Windows 10.
+
+        You can provide a static image or animated GIF, which will be displayed above the specified pinned contact.
+
+        If a matching contact cannot be found, Windows will fall back to a toast notification. This toast notification will also been seen in the Action Center (with or without a working Shoulder Tap.)
+
+        You can optionally call the New-BurntToastShoulderTap function with the ShoulderTap alias.
 
         .INPUTS
-        TODO
+        LOTS...
 
         .OUTPUTS
-        TODO
+        None
+            New-BurntToastShoulderTap displays the Shoulder Tap that is created.
 
         .EXAMPLE
-        TODO
+        $ShoulderSplat = @{
+            Image = 'https://www.route66sodas.com/wp-content/uploads/2019/01/Alert.gif'
+            Person = 'stormy@example.com'
+            Text = 'Alarms!', "There's a thing you need to worry about"
+        }
+
+        New-BurntToastShoulderTap @ShoulderSplat
+
+        .NOTES
+        There's some manual steps required to create and pin a contact which matches the specified email address in the Person parameter.
+
+        There will be a blog post about this on https://toastit.dev, and also further documented within this module in the next release.
 
         .LINK
         https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastShoulderTap.md
@@ -22,17 +40,21 @@
     [alias('ShoulderTap')]
     [CmdletBinding(SupportsShouldProcess   = $true)]
     param (
+        # The URI of the image. Can be a static image or animated GIF.
         [Parameter(Mandatory)]
         [string] $Image,
 
+        # The email address of the "person" from which the Shoulder Tap is coming from.
+        #
+        # A contact with a matching email address must be pinned to the task bar.
         [Parameter(Mandatory)]
         [string] $Person,
 
         # Specifies the text to show on the Toast Notification. Up to three strings can be displayed, the first of which will be embolden as a title.
+        #
+        # The toast version will be shown on screen if the required contact is not pinned to the task bar, and will also appear in the Action Center.
         [ValidateCount(0, 3)]
         [string[]] $Text = 'Default Notification',
-
-        #TODO: [ValidateScript({ Test-ToastImage -Path $_ })]
 
         # Specifies the path to an image that will override the default image displayed with a Toast Notification.
         [string] $AppLogo,
@@ -51,13 +73,21 @@
         # This is useful when updating the progress of a process, using a progress bar, or otherwise correcting/updating the information on a toast.
         [string] $UniqueIdentifier,
 
+        # The time after which the notification is no longer relevant and should be removed from the People notification and Action Center.
         [datetime] $ExpirationTime,
 
+        # Bypasses display to the screen and sends the notification directly to the Action Center.
         [switch] $SuppressPopup,
 
+        # Sets the time at which Windows should consider the notification to have been created. If not specified the time at which the notification was recieved will be used.
+        #
+        # The time stamp affects sorting of notifications in the Action Center.
         [datetime] $CustomTimestamp,
 
-        [string] $AppId
+        # Specifies the AppId of the 'application' or process that spawned the toast notification.
+        #
+        # Defaults to the People App, rather than the configured default.
+        [string] $AppId = 'Microsoft.People_8wekyb3d8bbwe!x4c7a3b7dy2188y46d4ya362y19ac5a5805e5x'
     )
 
     $ChildObjects = @()
@@ -101,7 +131,7 @@
 
     $ToastSplat = @{
         Content = $Content
-        AppId = $Script:Config.AppId
+        AppId = $AppId
     }
 
     if ($UniqueIdentifier) {
@@ -114,12 +144,6 @@
 
     if ($SuppressPopup.IsPresent) {
         $ToastSplat.Add('SuppressPopup', $true)
-    }
-
-    if ($AppId) {
-        $ToastSplat.Add('AppId', $AppId)
-    } else {
-        $ToastSplat.Add('AppId', 'Microsoft.People_8wekyb3d8bbwe!x4c7a3b7dy2188y46d4ya362y19ac5a5805e5x')
     }
 
     if($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {

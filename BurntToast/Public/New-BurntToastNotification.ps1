@@ -155,10 +155,15 @@
         # This is useful when updating the progress of a process, using a progress bar, or otherwise correcting/updating the information on a toast.
         [string] $UniqueIdentifier,
 
+        # The time after which the notification is no longer relevant and should be removed from the Action Center.
         [datetime] $ExpirationTime,
 
+        # Bypasses display to the screen and sends the notification directly to the Action Center.
         [switch] $SuppressPopup,
 
+        # Sets the time at which Windows should consider the notification to have been created. If not specified the time at which the notification was recieved will be used.
+        #
+        # The time stamp affects sorting of notifications in the Action Center.
         [datetime] $CustomTimestamp
     )
 

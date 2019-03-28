@@ -1,19 +1,20 @@
 ﻿function New-BTShoulderTapBinding {
     <#
         .SYNOPSIS
-        TODO
+        Creates a new Shoulder Tap Binding object.
 
         .DESCRIPTION
-        TODO
+        The New-BTShoulderTapBinding function creates a new Shoulder Tap Binding Object, with which you can specify the Image to be displayed.
 
         .INPUTS
-        TODO
+        LOTS...
 
         .OUTPUTS
-        TODO
+        ToastBindingShoulderTap
 
         .EXAMPLE
-        TODO
+        $Image = New-BTShoulderTapImage -Source 'https://www.route66sodas.com/wp-content/uploads/2019/01/Alert.gif'
+        New-BTShoulderTapBinding -Image $Image
 
         .LINK
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTShoulderTapBinding.md
@@ -21,6 +22,7 @@
 
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastBindingShoulderTap])]
     param (
+        # The image displayed in the Shoulder Tap notification, this object is created using the New-BTShoulderTapImage function.
         [Parameter(Mandatory)]
         [Microsoft.Toolkit.Uwp.Notifications.ToastShoulderTapImage] $Image,
 
