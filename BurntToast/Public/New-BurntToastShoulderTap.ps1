@@ -22,60 +22,22 @@
     [alias('ShoulderTap')]
     [CmdletBinding(SupportsShouldProcess   = $true)]
     param (
+        [Parameter(Mandatory)]
+        [string] $Image,
+
+        [Parameter(Mandatory)]
+        [string] $Person,
+
         # Specifies the text to show on the Toast Notification. Up to three strings can be displayed, the first of which will be embolden as a title.
         [ValidateCount(0, 3)]
-        [String[]] $Text = 'Default Notification',
+        [string[]] $Text = 'Default Notification',
 
         #TODO: [ValidateScript({ Test-ToastImage -Path $_ })]
 
         # Specifies the path to an image that will override the default image displayed with a Toast Notification.
-        [String] $AppLogo,
-
-        # Selects the sound to acompany the Toast Notification. Any 'Alarm' or 'Call' tones will automatically loop and extent the amount of time that a Toast is displayed on screen.
-        #
-        # Cannot be used in conjunction with the 'Silent' switch.
-        [Parameter(ParameterSetName = 'Sound')]
-        [ValidateSet('Default',
-                     'IM',
-                     'Mail',
-                     'Reminder',
-                     'SMS',
-                     'Alarm',
-                     'Alarm2',
-                     'Alarm3',
-                     'Alarm4',
-                     'Alarm5',
-                     'Alarm6',
-                     'Alarm7',
-                     'Alarm8',
-                     'Alarm9',
-                     'Alarm10',
-                     'Call',
-                     'Call2',
-                     'Call3',
-                     'Call4',
-                     'Call5',
-                     'Call6',
-                     'Call7',
-                     'Call8',
-                     'Call9',
-                     'Call10')]
-        [String] $Sound = 'Default',
-
-        # Indicates that the Toast Notification will be displayed on screen without an accompanying sound.
-        #
-        # Cannot be used in conjunction with the 'Sound' parameter.
-        [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Silent')]
-        [Switch] $Silent,
+        [string] $AppLogo,
 
         # Allows up to five buttons to be added to the bottom of the Toast Notification. These buttons should be created using the New-BTButton function.
-        [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Button')]
-        [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Silent-Button')]
-        [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Sound-Button')]
         [Microsoft.Toolkit.Uwp.Notifications.IToastButton[]] $Button,
 
         # Specify the Toast Header object created using the New-BTHeader function, for seperation/categorization of toasts from the same AppId.
@@ -93,7 +55,9 @@
 
         [switch] $SuppressPopup,
 
-        [datetime] $CustomTimestamp
+        [datetime] $CustomTimestamp,
+
+        [string] $AppId
     )
 
     $ChildObjects = @()
@@ -114,28 +78,15 @@
         $AppLogoImage = New-BTImage -AppLogoOverride -Crop Circle -WhatIf:$false
     }
 
-    if ($Silent) {
-        $Audio = New-BTAudio -Silent -WhatIf:$false
-    } else {
-        if ($Sound -ne 'Default') {
-            if ($Sound -like 'Alarm*' -or $Sound -like 'Call*') {
-                $Audio = New-BTAudio -Source "ms-winsoundevent:Notification.Looping.$Sound" -Loop -WhatIf:$false
-                $Long = $True
-            } else {
-                $Audio = New-BTAudio -Source "ms-winsoundevent:Notification.$Sound" -WhatIf:$false
-            }
-        }
-    }
-
     $Binding = New-BTBinding -Children $ChildObjects -AppLogoOverride $AppLogoImage -WhatIf:$false
-    $Visual = New-BTVisual -BindingGeneric $Binding -WhatIf:$false
 
-    $ContentSplat = @{'Audio' = $Audio
+    $ShoulderTapBinding = New-BTShoulderTapBinding -Image (New-BTShoulderTapImage -Source $Image)
+
+    $Visual = New-BTVisual -BindingGeneric $Binding -BindingShoulderTap $ShoulderTapBinding -WhatIf:$false
+
+    $ContentSplat = @{
         'Visual' = $Visual
-    }
-
-    if ($Long) {
-        $ContentSplat.Add('Duration', [Microsoft.Toolkit.Uwp.Notifications.ToastDuration]::Long)
+        'ToastPeople' = (New-BTShoulderTapPeople -Email $Person)
     }
 
     if ($Header) {
@@ -163,6 +114,12 @@
 
     if ($SuppressPopup.IsPresent) {
         $ToastSplat.Add('SuppressPopup', $true)
+    }
+
+    if ($AppId) {
+        $ToastSplat.Add('AppId', $AppId)
+    } else {
+        $ToastSplat.Add('AppId', 'Microsoft.People_8wekyb3d8bbwe!x4c7a3b7dy2188y46d4ya362y19ac5a5805e5x')
     }
 
     if($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {
