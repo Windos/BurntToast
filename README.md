@@ -114,6 +114,10 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 
 - [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.7.1.zip) (Development/Raw Repo)
 
+- [v0.7.1](https://github.com/Windos/BurntToast/releases/download/v0.7.1/BurntToast.zip)
+
+  - Features here
+
 - [v0.7.0](https://github.com/Windos/BurntToast/releases/download/v0.7.0/BurntToast.zip)
 
   - **HEADLINE FEATURE**: My People "Shoulder Tap" notifications have been implemented
