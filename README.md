@@ -112,9 +112,9 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
 
-- [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.7.0.zip) (Development/Raw Repo)
+- [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.7.1.zip) (Development/Raw Repo)
 
-- [v0.7.0](https://github.com/Windos/BurntToast/releases/download/v0.6.3/BurntToast.zip)
+- [v0.7.0](https://github.com/Windos/BurntToast/releases/download/v0.7.0/BurntToast.zip)
 
   - **HEADLINE FEATURE**: My People "Shoulder Tap" notifications have been implemented
 
