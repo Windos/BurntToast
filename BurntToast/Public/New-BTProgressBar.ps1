@@ -38,6 +38,12 @@
 
         The Progress Bar is displayed under the title 'File Copy.'
 
+        .EXAMPLE
+        $Progress = New-BTProgressBar -Status 'Copying files' -Value 0.2
+        New-BurntToastNotification -Text 'File copy script running', 'More details!' -ProgressBar $Progress
+
+        This example creates a Toast Notification which will include a progress bar.
+
         .LINK
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTProgressBar.md
     #>
