@@ -1,19 +1,21 @@
 ﻿function New-BTShoulderTapPeople {
     <#
         .SYNOPSIS
-        TODO
+        Creates a new ToastPeople object.
 
         .DESCRIPTION
-        TODO
+        The New-BTShoulderTapPeople function creates a new ToastPeople object. This object identifies a user from the People app which has been pinned to the Windows Taskbar.
+
+        This function is mainly used internally, as it is abstracted away when using New-BurntToastShoulderTap.
 
         .INPUTS
-        TODO
+        STRING
 
         .OUTPUTS
-        TODO
+        ToastPeople
 
         .EXAMPLE
-        TODO
+        $Person = New-BTShoulderTapPeople -Email 'bob@example.com'
 
         .LINK
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTShoulderTapPeople.md
@@ -23,14 +25,17 @@
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastPeople])]
 
     param (
+        # The email address which matches a contact in the Contacts app.
         [Parameter(ParameterSetName = 'Email',
                    Mandatory)]
         [string] $Email,
 
+        # The remote identifier which matches a contact in the Contacts app.
         [Parameter(ParameterSetName = 'RemoteId',
                    Mandatory)]
         [string] $RemoteId,
 
+        # The phone number which matches a contact in the Contacts app.
         [Parameter(ParameterSetName = 'PhoneNumber',
                    Mandatory)]
         [string] $PhoneNumber

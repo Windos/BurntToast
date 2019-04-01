@@ -1,19 +1,23 @@
 ﻿function New-BTShoulderTapImage {
     <#
         .SYNOPSIS
-        TODO
+        Creates a new ToastShoulderTapImage object.
 
         .DESCRIPTION
-        TODO
+        The New-BTShoulderTapImage function creates a new ToastShoulderTapImage object.
+
+        The image can be a static image or anitmated gif, specified using the Source parameter. It can also be a spritesheet.
+
+        This function is mainly used internally, as it is abstracted away when using New-BurntToastShoulderTap.
 
         .INPUTS
-        TODO
+        LOTS
 
         .OUTPUTS
-        TODO
+        ToastShoulderTapImage
 
         .EXAMPLE
-        TODO
+        $Image = New-BTShoulderTapImage -Source 'https://www.route66sodas.com/wp-content/uploads/2019/01/Alert.gif'
 
         .LINK
         https://github.com/Windos/BurntToast/blob/master/Help/New-BTShoulderTapImage.md

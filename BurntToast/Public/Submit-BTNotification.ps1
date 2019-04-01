@@ -39,10 +39,13 @@
         # Specifies the AppId of the 'application' or process that spawned the toast notification.
         [string] $AppId = $Script:Config.AppId,
 
+        # A hashtable that binds strings to keys in a toast notification. In order to update a toast, the original toast needs to include a databinding hashtable.
         [hashtable] $DataBinding,
 
+        # The time after which the notification is no longer relevant and should be removed from the Action Center.
         [datetime] $ExpirationTime,
 
+        # Bypasses display to the screen and sends the notification directly to the Action Center.
         [switch] $SuppressPopup
     )
 

@@ -7,19 +7,30 @@
         The Update-BTNotification function updates a toast notification in the operating systems' notification manager.
 
         .INPUTS
-        TODO
+        LOTS...
 
         .OUTPUTS
-        TODO
+        NONE
 
         .EXAMPLE
-        TODO
+        $FirstDataBinding = @{
+            FirstLine = 'Example Toast Heading'
+            SecondLine = 'This toast is still the original'
+        }
+
+        New-BurntToastNotification -Text 'FirstLine', 'SecondLine' -UniqueIdentifier 'ExampleToast' -DataBinding $FirstDataBinding
+
+        $SecondDataBinding = @{
+            SecondLine = 'This toast has been updated!'
+        }
+
+        Update-BTNotification -UniqueIdentifier 'ExampleToast' -DataBinding $SecondDataBinding
 
         .LINK
         https://github.com/Windos/BurntToast/blob/master/Help/Update-BTNotification.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding()]
     param (
         # When updating toasts (not curently working) rapidly, the sequence number helps to ensure that toasts recieved out of order will not be displayed in a manner that may confuse.
         #
@@ -34,6 +45,7 @@
         # Specifies the AppId of the 'application' or process that spawned the toast notification.
         [string] $AppId = $Script:Config.AppId,
 
+        # A hashtable that binds strings to keys in a toast notification. In order to update a toast, the original toast needs to include a databinding hashtable.
         [hashtable] $DataBinding
     )
 
@@ -58,7 +70,5 @@
         $ToastData.SequenceNumber = $SequenceNumber
     }
 
-    # if($PSCmdlet.ShouldProcess( "submitting: [$($Toast.GetType().Name)] with AppId $AppId, Id $UniqueIdentifier, Sequence Number $($Toast.Data.SequenceNumber) and XML: $CleanContent")) {
     [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Update($ToastData, $UniqueIdentifier, $UniqueIdentifier)
-    # }
 }

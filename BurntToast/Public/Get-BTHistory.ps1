@@ -1,19 +1,21 @@
 function Get-BTHistory {
     <#
         .SYNOPSIS
-        TODO
+        Shows all toast notifications in the Action Center.
 
         .DESCRIPTION
-        TODO
+        The Get-BTHistory function returns all toast notifications that are in the Action Center. Toasts that have been dismissed by the user will not be returned.
+
+        The object returned includes tag and group information which can be used with the Remove-BTNotification function to clear specific notification from the Action Center.
 
         .INPUTS
-        TODO
+        STRING
 
         .OUTPUTS
         TODO
 
         .EXAMPLE
-        TODO
+        Get-BTHistory
 
         .LINK
         https://github.com/Windos/BurntToast/blob/master/Help/Get-BTHistory.md
@@ -23,6 +25,9 @@ function Get-BTHistory {
         # Specifies the AppId of the 'application' or process that spawned the toast notification.
         [string] $AppId = $Script:Config.AppId,
 
+        # A string that uniquely identifies a toast notification. Submitting a new toast with the same identifier as a previous toast will replace the previous toast.
+        #
+        # This is useful when updating the progress of a process, using a progress bar, or otherwise correcting/updating the information on a toast.
         [string] $UniqueIdentifier
     )
 

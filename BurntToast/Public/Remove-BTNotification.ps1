@@ -1,19 +1,26 @@
 function Remove-BTNotification {
     <#
         .SYNOPSIS
-        TODO
+        Removes toast notifications from the Action Center.
 
         .DESCRIPTION
-        TODO
+        The Remove-BTNotification function removes toast notifications from the Action Center.
+
+        If no parameters are specified, all toasts (for the default AppId) will be removed.
+
+        Tags and Groups for Toasts can be found using the Get-BTHistory function.
 
         .INPUTS
-        TODO
+        LOTS
 
         .OUTPUTS
-        TODO
+        NONE
 
         .EXAMPLE
-        TODO
+        Remove-BTNotification
+
+        .EXAMPLE
+        Remove-BTNotification -Tag 'UniqueIdentifier'
 
         .LINK
         https://github.com/Windos/BurntToast/blob/master/Help/Remove-BTNotification.md
@@ -23,8 +30,10 @@ function Remove-BTNotification {
         # Specifies the AppId of the 'application' or process that spawned the toast notification.
         [string] $AppId = $Script:Config.AppId,
 
+        # Specifies the tag, which identifies a given toast notification.
         [string] $Tag,
 
+        # Specifies the group, which helps to identify a given toast notification.
         [string] $Group
     )
 
