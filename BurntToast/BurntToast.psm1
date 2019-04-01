@@ -38,6 +38,8 @@ if ($WinMajorVersion -ge 10)
 
     # Register default AppId
     New-BTAppId
+
+    $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
 }
 else
 {

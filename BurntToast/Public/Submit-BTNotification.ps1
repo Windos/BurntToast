@@ -37,37 +37,99 @@
         [string] $UniqueIdentifier,
 
         # Specifies the AppId of the 'application' or process that spawned the toast notification.
-        [string] $AppId = $Script:Config.AppId
+        [string] $AppId = $Script:Config.AppId,
+
+        # A hashtable that binds strings to keys in a toast notification. In order to update a toast, the original toast needs to include a databinding hashtable.
+        [hashtable] $DataBinding,
+
+        # The time after which the notification is no longer relevant and should be removed from the Action Center.
+        [datetime] $ExpirationTime,
+
+        # Bypasses display to the screen and sends the notification directly to the Action Center.
+        [switch] $SuppressPopup
     )
 
     if (!(Test-Path -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\$AppId")) {
         Write-Warning -Message "The AppId $AppId is not present in the registry, please run New-BTAppId to avoid inconsistent Toast behaviour."
     }
 
-    $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
     $null = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
 
     $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::new()
 
-    $CleanContent = $Content.GetContent().Replace('<text>{', '<text>')
-    $CleanContent = $CleanContent.Replace('}</text>', '</text>')
-    $CleanContent = $CleanContent.Replace('="{', '="')
-    $CleanContent = $CleanContent.Replace('}" ', '" ')
-
-    $ToastXml.LoadXml($CleanContent)
+    $ToastXml.LoadXml($Content.GetContent())
     $Toast = [Windows.UI.Notifications.ToastNotification]::new($ToastXml)
-
-    if ($SequenceNumber) {
-        $Toast.Data = [Windows.UI.Notifications.NotificationData]::new()
-        $Toast.Data.SequenceNumber = $SequenceNumber
-    }
 
     if ($UniqueIdentifier) {
         $Toast.Group = $UniqueIdentifier
         $Toast.Tag = $UniqueIdentifier
     }
 
-    if($PSCmdlet.ShouldProcess( "submitting: [$($Toast.GetType().Name)] with AppId $AppId, Id $UniqueIdentifier, Sequence Number $($Toast.Data.SequenceNumber) and XML: $CleanContent")) {
+    if ($ExpirationTime) {
+        $Toast.ExpirationTime = $ExpirationTime
+    }
+
+    if ($SuppressPopup.IsPresent) {
+        $Toast.SuppressPopup = $SuppressPopup
+    }
+
+    $DataDictionary = New-Object 'system.collections.generic.dictionary[string,string]'
+
+    if ($DataBinding) {
+        foreach ($Key in $DataBinding.Keys) {
+            $DataDictionary.Add($Key, $DataBinding.$Key)
+        }
+    }
+
+    foreach ($Child in $Content.Visual.BindingGeneric.Children) {
+        if ($Child.GetType().Name -eq 'AdaptiveText') {
+            $BindingName = $Child.Text.BindingName
+
+            if (!$DataDictionary.ContainsKey($BindingName)) {
+                $DataDictionary.Add($BindingName, $BindingName)
+            }
+        } elseif ($Child.GetType().Name -eq 'AdaptiveProgressBar') {
+            if ($Child.Title) {
+                $BindingName = $Child.Title.BindingName
+
+                if (!$DataDictionary.ContainsKey($BindingName)) {
+                    $DataDictionary.Add($BindingName, $BindingName)
+                }
+            }
+
+            if ($Child.Value) {
+                $BindingName = $Child.Value.BindingName
+
+                if (!$DataDictionary.ContainsKey($BindingName)) {
+                    $DataDictionary.Add($BindingName, $BindingName)
+                }
+            }
+
+            if ($Child.ValueStringOverride) {
+                $BindingName = $Child.ValueStringOverride.BindingName
+
+                if (!$DataDictionary.ContainsKey($BindingName)) {
+                    $DataDictionary.Add($BindingName, $BindingName)
+                }
+            }
+
+            if ($Child.Status) {
+                $BindingName = $Child.Status.BindingName
+
+                if (!$DataDictionary.ContainsKey($BindingName)) {
+                    $DataDictionary.Add($BindingName, $BindingName)
+                }
+            }
+        }
+    }
+
+    $Toast.Data = [Windows.UI.Notifications.NotificationData]::new($DataDictionary)
+
+    if ($SequenceNumber) {
+        $Toast.Data.SequenceNumber = $SequenceNumber
+    }
+
+    if($PSCmdlet.ShouldProcess( "submitting: [$($Toast.GetType().Name)] with AppId $AppId, Id $UniqueIdentifier, Sequence Number $($Toast.Data.SequenceNumber) and XML: $($Content.GetContent())")) {
         [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show($Toast)
     }
 }

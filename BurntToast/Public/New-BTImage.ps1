@@ -107,19 +107,7 @@
     }
 
     if ($Source) {
-        if ($Source -like 'http?://*') {
-            $RemoteFileName = $Source.Split('/')[-1] -replace '[\[\]*?]',''
-
-            $NewFilePath = '{0}\{1}' -f $Env:TEMP, $RemoteFileName
-
-            if (!(Test-Path -Path $NewFilePath)) {
-                Invoke-WebRequest -Uri $Source -OutFile $NewFilePath
-            }
-
-            $Image.Source = $NewFilePath
-        } else {
-            $Image.Source = $Source
-        }
+        $Image.Source = Optimize-BTImageSource -Source $Source
     }
 
     if ($AlternateText) {

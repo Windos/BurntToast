@@ -114,6 +114,28 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 
 - [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.7.0.zip) (Development/Raw Repo)
 
+- [v0.7.0](https://github.com/Windos/BurntToast/releases/download/v0.6.3/BurntToast.zip)
+
+  - **HEADLINE FEATURE**: My People "Shoulder Tap" notifications have been implemented
+
+  - You can now specify images on the network via UNC paths. Fix for #56
+
+  - We're now properly supporting bindable text, and removing the curly braces more gracefully.
+
+  - Get a list of all toasts you've sent, which have not been dismissed by the user, using `Get-BTHistory`.
+
+  - Remove toasts you've sent, using `Remove-BTNotification`.
+
+  - Set expiration times on toasts using the new `ExpirationTime` parameter on `New-BurntToastNotification` and `Submit-BTNotification`.
+
+    - Toasts which have expired are removed from the Action Center.
+
+  - Send toasts directly to the Action Center, and avoid showing them on screen, with the new `SuppressPopup` switch on `New-BurntToastNotification` and `Submit-BTNotification`.
+
+  - You can now adjust a toasts timestamp (both past and future) using the `CustomTimestamp` parameter on `New-BurntToastNotification` and `New-BTContent`.
+
+    - If not specified, the system uses the time at which the toast was received and this may not accuratly reflect the intent of the notification.
+
 - [v0.6.3](https://github.com/Windos/BurntToast/releases/download/v0.6.3/BurntToast.zip)
 
   - Update Windows Community Toolkit (UWP Notifications) to 5.0.0.

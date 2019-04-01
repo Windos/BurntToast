@@ -153,7 +153,21 @@
         # A string that uniquely identifies a toast notification. Submitting a new toast with the same identifier as a previous toast will replace the previous toast.
         #
         # This is useful when updating the progress of a process, using a progress bar, or otherwise correcting/updating the information on a toast.
-        [string] $UniqueIdentifier
+        [string] $UniqueIdentifier,
+
+        # A hashtable that binds strings to keys in a toast notification. In order to update a toast, the original toast needs to include a databinding hashtable.
+        [hashtable] $DataBinding,
+
+        # The time after which the notification is no longer relevant and should be removed from the Action Center.
+        [datetime] $ExpirationTime,
+
+        # Bypasses display to the screen and sends the notification directly to the Action Center.
+        [switch] $SuppressPopup,
+
+        # Sets the time at which Windows should consider the notification to have been created. If not specified the time at which the notification was recieved will be used.
+        #
+        # The time stamp affects sorting of notifications in the Action Center.
+        [datetime] $CustomTimestamp
     )
 
     $ChildObjects = @()
@@ -208,15 +222,34 @@
         $ContentSplat.Add('Header', $Header)
     }
 
+    if ($CustomTimestamp) {
+        $ContentSplat.Add('CustomTimestamp', $CustomTimestamp)
+    }
+
     $Content = New-BTContent @ContentSplat -WhatIf:$false
 
+    $ToastSplat = @{
+        Content = $Content
+        AppId = $Script:Config.AppId
+    }
+
     if ($UniqueIdentifier) {
-        if($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {
-            Submit-BTNotification -Content $Content -AppId $Script:Config.AppId -UniqueIdentifier $UniqueIdentifier
-        }
-    } else {
-        if($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {
-            Submit-BTNotification -Content $Content -AppId $Script:Config.AppId
-        }
+        $ToastSplat.Add('UniqueIdentifier', $UniqueIdentifier)
+    }
+
+    if ($ExpirationTime) {
+        $ToastSplat.Add('ExpirationTime', $ExpirationTime)
+    }
+
+    if ($SuppressPopup.IsPresent) {
+        $ToastSplat.Add('SuppressPopup', $true)
+    }
+
+    if ($DataBinding) {
+        $ToastSplat.Add('DataBinding', $DataBinding)
+    }
+
+    if($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {
+        Submit-BTNotification @ToastSplat
     }
 }

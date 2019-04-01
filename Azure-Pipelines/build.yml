@@ -2,7 +2,7 @@ jobs:
 - job: CookToast
   displayName: 'Cook Toast'
   pool:
-    vmImage: 'VS2017-Win2016'
+    vmImage: 'windows-2019'
   steps:
   - task: PowerShell@2
     displayName: 'Run tests (individual .ps1 files)'
