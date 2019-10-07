@@ -116,7 +116,7 @@ $Text = 'First Shoulder Tap', 'This is for the fallback toast.'
 
 New-BurntToastShoulderTap -Image $Image -Person $Contact -Text $Text
 ```
-![Example: Shoulder Tap feature in Windows 10](/Examples/Example10/Result.gif)
+![Example: Shoulder Tap feature in Windows 10](/Examples/Example10/result.gif)
 
 ## Releases
 

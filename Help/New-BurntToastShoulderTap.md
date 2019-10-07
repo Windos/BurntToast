@@ -222,17 +222,10 @@ You cannot pipe input to this function.
 
 ## OUTPUTS
 
-TODO
+Displays a Windows 10 Shoulder Tap message is a matching user (matches by e-mail address) is pinned to the task bar.
 
-New-BurntToastNotification displays the Toast Notification that is created.
-
-## NOTES
-
-I'm *really* sorry about the number of Parameter Sets. The best explanation is:
-
-* You cannot specify a sound and mark the toast as silent at the same time.
-* You cannot specify SnoozeAndDismiss and custom buttons at the same time.
+If not, fails back to a standard Burnt Toast notification
 
 ## RELATED LINKS
 
-[New-BurntToastNotification](https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastShoulderTap.md)
+[New-BurntToastShoulderTap](https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastShoulderTap.md)
