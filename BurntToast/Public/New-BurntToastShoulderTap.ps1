@@ -8,6 +8,8 @@
 
         You can provide a static image or animated GIF, which will be displayed above the specified pinned contact.
 
+        You must first pin a contact to the Taskbar using the Windows 10 People app.  Next, you can refer to the contact **by its e-mail address** to display a notification.
+        
         If a matching contact cannot be found, Windows will fall back to a toast notification. This toast notification will also been seen in the Action Center (with or without a working Shoulder Tap.)
 
         You can optionally call the New-BurntToastShoulderTap function with the ShoulderTap alias.
@@ -17,16 +19,14 @@
 
         .OUTPUTS
         None
-            New-BurntToastShoulderTap displays the Shoulder Tap that is created.
+            New-BurntToastShoulderTap displays the Shoulder Tap that is created.        
 
         .EXAMPLE
-        $ShoulderSplat = @{
-            Image = 'https://www.route66sodas.com/wp-content/uploads/2019/01/Alert.gif'
-            Person = 'stormy@example.com'
-            Text = 'Alarms!', "There's a thing you need to worry about"
-        }
+        $Image = 'https://i.imgur.com/WKiNp5o.gif'
+        $Contact = 'stormy@example.com'
+        $Text = 'First Shoulder Tap', 'This is for the fallback toast.'
 
-        New-BurntToastShoulderTap @ShoulderSplat
+        New-BurntToastShoulderTap -Image $Image -Person $Contact -Text $Text
 
         .NOTES
         There's some manual steps required to create and pin a contact which matches the specified email address in the Person parameter.

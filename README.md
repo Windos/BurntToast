@@ -108,6 +108,16 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 
 ![Example: API Call](/Examples/Example08/ApiToast.png)
 
+### [Windows 10 Shoulder Tap Notification](/Examples/Example10)
+```
+$Image = 'https://i.imgur.com/WKiNp5o.gif'
+$Contact = 'stormy@example.com'
+$Text = 'First Shoulder Tap', 'This is for the fallback toast.'
+
+New-BurntToastShoulderTap -Image $Image -Person $Contact -Text $Text
+```
+![Example: Shoulder Tap feature in Windows 10](/Examples/Example10/Result.gif)
+
 ## Releases
 
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
