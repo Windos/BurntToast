@@ -81,7 +81,6 @@ PS C:\>$Image = 'https://i.imgur.com/WKiNp5o.gif'
 
 This command creates and displays a Should Tap Toast Notification with all default values, for a pinned user named 'stormy@example.com'.  If this user does not exist or is not pinned to the Taskbar, Burnt Toast will fall back to a default notification instead.
 
-
 ## PARAMETERS
 
 ### -AppLogo
