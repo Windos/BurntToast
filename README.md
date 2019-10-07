@@ -109,7 +109,7 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 ![Example: API Call](/Examples/Example08/ApiToast.png)
 
 ### [Windows 10 Shoulder Tap Notification](/Examples/Example10)
-```
+```powershell
 $Image = 'https://i.imgur.com/WKiNp5o.gif'
 $Contact = 'stormy@example.com'
 $Text = 'First Shoulder Tap', 'This is for the fallback toast.'
