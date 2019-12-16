@@ -1,7 +1,7 @@
 Import-Module BurntToast
 
-if (Get-Command choco -ErrorAction SilentlyContinue) { 
-  New-BurntToastNotification "choco not available!"
+if (!(Get-Command choco -ErrorAction SilentlyContinue)) { 
+  New-BurntToastNotification -Text "choco not available!"
   throw "choco.exe is required to run this script!"
 }
 
@@ -9,7 +9,7 @@ $pkgs = choco outdated --ignore-pinned --ignore-unfound -r
 $total = $pkgs.Count
 
 if ($total.Count -eq 0) {
-  New-BurntToastNotification "all Chocolatey packages are up-to-date!"
+  New-BurntToastNotification -Text "all Chocolatey packages are up-to-date!"
 }
 else {
   $pkgText = ""
