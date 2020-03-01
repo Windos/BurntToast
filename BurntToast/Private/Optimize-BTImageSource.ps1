@@ -19,6 +19,10 @@ function Optimize-BTImageSource {
 
         $NewFilePath
     } else {
-        $Source
+        try {
+            (Get-Item -Path $Source -ErrorAction Stop).FullName
+        } catch {
+            Write-Warning -Message "The image source '$Source' doesn't exist, failed back to icon."
+        }
     }
 }
