@@ -7,7 +7,11 @@ if ($WinMajorVersion -ge 10)
     $Library = @( Get-ChildItem -Path $PSScriptRoot\lib\*.dll -Recurse -ErrorAction SilentlyContinue )
 
     $Script:Config = Get-Content -Path $PSScriptRoot\config.json -ErrorAction SilentlyContinue | ConvertFrom-Json
-    $Script:DefaultImage = "$PSScriptRoot$($Script:Config.AppLogo)"
+    $Script:DefaultImage = if ($Script:Config.AppLogo -match '^[.\\]') {
+        "$PSScriptRoot$($Script:Config.AppLogo)"
+    } else {
+        $Script:Config.AppLogo
+    }
 
     Foreach($Import in @($Public + $Private))
     {
