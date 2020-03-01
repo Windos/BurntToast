@@ -5,6 +5,11 @@ if ($WinMajorVersion -ge 10) {
     $Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue )
     $Library = @( Get-ChildItem -Path $PSScriptRoot\lib\*.dll -Recurse -ErrorAction SilentlyContinue )
 
+    # Add one class from each expected DLL here:
+    $LibraryMap = @{
+        'Microsoft.Toolkit.Uwp.Notifications.dll' = 'Microsoft.Toolkit.Uwp.Notifications.ToastContent'
+    }
+
     $Script:Config = Get-Content -Path $PSScriptRoot\config.json -ErrorAction SilentlyContinue | ConvertFrom-Json
     $Script:DefaultImage = if ($Script:Config.AppLogo -match '^[.\\]') {
         "$PSScriptRoot$($Script:Config.AppLogo)"
@@ -22,7 +27,9 @@ if ($WinMajorVersion -ge 10) {
 
     foreach ($Type in $Library) {
         try {
-            Add-Type -Path $Type.FullName
+            if (-not ($LibraryMap[$Type.Name]  -as [type])) {
+                Add-Type -Path $Type.FullName -ErrorAction Stop
+            }
         } catch {
             Write-Error -Message "Failed to load library $($Type.FullName): $_"
         }
