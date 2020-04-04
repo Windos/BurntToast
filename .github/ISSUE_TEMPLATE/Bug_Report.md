@@ -15,19 +15,27 @@ assignees: Windos
 
 # Expected behavior
 
-```none
 
-```
 
 # Actual behavior
 
+
+
+# Environment data
+
+<!-- provide the output of: $PSVersionTable -->
+
 ```none
 
 ```
 
-# Environment data
+<!-- provide the output of: Get-ComputerInfo | fl OsName, OsVersion, OsArchitecture -->
 
-<!-- provide the output of $PSVersionTable -->
+```none
+
+```
+
+<!-- provide the output of: Get-Module -Name BurntToast -ListAvailable -->
 
 ```none
 
