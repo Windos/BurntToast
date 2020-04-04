@@ -7,21 +7,21 @@ assignees: Windos
 
 ---
 
-# Steps to reproduce
+## Steps to reproduce
 
 ```powershell
 
 ```
 
-# Expected behavior
+## Expected behavior
 
+<!-- detail what you expected to happen, what output or UX were you hoping for -->
 
+## Actual behavior
 
-# Actual behavior
+<!-- detail what actually happened, screenshots or GIFs are always appreciated -->
 
-
-
-# Environment data
+## Environment data
 
 <!-- provide the output of: $PSVersionTable -->
 
