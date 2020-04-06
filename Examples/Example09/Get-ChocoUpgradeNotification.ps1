@@ -1,7 +1,7 @@
 Import-Module BurntToast
 
 # check if chocolatey is installed and the commands are executeable
-if (!(Get-Command choco -ErrorAction SilentlyContinue)) { 
+if (!(Get-Command choco -ErrorAction SilentlyContinue)) {
     New-BurntToastNotification -Text "choco not available!"
     throw "choco.exe is required to run this script!"
 }
@@ -19,7 +19,7 @@ else {
     {
         $pkgText += "$($package -split "\|" | Select-Object -First 1), "
     }
-    
+
     # cut the list of entries after 103, else the New-BurntToastNotification will throw an MethodInvocationException
     if ($pkgText.Length -gt 103) {
         $pkgText = $pkgText.Substring(0, 100)
