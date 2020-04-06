@@ -256,10 +256,12 @@ Describe 'New-BTHeader' {
 }
 
 Describe 'New-BTImage' {
+    $ImagePath = Resolve-Path -Path $PSScriptRoot\..\BurntToast\Images\BurntToast.png
+
     Context 'standard image' {
         Start-Transcript tmp.log
         try {
-            New-BTImage -Source $PSScriptRoot\..\Media\BurntToast.png -WhatIf
+            New-BTImage -Source $ImagePath -WhatIf
         }
         finally {
             Stop-Transcript
@@ -267,14 +269,14 @@ Describe 'New-BTImage' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [AdaptiveImage]:Source=$PSScriptRoot\..\Media\BurntToast.png:AlternateText=:HintCrop=Default:HintRemoveMargin=False:HintAlign=Default:AddImageQuery=""."
+            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [AdaptiveImage]:Source=$($ImagePath):AlternateText=:HintCrop=Default:HintRemoveMargin=False:HintAlign=Default:AddImageQuery=""."
             $Log | Should -Be $Expected
         }
     }
     Context 'application logo override' {
         Start-Transcript tmp.log
         try {
-            New-BTImage -Source $PSScriptRoot\..\Media\BurntToast.png -AppLogoOverride -Crop Circle -WhatIf
+            New-BTImage -Source $ImagePath -AppLogoOverride -Crop Circle -WhatIf
         }
         finally {
             Stop-Transcript
@@ -282,14 +284,14 @@ Describe 'New-BTImage' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [ToastGenericAppLogo]:Source=$PSScriptRoot\..\Media\BurntToast.png:AlternateText=:HintCrop=Circle:AddImageQuery=""."
+            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [ToastGenericAppLogo]:Source=$($ImagePath):AlternateText=:HintCrop=Circle:AddImageQuery=""."
             $Log | Should -Be $Expected
         }
     }
     Context 'hero image' {
         Start-Transcript tmp.log
         try {
-            New-BTImage -Source $PSScriptRoot\..\Media\BurntToast.png -HeroImage -WhatIf
+            New-BTImage -Source $ImagePath -HeroImage -WhatIf
         }
         finally {
             Stop-Transcript
@@ -297,7 +299,7 @@ Describe 'New-BTImage' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [ToastGenericHeroImage]:Source=$PSScriptRoot\..\Media\BurntToast.png:AlternateText=:AddImageQuery=""."
+            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [ToastGenericHeroImage]:Source=$($ImagePath):AlternateText=:AddImageQuery=""."
             $Log | Should -Be $Expected
         }
     }
@@ -612,7 +614,7 @@ Describe 'New-BTContent' {
 
     $Text1 = New-BTText -Content 'This is a test'
     $Text2 = New-BTText -Content 'This more testing'
-    $Image2 = New-BTImage -Source $PSScriptRoot\..\Media\BurntToast.png -AppLogoOverride -Crop Circle
+    $Image2 = New-BTImage -Source $ImagePath -AppLogoOverride -Crop Circle
     $Binding1 = New-BTBinding -Children $Text1, $Text2 -AppLogoOverride $Image2
     $Visual1 = New-BTVisual -BindingGeneric $Binding1
 
