@@ -17,11 +17,11 @@ Describe 'Get-BTHistory' {
             Mock Test-Path { $true } -ModuleName BurntToast -Verifiable -ParameterFilter {
                 $Path -eq 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
             }
-        
+
             It 'should not throw' {
                 { Get-BTHistory } | Should -Not -Throw
             }
-        
+
             It 'tested the correct path' {
                 Assert-VerifiableMock
             }
@@ -608,6 +608,8 @@ Describe 'New-BTVisual' {
 }
 
 Describe 'New-BTContent' {
+    $ImagePath = Resolve-Path -Path $PSScriptRoot\..\BurntToast\Images\BurntToast.png
+
     $Text1 = New-BTText -Content 'This is a test'
     $Text2 = New-BTText -Content 'This more testing'
     $Image2 = New-BTImage -Source $PSScriptRoot\..\Media\BurntToast.png -AppLogoOverride -Crop Circle
@@ -625,7 +627,7 @@ Describe 'New-BTContent' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = "What if: Performing the operation ""New-BTContent"" on target ""returning: [ToastContent] with XML: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{This is a test}</text><text>{This more testing}</text><image src=""$PSScriptRoot\..\Media\BurntToast.png"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
+            $Expected = "What if: Performing the operation ""New-BTContent"" on target ""returning: [ToastContent] with XML: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{This is a test}</text><text>{This more testing}</text><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
             $Log | Should -Be $Expected
         }
     }
@@ -640,7 +642,7 @@ Describe 'New-BTContent' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = "What if: Performing the operation ""New-BTContent"" on target ""returning: [ToastContent] with XML: <?xml version=""1.0"" encoding=""utf-8""?><toast activationType=""protocol"" launch=""https://google.com""><visual><binding template=""ToastGeneric""><text>{This is a test}</text><text>{This more testing}</text><image src=""$PSScriptRoot\..\Media\BurntToast.png"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
+            $Expected = "What if: Performing the operation ""New-BTContent"" on target ""returning: [ToastContent] with XML: <?xml version=""1.0"" encoding=""utf-8""?><toast activationType=""protocol"" launch=""https://google.com""><visual><binding template=""ToastGeneric""><text>{This is a test}</text><text>{This more testing}</text><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
             $Log | Should -Be $Expected
         }
     }
