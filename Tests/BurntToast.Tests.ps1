@@ -17,11 +17,11 @@ Describe 'Get-BTHistory' {
             Mock Test-Path { $true } -ModuleName BurntToast -Verifiable -ParameterFilter {
                 $Path -eq 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
             }
-        
+
             It 'should not throw' {
                 { Get-BTHistory } | Should -Not -Throw
             }
-        
+
             It 'tested the correct path' {
                 Assert-VerifiableMock
             }
@@ -256,10 +256,12 @@ Describe 'New-BTHeader' {
 }
 
 Describe 'New-BTImage' {
+    $ImagePath = Resolve-Path -Path $PSScriptRoot\..\BurntToast\Images\BurntToast.png
+
     Context 'standard image' {
         Start-Transcript tmp.log
         try {
-            New-BTImage -Source $PSScriptRoot\..\Media\BurntToast.png -WhatIf
+            New-BTImage -Source $ImagePath -WhatIf
         }
         finally {
             Stop-Transcript
@@ -267,14 +269,14 @@ Describe 'New-BTImage' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [AdaptiveImage]:Source=$PSScriptRoot\..\Media\BurntToast.png:AlternateText=:HintCrop=Default:HintRemoveMargin=False:HintAlign=Default:AddImageQuery=""."
+            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [AdaptiveImage]:Source=$($ImagePath):AlternateText=:HintCrop=Default:HintRemoveMargin=False:HintAlign=Default:AddImageQuery=""."
             $Log | Should -Be $Expected
         }
     }
     Context 'application logo override' {
         Start-Transcript tmp.log
         try {
-            New-BTImage -Source $PSScriptRoot\..\Media\BurntToast.png -AppLogoOverride -Crop Circle -WhatIf
+            New-BTImage -Source $ImagePath -AppLogoOverride -Crop Circle -WhatIf
         }
         finally {
             Stop-Transcript
@@ -282,14 +284,14 @@ Describe 'New-BTImage' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [ToastGenericAppLogo]:Source=$PSScriptRoot\..\Media\BurntToast.png:AlternateText=:HintCrop=Circle:AddImageQuery=""."
+            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [ToastGenericAppLogo]:Source=$($ImagePath):AlternateText=:HintCrop=Circle:AddImageQuery=""."
             $Log | Should -Be $Expected
         }
     }
     Context 'hero image' {
         Start-Transcript tmp.log
         try {
-            New-BTImage -Source $PSScriptRoot\..\Media\BurntToast.png -HeroImage -WhatIf
+            New-BTImage -Source $ImagePath -HeroImage -WhatIf
         }
         finally {
             Stop-Transcript
@@ -297,7 +299,7 @@ Describe 'New-BTImage' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [ToastGenericHeroImage]:Source=$PSScriptRoot\..\Media\BurntToast.png:AlternateText=:AddImageQuery=""."
+            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [ToastGenericHeroImage]:Source=$($ImagePath):AlternateText=:AddImageQuery=""."
             $Log | Should -Be $Expected
         }
     }
@@ -608,9 +610,11 @@ Describe 'New-BTVisual' {
 }
 
 Describe 'New-BTContent' {
+    $ImagePath = Resolve-Path -Path $PSScriptRoot\..\BurntToast\Images\BurntToast.png
+
     $Text1 = New-BTText -Content 'This is a test'
     $Text2 = New-BTText -Content 'This more testing'
-    $Image2 = New-BTImage -Source $PSScriptRoot\..\Media\BurntToast.png -AppLogoOverride -Crop Circle
+    $Image2 = New-BTImage -Source $ImagePath -AppLogoOverride -Crop Circle
     $Binding1 = New-BTBinding -Children $Text1, $Text2 -AppLogoOverride $Image2
     $Visual1 = New-BTVisual -BindingGeneric $Binding1
 
@@ -625,7 +629,7 @@ Describe 'New-BTContent' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = "What if: Performing the operation ""New-BTContent"" on target ""returning: [ToastContent] with XML: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{This is a test}</text><text>{This more testing}</text><image src=""$PSScriptRoot\..\Media\BurntToast.png"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
+            $Expected = "What if: Performing the operation ""New-BTContent"" on target ""returning: [ToastContent] with XML: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{This is a test}</text><text>{This more testing}</text><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
             $Log | Should -Be $Expected
         }
     }
@@ -640,7 +644,7 @@ Describe 'New-BTContent' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = "What if: Performing the operation ""New-BTContent"" on target ""returning: [ToastContent] with XML: <?xml version=""1.0"" encoding=""utf-8""?><toast activationType=""protocol"" launch=""https://google.com""><visual><binding template=""ToastGeneric""><text>{This is a test}</text><text>{This more testing}</text><image src=""$PSScriptRoot\..\Media\BurntToast.png"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
+            $Expected = "What if: Performing the operation ""New-BTContent"" on target ""returning: [ToastContent] with XML: <?xml version=""1.0"" encoding=""utf-8""?><toast activationType=""protocol"" launch=""https://google.com""><visual><binding template=""ToastGeneric""><text>{This is a test}</text><text>{This more testing}</text><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
             $Log | Should -Be $Expected
         }
     }
@@ -763,7 +767,7 @@ Describe 'New-BurntToastNotification' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = 'What if: Performing the operation "Submit-BTNotification" on target "submitting: [ToastNotification] with AppId {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe, Id , Sequence Number 0 and XML: <?xml version="1.0" encoding="utf-8"?><toast><visual><binding template="ToastGeneric"><text>{Default Notification}</text><text placement="attribution">via Pester</text></binding></visual></toast>".'
+            $Expected = 'What if: Performing the operation "Submit-BTNotification" on target "submitting: [ToastNotification] with AppId {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe, Id , Sequence Number  and XML: <?xml version="1.0" encoding="utf-8"?><toast><visual><binding template="ToastGeneric"><text>{Default Notification}</text><text placement="attribution">via Pester</text></binding></visual></toast>".'
             $Log | Should -Be $Expected
         }
     }

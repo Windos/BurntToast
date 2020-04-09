@@ -57,8 +57,72 @@
 
     $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::new()
 
-    $ToastXml.LoadXml($Content.GetContent())
+    if (-not $DataBinding) {
+        $CleanContent = $Content.GetContent().Replace('<text>{', '<text>')
+        $CleanContent = $CleanContent.Replace('}</text>', '</text>')
+        $CleanContent = $CleanContent.Replace('="{', '="')
+        $CleanContent = $CleanContent.Replace('}" ', '" ')
+
+        $ToastXml.LoadXml($CleanContent)
+    } else {
+        $ToastXml.LoadXml($Content.GetContent())
+    }
+
     $Toast = [Windows.UI.Notifications.ToastNotification]::new($ToastXml)
+
+    if ($DataBinding) {
+        $DataDictionary = New-Object 'system.collections.generic.dictionary[string,string]'
+
+        if ($DataBinding) {
+            foreach ($Key in $DataBinding.Keys) {
+                $DataDictionary.Add($Key, $DataBinding.$Key)
+            }
+        }
+
+        foreach ($Child in $Content.Visual.BindingGeneric.Children) {
+            if ($Child.GetType().Name -eq 'AdaptiveText') {
+                $BindingName = $Child.Text.BindingName
+
+                if (!$DataDictionary.ContainsKey($BindingName)) {
+                    $DataDictionary.Add($BindingName, $BindingName)
+                }
+            } elseif ($Child.GetType().Name -eq 'AdaptiveProgressBar') {
+                if ($Child.Title) {
+                    $BindingName = $Child.Title.BindingName
+
+                    if (!$DataDictionary.ContainsKey($BindingName)) {
+                        $DataDictionary.Add($BindingName, $BindingName)
+                    }
+                }
+
+                if ($Child.Value) {
+                    $BindingName = $Child.Value.BindingName
+
+                    if (!$DataDictionary.ContainsKey($BindingName)) {
+                        $DataDictionary.Add($BindingName, $BindingName)
+                    }
+                }
+
+                if ($Child.ValueStringOverride) {
+                    $BindingName = $Child.ValueStringOverride.BindingName
+
+                    if (!$DataDictionary.ContainsKey($BindingName)) {
+                        $DataDictionary.Add($BindingName, $BindingName)
+                    }
+                }
+
+                if ($Child.Status) {
+                    $BindingName = $Child.Status.BindingName
+
+                    if (!$DataDictionary.ContainsKey($BindingName)) {
+                        $DataDictionary.Add($BindingName, $BindingName)
+                    }
+                }
+            }
+        }
+
+        $Toast.Data = [Windows.UI.Notifications.NotificationData]::new($DataDictionary)
+    }
 
     if ($UniqueIdentifier) {
         $Toast.Group = $UniqueIdentifier
@@ -72,58 +136,6 @@
     if ($SuppressPopup.IsPresent) {
         $Toast.SuppressPopup = $SuppressPopup
     }
-
-    $DataDictionary = New-Object 'system.collections.generic.dictionary[string,string]'
-
-    if ($DataBinding) {
-        foreach ($Key in $DataBinding.Keys) {
-            $DataDictionary.Add($Key, $DataBinding.$Key)
-        }
-    }
-
-    foreach ($Child in $Content.Visual.BindingGeneric.Children) {
-        if ($Child.GetType().Name -eq 'AdaptiveText') {
-            $BindingName = $Child.Text.BindingName
-
-            if (!$DataDictionary.ContainsKey($BindingName)) {
-                $DataDictionary.Add($BindingName, $BindingName)
-            }
-        } elseif ($Child.GetType().Name -eq 'AdaptiveProgressBar') {
-            if ($Child.Title) {
-                $BindingName = $Child.Title.BindingName
-
-                if (!$DataDictionary.ContainsKey($BindingName)) {
-                    $DataDictionary.Add($BindingName, $BindingName)
-                }
-            }
-
-            if ($Child.Value) {
-                $BindingName = $Child.Value.BindingName
-
-                if (!$DataDictionary.ContainsKey($BindingName)) {
-                    $DataDictionary.Add($BindingName, $BindingName)
-                }
-            }
-
-            if ($Child.ValueStringOverride) {
-                $BindingName = $Child.ValueStringOverride.BindingName
-
-                if (!$DataDictionary.ContainsKey($BindingName)) {
-                    $DataDictionary.Add($BindingName, $BindingName)
-                }
-            }
-
-            if ($Child.Status) {
-                $BindingName = $Child.Status.BindingName
-
-                if (!$DataDictionary.ContainsKey($BindingName)) {
-                    $DataDictionary.Add($BindingName, $BindingName)
-                }
-            }
-        }
-    }
-
-    $Toast.Data = [Windows.UI.Notifications.NotificationData]::new($DataDictionary)
 
     if ($SequenceNumber) {
         $Toast.Data.SequenceNumber = $SequenceNumber

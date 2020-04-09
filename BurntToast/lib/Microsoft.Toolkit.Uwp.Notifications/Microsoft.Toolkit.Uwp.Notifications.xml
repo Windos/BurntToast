@@ -573,12 +573,6 @@
             </summary>
             <returns>The notification XML content as a string.</returns>
         </member>
-        <member name="M:Microsoft.Toolkit.Uwp.Notifications.BadgeGlyphContent.GetXml">
-            <summary>
-            Retrieves the notification XML content as a WinRT Xml document.
-            </summary>
-            <returns>The notification XML content as a WinRT Xml document.</returns>
-        </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.BadgeGlyphValue">
             <summary>
             The types of glyphs that can be placed on a badge.
@@ -689,23 +683,11 @@
             </summary>
             <returns>The notification Xml content as a string.</returns>
         </member>
-        <member name="M:Microsoft.Toolkit.Uwp.Notifications.BadgeNumericContent.GetXml">
-            <summary>
-            Retrieves the notification Xml content as a WinRT Xml document.
-            </summary>
-            <returns>The notification Xml content as a WinRT Xml document.</returns>
-        </member>
         <member name="M:Microsoft.Toolkit.Uwp.Notifications.BaseElement.GetContent">
             <summary>
             Retrieves the notification XML content as a string.
             </summary>
             <returns>The notification XML content as a string.</returns>
-        </member>
-        <member name="M:Microsoft.Toolkit.Uwp.Notifications.BaseElement.GetXml">
-            <summary>
-            Retrieves the notification XML content as a WinRT XML document.
-            </summary>
-            <returns>The notification XML content as a WinRT XML document.</returns>
         </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.INotificationContent">
             <summary>
@@ -717,12 +699,6 @@
             Retrieves the notification Xml content as a string.
             </summary>
             <returns>The notification Xml content as a string.</returns>
-        </member>
-        <member name="M:Microsoft.Toolkit.Uwp.Notifications.INotificationContent.GetXml">
-            <summary>
-            Retrieves the notification Xml content as a WinRT Xml document.
-            </summary>
-            <returns>The notification Xml content as a WinRT Xml document.</returns>
         </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.NotificationContentValidationException">
             <summary>
@@ -743,6 +719,393 @@
             <param name="bindableProperty">The property to obtain.</param>
             <param name="absoluteValue">The absolute value, if any.</param>
             <returns>The provided binding value, if it exists. Otherwise, falls back to the absolute value.</returns>
+        </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationHistoryCompat">
+            <summary>
+            Manages the toast notifications for an app including the ability the clear all toast history and removing individual toasts.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationHistoryCompat.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationHistoryCompat"/> class.
+            Do not call this. Instead, call <see cref="P:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationManagerCompat.History"/> to obtain an instance.
+            </summary>
+            <param name="aumid">An AUMID that uniquely identifies your application.</param>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationHistoryCompat.Clear">
+            <summary>
+            Removes all notifications sent by this app from action center.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationHistoryCompat.GetHistory">
+            <summary>
+            Gets all notifications sent by this app that are currently still in Action Center.
+            </summary>
+            <returns>A collection of toasts.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationHistoryCompat.Remove(System.String)">
+            <summary>
+            Removes an individual toast, with the specified tag label, from action center.
+            </summary>
+            <param name="tag">The tag label of the toast notification to be removed.</param>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationHistoryCompat.Remove(System.String,System.String)">
+            <summary>
+            Removes a toast notification from the action using the notification's tag and group labels.
+            </summary>
+            <param name="tag">The tag label of the toast notification to be removed.</param>
+            <param name="group">The group label of the toast notification to be removed.</param>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationHistoryCompat.RemoveGroup(System.String)">
+            <summary>
+            Removes a group of toast notifications, identified by the specified group label, from action center.
+            </summary>
+            <param name="group">The group label of the toast notifications to be removed.</param>
+        </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationManagerCompat">
+            <summary>
+            Helper for .NET Framework applications to display toast notifications and respond to toast events
+            </summary>
+        </member>
+        <member name="F:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationManagerCompat.ToastActivatedLaunchArg">
+            <summary>
+            A constant that is used as the launch arg when your EXE is launched from a toast notification.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationManagerCompat.RegisterAumidAndComServer``1(System.String)">
+            <summary>
+            If not running under the Desktop Bridge, you must call this method to register your AUMID with the Compat library and to
+            register your COM CLSID and EXE in LocalServer32 registry. Feel free to call this regardless, and we will no-op if running
+            under Desktop Bridge. Call this upon application startup, before calling any other APIs.
+            </summary>
+            <typeparam name="T">Your implementation of NotificationActivator. Must have GUID and ComVisible attributes on class.</typeparam>
+            <param name="aumid">An AUMID that uniquely identifies your application.</param>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationManagerCompat.RegisterActivator``1">
+            <summary>
+            Registers the activator type as a COM server client so that Windows can launch your activator.
+            </summary>
+            <typeparam name="T">Your implementation of NotificationActivator. Must have GUID and ComVisible attributes on class.</typeparam>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationManagerCompat.CreateToastNotifier">
+            <summary>
+            Creates a toast notifier. You must have called <see cref="M:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationManagerCompat.RegisterActivator``1"/> first (and also <see cref="M:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationManagerCompat.RegisterAumidAndComServer``1(System.String)"/> if you're a classic Win32 app), or this will throw an exception.
+            </summary>
+            <returns><see cref="T:Windows.UI.Notifications.ToastNotifier"/></returns>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationManagerCompat.History">
+            <summary>
+            Gets the <see cref="T:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationHistoryCompat"/> object. You must have called <see cref="M:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationManagerCompat.RegisterActivator``1"/> first (and also <see cref="M:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationManagerCompat.RegisterAumidAndComServer``1(System.String)"/> if you're a classic Win32 app), or this will throw an exception.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationManagerCompat.CanUseHttpImages">
+            <summary>
+            Gets a value indicating whether http images can be used within toasts. This is true if running under Desktop Bridge.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.DesktopNotificationManagerCompat.DesktopBridgeHelpers">
+            <summary>
+            Code from https://github.com/qmatteoq/DesktopBridgeHelpers/edit/master/DesktopBridge.Helpers/Helpers.cs
+            </summary>
+        </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.NotificationActivator">
+            <summary>
+            Apps must implement this activator to handle notification activation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.NotificationActivator.Activate(System.String,System.String,Microsoft.Toolkit.Uwp.Notifications.NotificationActivator.NOTIFICATION_USER_INPUT_DATA[],System.UInt32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.NotificationActivator.OnActivated(System.String,Microsoft.Toolkit.Uwp.Notifications.NotificationUserInput,System.String)">
+            <summary>
+            This method will be called when the user clicks on a foreground or background activation on a toast. Parent app must implement this method.
+            </summary>
+            <param name="arguments">The arguments from the original notification. This is either the launch argument if the user clicked the body of your toast, or the arguments from a button on your toast.</param>
+            <param name="userInput">Text and selection values that the user entered in your toast.</param>
+            <param name="appUserModelId">Your AUMID.</param>
+        </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.NotificationActivator.NOTIFICATION_USER_INPUT_DATA">
+            <summary>
+            A single user input key/value pair.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Toolkit.Uwp.Notifications.NotificationActivator.NOTIFICATION_USER_INPUT_DATA.Key">
+            <summary>
+            The key of the user input.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Toolkit.Uwp.Notifications.NotificationActivator.NOTIFICATION_USER_INPUT_DATA.Value">
+            <summary>
+            The value of the user input.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.NotificationActivator.INotificationActivationCallback">
+            <summary>
+            The COM callback that is triggered when your notification is clicked.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.NotificationActivator.INotificationActivationCallback.Activate(System.String,System.String,Microsoft.Toolkit.Uwp.Notifications.NotificationActivator.NOTIFICATION_USER_INPUT_DATA[],System.UInt32)">
+            <summary>
+            The method called when your notification is clicked.
+            </summary>
+            <param name="appUserModelId">The app id of the app that sent the toast.</param>
+            <param name="invokedArgs">The activation arguments from the toast.</param>
+            <param name="data">The user input from the toast.</param>
+            <param name="dataCount">The number of user inputs.</param>
+        </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.NotificationUserInput">
+            <summary>
+            Text and selection values that the user entered on your notification. The Key is the ID of the input, and the Value is what the user entered.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.NotificationUserInput.Item(System.String)">
+            <summary>
+            Gets the value of an input with the given key.
+            </summary>
+            <param name="key">The key of the inpupt.</param>
+            <returns>The value of the input.</returns>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.NotificationUserInput.Keys">
+            <summary>
+            Gets all the keys of the inputs.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.NotificationUserInput.Values">
+            <summary>
+            Gets all the values of the inputs.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.NotificationUserInput.Count">
+            <summary>
+            Gets how many inputs there were.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.NotificationUserInput.ContainsKey(System.String)">
+            <summary>
+            Checks whether any inpupts have the given key.
+            </summary>
+            <param name="key">The key to look for.</param>
+            <returns>A boolean representing whether any inputs have the given key.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.NotificationUserInput.GetEnumerator">
+            <summary>
+            Gets an enumerator of the inputs.
+            </summary>
+            <returns>An enumerator of the inputs.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.NotificationUserInput.TryGetValue(System.String,System.String@)">
+            <summary>
+            Tries to get the input value for the given key.
+            </summary>
+            <param name="key">The key of the input to look for.</param>
+            <param name="value">The value of the input.</param>
+            <returns>True if found an input with the specified key, else false.</returns>
+        </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder">
+            <summary>
+            Builder class used to create <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContent"/>
+            </summary>
+            <summary>
+            Builder class used to create <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContent"/>
+            </summary>
+        </member>
+        <member name="F:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.AllSize">
+            <summary>
+            Flag used to create all tile size (Small , Medium, Large and Wide)
+            </summary>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.Content">
+            <summary>
+            Gets internal instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContent"/>. This is equivalent to the call to <see cref="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.GetTileContent"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.AddTile(Microsoft.Toolkit.Uwp.Notifications.TileSize,Microsoft.Toolkit.Uwp.Notifications.ITileBindingContent)">
+            <summary>
+            Add a tile layout size that the notification will be displayed on.
+            </summary>
+            <param name="size">The size of tile that the notification will be displayed on.</param>
+            <param name="tileContent">Specialized tile content. Use for special tile template. Default to NULL.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.SetBranding(Microsoft.Toolkit.Uwp.Notifications.TileBranding,Microsoft.Toolkit.Uwp.Notifications.TileSize)">
+            <summary>
+            Set how the tile notification should display the application branding.
+            </summary>
+            <param name="branding">How branding should appear on the tile</param>
+            <param name="size">The tile size that the <paramref name="branding"/> parameter should be applied to. Default to all currently supported tile size.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.SetDisplayName(System.String,Microsoft.Toolkit.Uwp.Notifications.TileSize)">
+            <summary>
+            Set the name that will be used to override the application's name on the tile notification.
+            </summary>
+            <param name="displayName">Custom name to display on the tile in place of the application's name</param>
+            <param name="size">The tile size that <paramref name="displayName"/> parameter should be applied to. Default to all currently supported tile size.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.SetBackgroundImage(System.Uri,Microsoft.Toolkit.Uwp.Notifications.TileSize,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},Microsoft.Toolkit.Uwp.Notifications.TileBackgroundImageCrop)">
+            <summary>
+            Set the optional background image that stays behind the tile notification.
+            </summary>
+            <param name="imageUri">Source of the background image</param>
+            <param name="size">The tile size that the background image should be applied to. Default to all currently supported tile size.</param>
+            <param name="alternateText">Description of the background image, for user of assistance technology</param>
+            <param name="addImageQuery">
+            Indicating whether Windows should append a query string to the image URI supplied in the Tile notification.
+            Use this attribute if your server hosts images and can handle query strings, either by retrieving an image variant based on the query strings or by ignoring the query string and returning the image as specified without the query string.
+            This query string specifies scale, contrast setting, and language.
+            </param>
+            <param name="hintOverlay">The opacity of the black overlay on the background image.</param>
+            <param name="hintCrop">Desired cropping of the image.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.SetBackgroundImage(Microsoft.Toolkit.Uwp.Notifications.TileBackgroundImage,Microsoft.Toolkit.Uwp.Notifications.TileSize)">
+            <summary>
+            Set the optional background image that stays behind the tile notification.
+            </summary>
+            <param name="backgroundImage">An instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileBackgroundImage"/> as the background image for the tile.</param>
+            <param name="size">The tile size that the background image should be applied to. Default to all currently supported tile size.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.SetPeekImage(System.Uri,Microsoft.Toolkit.Uwp.Notifications.TileSize,System.String,System.Nullable{System.Boolean},System.Nullable{System.Int32},Microsoft.Toolkit.Uwp.Notifications.TilePeekImageCrop)">
+            <summary>
+            Set the Tile's Peek Image that animate from the top of the tile notification.
+            </summary>
+            <param name="imageUri">Source of the peek image</param>
+            <param name="size">The tile size that the peek image should be applied to. Default to all currently supported tile size.</param>
+            <param name="alternateText">Description of the peek image, for user of assistance technology</param>
+            <param name="addImageQuery">
+            Indicating whether Windows should append a query string to the image URI supplied in the Tile notification.
+            Use this attribute if your server hosts images and can handle query strings, either by retrieving an image variant based on the query strings or by ignoring the query string and returning the image as specified without the query string.
+            This query string specifies scale, contrast setting, and language.
+            </param>
+            <param name="hintOverlay">The opacity of the black overlay on the peek image.</param>
+            <param name="hintCrop">Desired cropping of the image.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.SetPeekImage(Microsoft.Toolkit.Uwp.Notifications.TilePeekImage,Microsoft.Toolkit.Uwp.Notifications.TileSize)">
+            <summary>
+            Set the Tile's Peek Image that animate from the top of the tile notification.
+            </summary>
+            <param name="peekImage">An instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TilePeekImage"/> for the Tile's peek image </param>
+            <param name="size">The tile size that the peek image should be applied to. Default to all currently supported tile size.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.SetTextStacking(Microsoft.Toolkit.Uwp.Notifications.TileTextStacking,Microsoft.Toolkit.Uwp.Notifications.TileSize)">
+            <summary>
+            Set the text stacking (vertical alignment) of the entire binding element.
+            </summary>
+            <param name="textStacking">Text Stacking Option</param>
+            <param name="size">The tile size that the peek image should be applied to. Default to all currently supported tile size.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.SetActivationArgument(System.String,Microsoft.Toolkit.Uwp.Notifications.TileSize)">
+            <summary>
+            Set the tile's activation arguments for chasable tile notification.
+            </summary>
+            <param name="args">App-Defined custom arguments that will be passed in when the user click on the tile when this tile notification is being displayed.</param>
+            <param name="size">The tile size that the custom argument should be applied to. Default to all currently supported tile size.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.AddText(System.String,Microsoft.Toolkit.Uwp.Notifications.TileSize,System.Nullable{Microsoft.Toolkit.Uwp.Notifications.AdaptiveTextStyle},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Microsoft.Toolkit.Uwp.Notifications.AdaptiveTextAlign},System.String)">
+            <summary>
+            Add a custom text that will appear on the tile notification.
+            </summary>
+            <param name="text">Custom text to display on the tile.</param>
+            <param name="size">The tile size that the custom text would be added to. Default to all currently supported tile size.</param>
+            <param name="hintStyle">Style that controls the text's font size, weight, and opacity.</param>
+            <param name="hintWrap">Indicating whether text wrapping is enabled. For Tiles, this is false by default.</param>
+            <param name="hintMaxLines">The maximum number of lines the text element is allowed to display. For Tiles, this is infinity by default</param>
+            <param name="hintMinLines">The minimum number of lines the text element must display.</param>
+            <param name="hintAlign">The horizontal alignment of the text</param>
+            <param name="language">
+            The target locale of the XML payload, specified as a BCP-47 language tags such as "en-US" or "fr-FR". The locale specified here overrides any other specified locale, such as that in binding or visual.
+            </param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.AddAdaptiveTileVisualChild(Microsoft.Toolkit.Uwp.Notifications.ITileBindingContentAdaptiveChild,Microsoft.Toolkit.Uwp.Notifications.TileSize)">
+            <summary>
+            Add an adaptive child to the tile notification.
+            </summary>
+            <param name="child">An adaptive child to add</param>
+            <param name="size">Tile size that the adaptive child should be added to. Default to all currently supported tile size.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder"/></returns>
+            <remarks>
+            This can be used to add Group and Subgroup to the tile.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.GetTileContent">
+            <summary>
+            Get the instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContent"/> that has been built by the builder with specified configuration so far.
+            </summary>
+            <returns>An instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileContent"/> that can be used to create tile notification.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.CreateContactTileContent(System.Uri,System.String,System.String,System.Nullable{System.Boolean},System.String)">
+            <summary>
+            Helper method for creating a tile notification content for using Contact tile template.
+            </summary>
+            <param name="contactImageUri">Source for the contact picture</param>
+            <param name="contactName">Name of the contact</param>
+            <param name="contactImageAltText">A description of the contact image, for users of assistive technologies.</param>
+            <param name="contactImageAddImageQuery">Indicating whether Windows should append a query string to the image URI supplied in the Tile notification.</param>
+            <param name="textLanguage">Gets or sets the target locale of the XML payload, specified as a BCP-47 language tags such as "en-US" or "fr-FR". The locale specified here overrides any other specified locale, such as that in binding or visual.</param>
+            <returns>An instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileBindingContentContact"/> represent a payload of a tile notification.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.CreateIconicTileContent(System.Uri,System.String,System.Nullable{System.Boolean})">
+            <summary>
+            Helper method for creating a tile notification content for using Iconic tile template.
+            </summary>
+            <param name="iconImageUri">Source of the icon image.</param>
+            <param name="iconImageAltText">A description of the icon image, for users of assistive technologies.</param>
+            <param name="iconImageAddImageQuery">Indicating whether Windows should append a query string to the image URI supplied in the Tile notification.</param>
+            <returns>An instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileBindingContentIconic"/> represent a payload of a tile notification.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.CreatePeopleTileContent(System.Uri[])">
+            <summary>
+            Helper method for creating a tile notification content for using People tile template.
+            </summary>
+            <param name="peoplePictureSources">Sources of pictures that will be used on the people tile.</param>
+            <returns>An instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileBindingContentPeople"/> represent a payload of a tile notification.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.CreatePeopleTileContent(System.ValueTuple{System.Uri,System.String,System.Nullable{System.Boolean}}[])">
+            <summary>
+            Helper method for creating a tile notification content for using People tile template.
+            </summary>
+            <param name="peoplePictures">Sources of pictures with description and image query indicator that will be used on the people tile.</param>
+            <returns>An instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileBindingContentPeople"/> represent a payload of a tile notification.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.CreatePeopleTileContent(System.Collections.Generic.IEnumerable{Microsoft.Toolkit.Uwp.Notifications.TileBasicImage})">
+            <summary>
+            Helper method for creating a tile notification content for using People tile template.
+            </summary>
+            <param name="peoplePictures">Pictures that will be used on the people tile.</param>
+            <returns>An instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileBindingContentPeople"/> represent a payload of a tile notification.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.CreatePhotosTileContent(System.Uri[])">
+            <summary>
+            Helper method for creating a tile notification content for using Photos tile template.
+            </summary>
+            <param name="photoSources">Sources of pictures that will be used on the photos tile.</param>
+            <returns>An instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileBindingContentPhotos"/> represent a payload of a tile notification.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.CreatePhotosTileContent(System.ValueTuple{System.Uri,System.String,System.Nullable{System.Boolean}}[])">
+            <summary>
+            Helper method for creating a tile notification content for using Photos tile template.
+            </summary>
+            <param name="photos">Sources of pictures with description and addImageQuery indicator that will be used for the photos tile.</param>
+            <returns>An instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileBindingContentPhotos"/> represent a payload of a tile notification.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContentBuilder.CreatePhotosTileContent(System.Collections.Generic.IEnumerable{Microsoft.Toolkit.Uwp.Notifications.TileBasicImage})">
+            <summary>
+            Helper method for creating a tile notification content for using Photos tile template.
+            </summary>
+            <param name="photos">Pictures that will be used for the photos tile.</param>
+            <returns>An instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.TileBindingContentPhotos"/> represent a payload of a tile notification.</returns>
         </member>
         <member name="P:Microsoft.Toolkit.Uwp.Notifications.Element_TileBinding.AddImageQuery">
              <summary>
@@ -1031,6 +1394,31 @@
             Desktop-only. Both the DisplayName and Square44x44Logo will be shown. On Mobile, this will fallback to Name.
             </summary>
         </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.TileSize">
+            <summary>
+            Represent the all tile sizes that are available.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Toolkit.Uwp.Notifications.TileSize.Small">
+            <summary>
+            Small Square Tile
+            </summary>
+        </member>
+        <member name="F:Microsoft.Toolkit.Uwp.Notifications.TileSize.Medium">
+            <summary>
+            Medium Square Tile
+            </summary>
+        </member>
+        <member name="F:Microsoft.Toolkit.Uwp.Notifications.TileSize.Wide">
+            <summary>
+            Wide Rectangle Tile
+            </summary>
+        </member>
+        <member name="F:Microsoft.Toolkit.Uwp.Notifications.TileSize.Large">
+            <summary>
+            Large Square Tile
+            </summary>
+        </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.TileContent">
             <summary>
             Base Tile element, which contains a single visual element.
@@ -1046,12 +1434,6 @@
             Retrieves the notification XML content as a string, so that it can be sent with a HTTP POST in a push notification.
             </summary>
             <returns>The notification XML content as a string.</returns>
-        </member>
-        <member name="M:Microsoft.Toolkit.Uwp.Notifications.TileContent.GetXml">
-            <summary>
-            Retrieves the notification XML content as a WinRT XmlDocument, so that it can be used with a local Tile notification's constructor on either <see cref="T:Windows.UI.Notifications.TileNotification"/> or <see cref="T:Windows.UI.Notifications.ScheduledTileNotification"/>.
-            </summary>
-            <returns>The notification XML content as a WinRT XmlDocument.</returns>
         </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.TileBackgroundImageCrop">
             <summary>
@@ -1237,6 +1619,238 @@
             <param name="lockText">The lock screen line text.</param>
             <param name="binding">The binding to look in for matches.</param>
             <returns>True if could re-use existing text element, otherwise false.</returns>
+        </member>
+        <member name="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder">
+            <summary>
+            Builder class used to create <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContent"/>
+            </summary>
+            <summary>
+            Builder class used to create <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContent"/>
+            </summary>
+            <summary>
+            Builder class used to create <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContent"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddButton(System.String,Microsoft.Toolkit.Uwp.Notifications.ToastActivationType,System.String,System.Uri)">
+            <summary>
+            Add a button to the current toast.
+            </summary>
+            <param name="content">Text to display on the button.</param>
+            <param name="activationType">Type of activation this button will use when clicked. Defaults to Foreground.</param>
+            <param name="arguments">App-defined string of arguments that the app can later retrieve once it is activated when the user clicks the button.</param>
+            <param name="imageUri">Optional image icon for the button to display (required for buttons adjacent to inputs like quick reply).</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddButton(Microsoft.Toolkit.Uwp.Notifications.IToastButton)">
+            <summary>
+            Add a button to the current toast.
+            </summary>
+            <param name="button">An instance of class that implement <see cref="T:Microsoft.Toolkit.Uwp.Notifications.IToastButton"/> for the button that will be used on the toast.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddButton(System.String,System.String,Microsoft.Toolkit.Uwp.Notifications.ToastActivationType,System.String,System.Uri)">
+            <summary>
+            Add an button to the toast that will be display to the right of the input text box, achieving a quick reply scenario.
+            </summary>
+            <param name="textBoxId">ID of an existing <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastTextBox"/> in order to have this button display to the right of the input, achieving a quick reply scenario.</param>
+            <param name="content">Text to display on the button.</param>
+            <param name="activationType">Type of activation this button will use when clicked. Defaults to Foreground.</param>
+            <param name="arguments">App-defined string of arguments that the app can later retrieve once it is activated when the user clicks the button.</param>
+            <param name="imageUri">An optional image icon for the button to display (required for buttons adjacent to inputs like quick reply)</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddInputTextBox(System.String,System.String,System.String)">
+            <summary>
+            Add an input text box that the user can type into.
+            </summary>
+            <param name="id">Required ID property so that developers can retrieve user input once the app is activated.</param>
+            <param name="placeHolderContent">Placeholder text to be displayed on the text box when the user hasn't typed any text yet.</param>
+            <param name="title">Title text to display above the text box.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddComboBox(System.String,System.ValueTuple{System.String,System.String}[])">
+            <summary>
+            Add a combo box / drop-down menu that contain options for user to select.
+            </summary>
+            <param name="id">Required ID property used so that developers can retrieve user input once the app is activated.</param>
+            <param name="choices">List of choices that will be available for user to select.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddComboBox(System.String,System.String,System.ValueTuple{System.String,System.String}[])">
+            <summary>
+            Add a combo box / drop-down menu that contain options for user to select.
+            </summary>
+            <param name="id">Required ID property used so that developers can retrieve user input once the app is activated.</param>
+            <param name="defaultSelectionBoxItemId">Sets which item is selected by default, and refers to the Id property of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem"/>. If you do not provide this or null, the default selection will be empty (user sees nothing).</param>
+            <param name="choices">List of choices that will be available for user to select.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddComboBox(System.String,System.String,System.String,System.ValueTuple{System.String,System.String}[])">
+            <summary>
+            Add a combo box / drop-down menu that contain options for user to select.
+            </summary>
+            <param name="id">Required ID property used so that developers can retrieve user input once the app is activated.</param>
+            <param name="title">Title text to display above the Combo Box.</param>
+            <param name="defaultSelectionBoxItemId">Sets which item is selected by default, and refers to the Id property of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem"/>. If you do not provide this or null, the default selection will be empty (user sees nothing).</param>
+            <param name="choices">List of choices that will be available for user to select.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddComboBox(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}})">
+            <summary>
+            Add a combo box / drop-down menu that contain options for user to select.
+            </summary>
+            <param name="id">Required ID property used so that developers can retrieve user input once the app is activated.</param>
+            <param name="title">Title text to display above the Combo Box.</param>
+            <param name="defaultSelectionBoxItemId">Sets which item is selected by default, and refers to the Id property of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem"/>. If you do not provide this or null, the default selection will be empty (user sees nothing).</param>
+            <param name="choices">List of choices that will be available for user to select.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddToastInput(Microsoft.Toolkit.Uwp.Notifications.IToastInput)">
+            <summary>
+            Add an input option to the Toast.
+            </summary>
+            <param name="input">An instance of a class that impmement <see cref="T:Microsoft.Toolkit.Uwp.Notifications.IToastInput"/> that will be used on the toast.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="P:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.Content">
+            <summary>
+            Gets internal instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContent"/>. This is equivalent to the call to <see cref="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.GetToastContent"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddCustomTimeStamp(System.DateTime)">
+            <summary>
+            Add custom time stamp on the toast to override the time display on the toast.
+            </summary>
+            <param name="dateTime">Custom Time to be displayed on the toast</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddHeader(System.String,System.String,System.String)">
+            <summary>
+            Add a header to a toast.
+            </summary>
+            <param name="id">A developer-created identifier that uniquely identifies this header. If two notifications have the same header id, they will be displayed underneath the same header in Action Center.</param>
+            <param name="title">A title for the header.</param>
+            <param name="arguments">A developer-defined string of arguments that is returned to the app when the user clicks this header.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+            <remarks>More info about toast header: https://docs.microsoft.com/en-us/windows/uwp/design/shell/tiles-and-notifications/toast-headers </remarks>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddToastActivationInfo(System.String,Microsoft.Toolkit.Uwp.Notifications.ToastActivationType)">
+            <summary>
+            Add info that can be used by the application when the app was activated/launched by the toast.
+            </summary>
+            <param name="launchArgs">Custom app-defined launch arguments to be passed along on toast activation</param>
+            <param name="activationType">Set the activation type that will be used when the user click on this toast</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.SetToastDuration(Microsoft.Toolkit.Uwp.Notifications.ToastDuration)">
+            <summary>
+            Sets the amount of time the Toast should display. You typically should use the
+            Scenario attribute instead, which impacts how long a Toast stays on screen.
+            </summary>
+            <param name="duration">Duration of the toast</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.SetToastScenario(Microsoft.Toolkit.Uwp.Notifications.ToastScenario)">
+            <summary>
+             Sets the scenario, to make the Toast behave like an alarm, reminder, or more.
+            </summary>
+            <param name="scenario">Scenario to be used for the toast's behavior</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddAudio(System.Uri,System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+            <summary>
+            Set custom audio to go along with the toast.
+            </summary>
+            <param name="src">Source to the media that will be played when the toast is pop</param>
+            <param name="loop">Indicating whether sound should repeat as long as the Toast is shown; false to play only once (default).</param>
+            <param name="silent">Indicating whether sound is muted; false to allow the Toast notification sound to play (default).</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.GetToastContent">
+            <summary>
+            Get the instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContent"/> that has been built by the builder with specified configuration so far.
+            </summary>
+            <returns>An instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContent"/> that can be used to create tile notification.</returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddAttributionText(System.String,System.String)">
+            <summary>
+            Add an Attribution Text to be displayed on the toast.
+            </summary>
+            <param name="text">Text to be displayed as Attribution Text</param>
+            <param name="language">The target locale of the XML payload, specified as a BCP-47 language tags such as "en-US" or "fr-FR".</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddAppLogoOverride(System.Uri,System.Nullable{Microsoft.Toolkit.Uwp.Notifications.ToastGenericAppLogoCrop},System.String,System.Nullable{System.Boolean})">
+            <summary>
+            Override the app logo with custom image of choice that will be displayed on the toast.
+            </summary>
+            <param name="uri">The URI of the image. Can be from your application package, application data, or the internet. Internet images must be less than 200 KB in size.</param>
+            <param name="hintCrop">Specify how the image should be cropped.</param>
+            <param name="alternateText">A description of the image, for users of assistive technologies.</param>
+            <param name="addImageQuery">A value whether Windows is allowed to append a query string to the image URI supplied in the Tile notification.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddHeroImage(System.Uri,System.String,System.Nullable{System.Boolean})">
+            <summary>
+            Add a hero image to the toast.
+            </summary>
+            <param name="uri">The URI of the image. Can be from your application package, application data, or the internet. Internet images must be less than 200 KB in size.</param>
+            <param name="alternateText">A description of the image, for users of assistive technologies.</param>
+            <param name="addImageQuery">A value whether Windows is allowed to append a query string to the image URI supplied in the Tile notification.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddInlineImage(System.Uri,System.String,System.Nullable{System.Boolean},System.Nullable{Microsoft.Toolkit.Uwp.Notifications.AdaptiveImageCrop},System.Nullable{System.Boolean})">
+            <summary>
+            Add an image inline with other toast content.
+            </summary>
+            <param name="uri">The URI of the image. Can be from your application package, application data, or the internet. Internet images must be less than 200 KB in size.</param>
+            <param name="alternateText">A description of the image, for users of assistive technologies.</param>
+            <param name="addImageQuery">A value whether Windows is allowed to append a query string to the image URI supplied in the Tile notification.</param>
+            <param name="hintCrop">A value whether a margin is removed. images have an 8px margin around them.</param>
+            <param name="hintRemoveMargin">the horizontal alignment of the image.This is only supported when inside an <see cref="T:Microsoft.Toolkit.Uwp.Notifications.AdaptiveSubgroup"/>.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddProgressBar(System.String,System.Nullable{System.Double},System.Boolean,System.String,System.String)">
+            <summary>
+            Add a progress bar to the toast.
+            </summary>
+            <param name="title">Title of the progress bar.</param>
+            <param name="value">Value of the progress bar. Default is 0</param>
+            <param name="isIndeterminate">Determine if the progress bar value should be indeterminate. Default to false.</param>
+            <param name="valueStringOverride">An optional string to be displayed instead of the default percentage string. If this isn't provided, something like "70%" will be displayed.</param>
+            <param name="status">A status string which is displayed underneath the progress bar. This string should reflect the status of the operation, like "Downloading..." or "Installing...". Default to empty.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+            <remarks>More info at: https://docs.microsoft.com/en-us/windows/uwp/design/shell/tiles-and-notifications/toast-progress-bar </remarks>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddText(System.String,System.Nullable{Microsoft.Toolkit.Uwp.Notifications.AdaptiveTextStyle},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{Microsoft.Toolkit.Uwp.Notifications.AdaptiveTextAlign},System.String)">
+            <summary>
+            Add text to the toast.
+            </summary>
+            <param name="text">Custom text to display on the tile.</param>
+            <param name="hintStyle">Style that controls the text's font size, weight, and opacity.</param>
+            <param name="hintWrap">Indicating whether text wrapping is enabled. For Tiles, this is false by default.</param>
+            <param name="hintMaxLines">The maximum number of lines the text element is allowed to display. For Tiles, this is infinity by default</param>
+            <param name="hintMinLines">The minimum number of lines the text element must display.</param>
+            <param name="hintAlign">The horizontal alignment of the text</param>
+            <param name="language">
+            The target locale of the XML payload, specified as a BCP-47 language tags such as "en-US" or "fr-FR". The locale specified here overrides any other specified locale, such as that in binding or visual.
+            </param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
+            <exception cref="T:System.InvalidOperationException">Throws when attempting to add/reserve more than 4 lines on a single toast. </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Throws when <paramref name="hintMaxLines"/> value is larger than 2. </exception>
+            <remarks>More info at: https://docs.microsoft.com/en-us/windows/uwp/design/shell/tiles-and-notifications/adaptive-interactive-toasts#text-elements</remarks>
+        </member>
+        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder.AddVisualChild(Microsoft.Toolkit.Uwp.Notifications.IToastBindingGenericChild)">
+            <summary>
+            Add a visual element to the toast.
+            </summary>
+            <param name="child">An instance of a class that implement <see cref="T:Microsoft.Toolkit.Uwp.Notifications.IToastBindingGenericChild"/>.</param>
+            <returns>The current instance of <see cref="T:Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder"/></returns>
         </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.ToastDuration">
             <summary>
@@ -1830,12 +2444,6 @@
             Retrieves the notification XML content as a string, so that it can be sent with a HTTP POST in a push notification.
             </summary>
             <returns>The notification XML content as a string.</returns>
-        </member>
-        <member name="M:Microsoft.Toolkit.Uwp.Notifications.ToastContent.GetXml">
-            <summary>
-            Retrieves the notification XML content as a WinRT XmlDocument, so that it can be used with a local Toast notification's constructor on either <see cref="T:Windows.UI.Notifications.ToastNotification"/> or <see cref="T:Windows.UI.Notifications.ScheduledToastNotification"/>.
-            </summary>
-            <returns>The notification XML content as a WinRT XmlDocument.</returns>
         </member>
         <member name="T:Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem">
             <summary>

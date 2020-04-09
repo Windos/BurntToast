@@ -109,6 +109,7 @@ Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download
 ![Example: API Call](/Examples/Example08/ApiToast.png)
 
 ### [Windows 10 Shoulder Tap Notification](/Examples/Example10)
+
 ```powershell
 $Image = 'https://i.imgur.com/WKiNp5o.gif'
 $Contact = 'stormy@example.com'
@@ -116,13 +117,33 @@ $Text = 'First Shoulder Tap', 'This is for the fallback toast.'
 
 New-BurntToastShoulderTap -Image $Image -Person $Contact -Text $Text
 ```
+
 ![Example: Shoulder Tap feature in Windows 10](/Examples/Example10/result.gif)
 
 ## Releases
 
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
 
-- [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.7.1.zip) (Development/Raw Repo)
+- [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.7.2.zip) (Development/Raw Repo)
+
+- [v0.7.1](https://github.com/Windos/BurntToast/releases/download/v0.7.1/BurntToast.zip)
+
+  - Update: Microsoft Community Toolkit to 6.0.0
+
+  - New: Support relative paths on images
+
+  - New: "ScheduledToast" switch added to `Get-BTHistory` which returns scheduled or snoozed toast notifications
+
+  - Enhancement: Libraries only loaded on module import if libraries not already loaded
+
+  - Enhancement: Validate that image paths exist
+
+  - Fix: Reverted to XML clean up to remove curly braces if databindings are not being used (Issue #72)
+
+  - Known Issues:
+
+    - Regardless of what snooze option is chosen, a snoozed toast will re-appear after 9 minutes
+    - Cause is unknown and isn''t unique to v0.7.1, will be investigated while working on v0.7.2
 
 - [v0.7.0](https://github.com/Windos/BurntToast/releases/download/v0.7.0/BurntToast.zip)
 
