@@ -126,6 +126,10 @@ New-BurntToastShoulderTap -Image $Image -Person $Contact -Text $Text
 
 - [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.7.2.zip) (Development/Raw Repo)
 
+- [v0.7.2](https://github.com/Windos/BurntToast/releases/download/v0.7.2/BurntToast.zip)
+
+  - Features
+
 - [v0.7.1](https://github.com/Windos/BurntToast/releases/download/v0.7.1/BurntToast.zip)
 
   - Update: Microsoft Community Toolkit to 6.0.0
