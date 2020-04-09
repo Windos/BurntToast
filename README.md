@@ -143,7 +143,6 @@ New-BurntToastShoulderTap -Image $Image -Person $Contact -Text $Text
   - Known Issues:
 
     - Regardless of what snooze option is chosen, a snoozed toast will re-appear after 9 minutes
-
     - Cause is unknown and isn''t unique to v0.7.1, will be investigated while working on v0.7.2
 
 - [v0.7.0](https://github.com/Windos/BurntToast/releases/download/v0.7.0/BurntToast.zip)
