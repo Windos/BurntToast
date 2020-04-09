@@ -42,7 +42,17 @@
             IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/master/Media/BurntToast-Logo.png'
             ReleaseNotes = '# 0.7.1
 
-* Features here
+* Update: Microsoft Community Toolkit to 6.0.0
+* New: Support relative paths on images
+* New: "ScheduledToast" switch added to `Get-BTHistory` which returns scheduled or snoozed toast notifications
+* Enhancement: Libraries only loaded on module import if libraries not already loaded
+* Enhancement: Validate that image paths exist
+* Fix: Reverted to XML clean up to remove curly braces if databindings are not being used (Issue #72)
+
+## Known Issues
+
+* Regardless of what snooze option is chosen, a snoozed toast will re-appear after 9 minutes
+  * Cause is unknown and isn''t unique to v0.7.1, will be investigated while working on v0.7.2
 '
         }
     }
