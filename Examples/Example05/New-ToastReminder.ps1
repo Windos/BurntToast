@@ -21,6 +21,9 @@ This parameter is additive with the -Seconds and -Hours parameters
 The number of hours to wait before showing the reminder.
 This parameter is additive with the -Seconds and -Minutes parameters
 
+.PARAMETER AppLogo
+The logo to be displayed on the toast notification
+
 .PARAMETER PassThru
 If this parameter is specified, a reference to the event registration will be written to the pipeline
 (e.g. to allow the subscription to be cancelled). By default, this cmdlet produces no output
@@ -59,6 +62,10 @@ remain open for the reminder to trigger.
         [Int]
         $Hours,
 
+        [Parameter(Position = 5)]
+        [string]
+        $AppLogo,
+
         [switch]
         $Passthru
     )
@@ -84,11 +91,12 @@ remain open for the reminder to trigger.
         $Data = [pscustomobject]@{
             Title = $ReminderTitle
             Text = $ReminderText
+            $AppLogo = $AppLogo
         }
         $ElapsedAction = {
             $Data = $event.MessageData
             $Header = New-BTHeader -ID 1 -Title $Data.Title
-            New-BurntToastNotification -Text $Data.Text -Header $Header -AppLogo $null -SnoozeAndDismiss
+            New-BurntToastNotification -Text $Data.Text -Header $Header -AppLogo $Data.$AppLogo -SnoozeAndDismiss
             $Event | Unregister-Event
             $Timer.Dispose()
         }
