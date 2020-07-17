@@ -5,7 +5,7 @@ function Optimize-BTImageSource {
     )
 
     if ([bool]([System.Uri]$Source).IsUnc -or $Source -like 'http?://*') {
-        $RemoteFileName = $Source.Split('/\')[-1] -replace '[\[\]*?]',''
+        $RemoteFileName = "$(get-random -min 0 -max 100000)" +$Source.Split('/\')[-1] -replace '[\[\]*?]',''
 
         $NewFilePath = '{0}\{1}' -f $Env:TEMP, $RemoteFileName
 
