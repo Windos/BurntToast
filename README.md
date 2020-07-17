@@ -23,7 +23,9 @@ See the [PowerShell Gallery](http://www.powershellgallery.com/packages/BurntToas
 
 ### Manual Install
 
-Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download/v0.6.2/BurntToast.zip) and extract the contents into `C:\Users\[User]\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
+Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download/v0.6.2/BurntToast.zip) and extract the contents into `$env:userprofile\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
+
+if you using Powershell 6 or later, extract into `$env:userprofile\Documents\PowerShell\Modules\BurntToast`
 
 *Please remember to "**unblock**" the zip file before extracting the contents. Not doing so will result in the module not working correctly. This can be done via the file properties or with `Unblock-File`.*
 
