@@ -17,7 +17,7 @@ if ($Bootstrap.IsPresent) {
     # For testing Pester
     if (-not (Get-Module -Name Pester -ListAvailable) -or (Get-Module -Name Pester -ListAvailable)[0].Version -eq [Version]'3.4.0') {
         Write-Warning "Module 'Pester' is missing. Installing 'Pester' ..."
-        Install-Module -Name Pester -Scope CurrentUser -Force
+        Install-Module -Name Pester -Scope CurrentUser -Force -RequiredVersion 4.10.1
     }
 
     if (-not (Get-Module -Name PSCodeCovIo -ListAvailable)) {
