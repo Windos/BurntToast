@@ -20,6 +20,12 @@ if ($Bootstrap.IsPresent) {
         Install-Module -Name Pester -Scope CurrentUser -Force -RequiredVersion 4.10.1
     }
 
+    if ((Get-Module -Name Pester -ListAvailable)[0].Version -ne [Version]'4.10.1') {
+        Install-Module -Name Pester -Scope CurrentUser -Force -RequiredVersion 4.10.1
+    }
+
+    Import-Module -Name Pester -RequiredVersion 4.10.1
+
     if (-not (Get-Module -Name PSCodeCovIo -ListAvailable)) {
         Write-Warning "Module 'PSCodeCovIo' is missing. Installing 'PSCodeCovIo' ..."
         Install-Module -Name PSCodeCovIo -Scope CurrentUser -Force
