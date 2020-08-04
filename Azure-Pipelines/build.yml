@@ -1,6 +1,6 @@
 jobs:
-- job: CookToastPreview
-  displayName: 'Cook Toast with Custom Agent'
+- job: ThawBread
+  displayName: 'Thow Frozen Bread'
   pool: 'AzPS7.1-Preview'
   steps:
   - task: PowerShell@2
@@ -16,8 +16,8 @@ jobs:
       pwsh: true
 
 - job: CookToast
-  displayName: 'Cook Toast with Hosted Agent'
-  dependsOn: 'CookToastPreview'
+  displayName: 'Cook Toast'
+  dependsOn: 'ThawBread'
   pool:
     vmImage: 'windows-2019'
   steps:
