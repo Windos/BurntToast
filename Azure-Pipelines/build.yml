@@ -2,7 +2,7 @@ stages:
 - stage: ThawBread
   displayName: 'Thaw Frozen Bread'
   jobs:
-  - job: Srv2019-64bit
+  - job: Srv2019_64bit
     displayName: 'Server 2019 - 64 bit'
     pool: 'AzPS7.1-Preview'
     steps:
