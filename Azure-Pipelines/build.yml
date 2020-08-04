@@ -48,7 +48,7 @@ stages:
       displayName: 'Compile module'
       inputs:
         targetType: Inline
-        script: ./Azure-Pipelines/build.ps1 -Compile
+        script: ./Azure-Pipelines/build.ps1 -Bootstrap -Compile
 
     - task: PowerShell@2
       displayName: 'Run tests (compiled .psm1)'
