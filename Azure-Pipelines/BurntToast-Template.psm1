@@ -37,7 +37,9 @@ if ($WinMajorVersion -ge 10) {
     # Register default AppId
     New-BTAppId
 
-    $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
+    if (-not $IsWindows) {
+        $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
+    }
 } else {
     throw 'This version of BurntToast will only work on Windows 10. If you would like to use BurntToast on Windows 8, please use version 0.4'
 }
