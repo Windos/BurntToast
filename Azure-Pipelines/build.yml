@@ -5,10 +5,17 @@ jobs:
     vmImage: 'windows-2019'
   steps:
   - task: PowerShell@2
-    displayName: 'Run tests (individual .ps1 files)'
+    displayName: 'Run tests (individual .ps1 files) - Windows PowerShell'
     inputs:
       targetType: Inline
       script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
+
+  - task: PowerShell@2
+    displayName: 'Run tests (individual .ps1 files) - PowerShell Core'
+    inputs:
+      targetType: Inline
+      script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
+      pwsh: true
 
   - task: PowerShell@2
     displayName: 'Compile module'
@@ -52,3 +59,19 @@ jobs:
       artifactName: 'PipelinesScripts'
       targetPath: ./Azure-Pipelines
     condition: succeededOrFailed()
+
+- job: CookToastPreview
+  displayName: 'Cook Toast'
+  pool: 'AzPS7.1-Preview'
+  steps:
+  - task: PowerShell@2
+    displayName: 'Run tests (individual .ps1 files) - Windows PowerShell'
+    inputs:
+      targetType: Inline
+      script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
+  - task: PowerShell@2
+    displayName: 'Run tests (individual .ps1 files) - PowerShell 7.1 Preview 5'
+    inputs:
+      targetType: Inline
+      script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
+      pwsh: true
