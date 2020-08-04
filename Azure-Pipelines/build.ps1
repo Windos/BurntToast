@@ -88,7 +88,7 @@ if($Test.IsPresent) {
     $RelevantFiles = (Get-ChildItem ./BurntToast -Recurse -Include "*.psm1","*.ps1").FullName
 
     if ($env:TF_BUILD) {
-        $res = Invoke-Pester "./Tests" -OutputFormat NUnitXml -OutputFile TestResults.xml -CodeCoverage $RelevantFiles -PassThru
+        $res = Invoke-Pester "./Tests" -OutputFormat NUnitXml -OutputFile TestResults.xml -CodeCoverage $RelevantFiles -CodeCoverageOutputFileFormat 'JaCoCo' -CodeCoverageOutputFile "$Env:AgentTemp\CoverageResults.xml" -PassThru
         if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed." }
     } else {
         $res = Invoke-Pester "./Tests" -CodeCoverage $RelevantFiles -PassThru

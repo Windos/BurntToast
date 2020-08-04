@@ -77,6 +77,12 @@ stages:
         testRunner: NUnit
         testResultsFiles: '**/TestResults.xml'
       condition: succeededOrFailed()
+    - task: PublishCodeCoverageResults@1
+      displayName: 'Publish code coverage results'
+      inputs:
+        summaryFileLocation: $(Agent.TempDirectory)/CoverageResults.xml
+        pathToSources: $(Agent.TempDirectory)
+      condition: succeededOrFailed()
 
     - task: Bash@3
       displayName: 'Upload coverage to Codecov'
