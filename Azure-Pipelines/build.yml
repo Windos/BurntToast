@@ -20,6 +20,7 @@ stages:
 - stage: CookToast
   displayName: 'Cook Toast'
   dependsOn: 'ThawBread'
+  jobs:
   - job: PreBuild
     displayName: 'Pre-Build Tests'
     pool:
