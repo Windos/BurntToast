@@ -17,6 +17,21 @@ stages:
         targetType: Inline
         script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
         pwsh: true
+  - job: Win10_32bit
+    displayName: 'Windows 10 - 32 bit'
+    pool: 'LabPS7x86'
+    steps:
+    - task: PowerShell@2
+      displayName: 'Run tests (individual .ps1 files) - Windows PowerShell - x86'
+      inputs:
+        targetType: Inline
+        script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
+    - task: PowerShell@2
+      displayName: 'Run tests (individual .ps1 files) - PowerShell 7.1 Preview 5 - x86'
+      inputs:
+        targetType: Inline
+        script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
+        pwsh: true
 - stage: CookToast
   displayName: 'Cook Toast'
   dependsOn: 'ThawBread'
