@@ -1,6 +1,23 @@
 jobs:
+- job: CookToastPreview
+  displayName: 'Cook Toast with Custom Agent'
+  pool: 'AzPS7.1-Preview'
+  steps:
+  - task: PowerShell@2
+    displayName: 'Run tests (individual .ps1 files) - Windows PowerShell'
+    inputs:
+      targetType: Inline
+      script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
+  - task: PowerShell@2
+    displayName: 'Run tests (individual .ps1 files) - PowerShell 7.1 Preview 5'
+    inputs:
+      targetType: Inline
+      script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
+      pwsh: true
+
 - job: CookToast
-  displayName: 'Cook Toast'
+  displayName: 'Cook Toast with Hosted Agent'
+  dependsOn: 'CookToastPreview'
   pool:
     vmImage: 'windows-2019'
   steps:
@@ -59,19 +76,3 @@ jobs:
       artifactName: 'PipelinesScripts'
       targetPath: ./Azure-Pipelines
     condition: succeededOrFailed()
-
-- job: CookToastPreview
-  displayName: 'Cook Toast'
-  pool: 'AzPS7.1-Preview'
-  steps:
-  - task: PowerShell@2
-    displayName: 'Run tests (individual .ps1 files) - Windows PowerShell'
-    inputs:
-      targetType: Inline
-      script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
-  - task: PowerShell@2
-    displayName: 'Run tests (individual .ps1 files) - PowerShell 7.1 Preview 5'
-    inputs:
-      targetType: Inline
-      script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
-      pwsh: true
