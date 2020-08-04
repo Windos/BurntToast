@@ -11,12 +11,16 @@ stages:
       inputs:
         targetType: Inline
         script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
+      env:
+            AgentTemp: $(Agent.TempDirectory)
     - task: PowerShell@2
       displayName: 'Run tests (individual .ps1 files) - PowerShell 7.1 Preview 5 - x64'
       inputs:
         targetType: Inline
         script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
         pwsh: true
+      env:
+            AgentTemp: $(Agent.TempDirectory)
   - job: Win10_32bit
     displayName: 'Windows 10 - 32 bit'
     pool: 'LabPS7x86'
@@ -26,12 +30,16 @@ stages:
       inputs:
         targetType: Inline
         script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
+      env:
+            AgentTemp: $(Agent.TempDirectory)
     - task: PowerShell@2
       displayName: 'Run tests (individual .ps1 files) - PowerShell 7.1 Preview 5 - x86'
       inputs:
         targetType: Inline
         script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
         pwsh: true
+      env:
+            AgentTemp: $(Agent.TempDirectory)
 - stage: CookToast
   displayName: 'Cook Toast'
   dependsOn: 'ThawBread'
@@ -46,6 +54,8 @@ stages:
       inputs:
         targetType: Inline
         script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
+      env:
+            AgentTemp: $(Agent.TempDirectory)
   - job: 'BuildRetest'
     displayName: 'Build & Re-test'
     dependsOn: 'PreBuild'
@@ -58,6 +68,8 @@ stages:
         targetType: Inline
         script: ./Azure-Pipelines/build.ps1 -Bootstrap -Test
         pwsh: true
+      env:
+            AgentTemp: $(Agent.TempDirectory)
 
     - task: PowerShell@2
       displayName: 'Compile module'
@@ -70,6 +82,8 @@ stages:
       inputs:
         targetType: Inline
         script: ./Azure-Pipelines/build.ps1 -Test
+      env:
+            AgentTemp: $(Agent.TempDirectory)
 
     - task: PublishTestResults@2
       displayName: 'Publish test results'
