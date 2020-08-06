@@ -132,7 +132,9 @@ New-BurntToastShoulderTap -Image $Image -Person $Contact -Text $Text
 
   - Fix: Curly Braces when "Reminder" pops up ([#72](https://github.com/Windos/BurntToast/issues/72))
 
-  - Fix: Caching remote gifs are saved based on their remote filename and not overwritten ([#105](https://github.com/Windos/BurntToast/issues/105)) - Thanks [@KelvinTegelaar](https://github.com/KelvinTegelaar)
+  - Fix: Caching remote gifs are saved based on their remote filename and not overwritten ([#105](https://github.com/Windos/BurntToast/issues/105))
+
+    - Thanks [@KelvinTegelaar](https://github.com/KelvinTegelaar)
 
   - Fix: BurntToast and .NET 5 ([#101](https://github.com/Windos/BurntToast/issues/101))
 
