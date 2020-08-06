@@ -42,7 +42,9 @@
             IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/master/Media/BurntToast-Logo.png'
             ReleaseNotes = '# 0.7.2
 
-*
+* Fix: Curly Braces when "Reminder" pops up ([#72](https://github.com/Windos/BurntToast/issues/72))
+* Fix: Caching remote gifs are saved based on their remote filename and not overwritten ([#105](https://github.com/Windos/BurntToast/issues/105)) - Thanks [@KelvinTegelaar](https://github.com/KelvinTegelaar)
+* Fix: BurntToast and .NET 5 ([#101](https://github.com/Windos/BurntToast/issues/101))
 '
         }
     }

@@ -130,7 +130,11 @@ New-BurntToastShoulderTap -Image $Image -Person $Contact -Text $Text
 
 - [v0.7.2](https://github.com/Windos/BurntToast/releases/download/v0.7.2/BurntToast.zip)
 
-  - Features
+  - Fix: Curly Braces when "Reminder" pops up ([#72](https://github.com/Windos/BurntToast/issues/72))
+
+  - Fix: Caching remote gifs are saved based on their remote filename and not overwritten ([#105](https://github.com/Windos/BurntToast/issues/105)) - Thanks [@KelvinTegelaar](https://github.com/KelvinTegelaar)
+
+  - Fix: BurntToast and .NET 5 ([#101](https://github.com/Windos/BurntToast/issues/101))
 
 - [v0.7.1](https://github.com/Windos/BurntToast/releases/download/v0.7.1/BurntToast.zip)
 
