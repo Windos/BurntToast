@@ -96,10 +96,8 @@ if you using Powershell 6 or later, extract into `$env:userprofile\Documents\Pow
 ## Contributors
 
 - [Windos](https://github.com/Windos)
-
-## TODO
-
-- see [TODO](TODO.md) file
+- [jeremytbrun](https://github.com/jeremytbrun)
+- [KelvinTegelaar](https://github.com/KelvinTegelaar)
 
 ## License
 
