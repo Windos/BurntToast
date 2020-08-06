@@ -2,7 +2,12 @@
 $WinMajorVersion = (Get-CimInstance -ClassName Win32_OperatingSystem -Property Version).Version.Split('.')[0]
 
 if ($WinMajorVersion -ge 10) {
-    $Library = @( Get-ChildItem -Path $PSScriptRoot\lib\*.dll -Recurse -ErrorAction SilentlyContinue )
+    $Library = @( Get-ChildItem -Path $PSScriptRoot\lib\Microsoft.Toolkit.Uwp.Notifications\*.dll -Recurse -ErrorAction SilentlyContinue )
+
+    if ($IsWindows) {
+        $Library += @( Get-ChildItem -Path $PSScriptRoot\lib\Microsoft.Windows.CsWinRT\*.dll -Recurse -ErrorAction SilentlyContinue )
+        $Library += @( Get-ChildItem -Path $PSScriptRoot\lib\Microsoft.Windows.SDK.NET\*.dll -Recurse -ErrorAction SilentlyContinue )
+    }
 
     # Add one class from each expected DLL here:
     $LibraryMap = @{
@@ -28,11 +33,13 @@ if ($WinMajorVersion -ge 10) {
 
     Export-ModuleMember -Alias 'Toast'
     Export-ModuleMember -Function $PublicFunctions
-    
+
     # Register default AppId
     New-BTAppId
 
-    $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
+    if (-not $IsWindows) {
+        $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
+    }
 } else {
     throw 'This version of BurntToast will only work on Windows 10. If you would like to use BurntToast on Windows 8, please use version 0.4'
 }

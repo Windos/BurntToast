@@ -314,7 +314,7 @@ Describe 'New-BTImage' {
             Remove-Item tmp.log
         }
         It 'has consitent WhatIf response' {
-            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [AdaptiveImage]:Source=$($env:TEMP)\BurntToast.png:AlternateText=:HintCrop=Default:HintRemoveMargin=False:HintAlign=Default:AddImageQuery=""."
+            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [AdaptiveImage]:Source=$($env:TEMP)\https---raw.githubusercontent.com-Windos-BurntToast-master-Media-BurntToast.png:AlternateText=:HintCrop=Default:HintRemoveMargin=False:HintAlign=Default:AddImageQuery=""."
             $Log | Should -Be $Expected
         }
     }
