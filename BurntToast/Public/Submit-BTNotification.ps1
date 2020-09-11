@@ -149,14 +149,11 @@
         $Toast.Data.SequenceNumber = $SequenceNumber
     }
 
-    $ActionsSupported = 'System.Management.Automation.SemanticVersion' -as [type] -and
-                        $PSVersionTable.PSVersion -ge [System.Management.Automation.SemanticVersion] '7.1.0-preview.4'
-
     $UnsupportedEvents = 'Toast events are only supported on PowerShell 7.1.0 and above. ' +
                          'Your notification will still be displayed, but the actions will be ignored.'
 
     if ($ActivatedAction) {
-        if ($ActionsSupported) {
+        if ($Script:ActionsSupported) {
             Register-ObjectEvent -InputObject $Toast -EventName Activated -Action $ActivatedAction |Out-Null
         } else {
             Write-Warning $UnsupportedEvents
@@ -164,7 +161,7 @@
     }
 
     if ($DismissedAction) {
-        if ($ActionsSupported) {
+        if ($Script:ActionsSupported) {
             Register-ObjectEvent -InputObject $Toast -EventName Dismissed -Action $DismissedAction | Out-Null
         } else {
             Write-Warning $UnsupportedEvents
@@ -172,7 +169,7 @@
     }
 
     if ($FailedAction) {
-        if ($ActionsSupported) {
+        if ($Script:ActionsSupported) {
             Register-ObjectEvent -InputObject $Toast -EventName Failed -Action $FailedAction | Out-Null
         } else {
             Write-Warning $UnsupportedEvents

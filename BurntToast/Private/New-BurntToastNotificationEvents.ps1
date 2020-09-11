@@ -1,4 +1,4 @@
-﻿function New-BurntToastNotification {
+﻿function New-BurntToastNotificationEvents {
     <#
         .SYNOPSIS
         Creates and displays a Toast Notification.
@@ -67,7 +67,6 @@
         https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastNotification.md
     #>
 
-    [alias('Toast')]
     [CmdletBinding(DefaultParameterSetName = 'Sound',
                    SupportsShouldProcess   = $true)]
     param (
@@ -167,7 +166,11 @@
         # Sets the time at which Windows should consider the notification to have been created. If not specified the time at which the notification was recieved will be used.
         #
         # The time stamp affects sorting of notifications in the Action Center.
-        [datetime] $CustomTimestamp
+        [datetime] $CustomTimestamp,
+
+        [scriptblock] $ActivatedAction,
+
+        [scriptblock] $DismissedAction
     )
 
     $ChildObjects = @()
@@ -247,6 +250,14 @@
 
     if ($DataBinding) {
         $ToastSplat.Add('DataBinding', $DataBinding)
+    }
+
+    if ($ActivatedAction) {
+        $ToastSplat.Add('ActivatedAction', $ActivatedAction)
+    }
+
+    if ($DismissedAction) {
+        $ToastSplat.Add('DismissedAction', $DismissedAction)
     }
 
     if($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {

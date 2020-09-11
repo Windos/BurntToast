@@ -40,7 +40,18 @@ if ($WinMajorVersion -ge 10) {
         }
     }
 
-    Export-ModuleMember -Alias 'Toast'
+    $Script:ActionsSupported = 'System.Management.Automation.SemanticVersion' -as [type] -and
+        $PSVersionTable.PSVersion -ge [System.Management.Automation.SemanticVersion] '7.1.0-preview.4'
+
+    if ($Script:ActionsSupported) {
+        New-Alias -Name 'New-BurntToastNotification' -Value 'New-BurntToastNotificationEvents'
+        New-Alias -Name 'Toast' -Value 'New-BurntToastNotificationEvents'
+    } else {
+        New-Alias -Name 'New-BurntToastNotification' -Value 'New-BurntToastNotificationNoEvents'
+        New-Alias -Name 'Toast' -Value 'New-BurntToastNotificationNoEvents'
+    }
+
+    Export-ModuleMember -Alias 'Toast', 'New-BurntToastNotification'
     Export-ModuleMember -Function $Public.BaseName
 
     # Register default AppId

@@ -27,13 +27,14 @@
                         'New-BTShoulderTapPeople',
                         'New-BTText',
                         'New-BTVisual',
-                        'New-BurntToastNotification',
                         'New-BurntToastShoulderTap',
                         'Remove-BTNotification',
                         'Submit-BTNotification',
                         'Update-BTNotification'
     CmdletsToExport   = @()
-    AliasesToExport   = @('ShoulderTap', 'Toast')
+    AliasesToExport   = @('New-BurntToastNotification',
+                          'ShoulderTap',
+                          'Toast')
     PrivateData       = @{
         PSData = @{
             Tags         = @('Notifications', 'Utilities', 'Windows10', 'Toast')
