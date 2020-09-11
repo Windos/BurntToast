@@ -1,4 +1,4 @@
-﻿function New-BurntToastNotificationEvents {
+﻿function New-BurntToastNotification {
     <#
         .SYNOPSIS
         Creates and displays a Toast Notification.
@@ -253,11 +253,19 @@
     }
 
     if ($ActivatedAction) {
-        $ToastSplat.Add('ActivatedAction', $ActivatedAction)
+        if ($Script:ActionsSupported) {
+            $ToastSplat.Add('ActivatedAction', $ActivatedAction)
+        } else {
+            Write-Warning $Script:UnsupportedEvents
+        }
     }
 
     if ($DismissedAction) {
-        $ToastSplat.Add('DismissedAction', $DismissedAction)
+        if ($Script:ActionsSupported) {
+            $ToastSplat.Add('DismissedAction', $DismissedAction)
+        } else {
+            Write-Warning $Script:UnsupportedEvents
+        }
     }
 
     if($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {

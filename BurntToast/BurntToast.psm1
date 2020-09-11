@@ -43,15 +43,10 @@ if ($WinMajorVersion -ge 10) {
     $Script:ActionsSupported = 'System.Management.Automation.SemanticVersion' -as [type] -and
         $PSVersionTable.PSVersion -ge [System.Management.Automation.SemanticVersion] '7.1.0-preview.4'
 
-    if ($Script:ActionsSupported) {
-        New-Alias -Name 'New-BurntToastNotification' -Value 'New-BurntToastNotificationEvents'
-        New-Alias -Name 'Toast' -Value 'New-BurntToastNotificationEvents'
-    } else {
-        New-Alias -Name 'New-BurntToastNotification' -Value 'New-BurntToastNotificationNoEvents'
-        New-Alias -Name 'Toast' -Value 'New-BurntToastNotificationNoEvents'
-    }
+    $Script:UnsupportedEvents = 'Toast events are only supported on PowerShell 7.1.0 and above. ' +
+        'Your notification will still be displayed, but the actions will be ignored.'
 
-    Export-ModuleMember -Alias 'Toast', 'New-BurntToastNotification'
+    Export-ModuleMember -Alias 'Toast'
     Export-ModuleMember -Function $Public.BaseName
 
     # Register default AppId

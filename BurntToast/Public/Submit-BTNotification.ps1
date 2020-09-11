@@ -149,14 +149,11 @@
         $Toast.Data.SequenceNumber = $SequenceNumber
     }
 
-    $UnsupportedEvents = 'Toast events are only supported on PowerShell 7.1.0 and above. ' +
-                         'Your notification will still be displayed, but the actions will be ignored.'
-
     if ($ActivatedAction) {
         if ($Script:ActionsSupported) {
             Register-ObjectEvent -InputObject $Toast -EventName Activated -Action $ActivatedAction |Out-Null
         } else {
-            Write-Warning $UnsupportedEvents
+            Write-Warning $Script:UnsupportedEvents
         }
     }
 
@@ -164,7 +161,7 @@
         if ($Script:ActionsSupported) {
             Register-ObjectEvent -InputObject $Toast -EventName Dismissed -Action $DismissedAction | Out-Null
         } else {
-            Write-Warning $UnsupportedEvents
+            Write-Warning $Script:UnsupportedEvents
         }
     }
 
@@ -172,7 +169,7 @@
         if ($Script:ActionsSupported) {
             Register-ObjectEvent -InputObject $Toast -EventName Failed -Action $FailedAction | Out-Null
         } else {
-            Write-Warning $UnsupportedEvents
+            Write-Warning $Script:UnsupportedEvents
         }
     }
 

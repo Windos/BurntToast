@@ -28,12 +28,12 @@
                         'New-BTText',
                         'New-BTVisual',
                         'New-BurntToastShoulderTap',
+                        'New-BurntToastNotification',
                         'Remove-BTNotification',
                         'Submit-BTNotification',
                         'Update-BTNotification'
     CmdletsToExport   = @()
-    AliasesToExport   = @('New-BurntToastNotification',
-                          'ShoulderTap',
+    AliasesToExport   = @('ShoulderTap',
                           'Toast')
     PrivateData       = @{
         PSData = @{
