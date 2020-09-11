@@ -46,7 +46,13 @@
         [datetime] $ExpirationTime,
 
         # Bypasses display to the screen and sends the notification directly to the Action Center.
-        [switch] $SuppressPopup
+        [switch] $SuppressPopup,
+
+        [scriptblock] $ActivatedAction,
+
+        [scriptblock] $DismissedAction,
+
+        [scriptblock] $FailedAction
     )
 
     if (!(Test-Path -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\$AppId")) {
@@ -141,6 +147,36 @@
 
     if ($SequenceNumber) {
         $Toast.Data.SequenceNumber = $SequenceNumber
+    }
+
+    $ActionsSupported = 'System.Management.Automation.SemanticVersion' -as [type] -and
+                        $PSVersionTable.PSVersion -ge [System.Management.Automation.SemanticVersion] '7.1.0-preview.4'
+
+    $UnsupportedEvents = 'Toast events are only supported on PowerShell 7.1.0 and above. ' +
+                         'Your notification will still be displayed, but the actions will be ignored.'
+
+    if ($ActivatedAction) {
+        if ($ActionsSupported) {
+            Register-ObjectEvent -InputObject $Toast -EventName Activated -Action $ActivatedAction |Out-Null
+        } else {
+            Write-Warning $UnsupportedEvents
+        }
+    }
+
+    if ($DismissedAction) {
+        if ($ActionsSupported) {
+            Register-ObjectEvent -InputObject $Toast -EventName Dismissed -Action $DismissedAction | Out-Null
+        } else {
+            Write-Warning $UnsupportedEvents
+        }
+    }
+
+    if ($FailedAction) {
+        if ($ActionsSupported) {
+            Register-ObjectEvent -InputObject $Toast -EventName Failed -Action $FailedAction | Out-Null
+        } else {
+            Write-Warning $UnsupportedEvents
+        }
     }
 
     if($PSCmdlet.ShouldProcess( "submitting: [$($Toast.GetType().Name)] with AppId $AppId, Id $UniqueIdentifier, Sequence Number $($Toast.Data.SequenceNumber) and XML: $($Content.GetContent())")) {
