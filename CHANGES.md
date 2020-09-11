@@ -1,5 +1,13 @@
 # Full Change Log
 
+- [v0.8.0](https://github.com/Windos/BurntToast/releases/download/v0.8.0/BurntToast.zip)
+
+  - Fix: Images from UNC path failing ([#111](https://github.com/Windos/BurntToast/issues/111))
+
+  - Add: Ability to force a refresh of cached images via IgnoreCache switch on New-BTImage
+
+  - Add: ACTIONABLE NOTIFICATIONS! Exposed via ActivatedAction and DismissedAction parameters on Submit-BTNotification and New-BurntToastNotification
+
 - [v0.7.2](https://github.com/Windos/BurntToast/releases/download/v0.7.2/BurntToast.zip)
 
   - Fix: Curly Braces when "Reminder" pops up ([#72](https://github.com/Windos/BurntToast/issues/72))

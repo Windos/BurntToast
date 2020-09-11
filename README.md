@@ -60,7 +60,15 @@ if you using Powershell 6 or later, extract into `$env:userprofile\Documents\Pow
 
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
 
-- [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.7.2.zip) (Development/Raw Repo)
+- [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.8.1.zip) (Development/Raw Repo)
+
+- [v0.8.0](https://github.com/Windos/BurntToast/releases/download/v0.8.0/BurntToast.zip)
+
+  - Fix: Images from UNC path failing ([#111](https://github.com/Windos/BurntToast/issues/111))
+
+  - Add: Ability to force a refresh of cached images via IgnoreCache switch on New-BTImage
+
+  - Add: ACTIONABLE NOTIFICATIONS! Exposed via ActivatedAction and DismissedAction parameters on Submit-BTNotification and New-BurntToastNotification
 
 - [v0.7.2](https://github.com/Windos/BurntToast/releases/download/v0.7.2/BurntToast.zip)
 
