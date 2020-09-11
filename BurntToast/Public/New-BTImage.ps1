@@ -77,7 +77,9 @@
         [switch] $RemoveMargin,
 
         # Set to true to allow Windows to append a query string to the image URI supplied in the Tile notification. Use this attribute if your server hosts images and can handle query strings, either by retrieving an image variant based on the query strings or by ignoring the query string and returning the image as specified without the query string. This query string specifies scale, contrast setting, and language.
-        [switch] $AddImageQuery
+        [switch] $AddImageQuery,
+
+        [switch] $IgnoreCache
     )
 
     switch ($PsCmdlet.ParameterSetName) {
@@ -107,7 +109,12 @@
     }
 
     if ($Source) {
-        $Image.Source = Optimize-BTImageSource -Source $Source
+        $Image.Source = if ($IgnoreCache) {
+            Optimize-BTImageSource -Source $Source -ForceRefresh
+        } else {
+            Optimize-BTImageSource -Source $Source
+        }
+
     }
 
     if ($AlternateText) {

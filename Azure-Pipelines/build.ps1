@@ -7,7 +7,10 @@ param(
     $Compile,
 
     [switch]
-    $Test
+    $Test,
+
+    [switch]
+    $CodeCoverage
 )
 
 # Bootstrap step
@@ -94,7 +97,9 @@ if($Test.IsPresent) {
         $res = Invoke-Pester "./Tests" -CodeCoverage $RelevantFiles -PassThru
     }
 
-    Export-CodeCovIoJson -CodeCoverage $res.CodeCoverage -RepoRoot $pwd -Path coverage.json
+    if ($CodeCoverage.IsPresent) {
+        Export-CodeCovIoJson -CodeCoverage $res.CodeCoverage -RepoRoot $pwd -Path coverage.json
 
-    Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+        Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+    }
 }

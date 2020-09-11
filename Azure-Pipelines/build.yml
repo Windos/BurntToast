@@ -81,7 +81,7 @@ stages:
       displayName: 'Run tests (compiled .psm1)'
       inputs:
         targetType: Inline
-        script: ./Azure-Pipelines/build.ps1 -Test
+        script: ./Azure-Pipelines/build.ps1 -Test -CodeCoverage
       env:
             AgentTemp: $(Agent.TempDirectory)
 
