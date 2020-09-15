@@ -1,5 +1,9 @@
 # Full Change Log
 
+- [v0.8.1](https://github.com/Windos/BurntToast/releases/download/v0.8.1/BurntToast.zip)
+
+  - Deprecation: Signalling removal of Shoulder Tap cmdlets in future version, v0.9.0
+
 - [v0.8.0](https://github.com/Windos/BurntToast/releases/download/v0.8.0/BurntToast.zip)
 
   - Fix: Images from UNC path failing ([#111](https://github.com/Windos/BurntToast/issues/111))

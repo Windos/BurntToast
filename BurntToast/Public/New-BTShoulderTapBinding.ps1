@@ -20,6 +20,7 @@
         https://github.com/Windos/BurntToast/blob/main/Help/New-BTShoulderTapBinding.md
     #>
 
+    [Obsolete('This cmdlet is being deprecated, it will be removed in v0.9.0')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastBindingShoulderTap])]
     param (
         # The image displayed in the Shoulder Tap notification, this object is created using the New-BTShoulderTapImage function.
