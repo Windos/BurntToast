@@ -82,6 +82,7 @@
         [Parameter(Mandatory,
                    ParameterSetName = 'CustomSound')]
         [ValidateScript({Test-BTAudioPath $_})]
+        [Obsolete('Unfortunately, custom sounds no longer work and this parameter will be removed in v0.9.0. See: https://github.com/MicrosoftDocs/windows-uwp/issues/1593')]
         [string] $Path,
 
         # Specifies that the slected sound should play multiple times if its duration is shorter than that of the toast it accompanies.
