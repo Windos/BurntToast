@@ -40,7 +40,7 @@
             Tags         = @('Notifications', 'Utilities', 'Windows10', 'Toast')
             LicenseUri   = 'https://github.com/Windos/BurntToast/blob/main/LICENSE'
             ProjectUri   = 'https://github.com/Windos/BurntToast'
-            IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/master/Media/BurntToast-Logo.png'
+            IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/main/Media/BurntToast-Logo.png'
             ReleaseNotes = '# 0.8.1
 
 * Deprecation: Signalling removal of Shoulder Tap cmdlets in future version, v0.9.0
