@@ -64,7 +64,7 @@
         * You cannot specify SnoozeAndDismiss and custom buttons at the same time.
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastNotification.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BurntToastNotification.md
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'Sound',

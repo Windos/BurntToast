@@ -123,4 +123,4 @@ Microsoft.Toolkit.Uwp.Notifications.ToastHeader
 
 ## RELATED LINKS
 
-[New-BTHeader](https://github.com/Windos/BurntToast/blob/master/Help/New-BTHeader.md)
+[New-BTHeader](https://github.com/Windos/BurntToast/blob/main/Help/New-BTHeader.md)

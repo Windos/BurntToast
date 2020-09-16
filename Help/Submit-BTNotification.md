@@ -106,4 +106,4 @@ None
 
 ## RELATED LINKS
 
-[Submit-BTNotification](https://github.com/Windos/BurntToast/blob/master/Help/Submit-BTNotification.md)
+[Submit-BTNotification](https://github.com/Windos/BurntToast/blob/main/Help/Submit-BTNotification.md)

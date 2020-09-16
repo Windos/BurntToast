@@ -32,7 +32,7 @@
         Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTContent.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTContent.md
     #>
 
     [CmdletBinding(SupportsShouldProcess = $true)]

@@ -91,4 +91,4 @@ Please see the [originating repo](https://github.com/windows-toolkit/WindowsComm
 
 ## RELATED LINKS
 
-[New-BTContextMenuItem](https://github.com/Windos/BurntToast/blob/master/Help/New-BTContextMenuItem.md)
+[New-BTContextMenuItem](https://github.com/Windos/BurntToast/blob/main/Help/New-BTContextMenuItem.md)

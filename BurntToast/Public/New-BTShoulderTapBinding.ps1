@@ -17,7 +17,7 @@
         New-BTShoulderTapBinding -Image $Image
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTShoulderTapBinding.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTShoulderTapBinding.md
     #>
 
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastBindingShoulderTap])]

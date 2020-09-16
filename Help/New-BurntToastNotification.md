@@ -309,4 +309,4 @@ I'm *really* sorry about the number of Parameter Sets. The best explanation is:
 
 ## RELATED LINKS
 
-[New-BurntToastNotification](https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastNotification.md)
+[New-BurntToastNotification](https://github.com/Windos/BurntToast/blob/main/Help/New-BurntToastNotification.md)

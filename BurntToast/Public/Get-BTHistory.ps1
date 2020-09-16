@@ -21,7 +21,7 @@ function Get-BTHistory {
         Get-BTHistory
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/Get-BTHistory.md
+        https://github.com/Windos/BurntToast/blob/main/Help/Get-BTHistory.md
     #>
 
     param (

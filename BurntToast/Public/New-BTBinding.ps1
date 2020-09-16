@@ -30,7 +30,7 @@
         Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTBinding.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTBinding.md
     #>
 
     [CmdletBinding(SupportsShouldProcess = $true)]

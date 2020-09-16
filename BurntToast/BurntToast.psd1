@@ -38,9 +38,9 @@
     PrivateData       = @{
         PSData = @{
             Tags         = @('Notifications', 'Utilities', 'Windows10', 'Toast')
-            LicenseUri   = 'https://github.com/Windos/BurntToast/blob/master/LICENSE'
+            LicenseUri   = 'https://github.com/Windos/BurntToast/blob/main/LICENSE'
             ProjectUri   = 'https://github.com/Windos/BurntToast'
-            IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/master/Media/BurntToast-Logo.png'
+            IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/main/Media/BurntToast-Logo.png'
             ReleaseNotes = '# 0.8.0
 
 * Fix: Images from UNC path failing (#111)

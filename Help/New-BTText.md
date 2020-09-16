@@ -175,4 +175,4 @@ Please see the [originating repo](https://github.com/Microsoft/UWPCommunityToolk
 
 ## RELATED LINKS
 
-[New-BTText](https://github.com/Windos/BurntToast/blob/master/Help/New-BTText.md)
+[New-BTText](https://github.com/Windos/BurntToast/blob/main/Help/New-BTText.md)

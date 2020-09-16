@@ -45,7 +45,7 @@
         This example creates a Toast Notification which will include a progress bar.
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTProgressBar.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTProgressBar.md
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'Determinate',

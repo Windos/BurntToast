@@ -28,7 +28,7 @@
         Clicking the header will take the user to the Stack Overflow website.
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTHeader.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTHeader.md
     #>
 
     [CmdletBinding(SupportsShouldProcess = $true)]

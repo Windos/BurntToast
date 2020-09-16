@@ -27,7 +27,7 @@
         Update-BTNotification -UniqueIdentifier 'ExampleToast' -DataBinding $SecondDataBinding
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/Update-BTNotification.md
+        https://github.com/Windos/BurntToast/blob/main/Help/Update-BTNotification.md
     #>
 
     [CmdletBinding()]

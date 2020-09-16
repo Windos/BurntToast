@@ -33,7 +33,7 @@
         This example creates an action elemnt with both a clickable button and a right click context menu item.
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTAction.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTAction.md
     #>
 
     [CmdletBinding(DefaultParametersetName = 'Custom Actions',

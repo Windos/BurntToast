@@ -161,4 +161,4 @@ Please see the [originating repo](https://github.com/Microsoft/UWPCommunityToolk
 
 ## RELATED LINKS
 
-[New-BTInput](https://github.com/Windos/BurntToast/blob/master/Help/New-BTInput.md)
+[New-BTInput](https://github.com/Windos/BurntToast/blob/main/Help/New-BTInput.md)

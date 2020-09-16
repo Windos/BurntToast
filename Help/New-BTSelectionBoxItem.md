@@ -76,4 +76,4 @@ Please see the [originating repo](https://github.com/Microsoft/UWPCommunityToolk
 
 ## RELATED LINKS
 
-[New-BTSelectionBoxItem](https://github.com/Windos/BurntToast/blob/master/Help/New-BTSelectionBoxItem.md)
+[New-BTSelectionBoxItem](https://github.com/Windos/BurntToast/blob/main/Help/New-BTSelectionBoxItem.md)

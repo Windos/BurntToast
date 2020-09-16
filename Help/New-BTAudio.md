@@ -146,4 +146,4 @@ ToastAudio
 
 ## RELATED LINKS
 
-[New-BTAudio](https://github.com/Windos/BurntToast/blob/master/Help/New-BTAudio.md)
+[New-BTAudio](https://github.com/Windos/BurntToast/blob/main/Help/New-BTAudio.md)

@@ -23,7 +23,7 @@ function Remove-BTNotification {
         Remove-BTNotification -Tag 'UniqueIdentifier'
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/Remove-BTNotification.md
+        https://github.com/Windos/BurntToast/blob/main/Help/Remove-BTNotification.md
     #>
 
     param (

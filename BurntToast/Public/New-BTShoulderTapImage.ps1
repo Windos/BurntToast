@@ -20,7 +20,7 @@
         $Image = New-BTShoulderTapImage -Source 'https://www.route66sodas.com/wp-content/uploads/2019/01/Alert.gif'
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTShoulderTapImage.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTShoulderTapImage.md
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'Image')]

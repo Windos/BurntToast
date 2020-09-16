@@ -32,7 +32,7 @@
         Creates an Audio  which will cause a Toast Notification to be silent.
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTAudio.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTAudio.md
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'StandardSound',

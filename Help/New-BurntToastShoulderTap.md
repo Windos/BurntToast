@@ -227,4 +227,4 @@ If not, fails back to a standard Burnt Toast notification
 
 ## RELATED LINKS
 
-[New-BurntToastShoulderTap](https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastShoulderTap.md)
+[New-BurntToastShoulderTap](https://github.com/Windos/BurntToast/blob/main/Help/New-BurntToastShoulderTap.md)

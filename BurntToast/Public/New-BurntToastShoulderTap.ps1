@@ -9,7 +9,7 @@
         You can provide a static image or animated GIF, which will be displayed above the specified pinned contact.
 
         You must first pin a contact to the Taskbar using the Windows 10 People app.  Next, you can refer to the contact **by its e-mail address** to display a notification.
-        
+
         If a matching contact cannot be found, Windows will fall back to a toast notification. This toast notification will also been seen in the Action Center (with or without a working Shoulder Tap.)
 
         You can optionally call the New-BurntToastShoulderTap function with the ShoulderTap alias.
@@ -19,7 +19,7 @@
 
         .OUTPUTS
         None
-            New-BurntToastShoulderTap displays the Shoulder Tap that is created.        
+            New-BurntToastShoulderTap displays the Shoulder Tap that is created.
 
         .EXAMPLE
         $Image = 'https://i.imgur.com/WKiNp5o.gif'
@@ -34,7 +34,7 @@
         There will be a blog post about this on https://toastit.dev, and also further documented within this module in the next release.
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastShoulderTap.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BurntToastShoulderTap.md
     #>
 
     [alias('ShoulderTap')]

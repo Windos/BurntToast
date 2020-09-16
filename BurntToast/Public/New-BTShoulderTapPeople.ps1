@@ -18,7 +18,7 @@
         $Person = New-BTShoulderTapPeople -Email 'bob@example.com'
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTShoulderTapPeople.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTShoulderTapPeople.md
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'Email')]

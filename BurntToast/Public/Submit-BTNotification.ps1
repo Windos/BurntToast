@@ -18,7 +18,7 @@
         This command submits the complete toast content object $Toast1, from the New-BTContent function, and tags it with a unique identifier so that it can be replaced/updated.
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/Submit-BTNotification.md
+        https://github.com/Windos/BurntToast/blob/main/Help/Submit-BTNotification.md
     #>
 
     [CmdletBinding(SupportsShouldProcess = $true)]
