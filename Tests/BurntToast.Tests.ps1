@@ -653,6 +653,10 @@ Describe 'New-BTContent' {
 Describe 'New-BurntToastNotification' {
     $ImagePath = Resolve-Path -Path $PSScriptRoot\..\BurntToast\Images\BurntToast.png
 
+    Context 'has registered alias' {
+        $Aliases = Get-Alias -Name 'Toast' -ErrorAction SilentlyContinue
+        $Aliases.Count | Should -BeGreaterThan 0
+    }
     Context 'running without arguments (default toast)' {
         Start-Transcript tmp.log
         try {

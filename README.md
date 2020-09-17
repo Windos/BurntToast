@@ -62,6 +62,16 @@ if you using Powershell 6 or later, extract into `$env:userprofile\Documents\Pow
 
 - [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.8.1.zip) (Development/Raw Repo)
 
+- [v0.8.1](https://github.com/Windos/BurntToast/releases/download/v0.8.1/BurntToast.zip)
+
+  - Fix: Toast alias removed in 0.8.0 has been restored
+
+  - Deprecation: Signalling removal of Shoulder Tap cmdlets in future version, v0.9.0
+
+  - Deprecation: Signalling removal of Path parameter from New-BTAudio in future version, v0.9.0.
+
+    - https://github.com/MicrosoftDocs/windows-uwp/issues/1593
+
 - [v0.8.0](https://github.com/Windos/BurntToast/releases/download/v0.8.0/BurntToast.zip)
 
   - Fix: Images from UNC path failing ([#111](https://github.com/Windos/BurntToast/issues/111))

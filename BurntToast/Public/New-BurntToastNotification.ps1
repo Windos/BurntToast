@@ -67,6 +67,7 @@
         https://github.com/Windos/BurntToast/blob/main/Help/New-BurntToastNotification.md
     #>
 
+    [Alias('Toast')]
     [CmdletBinding(DefaultParameterSetName = 'Sound',
                    SupportsShouldProcess   = $true)]
     param (

@@ -37,7 +37,8 @@
         https://github.com/Windos/BurntToast/blob/main/Help/New-BurntToastShoulderTap.md
     #>
 
-    [alias('ShoulderTap')]
+    [Obsolete('This cmdlet is being deprecated, it will be removed in v0.9.0')]
+    [Alias('ShoulderTap')]
     [CmdletBinding(SupportsShouldProcess   = $true)]
     param (
         # The URI of the image. Can be a static image or animated GIF.

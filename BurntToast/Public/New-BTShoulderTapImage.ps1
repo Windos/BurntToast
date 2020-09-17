@@ -23,6 +23,7 @@
         https://github.com/Windos/BurntToast/blob/main/Help/New-BTShoulderTapImage.md
     #>
 
+    [Obsolete('This cmdlet is being deprecated, it will be removed in v0.9.0')]
     [CmdletBinding(DefaultParameterSetName = 'Image')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastShoulderTapImage])]
 
