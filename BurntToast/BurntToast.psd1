@@ -43,6 +43,7 @@
             IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/main/Media/BurntToast-Logo.png'
             ReleaseNotes = '# 0.8.1
 
+* Fix: Toast alias removed in 0.8.0 has been restored
 * Deprecation: Signalling removal of Shoulder Tap cmdlets in future version, v0.9.0
 * Deprecation: Signalling removal of Path parameter from New-BTAudio in future version, v0.9.0. https://github.com/MicrosoftDocs/windows-uwp/issues/1593
 

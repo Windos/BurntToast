@@ -38,7 +38,7 @@
     #>
 
     [Obsolete('This cmdlet is being deprecated, it will be removed in v0.9.0')]
-    [alias('ShoulderTap')]
+    [Alias('ShoulderTap')]
     [CmdletBinding(SupportsShouldProcess   = $true)]
     param (
         # The URI of the image. Can be a static image or animated GIF.
