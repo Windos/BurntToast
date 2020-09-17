@@ -653,7 +653,7 @@ Describe 'New-BTContent' {
 Describe 'New-BurntToastNotification' {
     $ImagePath = Resolve-Path -Path $PSScriptRoot\..\BurntToast\Images\BurntToast.png
 
-    Contect 'has registered alias' {
+    Context 'has registered alias' {
         $Aliases = Get-Alias -Name 'Toast' -ErrorAction SilentlyContinue
         $Aliases.Count | Should -BeGreaterThan 0
     }
