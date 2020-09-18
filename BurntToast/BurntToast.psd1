@@ -15,6 +15,7 @@
                         'New-BTAudio',
                         'New-BTBinding',
                         'New-BTButton',
+                        'New-BTColumn',
                         'New-BTContent',
                         'New-BTContextMenuItem',
                         'New-BTHeader',

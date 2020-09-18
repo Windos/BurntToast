@@ -43,6 +43,9 @@
         # And finally, certain Text properties like HintStyle aren't supported on the root children text elements, and only work inside a Group. If you use Group on devices without the Anniversary Update, the group content will simply be dropped.
         [Microsoft.Toolkit.Uwp.Notifications.IToastBindingGenericChild[]] $Children,
 
+        # NOTE: Add help here!
+        [Microsoft.Toolkit.Uwp.Notifications.AdaptiveSubgroup[]] $Column,
+
         # Set to "true" to allow Windows to append a query string to the image URI supplied in the Toast notification. Use this attribute if your server hosts images and can handle query strings, either by retrieving an image variant based on the query strings or by ignoring the query string and returning the image as specified without the query string. This query string specifies scale, contrast setting, and language.
         [switch] $AddImageQuery,
 
@@ -74,6 +77,16 @@
         foreach ($Child in $Children) {
             $Binding.Children.Add($Child)
         }
+    }
+
+    if ($Column) {
+        $AdaptiveGroup = [Microsoft.Toolkit.Uwp.Notifications.AdaptiveGroup]::new()
+
+        foreach ($Group in $Column) {
+            $AdaptiveGroup.Children.Add($Group)
+        }
+
+        $Binding.Children.Add($AdaptiveGroup)
     }
 
     if ($AddImageQuery) {

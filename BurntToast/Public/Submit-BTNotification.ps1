@@ -66,7 +66,7 @@
     $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::new()
 
     if (-not $DataBinding) {
-        $CleanContent = $Content.GetContent().Replace('<text>{', '<text>')
+        $CleanContent = $Content.GetContent() -Replace '<text(.*?)>{', '<text$1>'
         $CleanContent = $CleanContent.Replace('}</text>', '</text>')
         $CleanContent = $CleanContent.Replace('="{', '="')
         $CleanContent = $CleanContent.Replace('}" ', '" ')
