@@ -75,8 +75,8 @@ Describe 'New-BTAction' {
     Context 'input objects' {
         Start-Transcript tmp.log
         try {
-            $Input = New-BTInput -Id Reply001 -Title 'Type a reply:'
-            New-BTAction -Inputs $Input -WhatIf
+            $Input1 = New-BTInput -Id Reply001 -Title 'Type a reply:'
+            New-BTAction -Inputs $Input1 -WhatIf
         }
         finally {
             Stop-Transcript
