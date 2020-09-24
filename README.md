@@ -60,7 +60,9 @@ if you using Powershell 6 or later, extract into `$env:userprofile\Documents\Pow
 
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
 
-- [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.8.1.zip) (Development/Raw Repo)
+- [v0.8.2](https://github.com/Windos/BurntToast/releases/download/v0.8.2/BurntToast.zip)
+
+  - Add: AdaptiveGroups are now usable via New-BTColumn
 
 - [v0.8.1](https://github.com/Windos/BurntToast/releases/download/v0.8.1/BurntToast.zip)
 
@@ -70,7 +72,7 @@ if you using Powershell 6 or later, extract into `$env:userprofile\Documents\Pow
 
   - Deprecation: Signalling removal of Path parameter from New-BTAudio in future version, v0.9.0.
 
-    - https://github.com/MicrosoftDocs/windows-uwp/issues/1593
+    - See [MicrosoftDocs/windows-uwp Issue #1593](https://github.com/MicrosoftDocs/windows-uwp/issues/1593)
 
 - [v0.8.0](https://github.com/Windos/BurntToast/releases/download/v0.8.0/BurntToast.zip)
 

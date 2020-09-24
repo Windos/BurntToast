@@ -26,6 +26,7 @@ function Remove-BTNotification {
         https://github.com/Windos/BurntToast/blob/main/Help/Remove-BTNotification.md
     #>
 
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param (
         # Specifies the AppId of the 'application' or process that spawned the toast notification.
         [string] $AppId = $Script:Config.AppId,
@@ -42,12 +43,20 @@ function Remove-BTNotification {
     }
 
     if ($Tag -and $Group) {
-        [Windows.UI.Notifications.ToastNotificationManager]::History.Remove($Tag, $Group, $AppId)
+        if($PSCmdlet.ShouldProcess("Tag: $Tag, Group: $Group, AppId: $AppId", 'Selectively removing notifications')) {
+            [Windows.UI.Notifications.ToastNotificationManager]::History.Remove($Tag, $Group, $AppId)
+        }
     } elseif ($Tag) {
-        [Windows.UI.Notifications.ToastNotificationManager]::History.Remove($Tag, $AppId)
+        if($PSCmdlet.ShouldProcess("Tag: $Tag, AppId: $AppId", 'Selectively removing notifications')) {
+            [Windows.UI.Notifications.ToastNotificationManager]::History.Remove($Tag, $AppId)
+        }
     } elseif ($Group) {
-        [Windows.UI.Notifications.ToastNotificationManager]::History.RemoveGroup($Group, $AppId)
+        if($PSCmdlet.ShouldProcess("Group: $Group, AppId: $AppId", 'Selectively removing notifications')) {
+            [Windows.UI.Notifications.ToastNotificationManager]::History.RemoveGroup($Group, $AppId)
+        }
     } else {
-        [Windows.UI.Notifications.ToastNotificationManager]::History.Clear($AppId)
+        if($PSCmdlet.ShouldProcess("AppId: $AppId", 'Clearing all notifications')) {
+            [Windows.UI.Notifications.ToastNotificationManager]::History.Clear($AppId)
+        }
     }
 }

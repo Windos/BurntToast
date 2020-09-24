@@ -75,6 +75,11 @@
         [ValidateCount(0, 3)]
         [String[]] $Text = 'Default Notification',
 
+        # Specifies groups of content (text and images) created via New-BTColumn that are displayed as a column.
+        #
+        # Multiple columns can be provided and they will be displayed side by side.
+        [Microsoft.Toolkit.Uwp.Notifications.AdaptiveSubgroup[]] $Column,
+
         #TODO: [ValidateScript({ Test-ToastImage -Path $_ })]
 
         # Specifies the path to an image that will override the default image displayed with a Toast Notification.
@@ -205,7 +210,17 @@
         }
     }
 
-    $Binding = New-BTBinding -Children $ChildObjects -AppLogoOverride $AppLogoImage -WhatIf:$false
+    $BindingSplat = @{
+        Children        = $ChildObjects
+        AppLogoOverride = $AppLogoImage
+        WhatIf          = $false
+    }
+
+    if ($Column) {
+        $BindingSplat['Column'] = $Column
+    }
+
+    $Binding = New-BTBinding @BindingSplat
     $Visual = New-BTVisual -BindingGeneric $Binding -WhatIf:$false
 
     $ContentSplat = @{'Audio' = $Audio
