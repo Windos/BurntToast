@@ -30,6 +30,7 @@
         https://github.com/Windos/BurntToast/blob/main/Help/Update-BTNotification.md
     #>
 
+    [CmdletBinding(SupportsShouldProcess = $true)]
     [CmdletBinding()]
     param (
         # When updating toasts (not curently working) rapidly, the sequence number helps to ensure that toasts recieved out of order will not be displayed in a manner that may confuse.
@@ -70,5 +71,7 @@
         $ToastData.SequenceNumber = $SequenceNumber
     }
 
-    [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Update($ToastData, $UniqueIdentifier, $UniqueIdentifier)
+    if($PSCmdlet.ShouldProcess("AppId: $AppId, UniqueId: $UniqueIdentifier", 'Updating notification')) {
+        [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Update($ToastData, $UniqueIdentifier, $UniqueIdentifier)
+    }
 }

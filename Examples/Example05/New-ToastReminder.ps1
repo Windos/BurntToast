@@ -36,7 +36,7 @@ This example sets a reminder for 1h30min from now with the specified title and t
 As this cmdlet functions via an event registration, the PowerShell session that launched it must
 remain open for the reminder to trigger.
 #>
-    [cmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     Param(
         [Parameter(Mandatory, Position = 0)]
         [Alias("Title")]
@@ -102,7 +102,7 @@ remain open for the reminder to trigger.
         }
 
         $ElapsedObjectEvent = Register-ObjectEvent -InputObject $Timer -EventName "Elapsed" -MaxTriggerCount 1 -Action $ElapsedAction -MessageData $Data
-        
+
         $Timer.Start()
 
         if ($Passthru)
@@ -114,4 +114,6 @@ remain open for the reminder to trigger.
     End {}
 }
 
-New-ToastReminder -Minutes 30 -ReminderTitle 'Hey you' -ReminderText 'The coffee is brewed'
+if($PSCmdlet.ShouldProcess($ReminderTitle)) {
+    New-ToastReminder -Minutes 30 -ReminderTitle 'Hey you' -ReminderText 'The coffee is brewed'
+}

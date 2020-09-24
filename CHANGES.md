@@ -8,7 +8,7 @@
 
   - Deprecation: Signalling removal of Path parameter from New-BTAudio in future version, v0.9.0.
 
-    - https://github.com/MicrosoftDocs/windows-uwp/issues/1593
+    - See [MicrosoftDocs/windows-uwp Issue #1593](https://github.com/MicrosoftDocs/windows-uwp/issues/1593)
 
 - [v0.8.0](https://github.com/Windos/BurntToast/releases/download/v0.8.0/BurntToast.zip)
 
