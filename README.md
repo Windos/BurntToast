@@ -60,7 +60,9 @@ if you using Powershell 6 or later, extract into `$env:userprofile\Documents\Pow
 
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
 
-- [Bleeding Edge](https://github.com/Windos/BurntToast/archive/v0.8.1.zip) (Development/Raw Repo)
+- [v0.8.2](https://github.com/Windos/BurntToast/releases/download/v0.8.2/BurntToast.zip)
+
+  - Add: AdaptiveGroups are now usable via New-BTColumn
 
 - [v0.8.1](https://github.com/Windos/BurntToast/releases/download/v0.8.1/BurntToast.zip)
 

@@ -1,6 +1,6 @@
 ﻿@{
     RootModule        = 'BurntToast.psm1'
-    ModuleVersion     = '0.8.1'
+    ModuleVersion     = '0.8.2'
     # Can only use CompatiblePSEditions if PowerShellVersion is set to 5.1, not sure about limiting this to that version yet.
     # CompatiblePSEditions = @('Desktop')
     GUID              = '751a2aeb-a68f-422e-a2ea-376bdd81612a'
@@ -42,7 +42,11 @@
             LicenseUri   = 'https://github.com/Windos/BurntToast/blob/main/LICENSE'
             ProjectUri   = 'https://github.com/Windos/BurntToast'
             IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/main/Media/BurntToast-Logo.png'
-            ReleaseNotes = '# 0.8.1
+            ReleaseNotes = '# 0.8.2
+
+* Add: AdaptiveGroups are now usable via New-BTColumn
+
+# 0.8.1
 
 * Fix: Toast alias removed in 0.8.0 has been restored
 * Deprecation: Signalling removal of Shoulder Tap cmdlets in future version, v0.9.0

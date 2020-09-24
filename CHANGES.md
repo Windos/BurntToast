@@ -1,5 +1,9 @@
 # Full Change Log
 
+- [v0.8.2](https://github.com/Windos/BurntToast/releases/download/v0.8.2/BurntToast.zip)
+
+  - Add: AdaptiveGroups are now usable via New-BTColumn
+
 - [v0.8.1](https://github.com/Windos/BurntToast/releases/download/v0.8.1/BurntToast.zip)
 
   - Fix: Toast alias removed in 0.8.0 has been restored
