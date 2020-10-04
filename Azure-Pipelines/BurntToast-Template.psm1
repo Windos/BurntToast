@@ -31,6 +31,12 @@ if ($WinMajorVersion -ge 10) {
         }
     }
 
+    $Script:ActionsSupported = 'System.Management.Automation.SemanticVersion' -as [type] -and
+        $PSVersionTable.PSVersion -ge [System.Management.Automation.SemanticVersion] '7.1.0-preview.4'
+
+    $Script:UnsupportedEvents = 'Toast events are only supported on PowerShell 7.1.0 and above. ' +
+        'Your notification will still be displayed, but the actions will be ignored.'
+
     Export-ModuleMember -Alias 'Toast'
     Export-ModuleMember -Function $PublicFunctions
 
