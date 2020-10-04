@@ -66,6 +66,8 @@ if you using Powershell 6 or later, extract into `$env:userprofile\Documents\Pow
 
   - Fix: Error when using actionable toast parameters on any version ([#122](https://github.com/Windos/BurntToast/issues/122))
 
+  - Fix: Multiple warnings about events not being supported when specifying multiple event types.
+
 - [v0.8.2](https://github.com/Windos/BurntToast/releases/download/v0.8.2/BurntToast.zip)
 
   - Add: AdaptiveGroups are now usable via New-BTColumn

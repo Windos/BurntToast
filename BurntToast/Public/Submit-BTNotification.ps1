@@ -149,25 +149,17 @@
         $Toast.Data.SequenceNumber = $SequenceNumber
     }
 
-    if ($ActivatedAction) {
+    if ($ActivatedAction -or $DismissedAction -or $FailedAction) {
         if ($Script:ActionsSupported) {
-            Register-ObjectEvent -InputObject $Toast -EventName Activated -Action $ActivatedAction |Out-Null
-        } else {
-            Write-Warning $Script:UnsupportedEvents
-        }
-    }
-
-    if ($DismissedAction) {
-        if ($Script:ActionsSupported) {
-            Register-ObjectEvent -InputObject $Toast -EventName Dismissed -Action $DismissedAction | Out-Null
-        } else {
-            Write-Warning $Script:UnsupportedEvents
-        }
-    }
-
-    if ($FailedAction) {
-        if ($Script:ActionsSupported) {
-            Register-ObjectEvent -InputObject $Toast -EventName Failed -Action $FailedAction | Out-Null
+            if ($ActivatedAction) {
+                Register-ObjectEvent -InputObject $Toast -EventName Activated -Action $ActivatedAction |Out-Null
+            }
+            if ($DismissedAction) {
+                Register-ObjectEvent -InputObject $Toast -EventName Dismissed -Action $DismissedAction | Out-Null
+            }
+            if ($FailedAction) {
+                Register-ObjectEvent -InputObject $Toast -EventName Failed -Action $FailedAction | Out-Null
+            }
         } else {
             Write-Warning $Script:UnsupportedEvents
         }

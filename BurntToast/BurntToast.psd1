@@ -46,6 +46,7 @@
 
 * Fix: Error when running Update-BTNotification on PowerShell 6.0+ (#120)
 * Fix: Error when using actionable toast parameters on any version (#122)
+* Fix: Multiple warnings about events not being supported when specifying multiple event types.
 
 # 0.8.2
 

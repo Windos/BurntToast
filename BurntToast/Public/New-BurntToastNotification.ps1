@@ -268,20 +268,13 @@
         $ToastSplat.Add('DataBinding', $DataBinding)
     }
 
+    # Toast events may not be supported, this check happens inside Submit-BTNotification
     if ($ActivatedAction) {
-        if ($Script:ActionsSupported) {
-            $ToastSplat.Add('ActivatedAction', $ActivatedAction)
-        } else {
-            Write-Warning $Script:UnsupportedEvents
-        }
+        $ToastSplat.Add('ActivatedAction', $ActivatedAction)
     }
 
     if ($DismissedAction) {
-        if ($Script:ActionsSupported) {
-            $ToastSplat.Add('DismissedAction', $DismissedAction)
-        } else {
-            Write-Warning $Script:UnsupportedEvents
-        }
+        $ToastSplat.Add('DismissedAction', $DismissedAction)
     }
 
     if($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {
