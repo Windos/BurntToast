@@ -26,7 +26,8 @@
         https://github.com/Windos/BurntToast/blob/main/Help/New-BTSelectionBoxItem.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTSelectionBoxItem.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem])]
 
     param (

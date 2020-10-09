@@ -35,7 +35,8 @@
         https://github.com/Windos/BurntToast/blob/main/Help/New-BTContent.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTContent.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastContent])]
     param (
         # Optionally create custom actions with buttons and inputs (New-BTAction.)

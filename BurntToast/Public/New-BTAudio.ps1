@@ -36,7 +36,8 @@
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'StandardSound',
-                   SupportsShouldProcess   = $true)]
+                   SupportsShouldProcess   = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTAudio.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastAudio])]
     param (
         # Specifies one of the built in Microsoft notification sounds.

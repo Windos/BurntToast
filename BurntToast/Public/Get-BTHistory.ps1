@@ -24,6 +24,7 @@ function Get-BTHistory {
         https://github.com/Windos/BurntToast/blob/main/Help/Get-BTHistory.md
     #>
 
+    [cmdletBinding(HelpUri='https://github.com/Windos/BurntToast/blob/main/Help/Get-BTHistory.md')]
     param (
         # Specifies the AppId of the 'application' or process that spawned the toast notification.
         [string] $AppId = $Script:Config.AppId,

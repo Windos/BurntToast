@@ -69,7 +69,8 @@
 
     [Alias('Toast')]
     [CmdletBinding(DefaultParameterSetName = 'Sound',
-                   SupportsShouldProcess   = $true)]
+                   SupportsShouldProcess   = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BurntToastNotification.md')]
     param (
         # Specifies the text to show on the Toast Notification. Up to three strings can be displayed, the first of which will be embolden as a title.
         [ValidateCount(0, 3)]

@@ -41,7 +41,8 @@
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'Image',
-                   SupportsShouldProcess   = $true)]
+                   SupportsShouldProcess   = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTImage.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.AdaptiveImage], ParameterSetName = 'Image')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastGenericAppLogo], ParameterSetName = 'AppLogo')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastGenericHeroImage], ParameterSetName = 'Hero')]

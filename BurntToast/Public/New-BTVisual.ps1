@@ -26,7 +26,8 @@
         https://github.com/Windos/BurntToast/blob/main/Help/New-BTVisual.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTVisual.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastVisual])]
     param (
         # The generic Toast binding, which can be rendered on all devices. This binding is created using the New-BTBinding function.

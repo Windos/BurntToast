@@ -33,7 +33,8 @@
         https://github.com/Windos/BurntToast/blob/main/Help/New-BTBinding.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTBinding.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastBindingGeneric])]
     param (
         # The contents of the body of the Toast, which can include Text (New-BTText), Image (New-BTImage), Group (not yet implemented), and Progress Bar (New-BTProgressBar).

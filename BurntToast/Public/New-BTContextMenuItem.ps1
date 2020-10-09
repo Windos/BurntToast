@@ -26,7 +26,8 @@
         https://github.com/Windos/BurntToast/blob/main/Help/New-BTContextMenuItem.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTContextMenuItem.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem])]
 
     param (
