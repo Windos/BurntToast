@@ -48,7 +48,8 @@
     #>
 
     [CmdletBinding(DefaultParametersetName = 'Button',
-                   SupportsShouldProcess   = $true)]
+                   SupportsShouldProcess   = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTButton.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastButton], ParameterSetName = 'Button')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastButtonDismiss], ParameterSetName = 'Dismiss')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze], ParameterSetName = 'Snooze')]

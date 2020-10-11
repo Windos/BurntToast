@@ -26,7 +26,8 @@ function Remove-BTNotification {
         https://github.com/Windos/BurntToast/blob/main/Help/Remove-BTNotification.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/Remove-BTNotification.md')]
     param (
         # Specifies the AppId of the 'application' or process that spawned the toast notification.
         [string] $AppId = $Script:Config.AppId,

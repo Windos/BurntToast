@@ -30,7 +30,8 @@
         https://github.com/Windos/BurntToast/blob/main/Help/Update-BTNotification.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/Update-BTNotification.md')]
     [CmdletBinding()]
     param (
         # When updating toasts (not curently working) rapidly, the sequence number helps to ensure that toasts recieved out of order will not be displayed in a manner that may confuse.

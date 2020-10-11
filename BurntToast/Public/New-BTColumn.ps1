@@ -77,6 +77,7 @@ function New-BTColumn {
     #>
 
     # [CmdletBinding(SupportsShouldProcess = $true)]
+    [cmdletBinding(HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTColumn.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.AdaptiveSubgroup])]
     param (
         # The content to be contained within the column. Can contain text (New-BTText) and images (New-BTImage).

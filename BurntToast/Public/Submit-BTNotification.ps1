@@ -21,7 +21,8 @@
         https://github.com/Windos/BurntToast/blob/main/Help/Submit-BTNotification.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/Submit-BTNotification.md')]
     param (
         # A Toast Content object which is the Base Toast element, created using the New-BTContent function.
         [Microsoft.Toolkit.Uwp.Notifications.ToastContent] $Content,

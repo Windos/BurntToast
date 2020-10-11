@@ -35,7 +35,8 @@
     #>
 
     [CmdletBinding(DefaultParametersetName = 'Text',
-                   SupportsShouldProcess   = $true)]
+                   SupportsShouldProcess   = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTInput.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastTextBox], ParametersetName = 'Text')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBox], ParametersetName = 'Text')]
 

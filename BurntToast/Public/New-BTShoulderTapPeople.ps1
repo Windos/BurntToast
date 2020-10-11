@@ -22,7 +22,8 @@
     #>
 
     [Obsolete('This cmdlet is being deprecated, it will be removed in v0.9.0')]
-    [CmdletBinding(DefaultParameterSetName = 'Email')]
+    [CmdletBinding(DefaultParameterSetName = 'Email',
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTShoulderTapPeople.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastPeople])]
 
     param (

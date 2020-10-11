@@ -39,7 +39,8 @@
         https://github.com/Windos/BurntToast/blob/main/Help/New-BTText.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTText.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.AdaptiveText])]
     param (
         # The text to display. Data binding support added in Creators Update, only works for toast top-level text elements (But appears to not be working via PowerShell yet.)
