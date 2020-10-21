@@ -16,7 +16,7 @@
         Microsoft.Toolkit.Uwp.Notifications.ToastHeader
 
         .EXAMPLE
-        New-BTHeader -Id 'primary header' -Title 'First Category'
+        New-BTHeader -Title 'First Category'
 
         This command creates a Toast Header object, which will be displayed with the text "First Category."
 
@@ -38,8 +38,8 @@
         # Unique string that identifies a header. If a new Id is provided, the system will treat the header as a new header even if it has the same display text as a previous header.
         #
         # It is possible to update a header's display text by re-using the Id but changing the title.
-        [Parameter(Mandatory)]
-        [string] $Id,
+        [Parameter()]
+        [string] $Id = 'ID' + (New-Guid).ToString().Replace('-','').ToUpper(),
 
         # The header string that is displayed to the user.
         [Parameter(Mandatory)]
