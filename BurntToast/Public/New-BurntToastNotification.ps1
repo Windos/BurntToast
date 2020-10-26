@@ -1,7 +1,7 @@
 ﻿function New-BurntToastNotification {
     <#
-        .SYNOPSIS
-        Creates and displays a Toast Notification.
+    .SYNOPSIS
+    Creates and displays a Toast Notification.
 
         .DESCRIPTION
         The New-BurntToastNotification function creates and displays a Toast Notification on Microsoft Windows 10.
@@ -69,8 +69,8 @@
 
     [Alias('Toast')]
     [CmdletBinding(DefaultParameterSetName = 'Sound',
-                   SupportsShouldProcess   = $true,
-                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BurntToastNotification.md')]
+        SupportsShouldProcess = $true,
+        HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BurntToastNotification.md')]
     param (
         # Specifies the text to show on the Toast Notification. Up to three strings can be displayed, the first of which will be embolden as a title.
         [ValidateCount(0, 3)]
@@ -86,68 +86,71 @@
         # Specifies the path to an image that will override the default image displayed with a Toast Notification.
         [String] $AppLogo,
 
+        # Specifies the path to an image that will be displayed with a Toast Notification in Hero section.
+        [String] $Hero,
+
         # Selects the sound to acompany the Toast Notification. Any 'Alarm' or 'Call' tones will automatically loop and extent the amount of time that a Toast is displayed on screen.
         #
         # Cannot be used in conjunction with the 'Silent' switch.
         [Parameter(ParameterSetName = 'Sound')]
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Sound-SnD')]
+            ParameterSetName = 'Sound-SnD')]
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Sound-Button')]
+            ParameterSetName = 'Sound-Button')]
         [ValidateSet('Default',
-                     'IM',
-                     'Mail',
-                     'Reminder',
-                     'SMS',
-                     'Alarm',
-                     'Alarm2',
-                     'Alarm3',
-                     'Alarm4',
-                     'Alarm5',
-                     'Alarm6',
-                     'Alarm7',
-                     'Alarm8',
-                     'Alarm9',
-                     'Alarm10',
-                     'Call',
-                     'Call2',
-                     'Call3',
-                     'Call4',
-                     'Call5',
-                     'Call6',
-                     'Call7',
-                     'Call8',
-                     'Call9',
-                     'Call10')]
+            'IM',
+            'Mail',
+            'Reminder',
+            'SMS',
+            'Alarm',
+            'Alarm2',
+            'Alarm3',
+            'Alarm4',
+            'Alarm5',
+            'Alarm6',
+            'Alarm7',
+            'Alarm8',
+            'Alarm9',
+            'Alarm10',
+            'Call',
+            'Call2',
+            'Call3',
+            'Call4',
+            'Call5',
+            'Call6',
+            'Call7',
+            'Call8',
+            'Call9',
+            'Call10')]
         [String] $Sound = 'Default',
 
         # Indicates that the Toast Notification will be displayed on screen without an accompanying sound.
         #
         # Cannot be used in conjunction with the 'Sound' parameter.
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Silent')]
+            ParameterSetName = 'Silent')]
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Silent-SnD')]
+            ParameterSetName = 'Silent-SnD')]
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Silent-Button')]
+            ParameterSetName = 'Silent-Button')]
         [Switch] $Silent,
 
         # Adds a default selection box and snooze/dismiss buttons to the bottom of the Toast Notification.
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'SnD')]
+            ParameterSetName = 'SnD')]
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Silent-SnD')]
+            ParameterSetName = 'Silent-SnD')]
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Sound-SnD')]
+            ParameterSetName = 'Sound-SnD')]
         [Switch] $SnoozeAndDismiss,
 
         # Allows up to five buttons to be added to the bottom of the Toast Notification. These buttons should be created using the New-BTButton function.
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Button')]
+            ParameterSetName = 'Button')]
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Silent-Button')]
+            ParameterSetName = 'Silent-Button')]
         [Parameter(Mandatory = $true,
-                   ParameterSetName = 'Sound-Button')]
+            ParameterSetName = 'Sound-Button')]
         [Microsoft.Toolkit.Uwp.Notifications.IToastButton[]] $Button,
 
         # Specify the Toast Header object created using the New-BTHeader function, for seperation/categorization of toasts from the same AppId.
@@ -198,6 +201,10 @@
         $AppLogoImage = New-BTImage -AppLogoOverride -Crop Circle -WhatIf:$false
     }
 
+    if ($Hero) {
+        $HeroImage = New-BTImage -Source $Hero -HeroImage -WhatIf:$false
+    }
+
     if ($Silent) {
         $Audio = New-BTAudio -Silent -WhatIf:$false
     } else {
@@ -214,6 +221,7 @@
     $BindingSplat = @{
         Children        = $ChildObjects
         AppLogoOverride = $AppLogoImage
+        HeroImage       = $HeroImage
         WhatIf          = $false
     }
 
@@ -225,7 +233,7 @@
     $Visual = New-BTVisual -BindingGeneric $Binding -WhatIf:$false
 
     $ContentSplat = @{'Audio' = $Audio
-        'Visual' = $Visual
+        'Visual'              = $Visual
     }
 
     if ($Long) {
@@ -250,7 +258,7 @@
 
     $ToastSplat = @{
         Content = $Content
-        AppId = $Script:Config.AppId
+        AppId   = $Script:Config.AppId
     }
 
     if ($UniqueIdentifier) {
@@ -278,7 +286,7 @@
         $ToastSplat.Add('DismissedAction', $DismissedAction)
     }
 
-    if($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {
+    if ($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {
         Submit-BTNotification @ToastSplat
     }
 }
