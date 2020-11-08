@@ -83,6 +83,9 @@
 
         #TODO: [ValidateScript({ Test-ToastImage -Path $_ })]
 
+        # Specifies the AppId of the 'application' or process that spawned the toast notification.
+        [string] $AppId = $Script:Config.AppId,
+
         # Specifies the path to an image that will override the default image displayed with a Toast Notification.
         [String] $AppLogo,
 
@@ -250,7 +253,7 @@
 
     $ToastSplat = @{
         Content = $Content
-        AppId = $Script:Config.AppId
+        AppId = $AppId
     }
 
     if ($UniqueIdentifier) {
