@@ -1,5 +1,15 @@
 # Full Change Log
 
+- [0.8.4](https://github.com/Windos/BurntToast/releases/download/v0.8.4/BurntToast.zip)
+
+  - Enhancement: Header ID on New-BTHeader is now optional. An ID will be auto generated if not specified ([#125](https://github.com/Windos/BurntToast/issues/125))
+
+    - Thanks [@glennsarti](https://github.com/glennsarti)
+
+  - Enhancement: Hero images can now be specified using the New-BurntToastNotification function using the -HeroImage parameter ([#80](https://github.com/Windos/BurntToast/issues/80))
+
+    - Thanks [@UniverseCitiz3n](https://github.com/UniverseCitiz3n)
+
 - [0.8.3](https://github.com/Windos/BurntToast/releases/download/v0.8.3/BurntToast.zip)
 
   - Fix: Error when running Update-BTNotification on PowerShell 6.0+ ([#120](https://github.com/Windos/BurntToast/issues/120))
