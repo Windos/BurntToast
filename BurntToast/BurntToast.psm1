@@ -6,7 +6,6 @@ if ($WinMajorVersion -ge 10) {
     $Library = @( Get-ChildItem -Path $PSScriptRoot\lib\Microsoft.Toolkit.Uwp.Notifications\*.dll -Recurse -ErrorAction SilentlyContinue )
 
     if ($IsWindows) {
-        $Library += @( Get-ChildItem -Path $PSScriptRoot\lib\Microsoft.Windows.CsWinRT\*.dll -Recurse -ErrorAction SilentlyContinue )
         $Library += @( Get-ChildItem -Path $PSScriptRoot\lib\Microsoft.Windows.SDK.NET\*.dll -Recurse -ErrorAction SilentlyContinue )
     }
 
