@@ -262,7 +262,7 @@
 
     $ToastSplat = @{
         Content = $Content
-        AppId   = $Script:Config.AppId
+        AppId   = $AppId
     }
 
     if ($UniqueIdentifier) {
