@@ -100,25 +100,6 @@ if you using Powershell 6 or later, extract into `$env:userprofile\Documents\Pow
 
   - Fix: BurntToast and .NET 5 ([#101](https://github.com/Windos/BurntToast/issues/101))
 
-- [v0.7.1](https://github.com/Windos/BurntToast/releases/download/v0.7.1/BurntToast.zip)
-
-  - Update: Microsoft Community Toolkit to 6.0.0
-
-  - New: Support relative paths on images
-
-  - New: "ScheduledToast" switch added to `Get-BTHistory` which returns scheduled or snoozed toast notifications
-
-  - Enhancement: Libraries only loaded on module import if libraries not already loaded
-
-  - Enhancement: Validate that image paths exist
-
-  - Fix: Reverted to XML clean up to remove curly braces if databindings are not being used (Issue #72)
-
-  - Known Issues:
-
-    - Regardless of what snooze option is chosen, a snoozed toast will re-appear after 9 minutes
-    - Cause is unknown and isn''t unique to v0.7.1, will be investigated while working on v0.7.2
-
 - see more in the [Full Change Log](CHANGES.md)
 
 ## Contributors
@@ -126,6 +107,8 @@ if you using Powershell 6 or later, extract into `$env:userprofile\Documents\Pow
 - [Windos](https://github.com/Windos)
 - [jeremytbrun](https://github.com/jeremytbrun)
 - [KelvinTegelaar](https://github.com/KelvinTegelaar)
+- [steviecoaster](https://github.com/steviecoaster)
+- [glennsarti](https://github.com/glennsarti)
 
 ## License
 
