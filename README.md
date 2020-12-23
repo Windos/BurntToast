@@ -110,6 +110,7 @@ if you using Powershell 6 or later, extract into `$env:userprofile\Documents\Pow
 - [steviecoaster](https://github.com/steviecoaster)
 - [glennsarti](https://github.com/glennsarti)
 - [UniverseCitiz3n](https://github.com/UniverseCitiz3n)
+- [cedarbaum](https://github.com/cedarbaum)
 
 ## License
 

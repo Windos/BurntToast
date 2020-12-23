@@ -10,6 +10,10 @@
 
     - Thanks [@UniverseCitiz3n](https://github.com/UniverseCitiz3n)
 
+  - Enhancement: AppIDs can now be specified using the New-BurntToastNotification function using the -AppId parameter.
+
+    - Thanks [@cedarbaum](https://github.com/cedarbaum)
+
 - [0.8.3](https://github.com/Windos/BurntToast/releases/download/v0.8.3/BurntToast.zip)
 
   - Fix: Error when running Update-BTNotification on PowerShell 6.0+ ([#120](https://github.com/Windos/BurntToast/issues/120))
