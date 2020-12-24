@@ -15,19 +15,19 @@ Describe 'Get-BTHistory' {
                 Assert-VerifiableMock
             }
         }
-    }
 
-    Context 'invalid AppId' {
-        Mock Test-Path { $false } -ModuleName BurntToast  -Verifiable -ParameterFilter {
-            $Path -eq 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Script Checker'
-        }
+        Context 'invalid AppId' {
+            Mock Test-Path { $false } -ModuleName BurntToast  -Verifiable -ParameterFilter {
+                $Path -eq 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Script Checker'
+            }
 
-        It 'should throw' {
-            { Get-BTHistory -AppId 'Script Checker' } | Should -Throw "The AppId Script Checker is not present in the registry, please run New-BTAppId to avoid inconsistent Toast behaviour."
-        }
+            It 'should throw' {
+                { Get-BTHistory -AppId 'Script Checker' } | Should -Throw "The AppId Script Checker is not present in the registry, please run New-BTAppId to avoid inconsistent Toast behaviour."
+            }
 
-        It 'tested the correct path' {
-            Assert-VerifiableMock
+            It 'tested the correct path' {
+                Assert-VerifiableMock
+            }
         }
     }
 }
