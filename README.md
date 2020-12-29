@@ -60,6 +60,26 @@ if you using Powershell 6 or later, extract into `$env:userprofile\Documents\Pow
 
 **Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
 
+- [0.8.4](https://github.com/Windos/BurntToast/releases/download/v0.8.4/BurntToast.zip)
+
+  - Enhancement: Header ID on New-BTHeader is now optional. An ID will be auto generated if not specified ([#125](https://github.com/Windos/BurntToast/issues/125))
+
+    - Thanks [@glennsarti](https://github.com/glennsarti)
+
+  - Enhancement: Hero images can now be specified using the New-BurntToastNotification function using the -HeroImage parameter ([#80](https://github.com/Windos/BurntToast/issues/80))
+
+    - Thanks [@UniverseCitiz3n](https://github.com/UniverseCitiz3n)
+
+  - Enhancement: AppIDs can now be specified using the New-BurntToastNotification function using the -AppId parameter.
+
+    - Thanks [@cedarbaum](https://github.com/cedarbaum)
+
+  - Enhancement: You can now specify a UniqueIdentifier when using the Remove-BTNotification function rather than component Tag and Group strings.
+
+  - Fix: Weird edge cases when taking text from Twitch/IRC and using them in a toast is now sorted.
+
+    - Thanks [@potatoqualitee](https://github.com/potatoqualitee) and [@vexx32](https://github.com/vexx32)
+
 - [0.8.3](https://github.com/Windos/BurntToast/releases/download/v0.8.3/BurntToast.zip)
 
   - Fix: Error when running Update-BTNotification on PowerShell 6.0+ ([#120](https://github.com/Windos/BurntToast/issues/120))
@@ -100,25 +120,6 @@ if you using Powershell 6 or later, extract into `$env:userprofile\Documents\Pow
 
   - Fix: BurntToast and .NET 5 ([#101](https://github.com/Windos/BurntToast/issues/101))
 
-- [v0.7.1](https://github.com/Windos/BurntToast/releases/download/v0.7.1/BurntToast.zip)
-
-  - Update: Microsoft Community Toolkit to 6.0.0
-
-  - New: Support relative paths on images
-
-  - New: "ScheduledToast" switch added to `Get-BTHistory` which returns scheduled or snoozed toast notifications
-
-  - Enhancement: Libraries only loaded on module import if libraries not already loaded
-
-  - Enhancement: Validate that image paths exist
-
-  - Fix: Reverted to XML clean up to remove curly braces if databindings are not being used (Issue #72)
-
-  - Known Issues:
-
-    - Regardless of what snooze option is chosen, a snoozed toast will re-appear after 9 minutes
-    - Cause is unknown and isn''t unique to v0.7.1, will be investigated while working on v0.7.2
-
 - see more in the [Full Change Log](CHANGES.md)
 
 ## Contributors
@@ -126,6 +127,10 @@ if you using Powershell 6 or later, extract into `$env:userprofile\Documents\Pow
 - [Windos](https://github.com/Windos)
 - [jeremytbrun](https://github.com/jeremytbrun)
 - [KelvinTegelaar](https://github.com/KelvinTegelaar)
+- [steviecoaster](https://github.com/steviecoaster)
+- [glennsarti](https://github.com/glennsarti)
+- [UniverseCitiz3n](https://github.com/UniverseCitiz3n)
+- [cedarbaum](https://github.com/cedarbaum)
 
 ## License
 

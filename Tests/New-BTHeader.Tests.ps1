@@ -16,6 +16,23 @@ Describe 'New-BTHeader' {
             $Log | Should -Be $Expected
         }
     }
+
+    Context 'loaded without Id' {
+        Start-Transcript tmp.log
+        try {
+            New-BTHeader -Title 'First Category' -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+        It 'generates an Id' {
+            $Expected = 'Id=[a-zA-Z\d]+:Title'
+            $Log | Should -Match $Expected
+        }
+    }
+
     Context 'clickable header text' {
         Start-Transcript tmp.log
         try {
