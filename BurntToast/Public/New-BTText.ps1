@@ -76,7 +76,7 @@
     $TextObj = [Microsoft.Toolkit.Uwp.Notifications.AdaptiveText]::new()
 
     if ($Text) {
-        $TextObj.Text = $Text
+        $TextObj.Text = $Text -replace '\x01'
     }
 
     if ($MaxLines) {

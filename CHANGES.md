@@ -16,6 +16,10 @@
 
   - Enhancement: You can now specify a UniqueIdentifier when using the Remove-BTNotification function rather than component Tag and Group strings.
 
+  - Fix: Weird edge cases when taking text from Twitch/IRC and using them in a toast is now sorted.
+
+    - Thanks [@potatoqualitee](https://github.com/potatoqualitee) and [@vexx32](https://github.com/vexx32)
+
 - [0.8.3](https://github.com/Windos/BurntToast/releases/download/v0.8.3/BurntToast.zip)
 
   - Fix: Error when running Update-BTNotification on PowerShell 6.0+ ([#120](https://github.com/Windos/BurntToast/issues/120))

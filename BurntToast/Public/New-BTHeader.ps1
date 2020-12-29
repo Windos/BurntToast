@@ -58,7 +58,7 @@
         [Microsoft.Toolkit.Uwp.Notifications.ToastActivationType] $ActivationType = [Microsoft.Toolkit.Uwp.Notifications.ToastActivationType]::Protocol
     )
 
-    $Header = [Microsoft.Toolkit.Uwp.Notifications.ToastHeader]::new($Id, $Title, $Arguments)
+    $Header = [Microsoft.Toolkit.Uwp.Notifications.ToastHeader]::new($Id, ($Title -replace '\x01'), $Arguments)
 
     if ($ActivationType) {
         $Header.ActivationType = $ActivationType
