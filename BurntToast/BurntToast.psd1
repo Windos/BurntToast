@@ -42,7 +42,19 @@
             LicenseUri   = 'https://github.com/Windos/BurntToast/blob/main/LICENSE'
             ProjectUri   = 'https://github.com/Windos/BurntToast'
             IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/main/Media/BurntToast-Logo.png'
-            ReleaseNotes = '#0.8.3
+            ReleaseNotes = '# 0.8.4
+
+* Enhancement: Header ID on New-BTHeader is now optional. An ID will be auto generated if not specified (#125)
+  * Thanks [@glennsarti](https://github.com/glennsarti)
+* Enhancement: Hero images can now be specified using the New-BurntToastNotification function using the -HeroImage parameter (#80)
+  * Thanks [@UniverseCitiz3n](https://github.com/UniverseCitiz3n)
+* Enhancement: AppIDs can now be specified using the New-BurntToastNotification function using the -AppId parameter.
+  * Thanks [@cedarbaum](https://github.com/cedarbaum)
+* Enhancement: You can now specify a UniqueIdentifier when using the Remove-BTNotification function rather than component Tag and Group strings.
+* Fix: Weird edge cases when taking text from Twitch/IRC and using them in a toast is now sorted.
+  * Thanks [@potatoqualitee](https://github.com/potatoqualitee) and [@vexx32](https://github.com/vexx32)
+
+# 0.8.3
 
 * Fix: Error when running Update-BTNotification on PowerShell 6.0+ (#120)
 * Fix: Error when using actionable toast parameters on any version (#122)
