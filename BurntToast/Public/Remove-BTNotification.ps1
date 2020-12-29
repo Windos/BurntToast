@@ -26,17 +26,25 @@ function Remove-BTNotification {
         https://github.com/Windos/BurntToast/blob/main/Help/Remove-BTNotification.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true,
+    [CmdletBinding(DefaultParameterSetName = 'Individual',
+                   SupportsShouldProcess = $true,
                    HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/Remove-BTNotification.md')]
     param (
         # Specifies the AppId of the 'application' or process that spawned the toast notification.
         [string] $AppId = $Script:Config.AppId,
 
         # Specifies the tag, which identifies a given toast notification.
+        [Parameter(ParameterSetName = 'Individual')]
         [string] $Tag,
 
         # Specifies the group, which helps to identify a given toast notification.
-        [string] $Group
+        [Parameter(ParameterSetName = 'Individual')]
+        [string] $Group,
+
+        # A string that uniquely identifies a toast notification. Represents both the Tag and Group for a toast.
+        [Parameter(Mandatory = $true,
+                   ParameterSetName = 'Combo')]
+        [string] $UniqueIdentifier
     )
 
     if (!(Test-Path -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\$AppId")) {

@@ -14,6 +14,8 @@
 
     - Thanks [@cedarbaum](https://github.com/cedarbaum)
 
+  - Enhancement: You can now specify a UniqueIdentifier when using the Remove-BTNotification function rather than component Tag and Group strings.
+
 - [0.8.3](https://github.com/Windos/BurntToast/releases/download/v0.8.3/BurntToast.zip)
 
   - Fix: Error when running Update-BTNotification on PowerShell 6.0+ ([#120](https://github.com/Windos/BurntToast/issues/120))
