@@ -47,7 +47,11 @@ function Remove-BTNotification {
         [string] $UniqueIdentifier
     )
 
-    if (!(Test-Path -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\$AppId")) {
+    if ($UniqueIdentifier) {
+        if($PSCmdlet.ShouldProcess("Tag: $UniqueIdentifier, Group: $UniqueIdentifier, AppId: $AppId", 'Selectively removing notifications')) {
+            [Windows.UI.Notifications.ToastNotificationManager]::History.Remove($UniqueIdentifier, $UniqueIdentifier, $AppId)
+        }
+    } elseif (!(Test-Path -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\$AppId")) {
         Write-Warning -Message "The AppId $AppId is not present in the registry, please run New-BTAppId to avoid inconsistent Toast behaviour."
     }
 
