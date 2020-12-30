@@ -1,6 +1,6 @@
 ﻿@{
     RootModule        = 'BurntToast.psm1'
-    ModuleVersion     = '0.8.4'
+    ModuleVersion     = '0.8.5'
     # Can only use CompatiblePSEditions if PowerShellVersion is set to 5.1, not sure about limiting this to that version yet.
     # CompatiblePSEditions = @('Desktop')
     GUID              = '751a2aeb-a68f-422e-a2ea-376bdd81612a'
@@ -42,7 +42,11 @@
             LicenseUri   = 'https://github.com/Windos/BurntToast/blob/main/LICENSE'
             ProjectUri   = 'https://github.com/Windos/BurntToast'
             IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/main/Media/BurntToast-Logo.png'
-            ReleaseNotes = '# 0.8.4
+            ReleaseNotes = '# 0.8.5
+
+* Actually implement the ability to use a UniqueIdentifier with the Remove-BTNotification function (which was half implemented in 0.8.4)
+
+# 0.8.4
 
 * Enhancement: Header ID on New-BTHeader is now optional. An ID will be auto generated if not specified (#125)
   * Thanks [@glennsarti](https://github.com/glennsarti)
