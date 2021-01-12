@@ -1,4 +1,4 @@
-# New-BTAction
+# New-BTAppId
 
 ## SYNOPSIS
 
@@ -68,4 +68,4 @@ None
 
 ## RELATED LINKS
 
-[New-BTAction](https://github.com/Windos/BurntToast/blob/main/Help/New-BTAppId.md)
+[New-BTAction](https://github.com/Windos/BurntToast/blob/main/Help/New-BTAction.md)
