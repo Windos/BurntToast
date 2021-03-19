@@ -1,16 +1,27 @@
 # Full Change Log
 
+- [v1.0.0-Preview1](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview1/BurntToast.zip)
+
+  - UPDATE: Microsoft.Windows.SDK.NET.Ref libraries to 10.0.20348.19
+
+  - UPDATE: Microsoft.Toolkit.Uwp.Notifications library to 7.0.2
+
+- see more in the [Full Change Log](CHANGES.md)
+
 - [0.8.5](https://github.com/Windos/BurntToast/releases/download/v0.8.5/BurntToast.zip)
 
-  - Actually implement the ability to use a UniqueIdentifier with the Remove-BTNotification function (which was half implemented in 0.8.4)
+  - Actually implement the ability to use a UniqueIdentifier with the Remove-BTNotification function
+    (which was half implemented in 0.8.4)
 
 - [0.8.4](https://github.com/Windos/BurntToast/releases/download/v0.8.4/BurntToast.zip)
 
-  - Enhancement: Header ID on New-BTHeader is now optional. An ID will be auto generated if not specified ([#125](https://github.com/Windos/BurntToast/issues/125))
+  - Enhancement: Header ID on New-BTHeader is now optional.
+    An ID will be auto generated if not specified ([#125](https://github.com/Windos/BurntToast/issues/125))
 
     - Thanks [@glennsarti](https://github.com/glennsarti)
 
-  - Enhancement: Hero images can now be specified using the New-BurntToastNotification function using the -HeroImage parameter ([#80](https://github.com/Windos/BurntToast/issues/80))
+  - Enhancement: Hero images can now be specified using the New-BurntToastNotification function using the -HeroImage
+    parameter ([#80](https://github.com/Windos/BurntToast/issues/80))
 
     - Thanks [@UniverseCitiz3n](https://github.com/UniverseCitiz3n)
 
@@ -18,7 +29,8 @@
 
     - Thanks [@cedarbaum](https://github.com/cedarbaum)
 
-  - Enhancement: You can now specify a UniqueIdentifier when using the Remove-BTNotification function rather than component Tag and Group strings.
+  - Enhancement: You can now specify a UniqueIdentifier when using the Remove-BTNotification function rather than
+    component Tag and Group strings.
 
   - Fix: Weird edge cases when taking text from Twitch/IRC and using them in a toast is now sorted.
 
@@ -26,9 +38,11 @@
 
 - [0.8.3](https://github.com/Windos/BurntToast/releases/download/v0.8.3/BurntToast.zip)
 
-  - Fix: Error when running Update-BTNotification on PowerShell 6.0+ ([#120](https://github.com/Windos/BurntToast/issues/120))
+  - Fix: Error when running Update-BTNotification on PowerShell 6.0+
+    ([#120](https://github.com/Windos/BurntToast/issues/120))
 
-  - Fix: Error when using actionable toast parameters on any version ([#122](https://github.com/Windos/BurntToast/issues/122))
+  - Fix: Error when using actionable toast parameters on any version
+    ([#122](https://github.com/Windos/BurntToast/issues/122))
 
   - Fix: Multiple warnings about events not being supported when specifying multiple event types.
 
@@ -54,13 +68,15 @@
 
   - Add: Ability to force a refresh of cached images via IgnoreCache switch on New-BTImage
 
-  - Add: ACTIONABLE NOTIFICATIONS! Exposed via ActivatedAction and DismissedAction parameters on Submit-BTNotification and New-BurntToastNotification
+  - Add: ACTIONABLE NOTIFICATIONS! Exposed via ActivatedAction and DismissedAction parameters on Submit-BTNotification
+    and New-BurntToastNotification
 
 - [v0.7.2](https://github.com/Windos/BurntToast/releases/download/v0.7.2/BurntToast.zip)
 
   - Fix: Curly Braces when "Reminder" pops up ([#72](https://github.com/Windos/BurntToast/issues/72))
 
-  - Fix: Caching remote gifs are saved based on their remote filename and not overwritten ([#105](https://github.com/Windos/BurntToast/issues/105))
+  - Fix: Caching remote GIFs are saved based on their remote filename and not overwritten
+    ([#105](https://github.com/Windos/BurntToast/issues/105))
 
     - Thanks [@KelvinTegelaar](https://github.com/KelvinTegelaar)
 
@@ -78,7 +94,7 @@
 
   - Enhancement: Validate that image paths exist
 
-  - Fix: Reverted to XML clean up to remove curly braces if databindings are not being used (Issue #72)
+  - Fix: Reverted to XML clean up to remove curly braces if data bindings are not being used (Issue #72)
 
   - Known Issues:
 
@@ -97,15 +113,19 @@
 
   - Remove toasts you've sent, using `Remove-BTNotification`.
 
-  - Set expiration times on toasts using the new `ExpirationTime` parameter on `New-BurntToastNotification` and `Submit-BTNotification`.
+  - Set expiration times on toasts using the new `ExpirationTime` parameter on `New-BurntToastNotification` and
+    `Submit-BTNotification`.
 
     - Toasts which have expired are removed from the Action Center.
 
-  - Send toasts directly to the Action Center, and avoid showing them on screen, with the new `SuppressPopup` switch on `New-BurntToastNotification` and `Submit-BTNotification`.
+  - Send toasts directly to the Action Center, and avoid showing them on screen,
+    with the new `SuppressPopup` switch on `New-BurntToastNotification` and `Submit-BTNotification`.
 
-  - You can now adjust a toasts timestamp (both past and future) using the `CustomTimestamp` parameter on `New-BurntToastNotification` and `New-BTContent`.
+  - You can now adjust a toasts timestamp (both past and future) using the `CustomTimestamp` parameter on
+    `New-BurntToastNotification` and `New-BTContent`.
 
-    - If not specified, the system uses the time at which the toast was received and this may not accuratly reflect the intent of the notification.
+    - If not specified, the system uses the time at which the toast was received and this may not accurately reflect
+      the intent of the notification.
 
 - [v0.6.3](https://github.com/Windos/BurntToast/releases/download/v0.6.3/BurntToast.zip)
 
@@ -133,7 +153,7 @@
 
   - Fixed Issue #18, Images from the internet will now be downloaded locally
 
-    - Supports regular images, hero images, and applogo
+    - Supports regular images, hero images, and app logos
 
   - All functions now included in .psm1 for release (Thanks @chrislgardner)
 
@@ -153,7 +173,9 @@
 
   - Updated bundled UWP Toolkit to 1.4.1
 
-    - Note that this caused an issue where strings were being wrapped with curly braces in end results. A workaround has been implemented, but could mean that if you legitimately use some rather obscure strings, they may have the braces removed.
+    - Note that this caused an issue where strings were being wrapped with curly braces in end results.
+      A workaround has been implemented, but could mean that if you legitimately use some rather obscure strings,
+      they may have the braces removed.
 
   - Hero Images working now (Thanks to Creators Update)
 
@@ -163,15 +185,19 @@
 
   - Specify a unique identifier in order to replace existing toasts
 
-  - You can specify a custom sound file using the -Path parameter of the New-BTAudio function. This hasn''t been exposed through the main function... that poor thing is getting bloated.
+  - You can specify a custom sound file using the -Path parameter of the New-BTAudio function.
+    This hasn't been exposed through the main function... that poor thing is getting bloated.
 
-  - There is now help for every public function, and the online version for each of them can be found on github. Specify the -Online switch when using Get-Help to be taken directly there.
+  - There is now help for every public function, and the online version for each of them can be found on github.
+    Specify the -Online switch when using Get-Help to be taken directly there.
 
 - [v0.5.2](https://github.com/Windos/BurntToast/releases/download/v0.5.2/BurntToast.zip)
 
-  - Exposed ability to have custom buttons via New-BurntToastNotification, passing result from New-BTButton to the -Button parameter.
+  - Exposed ability to have custom buttons via New-BurntToastNotification,
+    passing result from New-BTButton to the -Button parameter.
 
-    - Expect a blog post soon covering some cool ways to use these buttons. Keep an eye out on [king.geek.nz](http://king.geek.nz).
+    - Expect a blog post soon covering some cool ways to use these buttons.
+      Keep an eye out on [king.geek.nz](http://king.geek.nz).
 
   - Fixed module commands not auto-loading by removing Basic/Advanced function designation ( :( ).
 
@@ -185,7 +211,7 @@
   - Confirmed: Now **ONLY** works on Windows 10
   - BurntToast now has its own, original, logo!
   - New public function to adjust function level of module: Set-BTFunctionLevel
-  - Implemented checking for and registering of AppId in the registry to ensure proper Toast behaviour in the Action Center
+  - Implemented checking for and registering of AppId in the registry to ensure proper Toast behavior in the Action Center
 
 - [v0.5.0](https://github.com/Windos/BurntToast/releases/download/v0.5.0/BurntToast.zip)
 
@@ -193,9 +219,11 @@
   - Snooze and Dismiss now available and working.
   - Documentation is out of date, this will be polished in the next release.
 
-- [v0.4.0](https://github.com/Windos/BurntToast/releases/download/v0.4.0/BurntToast.zip) - Last version that supports Windows 8
+- [v0.4.0](https://github.com/Windos/BurntToast/releases/download/v0.4.0/BurntToast.zip) - Last version that
+  supports Windows 8
 
-  - Credential parameter added so toasts can be generated for regular user when running PowerShell host as a different (e.g. Admin) account.
+  - Credential parameter added so toasts can be generated for regular user when running PowerShell host as a
+    different (e.g. Admin) account.
 
 - [v0.3.0](https://github.com/Windos/BurntToast/releases/download/v0.3.0/BurntToast.zip)
 
