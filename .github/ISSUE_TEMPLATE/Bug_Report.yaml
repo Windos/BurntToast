@@ -51,7 +51,7 @@ body:
   attributes:
     label: "Environment data: PowerShell"
     description: Let us know what what actually happened, screenshots or GIFs are always appreciated!
-    placeholder: "Provide the output of: `$PSVersionTable`
+    placeholder: "Provide the output of: `$PSVersionTable`"
     render: text
   validations:
     required: false
