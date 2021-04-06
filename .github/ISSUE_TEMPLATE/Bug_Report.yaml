@@ -51,6 +51,7 @@ body:
   attributes:
     label: "Environment data: PowerShell"
     placeholder: "Paste the output of: $PSVersionTable"
+    value: "Replace with the output of: $PSVersionTable"
     render: text
   validations:
     required: true
@@ -59,6 +60,7 @@ body:
   attributes:
     label: "Environment data: OS"
     placeholder: "Paste the output of: Get-ComputerInfo | fl OsName, OsVersion, OsArchitecture"
+    value: "Replace with the output of: Get-ComputerInfo | fl OsName, OsVersion, OsArchitecture"
     render: text
   validations:
     required: true
@@ -67,6 +69,7 @@ body:
   attributes:
     label: "Environment data: BurntToast"
     placeholder: "Paste the output of: Get-Module -Name BurntToast -ListAvailable"
+    value: "Replace with the output of: Get-Module -Name BurntToast -ListAvailable"
     render: text
   validations:
     required: true
