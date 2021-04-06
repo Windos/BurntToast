@@ -13,7 +13,7 @@ body:
 - type: textarea
   id: reproduce-steps
   attributes:
-    label: Steps to reproduce?
+    label: Steps to Reproduce
     description: Please anonymize the code you were running and paste it here
     placeholder: Paste code here
     render: powershell
@@ -22,7 +22,7 @@ body:
 - type: textarea
   id: behavior-expected
   attributes:
-    label: Expected behavior
+    label: Expected Behavior
     description: Let us know what you expected to happen, what output or UX were you hoping for?
     placeholder: Type away, markdown is supported
   validations:
@@ -30,7 +30,7 @@ body:
 - type: textarea
   id: behavior-actual
   attributes:
-    label: Actual behavior
+    label: Actual Behavior
     description: Let us know what what actually happened, screenshots or GIFs are always appreciated!
     placeholder: Type away, markdown is supported
   validations:
