@@ -9,55 +9,57 @@ body:
 - type: markdown
   attributes:
     value: |
-      Thanks for taking the time to fill out this bug report!
-- type: input
-  id: contact
+      Thanks for using BurntToast and taking the time to fill out a bug report! 💜
+- type: textarea
+  id: reproduce-steps
   attributes:
-    label: Contact Details
-    description: How can we get in touch with you if we need more info?
-    placeholder: ex. email@example.com
+    label: Steps to reproduce?
+    description: Please anonymize the code you were running and paste it here
+    placeholder: Paste code here
+    render: powershell
+  validations:
+    required: true
+- type: textarea
+  id: behavior-expected
+  attributes:
+    label: Expected behavior
+    description: Let us know what you expected to happen, what output or UX were you hoping for?
+    placeholder: Type away, markdown is supported
   validations:
     required: false
 - type: textarea
-  id: what-happened
+  id: behavior-actual
   attributes:
-    label: What happened?
-    description: Also tell us, what did you expect to happen?
-    placeholder: Tell us what you see!
-    value: "A bug happened!"
+    label: Actual behavior
+    description: Let us know what what actually happened, screenshots or GIFs are always appreciated!
+    placeholder: Type away, markdown is supported
   validations:
-    required: true
+    required: false
 - type: dropdown
-  id: version
+  id: Experience
   attributes:
-    label: Version
-    description: What version of our software are you running?
+    label: Experience
+    description: For our own info, what would you rate your proficiency with toast notifications in general?
     options:
-    - 1.0.2 (Default)
-    - 1.0.3 (Edge)
+    - Beginner
+    - Intermediate
+    - Master Baker
   validations:
-    required: true
-- type: dropdown
-  id: browsers
-  attributes:
-    label: What browsers are you seeing the problem on?
-    multiple: true
-    options:
-    - Firefox
-    - Chrome
-    - Safari
-    - Microsoft Edge
+    required: false
 - type: textarea
-  id: logs
+  id: env-powershell
   attributes:
-    label: Relevant log output
-    description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-    render: shell
+    label: "Environment data: PowerShell"
+    description: Let us know what what actually happened, screenshots or GIFs are always appreciated!
+    placeholder: "Provide the output of: `$PSVersionTable`
+    render: text
+  validations:
+    required: false
 - type: checkboxes
-  id: terms
+  id: consent
   attributes:
-    label: Code of Conduct
-    description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
+    label: Consent to Attribute
+    description: Sometimes bug reports inspire blog posts on [ToastIT.dev](https://ToastIT.dev), please check this box if you'd like a call out if this is the case with this bug report
     options:
-    - label: I agree to follow this project's Code of Conduct
-      required: true
+    - label: Please shout me out if I've inspired a blog post!
+      required: false
