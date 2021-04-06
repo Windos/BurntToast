@@ -38,7 +38,7 @@ body:
 - type: dropdown
   id: Experience
   attributes:
-    label: Experience
+    label: Experience with Toast
     description: For our own info, what would you rate your proficiency with toast notifications in general?
     options:
     - Beginner
@@ -50,16 +50,31 @@ body:
   id: env-powershell
   attributes:
     label: "Environment data: PowerShell"
-    description: Let us know what what actually happened, screenshots or GIFs are always appreciated!
-    placeholder: "Provide the output of: `$PSVersionTable`"
+    placeholder: "Paste the output of: $PSVersionTable"
     render: text
   validations:
-    required: false
+    required: true
+- type: textarea
+  id: env-os
+  attributes:
+    label: "Environment data: OS"
+    placeholder: "Paste the output of: Get-ComputerInfo | fl OsName, OsVersion, OsArchitecture"
+    render: text
+  validations:
+    required: true
+- type: textarea
+  id: env-burnttoast
+  attributes:
+    label: "Environment data: BurntToast"
+    placeholder: "Paste the output of: Get-Module -Name BurntToast -ListAvailable"
+    render: text
+  validations:
+    required: true
 - type: checkboxes
   id: consent
   attributes:
-    label: Consent to Attribute
-    description: Sometimes bug reports inspire blog posts on [ToastIT.dev](https://ToastIT.dev), please check this box if you'd like a call out if this is the case with this bug report
+    label: Consent to Attribution
+    description: Sometimes bug reports inspire blog posts on [ToastIT.dev](https://ToastIT.dev), please check this box if you'd like a call out if that is the case with this bug report
     options:
     - label: Please shout me out if I've inspired a blog post!
       required: false
