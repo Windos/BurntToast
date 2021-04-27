@@ -62,9 +62,15 @@ function New-Shortcut {
 
 
 
-function Remove-COM ($ref) {
-    if($PSCmdlet.ShouldProcess("ReleaseComObject: '$ref' and run garbage collection")) {
-        [System.Runtime.InteropServices.Marshal]::ReleaseComObject([System.__ComObject]$ref) | out-null
+function Remove-COM {
+    [CmdletBinding(SupportsShouldProcess = $true)]
+    Param (
+        [ValidateNotNullOrEmpty()]
+        [String]$COMObject
+    )
+
+    if($PSCmdlet.ShouldProcess("ReleaseComObject: '$COMObject' and run garbage collection")) {
+        [System.Runtime.InteropServices.Marshal]::ReleaseComObject([System.__ComObject]$COMObject) | out-null
         [System.GC]::Collect()
         [System.GC]::WaitForPendingFinalizers()
     }
