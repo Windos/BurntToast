@@ -43,7 +43,7 @@
     $RegPath = 'SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings'
 
     $BaseKey =  (Get-Item HKCU:\).OpenSubKey($RegPath, $true)
-    
+
     if($PSCmdlet.ShouldProcess("creating: '$RegPath\$AppId' with property 'ShowInActionCenter' set to '1' (DWORD)")) {
         $NewKey = $BaseKey.CreateSubKey($AppId, $true)
         $NewKey.SetValue('ShowInActionCenter', 1, [Microsoft.Win32.RegistryValueKind]::DWORD)

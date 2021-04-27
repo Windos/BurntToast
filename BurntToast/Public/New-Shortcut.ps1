@@ -9,6 +9,10 @@ function New-Shortcut {
         .INPUTS
         System.String
 
+        AppName = The name of the application you want seen in your toast notifications
+        ShortcutTarget = The full path that the shortcut should point to
+        IconPath = The full path of an icon to use on the shortcut
+
         You cannot pipe input to this cmdlet.
 
         .OUTPUTS
@@ -17,12 +21,12 @@ function New-Shortcut {
         .EXAMPLE
         New-Shortcut -AppName 'BurntToast' -ShortcutTarget 'C:\Program Files\BurntToast\BurntToast.png' -IconPath 'C:\Program Files\BurntToast\BurntToast.png'
 
-        This command creates a new shortcut to the BurntToast installer example 
+        This command creates a new shortcut to the BurntToast installer example
 
         .LINK
-        
-    #>
 
+    #>
+    [CmdletBinding(SupportsShouldProcess = $true)]
     Param (
         [ValidateNotNullOrEmpty()]
         [String]$AppName,
@@ -35,12 +39,14 @@ function New-Shortcut {
     $shortcutPath = $wshShell.SpecialFolders("StartMenu") + "\" + $AppName + ".lnk"
 
     # Create New Shortcut
-    $newShortcut = $wshShell.CreateShortcut($shortcutPath)
-    $newShortcut.TargetPath = $ShortcutTarget
-    $newShortcut.IconLocation = $IconPath
-    $newShortcut.Description = $AppName
-    $newShortcut.WorkingDirectory =  Split-Path($ShortcutTarget)
-    $newShortcut.Save()
+    if($PSCmdlet.ShouldProcess("creating start menu shortcut: '$shortcutPath' that points to target '$ShortcutTarget'")) {
+        $newShortcut = $wshShell.CreateShortcut($shortcutPath)
+        $newShortcut.TargetPath = $ShortcutTarget
+        $newShortcut.IconLocation = $IconPath
+        $newShortcut.Description = $AppName
+        $newShortcut.WorkingDirectory =  Split-Path($ShortcutTarget)
+        $newShortcut.Save()
+    }
 
     # Cleanup COM objects
     Remove-COM $WshShell
@@ -57,7 +63,9 @@ function New-Shortcut {
 
 
 function Remove-COM ($ref) {
-    [System.Runtime.InteropServices.Marshal]::ReleaseComObject([System.__ComObject]$ref) | out-null
-    [System.GC]::Collect()
-    [System.GC]::WaitForPendingFinalizers()
+    if($PSCmdlet.ShouldProcess("ReleaseComObject: '$ref' and run garbage collection")) {
+        [System.Runtime.InteropServices.Marshal]::ReleaseComObject([System.__ComObject]$ref) | out-null
+        [System.GC]::Collect()
+        [System.GC]::WaitForPendingFinalizers()
+    }
 }
