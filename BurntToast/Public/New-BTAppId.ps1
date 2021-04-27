@@ -40,14 +40,12 @@
         [string] $AppId = $Script:Config.AppId
     )
 
-    $RegPath = 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings'
+    $RegPath = 'SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings'
 
-    if (!(Test-Path -Path "$RegPath\$AppId")) {
-        if($PSCmdlet.ShouldProcess("creating: '$RegPath\$AppId' with property 'ShowInActionCenter' set to '1' (DWORD)")) {
-            $null = New-Item -Path "$RegPath\$AppId" -Force
-            $null = New-ItemProperty -Path "$RegPath\$AppId" -Name 'ShowInActionCenter' -Value 1 -PropertyType 'DWORD'
-        }
-    } else {
-        Write-Verbose -Message 'Specified AppId is already present in the registry.'
+    $BaseKey =  (Get-Item HKCU:\).OpenSubKey($RegPath, $true)
+    
+    if($PSCmdlet.ShouldProcess("creating: '$RegPath\$AppId' with property 'ShowInActionCenter' set to '1' (DWORD)")) {
+        $NewKey = $BaseKey.CreateSubKey($AppId, $true)
+        $NewKey.SetValue('ShowInActionCenter', 1, [Microsoft.Win32.RegistryValueKind]::DWORD)
     }
 }
