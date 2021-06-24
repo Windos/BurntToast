@@ -4,7 +4,6 @@ title: "[Bug]: "
 labels: [bug, triage]
 assignees:
 - Windos
-issue_body: true
 body:
 - type: markdown
   attributes:
