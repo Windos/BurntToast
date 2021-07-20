@@ -138,11 +138,11 @@ if you using Powershell 6 or later, extract into `$env:userprofile\Documents\Pow
 
 ## License
 
-- see [LICENSE](LICENSE.md) file
+- see [LICENSE](LICENSE) file
 
 ## Image Credit
 
-The [default image](BurntToast.png) for BurntToast Notifications is a photo taken by [Craig Sunter](https://www.flickr.com/photos/16210667@N02/17230428864)
+The [default image](/Media/BurntToast.png) for BurntToast Notifications is a photo taken by [Craig Sunter](https://www.flickr.com/photos/16210667@N02/17230428864)
 
 ## Contact
 
