@@ -91,6 +91,7 @@
 
         # Specifies an image icon to display on the button.
         [Parameter(ParameterSetName = 'Button')]
+        [Parameter(ParameterSetName = 'Snooze')]
         [string] $ImageUri,
 
         # Specifies the ID of a relevant Toast control.
@@ -128,6 +129,10 @@
 
             if ($Id) {
                 $Button.SelectionBoxId = $Id
+            }
+            
+            if ($ImageUri) {
+                $Button.ImageUri = $ImageUri
             }
         }
         'Dismiss' {
