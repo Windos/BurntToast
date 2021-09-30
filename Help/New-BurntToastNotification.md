@@ -95,7 +95,7 @@ PS C:\>$BlogButton = New-BTButton -Content 'Open Blog' -Arguments 'https://king.
 PS C:\>New-BurntToastNotification -Text 'New Blog Post!' -Button $BlogButton
 ```
 
-This exmaple creates a Toast Notification with a button which will open a link to ["https://king.geek.nz"](https://king.geek.nz) when clicked.
+This example creates a Toast Notification with a button which will open a link to ["https://king.geek.nz"](https://king.geek.nz) when clicked.
 
 ### -------------------------- EXAMPLE 5 --------------------------
 
@@ -104,7 +104,7 @@ PS C:\>$ToastHeader = New-BTHeader -Id '001' -Title 'Stack Overflow Questions'
 PS C:\>New-BurntToastNotification -Text 'New Stack Overflow Question!', 'More details!' -Header $ToastHeader
 ```
 
-This exmaple creates a Toast Notification which will be displayed under the header 'Stack Overflow Questions.'
+This example creates a Toast Notification which will be displayed under the header 'Stack Overflow Questions.'
 
 ### -------------------------- EXAMPLE 6 --------------------------
 
@@ -113,7 +113,7 @@ PS C:\>$Progress = New-BTProgressBar -Status 'Copying files' -Value 0.2
 PS C:\>New-BurntToastNotification -Text 'File copy script running', 'More details!' -ProgressBar $Progress
 ```
 
-This exmaple creates a Toast Notification which will include a progress bar.
+This example creates a Toast Notification which will include a progress bar.
 
 ### -------------------------- EXAMPLE 7 --------------------------
 
@@ -226,9 +226,37 @@ Accept wildcard characters: False
 
 ### -Sound
 
-Selects the sound to acompany the Toast Notification. Any 'Alarm' or 'Call' tones will automatically loop and extent the amount of time that a Toast is displayed on screen.
+Selects the sound to accompany the Toast Notification. Any 'Alarm' or 'Call' tones will automatically loop and extent the amount of time that a Toast is displayed on screen.
 
 Cannot be used in conjunction with the 'Silent' switch.
+
+Valid values:
+
+- 'Default'
+- 'IM'
+- 'Mail'
+- 'Reminder'
+- 'SMS'
+- 'Alarm'
+- 'Alarm2'
+- 'Alarm3'
+- 'Alarm4'
+- 'Alarm5'
+- 'Alarm6'
+- 'Alarm7'
+- 'Alarm8'
+- 'Alarm9'
+- 'Alarm10'
+- 'Call'
+- 'Call2'
+- 'Call3'
+- 'Call4'
+- 'Call5'
+- 'Call6'
+- 'Call7'
+- 'Call8'
+- 'Call9'
+- 'Call10'
 
 ```yaml
 Type: String
@@ -309,4 +337,4 @@ I'm *really* sorry about the number of Parameter Sets. The best explanation is:
 
 ## RELATED LINKS
 
-[New-BurntToastNotification](https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastNotification.md)
+[New-BurntToastNotification](https://github.com/Windos/BurntToast/blob/main/Help/New-BurntToastNotification.md)

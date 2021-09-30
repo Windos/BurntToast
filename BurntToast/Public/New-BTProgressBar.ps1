@@ -45,11 +45,12 @@
         This example creates a Toast Notification which will include a progress bar.
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTProgressBar.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTProgressBar.md
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'Determinate',
-                   SupportsShouldProcess   = $true)]
+                   SupportsShouldProcess   = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTProgressBar.md')]
     param (
         # The text displayed above the progress bar. Generally used to give context around what the bar represents.
         [string] $Title,

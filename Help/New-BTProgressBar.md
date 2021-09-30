@@ -164,4 +164,4 @@ AdaptiveProgressBar
 
 ## RELATED LINKS
 
-[New-BTProgressBar](https://github.com/Windos/BurntToast/blob/master/Help/New-BTProgressBar.md)
+[New-BTProgressBar](https://github.com/Windos/BurntToast/blob/main/Help/New-BTProgressBar.md)

@@ -32,11 +32,12 @@
         Creates an Audio  which will cause a Toast Notification to be silent.
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTAudio.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTAudio.md
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'StandardSound',
-                   SupportsShouldProcess   = $true)]
+                   SupportsShouldProcess   = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTAudio.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastAudio])]
     param (
         # Specifies one of the built in Microsoft notification sounds.
@@ -82,6 +83,7 @@
         [Parameter(Mandatory,
                    ParameterSetName = 'CustomSound')]
         [ValidateScript({Test-BTAudioPath $_})]
+        [Obsolete('Unfortunately, custom sounds no longer work and this parameter will be removed in v0.9.0. See: https://github.com/MicrosoftDocs/windows-uwp/issues/1593')]
         [string] $Path,
 
         # Specifies that the slected sound should play multiple times if its duration is shorter than that of the toast it accompanies.

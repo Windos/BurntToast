@@ -14,7 +14,7 @@ New-BTHeader [-Id] <String> [-Title] <String> [[-Arguments] <String>] [[-Activat
 
 The New-BTHeader function creates a new toast notification header for a Toast Notification.
 
-These headers are diaplyed at the top of a toast and are also used to categorize toasts in the Action Center.
+These headers are displayed at the top of a toast and are also used to categorize toasts in the Action Center.
 
 ## EXAMPLES
 
@@ -123,4 +123,4 @@ Microsoft.Toolkit.Uwp.Notifications.ToastHeader
 
 ## RELATED LINKS
 
-[New-BTHeader](https://github.com/Windos/BurntToast/blob/master/Help/New-BTHeader.md)
+[New-BTHeader](https://github.com/Windos/BurntToast/blob/main/Help/New-BTHeader.md)

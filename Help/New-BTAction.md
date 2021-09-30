@@ -132,4 +132,4 @@ Microsoft.Toolkit.Uwp.Notifications.IToastActions
 
 ## RELATED LINKS
 
-[New-BTAction](https://github.com/Windos/BurntToast/blob/master/Help/New-BTAction.md)
+[New-BTAction](https://github.com/Windos/BurntToast/blob/main/Help/New-BTAction.md)

@@ -33,11 +33,12 @@
         This example creates an action elemnt with both a clickable button and a right click context menu item.
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTAction.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTAction.md
     #>
 
     [CmdletBinding(DefaultParametersetName = 'Custom Actions',
-                   SupportsShouldProcess   = $true)]
+                   SupportsShouldProcess   = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTAction.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.IToastActions])]
     param (
         # Button objects created with the New-BTButton function. Up to five can be included, or less if Context Menu Items are also included.

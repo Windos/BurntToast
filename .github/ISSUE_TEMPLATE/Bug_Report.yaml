@@ -1,0 +1,82 @@
+name: Bug Report 🐛
+description: Report errors or unexpected behavior
+title: "[Bug]: "
+labels: [bug, triage]
+assignees:
+- Windos
+body:
+- type: markdown
+  attributes:
+    value: |
+      Thanks for using BurntToast and taking the time to fill out a bug report! 💜
+- type: textarea
+  id: reproduce-steps
+  attributes:
+    label: Steps to Reproduce
+    description: Please anonymize the code you were running and paste it here
+    placeholder: Paste code here
+    render: powershell
+  validations:
+    required: true
+- type: textarea
+  id: behavior-expected
+  attributes:
+    label: Expected Behavior
+    description: Let us know what you expected to happen, what output or UX were you hoping for?
+    placeholder: Type away, markdown is supported
+  validations:
+    required: false
+- type: textarea
+  id: behavior-actual
+  attributes:
+    label: Actual Behavior
+    description: Let us know what what actually happened, screenshots or GIFs are always appreciated!
+    placeholder: Type away, markdown is supported
+  validations:
+    required: false
+- type: dropdown
+  id: Experience
+  attributes:
+    label: Experience with Toast
+    description: For our own info, what would you rate your proficiency with toast notifications in general?
+    options:
+    - Beginner
+    - Intermediate
+    - Master Baker
+  validations:
+    required: false
+- type: textarea
+  id: env-powershell
+  attributes:
+    label: "Environment data: PowerShell"
+    placeholder: "Paste the output of: $PSVersionTable"
+    value: "Replace with the output of: $PSVersionTable"
+    render: text
+  validations:
+    required: true
+- type: textarea
+  id: env-os
+  attributes:
+    label: "Environment data: OS"
+    placeholder: "Paste the output of: Get-ComputerInfo | fl OsName, OsVersion, OsArchitecture"
+    value: "Replace with the output of: Get-ComputerInfo | fl OsName, OsVersion, OsArchitecture"
+    render: text
+  validations:
+    required: true
+- type: textarea
+  id: env-burnttoast
+  attributes:
+    label: "Environment data: BurntToast"
+    placeholder: "Paste the output of: Get-Module -Name BurntToast -ListAvailable"
+    value: "Replace with the output of: Get-Module -Name BurntToast -ListAvailable"
+    render: text
+  validations:
+    required: true
+- type: checkboxes
+  id: consent
+  attributes:
+    label: Consent to Attribution
+    description: Sometimes bug reports inspire blog posts on [ToastIT.dev](https://ToastIT.dev), please check this box if you'd like a call out if that is the case with this bug report
+    options:
+    - label: Please shout me out if I've inspired a blog post!
+      required: false

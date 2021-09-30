@@ -27,9 +27,11 @@
         Update-BTNotification -UniqueIdentifier 'ExampleToast' -DataBinding $SecondDataBinding
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/Update-BTNotification.md
+        https://github.com/Windos/BurntToast/blob/main/Help/Update-BTNotification.md
     #>
 
+    [CmdletBinding(SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/Update-BTNotification.md')]
     [CmdletBinding()]
     param (
         # When updating toasts (not curently working) rapidly, the sequence number helps to ensure that toasts recieved out of order will not be displayed in a manner that may confuse.
@@ -53,8 +55,9 @@
         Write-Warning -Message "The AppId $AppId is not present in the registry, please run New-BTAppId to avoid inconsistent Toast behaviour."
     }
 
-    $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
-    $null = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+    if (-not $IsWindows) {
+        $null = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+    }
 
     if ($DataBinding) {
         $DataDictionary = New-Object 'system.collections.generic.dictionary[string,string]'
@@ -70,5 +73,7 @@
         $ToastData.SequenceNumber = $SequenceNumber
     }
 
-    [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Update($ToastData, $UniqueIdentifier, $UniqueIdentifier)
+    if($PSCmdlet.ShouldProcess("AppId: $AppId, UniqueId: $UniqueIdentifier", 'Updating notification')) {
+        [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Update($ToastData, $UniqueIdentifier, $UniqueIdentifier)
+    }
 }

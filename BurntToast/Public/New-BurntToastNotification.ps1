@@ -64,21 +64,33 @@
         * You cannot specify SnoozeAndDismiss and custom buttons at the same time.
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BurntToastNotification.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BurntToastNotification.md
     #>
 
-    [alias('Toast')]
+    [Alias('Toast')]
     [CmdletBinding(DefaultParameterSetName = 'Sound',
-                   SupportsShouldProcess   = $true)]
+                   SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BurntToastNotification.md')]
     param (
         # Specifies the text to show on the Toast Notification. Up to three strings can be displayed, the first of which will be embolden as a title.
         [ValidateCount(0, 3)]
         [String[]] $Text = 'Default Notification',
 
+        # Specifies groups of content (text and images) created via New-BTColumn that are displayed as a column.
+        #
+        # Multiple columns can be provided and they will be displayed side by side.
+        [Microsoft.Toolkit.Uwp.Notifications.AdaptiveSubgroup[]] $Column,
+
         #TODO: [ValidateScript({ Test-ToastImage -Path $_ })]
+
+        # Specifies the AppId of the 'application' or process that spawned the toast notification.
+        [string] $AppId = $Script:Config.AppId,
 
         # Specifies the path to an image that will override the default image displayed with a Toast Notification.
         [String] $AppLogo,
+
+        # Specifies the path to an image that will be used as the hero image on the toast.
+        [String] $HeroImage,
 
         # Selects the sound to acompany the Toast Notification. Any 'Alarm' or 'Call' tones will automatically loop and extent the amount of time that a Toast is displayed on screen.
         #
@@ -167,7 +179,11 @@
         # Sets the time at which Windows should consider the notification to have been created. If not specified the time at which the notification was recieved will be used.
         #
         # The time stamp affects sorting of notifications in the Action Center.
-        [datetime] $CustomTimestamp
+        [datetime] $CustomTimestamp,
+
+        [scriptblock] $ActivatedAction,
+
+        [scriptblock] $DismissedAction
     )
 
     $ChildObjects = @()
@@ -201,10 +217,26 @@
         }
     }
 
-    $Binding = New-BTBinding -Children $ChildObjects -AppLogoOverride $AppLogoImage -WhatIf:$false
+    $BindingSplat = @{
+        Children        = $ChildObjects
+        AppLogoOverride = $AppLogoImage
+        WhatIf          = $false
+    }
+
+    if ($HeroImage) {
+        $BTImageHero = New-BTImage -Source $HeroImage -HeroImage -WhatIf:$false
+        $BindingSplat['HeroImage'] = $BTImageHero
+    }
+
+    if ($Column) {
+        $BindingSplat['Column'] = $Column
+    }
+
+    $Binding = New-BTBinding @BindingSplat
     $Visual = New-BTVisual -BindingGeneric $Binding -WhatIf:$false
 
-    $ContentSplat = @{'Audio' = $Audio
+    $ContentSplat = @{
+        'Audio'  = $Audio
         'Visual' = $Visual
     }
 
@@ -230,7 +262,7 @@
 
     $ToastSplat = @{
         Content = $Content
-        AppId = $Script:Config.AppId
+        AppId   = $AppId
     }
 
     if ($UniqueIdentifier) {
@@ -249,7 +281,16 @@
         $ToastSplat.Add('DataBinding', $DataBinding)
     }
 
-    if($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {
+    # Toast events may not be supported, this check happens inside Submit-BTNotification
+    if ($ActivatedAction) {
+        $ToastSplat.Add('ActivatedAction', $ActivatedAction)
+    }
+
+    if ($DismissedAction) {
+        $ToastSplat.Add('DismissedAction', $DismissedAction)
+    }
+
+    if ($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {
         Submit-BTNotification @ToastSplat
     }
 }

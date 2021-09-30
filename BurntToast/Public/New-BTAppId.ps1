@@ -27,10 +27,11 @@
         This command create an AppId registry key called 'Script Checker.'
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTAppId.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTAppId.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTAppId.md')]
     param (
         # Specifies the new AppId. You can use any alphanumeric characters.
         #

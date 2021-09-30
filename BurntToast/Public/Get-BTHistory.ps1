@@ -21,9 +21,10 @@ function Get-BTHistory {
         Get-BTHistory
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/Get-BTHistory.md
+        https://github.com/Windos/BurntToast/blob/main/Help/Get-BTHistory.md
     #>
 
+    [cmdletBinding(HelpUri='https://github.com/Windos/BurntToast/blob/main/Help/Get-BTHistory.md')]
     param (
         # Specifies the AppId of the 'application' or process that spawned the toast notification.
         [string] $AppId = $Script:Config.AppId,
@@ -40,6 +41,10 @@ function Get-BTHistory {
     if (!(Test-Path -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\$AppId")) {
         throw "The AppId $AppId is not present in the registry, please run New-BTAppId to avoid inconsistent Toast behaviour."
     } else {
+        if ($Script:ActionsSupported) {
+            Write-Warning -Message 'The output from this function in some versions of PowerShell is not useful. Unfortunately this is expected at this time.'
+        }
+
         $Toasts = if ($ScheduledToast) {
             [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).GetScheduledToastNotifications()
         } else {

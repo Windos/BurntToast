@@ -230,4 +230,4 @@ Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze
 
 ## RELATED LINKS
 
-[New-BTButton](https://github.com/Windos/BurntToast/blob/master/Help/New-BTButton.md)
+[New-BTButton](https://github.com/Windos/BurntToast/blob/main/Help/New-BTButton.md)

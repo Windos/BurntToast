@@ -173,4 +173,4 @@ Please see the Please see the [originating repo](https://github.com/windows-tool
 
 ## RELATED LINKS
 
-[New-BTBinding](https://github.com/Windos/BurntToast/blob/master/Help/New-BTBinding.md)
+[New-BTBinding](https://github.com/Windos/BurntToast/blob/main/Help/New-BTBinding.md)

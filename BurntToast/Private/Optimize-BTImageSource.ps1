@@ -1,17 +1,19 @@
 function Optimize-BTImageSource {
     param (
         [Parameter(Mandatory)]
-        [String] $Source
+        [String] $Source,
+
+        [Switch] $ForceRefresh
     )
 
     if ([bool]([System.Uri]$Source).IsUnc -or $Source -like 'http?://*') {
-        $RemoteFileName = $Source.Split('/\')[-1] -replace '[\[\]*?]',''
+        $RemoteFileName = $Source -replace '/|:|\\', '-'
 
         $NewFilePath = '{0}\{1}' -f $Env:TEMP, $RemoteFileName
 
-        if (!(Test-Path -Path $NewFilePath)) {
+        if (!(Test-Path -Path $NewFilePath) -or $ForceRefresh) {
             if ([bool]([System.Uri]$Source).IsUnc) {
-                Copy-Item -Path $Source -Destination $NewFilePath
+                Copy-Item -Path $Source -Destination $NewFilePath -Force
             } else {
                 Invoke-WebRequest -Uri $Source -OutFile $NewFilePath
             }

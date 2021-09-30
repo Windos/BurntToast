@@ -23,10 +23,11 @@
         Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTSelectionBoxItem.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTSelectionBoxItem.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTSelectionBoxItem.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem])]
 
     param (

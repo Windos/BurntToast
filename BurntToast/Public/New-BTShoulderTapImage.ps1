@@ -20,10 +20,12 @@
         $Image = New-BTShoulderTapImage -Source 'https://www.route66sodas.com/wp-content/uploads/2019/01/Alert.gif'
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTShoulderTapImage.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTShoulderTapImage.md
     #>
 
-    [CmdletBinding(DefaultParameterSetName = 'Image')]
+    [Obsolete('This cmdlet is being deprecated, it will be removed in v0.9.0')]
+    [CmdletBinding(DefaultParameterSetName = 'Image',
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTShoulderTapImage.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastShoulderTapImage])]
 
     param (

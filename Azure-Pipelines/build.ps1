@@ -7,7 +7,10 @@ param(
     $Compile,
 
     [switch]
-    $Test
+    $Test,
+
+    [switch]
+    $CodeCoverage
 )
 
 # Bootstrap step
@@ -17,8 +20,14 @@ if ($Bootstrap.IsPresent) {
     # For testing Pester
     if (-not (Get-Module -Name Pester -ListAvailable) -or (Get-Module -Name Pester -ListAvailable)[0].Version -eq [Version]'3.4.0') {
         Write-Warning "Module 'Pester' is missing. Installing 'Pester' ..."
-        Install-Module -Name Pester -Scope CurrentUser -Force
+        Install-Module -Name Pester -Scope CurrentUser -Force -RequiredVersion 4.10.1 -SkipPublisherCheck
     }
+
+    if ((Get-Module -Name Pester -ListAvailable)[0].Version -ne [Version]'4.10.1') {
+        Install-Module -Name Pester -Scope CurrentUser -Force -RequiredVersion 4.10.1
+    }
+
+    Import-Module -Name Pester -RequiredVersion 4.10.1
 
     if (-not (Get-Module -Name PSCodeCovIo -ListAvailable)) {
         Write-Warning "Module 'PSCodeCovIo' is missing. Installing 'PSCodeCovIo' ..."
@@ -82,13 +91,15 @@ if($Test.IsPresent) {
     $RelevantFiles = (Get-ChildItem ./BurntToast -Recurse -Include "*.psm1","*.ps1").FullName
 
     if ($env:TF_BUILD) {
-        $res = Invoke-Pester "./Tests" -OutputFormat NUnitXml -OutputFile TestResults.xml -CodeCoverage $RelevantFiles -PassThru
+        $res = Invoke-Pester "./Tests" -OutputFormat NUnitXml -OutputFile TestResults.xml -CodeCoverage $RelevantFiles -CodeCoverageOutputFileFormat 'JaCoCo' -CodeCoverageOutputFile "$Env:AgentTemp\CoverageResults.xml" -PassThru
         if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed." }
     } else {
         $res = Invoke-Pester "./Tests" -CodeCoverage $RelevantFiles -PassThru
     }
 
-    Export-CodeCovIoJson -CodeCoverage $res.CodeCoverage -RepoRoot $pwd -Path coverage.json
+    if ($CodeCoverage.IsPresent) {
+        Export-CodeCovIoJson -CodeCoverage $res.CodeCoverage -RepoRoot $pwd -Path coverage.json
 
-    Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+        Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+    }
 }

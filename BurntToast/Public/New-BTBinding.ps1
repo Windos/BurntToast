@@ -30,10 +30,11 @@
         Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTBinding.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTBinding.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTBinding.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastBindingGeneric])]
     param (
         # The contents of the body of the Toast, which can include Text (New-BTText), Image (New-BTImage), Group (not yet implemented), and Progress Bar (New-BTProgressBar).
@@ -42,6 +43,11 @@
         #
         # And finally, certain Text properties like HintStyle aren't supported on the root children text elements, and only work inside a Group. If you use Group on devices without the Anniversary Update, the group content will simply be dropped.
         [Microsoft.Toolkit.Uwp.Notifications.IToastBindingGenericChild[]] $Children,
+
+        # Specifies groups of content (text and images) created via New-BTColumn that are displayed as a column.
+        #
+        # Multiple columns can be provided and they will be displayed side by side.
+        [Microsoft.Toolkit.Uwp.Notifications.AdaptiveSubgroup[]] $Column,
 
         # Set to "true" to allow Windows to append a query string to the image URI supplied in the Toast notification. Use this attribute if your server hosts images and can handle query strings, either by retrieving an image variant based on the query strings or by ignoring the query string and returning the image as specified without the query string. This query string specifies scale, contrast setting, and language.
         [switch] $AddImageQuery,
@@ -74,6 +80,16 @@
         foreach ($Child in $Children) {
             $Binding.Children.Add($Child)
         }
+    }
+
+    if ($Column) {
+        $AdaptiveGroup = [Microsoft.Toolkit.Uwp.Notifications.AdaptiveGroup]::new()
+
+        foreach ($Group in $Column) {
+            $AdaptiveGroup.Children.Add($Group)
+        }
+
+        $Binding.Children.Add($AdaptiveGroup)
     }
 
     if ($AddImageQuery) {

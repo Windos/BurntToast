@@ -209,4 +209,4 @@ Please see the [originating repo](https://github.com/Microsoft/UWPCommunityToolk
 
 ## RELATED LINKS
 
-[New-BTImage](https://github.com/Windos/BurntToast/blob/master/Help/New-BTImage.md)
+[New-BTImage](https://github.com/Windos/BurntToast/blob/main/Help/New-BTImage.md)

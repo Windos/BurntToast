@@ -37,11 +37,12 @@
         Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTImage.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTImage.md
     #>
 
     [CmdletBinding(DefaultParameterSetName = 'Image',
-                   SupportsShouldProcess   = $true)]
+                   SupportsShouldProcess   = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTImage.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.AdaptiveImage], ParameterSetName = 'Image')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastGenericAppLogo], ParameterSetName = 'AppLogo')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastGenericHeroImage], ParameterSetName = 'Hero')]
@@ -77,7 +78,9 @@
         [switch] $RemoveMargin,
 
         # Set to true to allow Windows to append a query string to the image URI supplied in the Tile notification. Use this attribute if your server hosts images and can handle query strings, either by retrieving an image variant based on the query strings or by ignoring the query string and returning the image as specified without the query string. This query string specifies scale, contrast setting, and language.
-        [switch] $AddImageQuery
+        [switch] $AddImageQuery,
+
+        [switch] $IgnoreCache
     )
 
     switch ($PsCmdlet.ParameterSetName) {
@@ -107,7 +110,12 @@
     }
 
     if ($Source) {
-        $Image.Source = Optimize-BTImageSource -Source $Source
+        $Image.Source = if ($IgnoreCache) {
+            Optimize-BTImageSource -Source $Source -ForceRefresh
+        } else {
+            Optimize-BTImageSource -Source $Source
+        }
+
     }
 
     if ($AlternateText) {

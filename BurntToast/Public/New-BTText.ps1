@@ -36,10 +36,11 @@
         Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/New-BTText.md
+        https://github.com/Windos/BurntToast/blob/main/Help/New-BTText.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTText.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.AdaptiveText])]
     param (
         # The text to display. Data binding support added in Creators Update, only works for toast top-level text elements (But appears to not be working via PowerShell yet.)
@@ -75,7 +76,7 @@
     $TextObj = [Microsoft.Toolkit.Uwp.Notifications.AdaptiveText]::new()
 
     if ($Text) {
-        $TextObj.Text = $Text
+        $TextObj.Text = $Text -replace '\x01'
     }
 
     if ($MaxLines) {

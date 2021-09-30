@@ -10,12 +10,12 @@ $JobScript = {
     try
     {
     Import-Module BurntToast
-    
+
     $Listener = [System.Net.HttpListener]::new()
-    
+
     $Listener.Prefixes.Add("http://localhost:9000/")
     $Listener.Start()
-    
+
     While ($True)
     {
         $context = $Listener.GetContext()

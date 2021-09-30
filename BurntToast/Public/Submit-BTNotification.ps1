@@ -18,10 +18,11 @@
         This command submits the complete toast content object $Toast1, from the New-BTContent function, and tags it with a unique identifier so that it can be replaced/updated.
 
         .LINK
-        https://github.com/Windos/BurntToast/blob/master/Help/Submit-BTNotification.md
+        https://github.com/Windos/BurntToast/blob/main/Help/Submit-BTNotification.md
     #>
 
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true,
+                   HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/Submit-BTNotification.md')]
     param (
         # A Toast Content object which is the Base Toast element, created using the New-BTContent function.
         [Microsoft.Toolkit.Uwp.Notifications.ToastContent] $Content,
@@ -46,19 +47,27 @@
         [datetime] $ExpirationTime,
 
         # Bypasses display to the screen and sends the notification directly to the Action Center.
-        [switch] $SuppressPopup
+        [switch] $SuppressPopup,
+
+        [scriptblock] $ActivatedAction,
+
+        [scriptblock] $DismissedAction,
+
+        [scriptblock] $FailedAction
     )
 
     if (!(Test-Path -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\$AppId")) {
         Write-Warning -Message "The AppId $AppId is not present in the registry, please run New-BTAppId to avoid inconsistent Toast behaviour."
     }
 
-    $null = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+    if (-not $IsWindows) {
+        $null = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+    }
 
     $ToastXml = [Windows.Data.Xml.Dom.XmlDocument]::new()
 
     if (-not $DataBinding) {
-        $CleanContent = $Content.GetContent().Replace('<text>{', '<text>')
+        $CleanContent = $Content.GetContent() -Replace '<text(.*?)>{', '<text$1>'
         $CleanContent = $CleanContent.Replace('}</text>', '</text>')
         $CleanContent = $CleanContent.Replace('="{', '="')
         $CleanContent = $CleanContent.Replace('}" ', '" ')
@@ -139,6 +148,22 @@
 
     if ($SequenceNumber) {
         $Toast.Data.SequenceNumber = $SequenceNumber
+    }
+
+    if ($ActivatedAction -or $DismissedAction -or $FailedAction) {
+        if ($Script:ActionsSupported) {
+            if ($ActivatedAction) {
+                Register-ObjectEvent -InputObject $Toast -EventName Activated -Action $ActivatedAction |Out-Null
+            }
+            if ($DismissedAction) {
+                Register-ObjectEvent -InputObject $Toast -EventName Dismissed -Action $DismissedAction | Out-Null
+            }
+            if ($FailedAction) {
+                Register-ObjectEvent -InputObject $Toast -EventName Failed -Action $FailedAction | Out-Null
+            }
+        } else {
+            Write-Warning $Script:UnsupportedEvents
+        }
     }
 
     if($PSCmdlet.ShouldProcess( "submitting: [$($Toast.GetType().Name)] with AppId $AppId, Id $UniqueIdentifier, Sequence Number $($Toast.Data.SequenceNumber) and XML: $($Content.GetContent())")) {

@@ -186,4 +186,4 @@ Please see the Please see the [originating repo](https://github.com/windows-tool
 
 ## RELATED LINKS
 
-[New-BTContent](https://github.com/Windos/BurntToast/blob/master/Help/New-BTContent.md)
+[New-BTContent](https://github.com/Windos/BurntToast/blob/main/Help/New-BTContent.md)
