@@ -23,7 +23,7 @@ See the [PowerShell Gallery](http://www.powershellgallery.com/packages/BurntToas
 
 ### Manual Install
 
-Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/download/v0.7.2/BurntToast.zip) and extract the contents into `$env:userprofile\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
+Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/latest/download/BurntToast.zip) from [Releases page](https://github.com/Windos/BurntToast/releases/latest) and extract the contents into `$env:userprofile\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
 
 if you using Powershell 6 or later, extract into `$env:userprofile\Documents\PowerShell\Modules\BurntToast`
 
