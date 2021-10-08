@@ -1,7 +1,8 @@
 . (Join-Path -Path $PSScriptRoot -ChildPath '_envPrep.ps1')
 
 Describe 'New-BurntToastNotification' {
-    $ImagePath = Resolve-Path -Path $PSScriptRoot\..\BurntToast\Images\BurntToast.png
+    $ModuleRoot = (Get-Item (Get-Module 'BurntToast').Path).Directory.FullName
+    $ImagePath = Resolve-Path -Path (Join-Path $ModuleRoot 'Images\BurntToast.png')
 
     Context 'has registered alias' {
         $Aliases = Get-Alias -Name 'Toast' -ErrorAction SilentlyContinue

@@ -2,7 +2,9 @@
 
 Describe 'New-BTColumn' {
     Context 'via New-BurntToastNotification' {
-        $ImagePath = Resolve-Path -Path $PSScriptRoot\..\BurntToast\Images\BurntToast.png
+        $ModuleRoot = (Get-Item (Get-Module 'BurntToast').Path).Directory.FullName
+        $ImagePath = Resolve-Path -Path (Join-Path $ModuleRoot 'Images\BurntToast.png')
+
         Start-Transcript tmp.log
         try {
             $TitleLabel = New-BTText -Text 'Title:' -Style Base

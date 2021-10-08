@@ -1,7 +1,8 @@
 . (Join-Path -Path $PSScriptRoot -ChildPath '_envPrep.ps1')
 
 Describe 'New-BTContent' {
-    $ImagePath = Resolve-Path -Path $PSScriptRoot\..\BurntToast\Images\BurntToast.png
+    $ModuleRoot = (Get-Item (Get-Module 'BurntToast').Path).Directory.FullName
+    $ImagePath = Resolve-Path -Path (Join-Path $ModuleRoot 'Images\BurntToast.png')
 
     $Text1 = New-BTText -Content 'This is a test'
     $Text2 = New-BTText -Content 'This more testing'
