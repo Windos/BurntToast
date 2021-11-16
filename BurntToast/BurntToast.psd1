@@ -9,7 +9,8 @@
     Copyright         = '(c) 2015 Joshua (Windos) King. All rights reserved.'
     Description       = 'Module for creating and displaying Toast Notifications on Microsoft Windows 10.'
     PowerShellVersion = '5.0'
-    FunctionsToExport = 'Get-BTHistory',
+    FunctionsToExport = 'Get-BTHeader',
+                        'Get-BTHistory',
                         'New-BTAction',
                         'New-BTAppId',
                         'New-BTAudio',

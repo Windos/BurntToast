@@ -26,7 +26,7 @@ Don't forget to set the correct [Execution Policy](https://docs.microsoft.com/en
 
 Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/latest/download/BurntToast.zip) from [Releases page](https://github.com/Windos/BurntToast/releases/latest) and extract the contents into `$env:userprofile\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
 
-If you using Powershell 6 or later, extract into `$env:userprofile\Documents\PowerShell\Modules\BurntToast`
+If you are using Powershell 6 or later, extract into `$env:userprofile\Documents\PowerShell\Modules\BurntToast`
 
 *Please remember to "**unblock**" the zip file before extracting the contents. Not doing so will result in the module not working correctly. This can be done via the file properties or with `Unblock-File`.*
 
