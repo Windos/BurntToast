@@ -1,0 +1,99 @@
+name: BurntToast CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  Win2019-x64-pwsh:
+    name: Server 2019 - PowerShell - x64
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - name: Perform a Pester test from the command-line
+        shell: pwsh
+        run: ./Tasks/build.ps1 -Bootstrap -Test
+
+  Win2019-x86-pwsh:
+    name: Server 2019 - PowerShell - x86
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - name: Perform a Pester test from the command-line
+        shell: pwsh
+        run: |
+          $Pwsh32 = .github/workflows/pwsh32.ps1
+          & $Pwsh32 -File ./Tasks/build.ps1 -Bootstrap -Test
+
+  Win2019-x64-winpwsh:
+    name: Server 2019 - Windows PowerShell - x64
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - name: Perform a Pester test from the command-line
+        shell: powershell
+        run: ./Tasks/build.ps1 -Bootstrap -Test
+
+  Win2019-x86-winpwsh:
+    name: Server 2019 - Windows PowerShell - x86
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - name: Perform a Pester test from the command-line
+        shell: powershell
+        # TODO: This could be problematic with hardcoding
+        run: C:\Windows\syswow64\WindowsPowerShell\v1.0\powershell.exe -File ./Tasks/build.ps1 -Bootstrap -Test
+
+  build-and-oat-module:
+    name: Build Module and OAT
+    needs: ["Win2019-x64-pwsh", "Win2019-x64-winpwsh", "Win2019-x86-pwsh", "Win2019-x86-winpwsh"]
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - name: Compile Module
+        shell: pwsh
+        run: ./Tasks/build.ps1 -Bootstrap -Compile
+      - name: OAT
+        shell: pwsh
+        env:
+          # Use the compiled module for testing
+          BURNTTOAST_MODULE_ROOT: './Output/BurntToast/BurntToast.psd1'
+        run: |
+          ./Tasks/build.ps1 -Test -CodeCoverage
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: "*.xml"
+      - name: Upload PowerShell Module
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: burnttoast-module
+          path: "./Output/BurntToast/"
+
+  publish-test-results:
+    name: "Publish Tests Results"
+    needs: build-and-oat-module
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: test-results
+          path: artifacts
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        with:
+          files: artifacts/**/TestResults.xml
+      - uses: codecov/codecov-action@v2
+        if: always()
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: artifacts/CoverageResults.xml

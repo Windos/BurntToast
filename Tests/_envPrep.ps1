@@ -1,5 +1,5 @@
 if (Get-Module -Name 'BurntToast') {
-    Remove-Module -Name 'BurntToast'
+    Remove-Module -Name 'BurntToast' -Force
 }
 
 try {
@@ -9,4 +9,9 @@ try {
     $PlatformAvailable = $false
 }
 
-Import-Module "$PSScriptRoot/../BurntToast/BurntToast.psd1" -Force
+if ($ENV:BURNTTOAST_MODULE_ROOT) {
+    Import-Module $ENV:BURNTTOAST_MODULE_ROOT -Force
+} else {
+    Import-Module "$PSScriptRoot/../BurntToast/BurntToast.psd1" -Force
+}
+
