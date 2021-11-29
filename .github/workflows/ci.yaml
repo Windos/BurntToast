@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Perform a Pester test from the command-line
         shell: pwsh
-        run: ./Tasks/build.ps1 -Bootstrap -Test
+        run: ./Tasks/build.ps1 -Test
 
   Win2019-x86-pwsh:
     name: Server 2019 - PowerShell - x86
@@ -27,7 +27,7 @@ jobs:
         shell: pwsh
         run: |
           $Pwsh32 = .github/workflows/pwsh32.ps1
-          & $Pwsh32 -File ./Tasks/build.ps1 -Bootstrap -Test
+          & $Pwsh32 -File ./Tasks/build.ps1 -Test
 
   Win2019-x64-winpwsh:
     name: Server 2019 - Windows PowerShell - x64
@@ -36,7 +36,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Perform a Pester test from the command-line
         shell: powershell
-        run: ./Tasks/build.ps1 -Bootstrap -Test
+        run: ./Tasks/build.ps1 -Test
 
   Win2019-x86-winpwsh:
     name: Server 2019 - Windows PowerShell - x86
@@ -46,7 +46,7 @@ jobs:
       - name: Perform a Pester test from the command-line
         shell: powershell
         # TODO: This could be problematic with hardcoding
-        run: C:\Windows\syswow64\WindowsPowerShell\v1.0\powershell.exe -File ./Tasks/build.ps1 -Bootstrap -Test
+        run: C:\Windows\syswow64\WindowsPowerShell\v1.0\powershell.exe -File ./Tasks/build.ps1 -Test
 
   build-and-oat-module:
     name: Build Module and OAT
@@ -54,16 +54,18 @@ jobs:
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
       - name: Compile Module
         shell: pwsh
-        run: ./Tasks/build.ps1 -Bootstrap -Compile
+        run: ./Tasks/build.ps1 -Compile
       - name: OAT
         shell: pwsh
         env:
           # Use the compiled module for testing
           BURNTTOAST_MODULE_ROOT: './Output/BurntToast/BurntToast.psd1'
         run: |
-          ./Tasks/build.ps1 -Test -CodeCoverage
+          ./Tasks/build.ps1 -Test
       - name: Upload Test Results
         if: always()
         uses: actions/upload-artifact@v2
@@ -92,8 +94,3 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v1
         with:
           files: artifacts/**/TestResults.xml
-      - uses: codecov/codecov-action@v2
-        if: always()
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: artifacts/CoverageResults.xml

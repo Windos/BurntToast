@@ -2,3 +2,6 @@ downloads/
 Output/
 TestResults.xml
 CoverageResults.xml
+coverage.xml
+codecov.sh
+coverage.json

@@ -1,16 +1,10 @@
 [CmdletBinding()]
 param(
     [switch]
-    $Bootstrap,
-
-    [switch]
     $Compile,
 
     [switch]
-    $Test,
-
-    [switch]
-    $CodeCoverage
+    $Test
 )
 
 # Write information
@@ -30,28 +24,6 @@ Write-Host ''
 $RootDir = Join-Path $PSScriptRoot '..'
 $OutputDir = Join-Path $RootDir 'Output'
 
-# Bootstrap step
-if ($Bootstrap.IsPresent) {
-    Write-Information "Validate and install missing prerequisits for building ..."
-
-    # For testing Pester
-    if (-not (Get-Module -Name Pester -ListAvailable) -or (Get-Module -Name Pester -ListAvailable)[0].Version -eq [Version]'3.4.0') {
-        Write-Warning "Module 'Pester' is missing. Installing 'Pester' ..."
-        Install-Module -Name Pester -Scope CurrentUser -Force -RequiredVersion 4.10.1 -SkipPublisherCheck
-    }
-
-    if ((Get-Module -Name Pester -ListAvailable)[0].Version -ne [Version]'4.10.1') {
-        Install-Module -Name Pester -Scope CurrentUser -Force -RequiredVersion 4.10.1
-    }
-
-    Import-Module -Name Pester -RequiredVersion 4.10.1
-
-    if (-not (Get-Module -Name PSCodeCovIo -ListAvailable)) {
-        Write-Warning "Module 'PSCodeCovIo' is missing. Installing 'PSCodeCovIo' ..."
-        Install-Module -Name PSCodeCovIo -Scope CurrentUser -Force
-    }
-}
-
 # Compile step
 if ($Compile.IsPresent) {
     $CompileDir = Join-Path $OutputDir 'BurntToast'
@@ -65,17 +37,17 @@ if ($Compile.IsPresent) {
     $null = New-Item -Path $CompileDir -ItemType Directory
 
     Write-Host "Copying support files ..."
-    Copy-Item -Path "$RootDir/BurntToast/*" -Filter '*.*' -Exclude '*.ps1', '*.psm1' -Recurse -Destination $CompileDir -Force
+    Copy-Item -Path "$RootDir/src/*" -Filter '*.*' -Exclude '*.ps1', '*.psm1' -Recurse -Destination $CompileDir -Force
     Remove-Item -Path "$CompileDir/Private", "$CompileDir/Public" -Recurse -Force
 
     # Copy Module README file
     Copy-Item -Path "$RootDir/README.md" -Destination $CompileDir -Force
 
     Write-Host "Adding Private Functions ..."
-    Get-ChildItem -Path "$RootDir\BurntToast\Private\*.ps1" -Recurse | Get-Content | Add-Content "$CompileDir/BurntToast.psm1"
+    Get-ChildItem -Path "$RootDir/src/Private/*.ps1" -Recurse | Get-Content | Add-Content "$CompileDir/BurntToast.psm1"
 
     Write-Host "Adding Public Functions ..."
-    $Public = @( Get-ChildItem -Path "$RootDir/BurntToast/Public/*.ps1" -ErrorAction SilentlyContinue )
+    $Public = @( Get-ChildItem -Path "$RootDir/src/Public/*.ps1" -ErrorAction SilentlyContinue )
 
     $Public | Get-Content | Add-Content "$CompileDir/BurntToast.psm1"
 
@@ -102,34 +74,27 @@ if ($Compile.IsPresent) {
 
 # Test step
 if ($Test.IsPresent) {
-    if (-not (Get-Module -Name Pester -ListAvailable)) {
-        throw "Cannot find the 'Pester' module. Please specify '-Bootstrap' to install build dependencies."
-    }
+    Write-Host "Running Pester within CI with code coverage"
 
-    if (-not (Get-Module -Name PSCodeCovIo -ListAvailable)) {
-        throw "Cannot find the 'PSCodeCovIo' module. Please specify '-Bootstrap' to install build dependencies."
-    }
+    $PesterConfig = New-PesterConfiguration
 
+    $PesterConfig.Run.Path = './tests'
+    $PesterConfig.Run.PassThru = $true
+
+    $PesterConfig.TestResult.Enabled = $true
+    $PesterConfig.TestResult.OutputFormat = 'JUnitXml'
+    $PesterConfig.TestResult.OutputPath = 'TestResults.xml'
+
+    $PesterConfig.CodeCoverage.Enabled = $true
+    $PesterConfig.CodeCoverage.OutputFormat = 'JaCoCo'
+    $PesterConfig.CodeCoverage.OutputPath = 'CoverageResults.xml'
     if ($ENV:BURNTTOAST_MODULE_ROOT) {
-        $ModuleDir = (Get-Item -Path $ENV:BURNTTOAST_MODULE_ROOT).Directory.FullName
-        Write-Host "Using Module Root directory of $ModuleDir"
-        $RelevantFiles = (Get-ChildItem $ModuleDir -Recurse -Include "*.psm1", "*.ps1").FullName
+        $PesterConfig.CodeCoverage.Path = (Get-Item -Path $ENV:BURNTTOAST_MODULE_ROOT).Directory.FullName
     } else {
-        $RelevantFiles = (Get-ChildItem ./BurntToast -Recurse -Include "*.psm1", "*.ps1").FullName
+        $PesterConfig.CodeCoverage.Path = './src'
     }
+    $PesterConfig.CodeCoverage.RecursePaths = $true
 
-    if ($env:CI) {
-        Write-Host "Running Pester within CI with code coverage for $($RelevantFiles.Count) file/s"
-        $res = Invoke-Pester "./Tests" -OutputFormat JUnitXml -OutputFile TestResults.xml -CodeCoverage $RelevantFiles -CodeCoverageOutputFileFormat 'JaCoCo' -CodeCoverageOutputFile CoverageResults.xml -PassThru
-        if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed." }
-    }
-    else {
-        $res = Invoke-Pester "./Tests" -CodeCoverage $RelevantFiles -PassThru
-    }
-
-    if ($CodeCoverage.IsPresent) {
-        Export-CodeCovIoJson -CodeCoverage $res.CodeCoverage -RepoRoot $pwd -Path coverage.json
-
-        Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
-    }
+    $res = Invoke-Pester -Configuration $PesterConfig
+    if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed." }
 }
