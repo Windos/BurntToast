@@ -13,10 +13,23 @@ function Show-BTNotification {
         None
 
         .EXAMPLE
-        PS C:\>
+        PS C:\>Show-BTNotification -ContentBuilder $ToastContentBuilder
+
+        This command displays a toast notification with the content of the ToastContentBuilder object.
 
         .EXAMPLE
-        PS C:\>
+        PS C:\>$ToastContentBuilder | Show-BTNotification
+
+        This command displays a toast notification with the content of the ToastContentBuilder object supplied via the pipeline.
+
+        .EXAMPLE
+        PS C:\>$Builder = New-BTContentBuilder
+
+        PS C:\>$Builder | Add-BTText -Text 'First Line of Text', 'Second Line of Text'
+
+        PS C:\>Show-BTNotification -ContentBuilder $Builder
+
+        This example demonstrates the full life cycle of a ToastContentBuilder object from creation to display.
 
         .LINK
         https://docs.toastit.dev/commands/show-btnotification
