@@ -37,7 +37,7 @@ function Add-BTAppLogo {
 
         PS C:\>$Builder | Add-BTAppLogo -Source 'https://example.com/OnlineImage.jpeg'
 
-        This example adds an image from a the internet as the app logo on the toast notification being constructred.
+        This example adds an image from the internet as the app logo on the toast notification being constructred.
 
         Future invocations of this example will used a cached copy of the referenced image rather than going out to the internet again.
 
@@ -46,14 +46,14 @@ function Add-BTAppLogo {
 
         PS C:\>$Builder | Add-BTAppLogo -Source 'https://example.com/OnlineImage.jpeg' -IgnoreCache
 
-        This example adds an image from a the internet as the app logo on the toast notification being constructred, it downloads the image from the internet regardless of if it has been previously cahced.
+        This example adds an image from the internet as the app logo on the toast notification being constructred, it downloads the image from the internet regardless of if it has been previously cahced.
 
         .EXAMPLE
         PS C:\>$Builder = New-BTContentBuilder
 
         PS C:\>$Builder | Add-BTAppLogo -Source 'C:\Temp\LocalImage.png' -AlternateText 'Picture of burnt toast, popped out of a toaster'
 
-        This example adds a local image as the app logo on the toast notification with supplied alt text to add with accessibility e.g. the use of screen readers.
+        This example adds a local image as the app logo on the toast notification with supplied alt text to aid with accessibility e.g. the use of screen readers.
 
         .EXAMPLE
         PS C:\>$Builder = New-BTContentBuilder

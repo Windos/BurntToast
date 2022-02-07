@@ -241,7 +241,7 @@ Describe 'Add-BTAppLogo' {
             $ExpectedXML = '<?xml version="1.0"?><toast><visual><binding template="ToastGeneric"><text>First Line of Text</text><text>Second Line of Text</text><image src="{0}" placement="appLogoOverride"/></binding></visual></toast>' -f $ImagePath
             $Builder.GetXml().GetXml() | Should -BeExactly $ExpectedXML
 
-            # There are no child elements
+            # There are two child elements
             $Builder.GetToastContent().Visual.BindingGeneric.Children | Should -HaveCount 2
 
             # The AppLogo:
