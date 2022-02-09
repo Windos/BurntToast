@@ -8,6 +8,7 @@
     Description       = 'Module for creating and displaying Toast Notifications on Microsoft Windows 10.'
     PowerShellVersion = '5.0'
     FunctionsToExport = 'Add-BTAppLogo',
+                        'Add-BTHeroImage',
                         'Add-BTImage',
                         'Add-BTText',
                         'New-BTContentBuilder',
