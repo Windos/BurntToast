@@ -90,12 +90,12 @@ function Add-BTText {
 
         PS C:\>$Builder | Add-BTText -Text 'First Line of Text' -Language en-NZ
 
-        Thie example specifies that the language included in the text element is New Zealand English using the relevant BCP-47 code, en-NZ.
+        This example specifies that the language included in the text element is New Zealand English using the relevant BCP-47 code, en-NZ.
 
         .NOTES
         A toast notification can contain a maximum of four reserved lines of text. By default this means you can include three customer text elements as the first, which acts like a heading, automatically reserves 2 lines.
 
-        You can override this behaviour using the MaxLines parameter, specifically by setting the first line to a maximum of 1 line.
+        You can override this behavior using the MaxLines parameter, specifically by setting the first line to a maximum of 1 line.
 
         This function will ignore any text elements that would exceed this limit and output a warning stating this.
 
@@ -105,7 +105,7 @@ function Add-BTText {
 
     [CmdletBinding()]
     param (
-        # The toast content builder obejct that represents the toast notification being constructed.
+        # The toast content builder object that represents the toast notification being constructed.
         [Parameter(Mandatory,
                    ValueFromPipeline)]
         [Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder] $ContentBuilder,

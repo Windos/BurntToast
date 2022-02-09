@@ -28,14 +28,14 @@ function Add-BTHeroImage {
 
         PS C:\>$Builder | Add-BTHeroImage -Source '\\FS01\Images$\NetworkImage.gif'
 
-        This example adds an image from a network share as the hero image on the toast notification being constructred.
+        This example adds an image from a network share as the hero image on the toast notification being constructed.
 
         .EXAMPLE
         PS C:\>$Builder = New-BTContentBuilder
 
         PS C:\>$Builder | Add-BTHeroImage -Source 'https://example.com/OnlineImage.jpeg'
 
-        This example adds an image from the internet as the hero image on the toast notification being constructred.
+        This example adds an image from the internet as the hero image on the toast notification being constructed.
 
         Future invocations of this example will used a cached copy of the referenced image rather than going out to the internet again.
 
@@ -44,7 +44,7 @@ function Add-BTHeroImage {
 
         PS C:\>$Builder | Add-BTHeroImage -Source 'https://example.com/OnlineImage.jpeg' -IgnoreCache
 
-        This example adds an image from the internet as the hero image on the toast notification being constructred, it downloads the image from the internet regardless of if it has been previously cahced.
+        This example adds an image from the internet as the hero image on the toast notification being constructed, it downloads the image from the internet regardless of if it has been previously cached.
 
         .EXAMPLE
         PS C:\>$Builder = New-BTContentBuilder
@@ -75,7 +75,7 @@ function Add-BTHeroImage {
 
     [CmdletBinding()]
     param (
-        # The toast content builder obejct that represents the toast notification being constructed.
+        # The toast content builder object that represents the toast notification being constructed.
         [Parameter(Mandatory,
                    ValueFromPipeline)]
         [Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder] $ContentBuilder,

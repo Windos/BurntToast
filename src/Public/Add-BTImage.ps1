@@ -48,7 +48,7 @@ function Add-BTImage {
 
         PS C:\>$Builder | Add-BTImage -Source 'https://example.com/OnlineImage.jpeg' -IgnoreCache
 
-        This example adds an image from the internet to the body of a toast notification, it downloads the image from the internet regardless of if it has been previously cahced.
+        This example adds an image from the internet to the body of a toast notification, it downloads the image from the internet regardless of if it has been previously cached.
 
         .EXAMPLE
         PS C:\>$Builder = New-BTContentBuilder
@@ -62,7 +62,7 @@ function Add-BTImage {
 
         PS C:\>$Builder | Add-BTImage -Source 'C:\Temp\LocalImage.png' -Crop Circle
 
-        This example adds a local image to the body of a toast notification cropped into the shape of a cirlce, overriding the default square shape.
+        This example adds a local image to the body of a toast notification cropped into the shape of a circle, overriding the default square shape.
 
         .EXAMPLE
         PS C:\>$Builder = New-BTContentBuilder
@@ -97,7 +97,7 @@ function Add-BTImage {
 
     [CmdletBinding()]
     param (
-        # The toast content builder obejct that represents the toast notification being constructed.
+        # The toast content builder object that represents the toast notification being constructed.
         [Parameter(Mandatory,
                    ValueFromPipeline)]
         [Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder] $ContentBuilder,

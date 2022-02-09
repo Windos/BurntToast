@@ -38,6 +38,20 @@ new usage paradigms. Existing scripts will **NOT** work without substantial chan
 
 - [v1.0.0-Preview1](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview1/BurntToast.zip)
 
+  - BREAKING CHANGE: Began rewriting module making use of Toast Content Builder objects. Available functions in Preview1 include:
+
+    - Add-BTAppLogo
+
+    - Add-BTHeroImage
+
+    - Add-BTImage
+
+    - Add-BTText
+
+    - New-BTContentBuilder
+
+    - Show-BTNotification
+
   - UPDATE: Microsoft.Windows.SDK.NET.Ref libraries to 10.0.22000.22
 
   - UPDATE: Microsoft.Toolkit.Uwp.Notifications library to 7.1.2

@@ -4,7 +4,7 @@ function New-BTContentBuilder {
         Create a toast builder object.
 
         .DESCRIPTION
-        The New-BTContentBuilder function creates a new toast content builder obejct to construct a complete notification.
+        The New-BTContentBuilder function creates a new toast content builder object to construct a complete notification.
 
         .INPUTS
         None. You cannot pipe objects to New-BTContentBuilder.

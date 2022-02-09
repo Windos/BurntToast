@@ -6,7 +6,7 @@ function Add-BTAppLogo {
         .DESCRIPTION
         The Add-BTAppLogo function specifies an image to be displayed on a toast notification as the app logo.
 
-        Prior to Windows 10 20H2 this app logo would replace the smaller icon that represents the source of a notification, but from 20H2 it is displayed in adition to the icon.
+        Prior to Windows 10 20H2 this app logo would replace the smaller icon that represents the source of a notification, but from 20H2 it is displayed in addition to the icon.
 
         .INPUTS
         Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder. You can pipe a toast content builder object to Add-BTAppLogo.
@@ -30,14 +30,14 @@ function Add-BTAppLogo {
 
         PS C:\>$Builder | Add-BTAppLogo -Source '\\FS01\Images$\NetworkImage.gif'
 
-        This example adds an image from a network share as the app logo on the toast notification being constructred.
+        This example adds an image from a network share as the app logo on the toast notification being constructed.
 
         .EXAMPLE
         PS C:\>$Builder = New-BTContentBuilder
 
         PS C:\>$Builder | Add-BTAppLogo -Source 'https://example.com/OnlineImage.jpeg'
 
-        This example adds an image from the internet as the app logo on the toast notification being constructred.
+        This example adds an image from the internet as the app logo on the toast notification being constructed.
 
         Future invocations of this example will used a cached copy of the referenced image rather than going out to the internet again.
 
@@ -46,7 +46,7 @@ function Add-BTAppLogo {
 
         PS C:\>$Builder | Add-BTAppLogo -Source 'https://example.com/OnlineImage.jpeg' -IgnoreCache
 
-        This example adds an image from the internet as the app logo on the toast notification being constructred, it downloads the image from the internet regardless of if it has been previously cahced.
+        This example adds an image from the internet as the app logo on the toast notification being constructed, it downloads the image from the internet regardless of if it has been previously cached.
 
         .EXAMPLE
         PS C:\>$Builder = New-BTContentBuilder
@@ -60,7 +60,7 @@ function Add-BTAppLogo {
 
         PS C:\>$Builder | Add-BTAppLogo -Source 'C:\Temp\LocalImage.png' -Crop Circle
 
-        This example adds a local image as the app logo on the toast notification cropped into the shape of a cirlce, overriding the default square shape.
+        This example adds a local image as the app logo on the toast notification cropped into the shape of a circle, overriding the default square shape.
 
         .EXAMPLE
         PS C:\>$Builder = New-BTContentBuilder
@@ -69,7 +69,7 @@ function Add-BTAppLogo {
                           Add-BTText -Text 'First Line of Text' -PassThru |
                           Add-BTText -Text 'Second Line of Text'
 
-        This example an app logo followed by three custom text elements to a toast content builder object on the pipeline by passing through a refference to the builder object.
+        This example adds an app logo followed by three custom text elements to a toast content builder object on the pipeline by passing through a refference to the builder object.
 
         .NOTES
         You can reference an image from your local computer, a network location, or the internet.
@@ -84,7 +84,7 @@ function Add-BTAppLogo {
 
     [CmdletBinding()]
     param (
-        # The toast content builder obejct that represents the toast notification being constructed.
+        # The toast content builder object that represents the toast notification being constructed.
         [Parameter(Mandatory,
                    ValueFromPipeline)]
         [Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder] $ContentBuilder,
