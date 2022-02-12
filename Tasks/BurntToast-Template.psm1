@@ -1,12 +1,14 @@
-
 $WinMajorVersion = (Get-CimInstance -ClassName Win32_OperatingSystem -Property Version).Version.Split('.')[0]
 
 if ($WinMajorVersion -ge 10) {
-    $Library = @( Get-ChildItem -Path $PSScriptRoot\lib\Microsoft.Toolkit.Uwp.Notifications\*.dll -Recurse -ErrorAction SilentlyContinue )
-
-    if ($IsWindows) {
-        $Library += @( Get-ChildItem -Path $PSScriptRoot\lib\Microsoft.Windows.SDK.NET\*.dll -Recurse -ErrorAction SilentlyContinue )
+    $Paths = if ($IsWindows) {
+        "$PSScriptRoot\lib\Microsoft.Toolkit.Uwp.Notifications\net5.0-windows10.0.17763\*.dll",
+        "$PSScriptRoot\lib\Microsoft.Windows.SDK.NET\*.dll"
+    } else {
+        "$PSScriptRoot\lib\Microsoft.Toolkit.Uwp.Notifications\net461\*.dll"
     }
+
+    $Library = @( Get-ChildItem -Path $Paths -Recurse -ErrorAction SilentlyContinue )
 
     # Add one class from each expected DLL here:
     $LibraryMap = @{
@@ -30,21 +32,9 @@ if ($WinMajorVersion -ge 10) {
         }
     }
 
-    $Script:ActionsSupported = 'System.Management.Automation.SemanticVersion' -as [type] -and
-        $PSVersionTable.PSVersion -ge [System.Management.Automation.SemanticVersion] '7.1.0-preview.4'
-
-    $Script:UnsupportedEvents = 'Toast events are only supported on PowerShell 7.1.0 and above. ' +
-        'Your notification will still be displayed, but the actions will be ignored.'
-
-    Export-ModuleMember -Alias 'Toast'
+    Export-ModuleMember -Alias 'Builder'
     Export-ModuleMember -Function $PublicFunctions
-
-    # Register default AppId
-    New-BTAppId
-
-    if (-not $IsWindows) {
-        $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
-    }
 } else {
-    throw 'This version of BurntToast will only work on Windows 10. If you would like to use BurntToast on Windows 8, please use version 0.4'
+    throw 'This version of BurntToast will only work on Windows 10. ' +
+          'If you would like to use BurntToast on Windows 8, please use version 0.4'
 }
