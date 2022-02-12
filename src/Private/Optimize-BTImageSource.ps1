@@ -7,9 +7,9 @@ function Optimize-BTImageSource {
     )
 
     if ([bool]([System.Uri]$Source).IsUnc -or $Source -like 'http?://*') {
-        $RemoteFileName = $Source -replace '/|:|\\', '-'
+        $RemoteFileName = [string]::Join('-', $Source.Split([System.IO.Path]::GetInvalidFileNameChars()))
 
-        $NewFilePath = '{0}\{1}' -f $Env:TEMP, $RemoteFileName
+        $NewFilePath = Join-Path -Path $Env:TEMP -ChildPath $RemoteFileName
 
         if (!(Test-Path -Path $NewFilePath) -or $ForceRefresh) {
             if ([bool]([System.Uri]$Source).IsUnc) {

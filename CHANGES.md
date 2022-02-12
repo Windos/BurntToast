@@ -8,6 +8,10 @@
 
 - Added Add-BTInputTextBox function, allowing addition of text boxes.
 
+### Improvements
+
+- Ensure all invalid characters are removed from potential file system paths when caching images (thanks @markekraus)
+
 ## [v1.0.0-Preview1](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview1/BurntToast.zip)
 
 ### Breaking Changes
