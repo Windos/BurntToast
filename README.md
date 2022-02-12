@@ -16,16 +16,17 @@ PowerShell Module for displaying **Windows 10** and **Windows Server 2019** Toas
 ### PowerShell Gallery Install (Requires PowerShell v5)
 
 ```powershell
-    Install-Module -Name BurntToast
+Install-Module -Name BurntToast
 ```
 
 See the [PowerShell Gallery](http://www.powershellgallery.com/packages/BurntToast/) for the complete details and instructions.
+Don't forget to set the correct [Execution Policy](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.1).
 
 ### Manual Install
 
 Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/latest/download/BurntToast.zip) from [Releases page](https://github.com/Windos/BurntToast/releases/latest) and extract the contents into `$env:userprofile\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
 
-If you using PowerShell 6 or later, extract into `$env:userprofile\Documents\PowerShell\Modules\BurntToast`
+If you are using Powershell 6 or later, extract into `$env:userprofile\Documents\PowerShell\Modules\BurntToast`
 
 *Please remember to "**unblock**" the zip file before extracting the contents. Not doing so will result in the module not working correctly. This can be done via the file properties or with `Unblock-File`.*
 
@@ -34,7 +35,7 @@ If you using PowerShell 6 or later, extract into `$env:userprofile\Documents\Pow
 ### [Default Toast](/Examples/Example01/)
 
 ```powershell
-    New-BurntToastNotification
+New-BurntToastNotification
 ```
 
 ![BurntToast Notification Example Default](/Examples/Example01/Example1-Default.png)
@@ -42,8 +43,8 @@ If you using PowerShell 6 or later, extract into `$env:userprofile\Documents\Pow
 ### [Customized Toast](/Examples/Example02/)
 
 ```powershell
-    New-BurntToastNotification -AppLogo C:\smile.jpg -Text "Don't forget to smile!",
-                                                           'Your script ran successfully, celebrate!'
+New-BurntToastNotification -AppLogo C:\smile.jpg -Text "Don't forget to smile!",
+                                                       'Your script ran successfully, celebrate!'
 ```
 
 ![BurntToast Notification Example Custom](/Examples/Example02/Example2-Custom.png)
@@ -51,7 +52,7 @@ If you using PowerShell 6 or later, extract into `$env:userprofile\Documents\Pow
 ### [Alarm Clock](/Examples/Example03/)
 
 ```powershell
-    New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2' -SnoozeAndDismiss
+New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2' -SnoozeAndDismiss
 ```
 
 ![BurntToast Notification Example Alarm](/Examples/Example03/Example3-Alarm.png)
@@ -138,7 +139,7 @@ If you using PowerShell 6 or later, extract into `$env:userprofile\Documents\Pow
 
 ## License
 
-- see [LICENSE](LICENSE) file
+- See [LICENSE](LICENSE) file
 
 ## Image Credit
 
