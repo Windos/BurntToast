@@ -6,6 +6,8 @@ function Add-BTText {
         .DESCRIPTION
         The Add-BTText function adds custom text to a toast notification via a content builder object.
 
+        By default this text will be added to the body of the toast. You can also add attribution text using the Attribution switch.
+
         .INPUTS
         Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder. You can pipe a toast content builder object to Add-BTText.
 
@@ -92,6 +94,13 @@ function Add-BTText {
 
         This example specifies that the language included in the text element is New Zealand English using the relevant BCP-47 code, en-NZ.
 
+        .EXAMPLE
+        PS C:\>$Builder = New-BTContentBuilder
+
+        PS C:\>$Builder | Add-BTText -Text 'Example Toast Source' -Attribution
+
+        This example add attribution test to a toast notification.
+
         .NOTES
         A toast notification can contain a maximum of four reserved lines of text. By default this means you can include three customer text elements as the first, which acts like a heading, automatically reserves 2 lines.
 
@@ -99,11 +108,13 @@ function Add-BTText {
 
         This function will ignore any text elements that would exceed this limit and output a warning stating this.
 
+        Attribution text is displayed underneath other text elements, but above image elements. You can only have one attribution text element per toast notification and adding attribution to a notification will override any existing attribution text.
+
         .LINK
         https://docs.toastit.dev/commands/add-bttext
     #>
 
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'CustomText')]
     param (
         # The toast content builder object that represents the toast notification being constructed.
         [Parameter(Mandatory,
@@ -118,8 +129,14 @@ function Add-BTText {
         [string[]] $Text,
 
         # The maximum number of lines the text element is allowed to display.
+        [Parameter(ParameterSetName = 'CustomText')]
         [ValidateRange(1,2)]
         [int] $MaxLines,
+
+        # Specifies that the text should be added as attribution text.
+        [Parameter(Mandatory,
+                   ParameterSetName = 'AttributionText')]
+        [switch] $Attribution,
 
         # The target locale of the toast notification, specified as a BCP-47 language tags such as "en-US" or "fr-FR".
         # The locale specified here overrides any other specified locale, such as that in binding or visual.
@@ -131,34 +148,52 @@ function Add-BTText {
 
     begin {}
     process {
-        $paraStyle    = $null
-        $paraWrap     = $null
-        $paraMaxLines = if ($MaxLines) {$MaxLines} else {$null}
-        $paraMinLines = $null
-        $paraAlign    = $null
-
-        try {
-            foreach ($Line in $Text) {
-                if ($Language) {
-                    $null = $ContentBuilder.AddText($Line,
-                                                    $paraStyle,
-                                                    $paraWrap,
-                                                    $paraMaxLines,
-                                                    $paraMinLines,
-                                                    $paraAlign,
-                                                    $Language)
-                } else {
-                    $null = $ContentBuilder.AddText($Line,
-                                                    $paraStyle,
-                                                    $paraWrap,
-                                                    $paraMaxLines,
-                                                    $paraMinLines,
-                                                    $paraAlign)
-                }
+        if ($Attribution) {
+            if ($Text.Count -gt 1) {
+                Write-Warning ('Attribution text can only contain a single string and more than one was provided. ' +
+                    'Only the first string will be used.')
             }
-        } catch {
-            Write-Warning ('The max lines of text (4) on the toast notification has been reached, extra lines have been ignored. ' +
-                'The first text element automatically reserves 2 lines of text, consider using the MaxLines parameter to override this.')
+
+            if ($null -ne $ContentBuilder.Content.Visual.BindingGeneric.Attribution.Text) {
+                Write-Warning ('Attribution text can only be set once per toast notification. ' +
+                    'The existing attribution text will be overwritten.')
+            }
+
+            if ($Language) {
+                $null = $ContentBuilder.AddAttributionText($Text[0], $Language)
+            } else {
+                $null = $ContentBuilder.AddAttributionText($Text[0])
+            }
+        } else {
+            $paraStyle    = $null
+            $paraWrap     = $null
+            $paraMaxLines = if ($MaxLines) {$MaxLines} else {$null}
+            $paraMinLines = $null
+            $paraAlign    = $null
+
+            try {
+                foreach ($Line in $Text) {
+                    if ($Language) {
+                        $null = $ContentBuilder.AddText($Line,
+                                                        $paraStyle,
+                                                        $paraWrap,
+                                                        $paraMaxLines,
+                                                        $paraMinLines,
+                                                        $paraAlign,
+                                                        $Language)
+                    } else {
+                        $null = $ContentBuilder.AddText($Line,
+                                                        $paraStyle,
+                                                        $paraWrap,
+                                                        $paraMaxLines,
+                                                        $paraMinLines,
+                                                        $paraAlign)
+                    }
+                }
+            } catch {
+                Write-Warning ('The max lines of text (4) on the toast notification has been reached, extra lines have been ignored. ' +
+                    'The first text element automatically reserves 2 lines of text, consider using the MaxLines parameter to override this.')
+            }
         }
 
         if ($PassThru) {

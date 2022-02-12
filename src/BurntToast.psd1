@@ -23,7 +23,11 @@ IMPORTANT: The usage of this module changes substantially with Version 1.0.0, an
             LicenseUri   = 'https://github.com/Windos/BurntToast/blob/main/LICENSE'
             ProjectUri   = 'https://github.com/Windos/BurntToast'
             IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/main/Media/BurntToast-Logo.png'
-            ReleaseNotes = '# 1.0.0-Preview1
+            ReleaseNotes = '# 1.0.0-Preview2
+
+* UPDATE: Added Attribution switch to Add-BTText, allowing addition of attribution text to a toast notification.
+
+# 1.0.0-Preview1
 
 * BREAKING CHANGE: Began rewriting module making use of Toast Content Builder objects. Available functions in Preview1 include:
   * Add-BTAppLogo

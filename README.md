@@ -36,6 +36,10 @@ See the [Chocolatey community package](https://chocolatey.org/packages/burnttoas
 **Please note:** in v1.0.0 there are major breaking changes meaning you should not upgrade without understanding the
 new usage paradigms. Existing scripts will **NOT** work without substantial changes.
 
+- [v1.0.0-Preview2](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview2/BurntToast.zip)
+
+  - UPDATE: Added Attribution switch to Add-BTText, allowing addition of attribution text to a toast notification.
+
 - [v1.0.0-Preview1](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview1/BurntToast.zip)
 
   - BREAKING CHANGE: Began rewriting module making use of Toast Content Builder objects. Available functions in Preview1 include:

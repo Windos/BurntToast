@@ -164,4 +164,38 @@ Describe 'Add-BTText' {
             $Builder.GetXml().GetXml() | Should -BeExactly $ExpectedXML
         }
     }
+
+    Context 'attribution text' {
+        BeforeAll {
+            $Builder = New-BTContentBuilder
+            $Builder | Add-BTText -Text 'Example Toast Source' -Attribution
+        }
+
+        It 'adds the attribution text' {
+            $Builder.Content.Visual.BindingGeneric.Attribution.Text | Should -BeExactly 'Example Toast Source'
+        }
+        It 'generates the expected XML' {
+            $ExpectedXML = '<?xml version="1.0"?><toast><visual><binding template="ToastGeneric"><text placement="attribution">Example Toast Source</text></binding></visual></toast>'
+            $Builder.GetXml().GetXml() | Should -BeExactly $ExpectedXML
+        }
+        It 'writes a warning when overwriting attribution text' {
+            $CaptureFile = New-TemporaryFile
+            $ExpectedWarning = 'Attribution text can only be set once per toast notification. The existing attribution text will be overwritten.'
+
+            $Builder | Add-BTText -Text 'New Example Toast Source' -Attribution 3> $CaptureFile
+            $CaptureFile | Should -FileContentMatchExactly $ExpectedWarning
+
+            Remove-Item $CaptureFile -Force
+        }
+        It 'writes a warning when providing two strings as attribution text' {
+            $CaptureFile = New-TemporaryFile
+            $ExpectedWarning = 'Attribution text can only contain a single string and more than one was provided. Only the first string will be used.'
+
+            $Builder = New-BTContentBuilder
+            $Builder | Add-BTText -Text 'Example Toast Source', 'New Example Toast Source' -Attribution 3> $CaptureFile
+            $CaptureFile | Should -FileContentMatchExactly $ExpectedWarning
+
+            Remove-Item $CaptureFile -Force
+        }
+    }
 }
