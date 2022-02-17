@@ -4,75 +4,83 @@ on:
   push:
     branches:
       - main
+      - 'v[0-9]+.[0-9]+.[0-9]+'
   pull_request:
     branches:
       - main
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   Win2019-x64-pwsh:
     name: Server 2019 - PowerShell - x64
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Perform a Pester test from the command-line
         shell: pwsh
-        run: ./Tasks/build.ps1 -Bootstrap -Test
+        run: ./tasks/build.ps1 -Test
 
   Win2019-x86-pwsh:
     name: Server 2019 - PowerShell - x86
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Perform a Pester test from the command-line
         shell: pwsh
         run: |
           $Pwsh32 = .github/workflows/pwsh32.ps1
-          & $Pwsh32 -File ./Tasks/build.ps1 -Bootstrap -Test
+          & $Pwsh32 -File ./tasks/build.ps1 -Test
 
   Win2019-x64-winpwsh:
     name: Server 2019 - Windows PowerShell - x64
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Perform a Pester test from the command-line
         shell: powershell
-        run: ./Tasks/build.ps1 -Bootstrap -Test
+        run: ./tasks/build.ps1 -Test
 
   Win2019-x86-winpwsh:
     name: Server 2019 - Windows PowerShell - x86
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Perform a Pester test from the command-line
         shell: powershell
         # TODO: This could be problematic with hardcoding
-        run: C:\Windows\syswow64\WindowsPowerShell\v1.0\powershell.exe -File ./Tasks/build.ps1 -Bootstrap -Test
+        run: C:\Windows\syswow64\WindowsPowerShell\v1.0\powershell.exe -File ./tasks/build.ps1 -Test
 
   build-and-oat-module:
     name: Build Module and OAT
     needs: ["Win2019-x64-pwsh", "Win2019-x64-winpwsh", "Win2019-x86-pwsh", "Win2019-x86-winpwsh"]
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - name: Test Coverage
+        shell: pwsh
+        run: |
+          ./tasks/build.ps1 -Test
       - name: Compile Module
         shell: pwsh
-        run: ./Tasks/build.ps1 -Bootstrap -Compile
+        run: ./tasks/build.ps1 -Compile
       - name: OAT
         shell: pwsh
         env:
           # Use the compiled module for testing
           BURNTTOAST_MODULE_ROOT: './Output/BurntToast/BurntToast.psd1'
         run: |
-          ./Tasks/build.ps1 -Test -CodeCoverage
+          ./tasks/build.ps1 -Test
       - name: Upload Test Results
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: test-results
           path: "*.xml"
       - name: Upload PowerShell Module
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: burnttoast-module
           path: "./Output/BurntToast/"
@@ -83,17 +91,18 @@ jobs:
     runs-on: ubuntu-latest
     if: always()
     steps:
+      - uses: actions/checkout@v3
       - name: Download Artifacts
         uses: actions/download-artifact@v4.1.7
         with:
           name: test-results
           path: artifacts
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           files: artifacts/**/TestResults.xml
-      - uses: codecov/codecov-action@v2
-        if: always()
+      - name: Publish Code Coverage Results to Codecov
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: artifacts/CoverageResults.xml

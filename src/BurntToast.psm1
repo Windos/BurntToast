@@ -1,8 +1,10 @@
-
 $OSVersion = [System.Environment]::OSVersion.Version
 
 if ($OSVersion.Major -ge 10 -and $null -eq $env:BurntToastPesterNotWindows10) {
     if ($OSVersion.Build -ge 15063 -and $null -eq $env:BurntToastPesterNotAnniversaryUpdate) {
+        $Public = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue )
+        $Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue )
+
         $Paths = if ($IsWindows) {
             "$PSScriptRoot\lib\Microsoft.Toolkit.Uwp.Notifications\net5.0-windows10.0.17763\*.dll",
             "$PSScriptRoot\lib\Microsoft.Windows.SDK.NET\*.dll"
@@ -24,6 +26,14 @@ if ($OSVersion.Major -ge 10 -and $null -eq $env:BurntToastPesterNotWindows10) {
             "$PSScriptRoot$($Script:Config.AppLogo)"
         } else {
             $Script:Config.AppLogo
+        }
+
+        foreach ($Import in @($Public + $Private)) {
+            try {
+                . $Import.FullName
+            } catch {
+                Write-Error -Message "Failed to import function $($Import.FullName): $_"
+            }
         }
 
         foreach ($Type in $Library) {
