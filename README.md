@@ -7,9 +7,17 @@
 [![PowerShell Gallery Downloads](https://img.shields.io/powershellgallery/dt/BurntToast.svg)](https://www.powershellgallery.com/packages/BurntToast)
 [![Open Issues](https://img.shields.io/github/issues-raw/Windos/BurntToast.svg)](https://github.com/Windos/BurntToast/issues)
 
-![BurntToast Logo Banner](/Media/BurntToast-Wide.png)
+![BurntToast Logo Banner](/images/BurntToast-Wide.png)
 
-PowerShell Module for displaying **Windows 10** and **Windows Server 2019** Toast Notifications
+PowerShell Module for displaying Toast Notifications on **Windows 10** and **Windows Server 2019** and above.
+
+## ❗❗❗ NOTICE ❗❗❗
+
+BurntToast v1.0.0 will include **numerous** breaking changes and your existing scripts **will not** work without changes.
+
+**DO NOT** upgrade to BurntToast v1.0.0 until you are ready.
+
+You can read more about the up coming changes on [ToastIT.dev](https://toastit.dev/tag/burnttoast/) and BurntToast's new [Docs Site](https://docs.toastit.dev/changelog)
 
 ## ❗❗❗ NOTICE ❗❗❗
 
@@ -21,61 +29,35 @@ You can read more about the up coming changes on [ToastIT.dev](https://toastit.d
 
 ## Install
 
-### PowerShell Gallery Install (Requires PowerShell v5)
+### PowerShell Gallery Install
 
 ```powershell
 Install-Module -Name BurntToast
 ```
 
-See the [PowerShell Gallery](http://www.powershellgallery.com/packages/BurntToast/) for the complete details and instructions.
-Don't forget to set the correct [Execution Policy](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.1).
+See the [PowerShell Gallery](http://www.powershellgallery.com/packages/BurntToast/) for the complete details and
+instructions.
 
-### Manual Install
-
-Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/latest/download/BurntToast.zip) from [Releases page](https://github.com/Windos/BurntToast/releases/latest) and extract the contents into `$env:userprofile\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
-
-If you are using PowerShell 6 or later, extract into `$env:userprofile\Documents\PowerShell\Modules\BurntToast`
-
-*Please remember to "**unblock**" the zip file before extracting the contents. Not doing so will result in the module not working correctly. This can be done via the file properties or with `Unblock-File`.*
-
-## Examples
-
-### [Default Toast](/Examples/Example01/)
+### Chocolatey
 
 ```powershell
-New-BurntToastNotification
+choco install burnttoast-psmodule
 ```
 
-![BurntToast Notification Example Default](/Examples/Example01/Example1-Default.png)
-
-### [Customized Toast](/Examples/Example02/)
-
-```powershell
-New-BurntToastNotification -AppLogo C:\smile.jpg -Text "Don't forget to smile!",
-                                                       'Your script ran successfully, celebrate!'
-```
-
-![BurntToast Notification Example Custom](/Examples/Example02/Example2-Custom.png)
-
-### [Alarm Clock](/Examples/Example03/)
-
-```powershell
-New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2' -SnoozeAndDismiss
-```
-
-![BurntToast Notification Example Alarm](/Examples/Example03/Example3-Alarm.png)
+See the [Chocolatey community package](https://chocolatey.org/packages/burnttoast-psmodule) for more details. Thanks
+[Bill Curran](https://github.com/bcurran3) for maintaining the package.
 
 ## Releases
 
-**Please note:** as of v0.5.0, BurntToast no longer works on Windows 8.
+### [v1.0.0](https://github.com/Windos/BurntToast/releases/download/v1.0.0/BurntToast.zip)
 
-- [0.8.5](https://github.com/Windos/BurntToast/releases/download/v0.8.5/BurntToast.zip)
+### Breaking Changes
 
-  - Actually implement the ability to use a UniqueIdentifier with the Remove-BTNotification function (which was half implemented in 0.8.4)
+### Features
 
-- [0.8.4](https://github.com/Windos/BurntToast/releases/download/v0.8.4/BurntToast.zip)
+### Improvements
 
-  - Enhancement: Header ID on New-BTHeader is now optional. An ID will be auto generated if not specified ([#125](https://github.com/Windos/BurntToast/issues/125))
+### Libraries
 
     - Thanks [@glennsarti](https://github.com/glennsarti)
 
@@ -147,13 +129,16 @@ New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2' -SnoozeAndDismiss
 
 ## License
 
-- See [LICENSE](LICENSE) file
+- see [LICENSE](LICENSE) file
 
 ## Image Credit
 
-The [default image](/Media/BurntToast.png) for BurntToast Notifications is a photo taken by [Craig Sunter](https://www.flickr.com/photos/16210667@N02/17230428864)
+The [default image](/images/BurntToast.png) for BurntToast Notifications is a photo taken by
+[Craig Sunter](https://www.flickr.com/photos/16210667@N02/17230428864)
 
 ## Contact
 
+- Bluesky: [@toastit.dev](https://bsky.app/profile/toastit.dev)
+- Mastodon: [@windos@mastodon.nz](https://mastodon.nz/@windos)
 - Twitter: [@WindosNZ](https://twitter.com/windosnz)
 - Blog: [ToastIT.dev](https://toastit.dev/)
