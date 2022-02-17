@@ -11,6 +11,14 @@
 
 PowerShell Module for displaying **Windows 10** and **Windows Server 2019** Toast Notifications
 
+## ❗❗❗ NOTICE ❗❗❗
+
+BurntToast v1.0.0 will include **numerous** breaking changes and your existing scripts **will not** work without changes.
+
+**DO NOT** upgrade to BurntToast v1.0.0 until you are ready.
+
+You can read more about the up coming changes on [ToastIT.dev](https://toastit.dev/tag/burnttoast/) and BurntToast's new [Docs Site](https://docs.toastit.dev/changelog)
+
 ## Install
 
 ### PowerShell Gallery Install (Requires PowerShell v5)
@@ -26,7 +34,7 @@ Don't forget to set the correct [Execution Policy](https://docs.microsoft.com/en
 
 Download [BurntToast.zip](https://github.com/Windos/BurntToast/releases/latest/download/BurntToast.zip) from [Releases page](https://github.com/Windos/BurntToast/releases/latest) and extract the contents into `$env:userprofile\Documents\WindowsPowerShell\modules\BurntToast` (you may have to create these directories if they don't exist.)
 
-If you are using Powershell 6 or later, extract into `$env:userprofile\Documents\PowerShell\Modules\BurntToast`
+If you are using PowerShell 6 or later, extract into `$env:userprofile\Documents\PowerShell\Modules\BurntToast`
 
 *Please remember to "**unblock**" the zip file before extracting the contents. Not doing so will result in the module not working correctly. This can be done via the file properties or with `Unblock-File`.*
 
