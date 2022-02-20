@@ -13,7 +13,7 @@ Describe 'BurntToast Module' {
         }
 
         It 'should import functions' {
-            (Get-Module BurntToast).ExportedFunctions.Count | Should -Be 6
+            (Get-Module BurntToast).ExportedFunctions.Count | Should -Be 7
         }
 
         It 'should import aliases' {

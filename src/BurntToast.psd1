@@ -11,6 +11,7 @@ IMPORTANT: The usage of this module changes substantially with Version 1.0.0, an
     FunctionsToExport = 'Add-BTAppLogo',
                         'Add-BTHeroImage',
                         'Add-BTImage',
+                        'Add-BTInputTextBox',
                         'Add-BTText',
                         'New-BTContentBuilder',
                         'Show-BTNotification'
@@ -23,21 +24,37 @@ IMPORTANT: The usage of this module changes substantially with Version 1.0.0, an
             LicenseUri   = 'https://github.com/Windos/BurntToast/blob/main/LICENSE'
             ProjectUri   = 'https://github.com/Windos/BurntToast'
             IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/main/Media/BurntToast-Logo.png'
-            ReleaseNotes = '# 1.0.0-Preview2
+            ReleaseNotes = '## [v1.0.0-Preview2](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview2/BurntToast.zip)
 
-* UPDATE: Added Attribution switch to Add-BTText, allowing addition of attribution text to a toast notification.
+### Features
 
-# 1.0.0-Preview1
+- Added Attribution switch to Add-BTText, allowing addition of attribution text to a toast notification.
 
-* BREAKING CHANGE: Began rewriting module making use of Toast Content Builder objects. Available functions in Preview1 include:
-  * Add-BTAppLogo
-  * Add-BTHeroImage
-  * Add-BTImage
-  * Add-BTText
-  * New-BTContentBuilder
-  * Show-BTNotification
-* UPDATE: Microsoft.Windows.SDK.NET.Ref libraries to 10.0.22000.22
-* UPDATE: Microsoft.Toolkit.Uwp.Notifications library to 7.1.2
+- Added Add-BTInputTextBox function, allowing addition of text boxes.
+
+## [v1.0.0-Preview1](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview1/BurntToast.zip)
+
+### Breaking Changes
+
+- Began rewriting module making use of Toast Content Builder objects. Available functions in Preview1 include:
+
+    - Add-BTAppLogo
+
+    - Add-BTHeroImage
+
+    - Add-BTImage
+
+    - Add-BTText
+
+    - New-BTContentBuilder
+
+    - Show-BTNotification
+
+### Libraries
+
+- Microsoft.Windows.SDK.NET.Ref libraries bumped to 10.0.22000.22
+
+- Microsoft.Toolkit.Uwp.Notifications library bumped to 7.1.2
 '
         }
     }

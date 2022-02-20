@@ -36,31 +36,39 @@ See the [Chocolatey community package](https://chocolatey.org/packages/burnttoas
 **Please note:** in v1.0.0 there are major breaking changes meaning you should not upgrade without understanding the
 new usage paradigms. Existing scripts will **NOT** work without substantial changes.
 
-- [v1.0.0-Preview2](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview2/BurntToast.zip)
+### [v1.0.0-Preview2](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview2/BurntToast.zip)
 
-  - UPDATE: Added Attribution switch to Add-BTText, allowing addition of attribution text to a toast notification.
+#### Features
 
-- [v1.0.0-Preview1](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview1/BurntToast.zip)
+- Added Attribution switch to Add-BTText, allowing addition of attribution text to a toast notification.
 
-  - BREAKING CHANGE: Began rewriting module making use of Toast Content Builder objects. Available functions in Preview1 include:
+- Added Add-BTInputTextBox function, allowing addition of text boxes.
 
-    - Add-BTAppLogo
+### [v1.0.0-Preview1](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview1/BurntToast.zip)
 
-    - Add-BTHeroImage
+#### Breaking Changes
 
-    - Add-BTImage
+- Began rewriting module making use of Toast Content Builder objects. Available functions in Preview1 include:
 
-    - Add-BTText
+  - Add-BTAppLogo
 
-    - New-BTContentBuilder
+  - Add-BTHeroImage
 
-    - Show-BTNotification
+  - Add-BTImage
 
-  - UPDATE: Microsoft.Windows.SDK.NET.Ref libraries to 10.0.22000.22
+  - Add-BTText
 
-  - UPDATE: Microsoft.Toolkit.Uwp.Notifications library to 7.1.2
+  - New-BTContentBuilder
 
-- see more in the [Full Change Log](CHANGES.md)
+  - Show-BTNotification
+
+#### Libraries
+
+- Microsoft.Windows.SDK.NET.Ref libraries bumped to 10.0.22000.22
+
+- Microsoft.Toolkit.Uwp.Notifications library bumped to 7.1.2
+
+### See more in the [Full Change Log](CHANGES.md)
 
 ## Contributors
 
