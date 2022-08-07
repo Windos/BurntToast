@@ -38,11 +38,19 @@ new usage paradigms. Existing scripts will **NOT** work without substantial chan
 
 ### [v1.0.0-Preview2](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview2/BurntToast.zip)
 
-#### Features
+### Features
 
 - Added Attribution switch to Add-BTText, allowing addition of attribution text to a toast notification.
 
 - Added Add-BTInputTextBox function, allowing addition of text boxes.
+
+### Improvements
+
+- Ensure all invalid characters are removed from potential file system paths when caching images (thanks @markekraus)
+
+### Libraries
+
+- Microsoft.Windows.SDK.NET.Ref libraries bumped to 10.0.22621.26
 
 ### [v1.0.0-Preview1](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview1/BurntToast.zip)
 

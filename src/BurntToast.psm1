@@ -16,6 +16,8 @@ if ($WinMajorVersion -ge 10) {
     # Add one class from each expected DLL here:
     $LibraryMap = @{
         'Microsoft.Toolkit.Uwp.Notifications.dll' = 'Microsoft.Toolkit.Uwp.Notifications.ToastContent'
+        'Microsoft.Windows.SDK.NET.dll' = 'Windows.UI.Notifications.ToastNotification'
+        'WinRT.Runtime.dll' = 'WinRT.WindowsRuntimeTypeAttribute'
     }
 
     $Script:Config = Get-Content -Path $PSScriptRoot\config.json -ErrorAction SilentlyContinue | ConvertFrom-Json
