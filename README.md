@@ -9,7 +9,7 @@
 
 ![BurntToast Logo Banner](/images/BurntToast-Wide.png)
 
-PowerShell Module for displaying **Windows 10** and **Windows Server 2019** Toast Notifications
+PowerShell Module for displaying **Windows 10** and **Windows Server 2019** Toast Notifications.
 
 ## Install
 
