@@ -50,7 +50,8 @@ new usage paradigms. Existing scripts will **NOT** work without substantial chan
 
 ### Libraries
 
-- Microsoft.Windows.SDK.NET.Ref libraries bumped to 10.0.22621.26
+- Microsoft.Windows.SDK.NET.Ref libraries bumped to 10.0.22621.28
+- Microsoft.Toolkit.Uwp.Notifications libraries bumped to 7.1.3
 
 ### [v1.0.0-Preview1](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview1/BurntToast.zip)
 
