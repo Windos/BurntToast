@@ -57,6 +57,10 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 2
+      - name: Test Coverage
+        shell: pwsh
+        run: |
+          ./Tasks/build.ps1 -Test
       - name: Compile Module
         shell: pwsh
         run: ./Tasks/build.ps1 -Compile

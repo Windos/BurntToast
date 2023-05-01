@@ -85,15 +85,13 @@ if ($Test.IsPresent) {
     $PesterConfig.TestResult.OutputFormat = 'JUnitXml'
     $PesterConfig.TestResult.OutputPath = 'TestResults.xml'
 
-    $PesterConfig.CodeCoverage.Enabled = $true
-    $PesterConfig.CodeCoverage.OutputFormat = 'JaCoCo'
-    $PesterConfig.CodeCoverage.OutputPath = 'CoverageResults.xml'
-    if ($ENV:BURNTTOAST_MODULE_ROOT) {
-        $PesterConfig.CodeCoverage.Path = (Get-Item -Path $ENV:BURNTTOAST_MODULE_ROOT).Directory.FullName
-    } else {
+    if ($null -eq $ENV:BURNTTOAST_MODULE_ROOT) {
+        $PesterConfig.CodeCoverage.Enabled = $true
+        $PesterConfig.CodeCoverage.OutputFormat = 'JaCoCo'
+        $PesterConfig.CodeCoverage.OutputPath = 'CoverageResults.xml'
         $PesterConfig.CodeCoverage.Path = './src'
+        $PesterConfig.CodeCoverage.RecursePaths = $true
     }
-    $PesterConfig.CodeCoverage.RecursePaths = $true
 
     $res = Invoke-Pester -Configuration $PesterConfig
     if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed." }
