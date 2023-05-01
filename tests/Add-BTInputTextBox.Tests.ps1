@@ -17,7 +17,7 @@ Describe 'Add-BTInputTextBox' {
             Mock Optimize-BTImageSource {return $ImagePath}
 
             $Builder = New-BTContentBuilder
-            Add-BTAppLogo -ContentBuilder $Builder -Source $ImagePath
+            Add-BTImage -ContentBuilder $Builder -Source $ImagePath -AppLogo
             Add-BTInputTextBox -ContentBuilder $Builder -Id 'Example 01'
 
 
@@ -44,7 +44,7 @@ Describe 'Add-BTInputTextBox' {
             Mock Optimize-BTImageSource {return $ImagePath}
 
             $Builder = New-BTContentBuilder
-            $Builder | Add-BTAppLogo -Source $ImagePath
+            $Builder | Add-BTImage -Source $ImagePath -AppLogo
             $Builder | Add-BTInputTextBox -Id 'Example 02'
 
 
@@ -71,7 +71,7 @@ Describe 'Add-BTInputTextBox' {
             Mock Optimize-BTImageSource {return $ImagePath}
 
             $Builder = New-BTContentBuilder
-            $Builder | Add-BTAppLogo -Source $ImagePath
+            $Builder | Add-BTImage -Source $ImagePath -AppLogo
             $Builder | Add-BTInputTextBox -Id 'Example 03' -Title "Enter your name" -PlaceholderContent "John Doe"
 
 
@@ -98,7 +98,7 @@ Describe 'Add-BTInputTextBox' {
             Mock Optimize-BTImageSource {return $ImagePath}
 
             $Builder = New-BTContentBuilder
-            $Builder | Add-BTAppLogo -Source $ImagePath
+            $Builder | Add-BTImage -Source $ImagePath -AppLogo
             $Builder | Add-BTInputTextBox -Id 'Example 04' -PlaceholderContent "Enter your name" -DefaultContent "John Doe"
 
 
@@ -125,7 +125,7 @@ Describe 'Add-BTInputTextBox' {
             Mock Optimize-BTImageSource {return $ImagePath}
 
             $Builder = New-BTContentBuilder
-            $Builder | Add-BTAppLogo -Source $ImagePath
+            $Builder | Add-BTImage -Source $ImagePath -AppLogo
             $Builder | Add-BTInputTextBox -Id 'Example 05 - First Name' -Title 'Set your name' -PlaceholderContent "Enter your first name" -DefaultContent "John"
             $Builder | Add-BTInputTextBox -Id 'Example 05 - Last Name' -PlaceholderContent "Enter your last name" -DefaultContent "Doe"
 

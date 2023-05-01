@@ -1,4 +1,4 @@
-Describe 'Add-BTImage' {
+Describe 'Add-BTImage (Adaptive)' {
     BeforeAll {
         if (Get-Module -Name 'BurntToast') {
             Remove-Module -Name 'BurntToast'

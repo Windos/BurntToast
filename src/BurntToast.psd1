@@ -8,9 +8,7 @@
     Description       = 'Module for creating and displaying Toast Notifications on Microsoft Windows 10, Windows Server 2019, and newer.
 IMPORTANT: The usage of this module changes substantially with Version 1.0.0, and is not compatible with previous versions.'
     PowerShellVersion = '5.0'
-    FunctionsToExport = 'Add-BTAppLogo',
-                        'Add-BTHeroImage',
-                        'Add-BTImage',
+    FunctionsToExport = 'Add-BTImage',
                         'Add-BTInputTextBox',
                         'Add-BTText',
                         'New-BTContentBuilder',
@@ -25,6 +23,12 @@ IMPORTANT: The usage of this module changes substantially with Version 1.0.0, an
             ProjectUri   = 'https://github.com/Windos/BurntToast'
             IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/main/Media/BurntToast-Logo.png'
             ReleaseNotes = '## [v1.0.0-Preview2](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview2/BurntToast.zip)
+
+### Breaking Changes
+
+- Consolidated multiple image functions into one function, Add-BTImage.
+
+    - Add-BTAppLogo and Add-BTHeroImage have been removed and their functionality added to Add-BTImage.
 
 ### Features
 

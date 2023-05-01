@@ -1,4 +1,4 @@
-Describe 'Add-BTAppLogo' {
+Describe 'Add-BTImage (AppLogo)' {
     BeforeAll {
         if (Get-Module -Name 'BurntToast') {
             Remove-Module -Name 'BurntToast'
@@ -17,7 +17,7 @@ Describe 'Add-BTAppLogo' {
 
             Mock Optimize-BTImageSource {return $ImagePath}
             $Builder = New-BTContentBuilder
-            $Builder | Add-BTAppLogo -Source $ImagePath
+            $Builder | Add-BTImage -Source $ImagePath -AppLogo
 
             # The image path was past to the private function Optimize-BTImageSource
             Assert-MockCalled Optimize-BTImageSource -Times 1
@@ -48,7 +48,7 @@ Describe 'Add-BTAppLogo' {
 
             Mock Optimize-BTImageSource {return $ImageDst}
             $Builder = New-BTContentBuilder
-            $Builder | Add-BTAppLogo -Source $ImageSrc
+            $Builder | Add-BTImage -Source $ImageSrc -AppLogo
 
             # The image path was past to the private function Optimize-BTImageSource
             Assert-MockCalled Optimize-BTImageSource -Times 1
@@ -79,7 +79,7 @@ Describe 'Add-BTAppLogo' {
 
             Mock Optimize-BTImageSource {return $ImageDst}
             $Builder = New-BTContentBuilder
-            $Builder | Add-BTAppLogo -Source $ImageSrc
+            $Builder | Add-BTImage -Source $ImageSrc -AppLogo
 
             # The image path was past to the private function Optimize-BTImageSource
             Assert-MockCalled Optimize-BTImageSource -Times 1
@@ -110,7 +110,7 @@ Describe 'Add-BTAppLogo' {
 
             Mock Optimize-BTImageSource {return $ImageDst}
             $Builder = New-BTContentBuilder
-            $Builder | Add-BTAppLogo -Source $ImageSrc -IgnoreCache
+            $Builder | Add-BTImage -Source $ImageSrc -IgnoreCache -AppLogo
 
             # The image path was past to the private function Optimize-BTImageSource with the ForceRefresh switch
             Assert-MockCalled Optimize-BTImageSource -Times 1 -ParameterFilter {$ForceRefresh -eq $true}
@@ -140,7 +140,7 @@ Describe 'Add-BTAppLogo' {
 
             Mock Optimize-BTImageSource {return $ImagePath}
             $Builder = New-BTContentBuilder
-            $Builder | Add-BTAppLogo -Source $ImagePath -AlternateText 'Picture of burnt toast, popped out of a toaster'
+            $Builder | Add-BTImage -Source $ImagePath -AlternateText 'Picture of burnt toast, popped out of a toaster' -AppLogo
 
             # The image path was past to the private function Optimize-BTImageSource with the ForceRefresh switch
             Assert-MockCalled Optimize-BTImageSource -Times 1
@@ -170,7 +170,7 @@ Describe 'Add-BTAppLogo' {
 
             Mock Optimize-BTImageSource {return $ImagePath}
             $Builder = New-BTContentBuilder
-            $Builder | Add-BTAppLogo -Source $ImagePath -Crop Circle
+            $Builder | Add-BTImage -Source $ImagePath -Crop Circle -AppLogo
 
             # The image path was past to the private function Optimize-BTImageSource with the ForceRefresh switch
             Assert-MockCalled Optimize-BTImageSource -Times 1
@@ -200,7 +200,7 @@ Describe 'Add-BTAppLogo' {
 
             Mock Optimize-BTImageSource {return $ImagePath}
             $Builder = New-BTContentBuilder
-            $Builder | Add-BTAppLogo -Source $ImagePath -Crop Circle -AlternateText 'Picture of burnt toast, popped out of a toaster'
+            $Builder | Add-BTImage -Source $ImagePath -Crop Circle -AlternateText 'Picture of burnt toast, popped out of a toaster' -AppLogo
 
             # The image path was past to the private function Optimize-BTImageSource with the ForceRefresh switch
             Assert-MockCalled Optimize-BTImageSource -Times 1
@@ -230,7 +230,7 @@ Describe 'Add-BTAppLogo' {
 
             Mock Optimize-BTImageSource {return $ImagePath}
             $Builder = New-BTContentBuilder
-            $Builder | Add-BTAppLogo -Source $ImagePath -PassThru |
+            $Builder | Add-BTImage -Source $ImagePath -PassThru -AppLogo |
 				       Add-BTText -Text 'First Line of Text' -PassThru |
 				       Add-BTText -Text 'Second Line of Text'
 

@@ -2,6 +2,12 @@
 
 ## [v1.0.0-Preview2](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview2/BurntToast.zip)
 
+### Breaking Changes
+
+- Consolidated multiple image functions into one function, Add-BTImage.
+
+  - Add-BTAppLogo and Add-BTHeroImage have been removed and their functionality added to Add-BTImage.
+
 ### Features
 
 - Added Attribution switch to Add-BTText, allowing addition of attribution text to a toast notification.
