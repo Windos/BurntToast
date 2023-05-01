@@ -28,9 +28,20 @@ function New-BTContentBuilder {
 
     [Alias('Builder')]
     [CmdletBinding(SupportsShouldProcess = $true)]
-    param ()
+    param (
+        [ValidateNotNullOrEmpty()]
+        [ValidateLength(1, 64)]
+        [string] $Group = 'BurntToast',
+
+        [ValidateNotNullOrEmpty()]
+        [ValidateLength(1, 64)]
+        [string] $Tag = [Guid]::NewGuid().ToString()
+    )
 
     if ($PSCmdlet.ShouldProcess( "Creating instance of a ToastContentBuilder object and returning it.", $env:COMPUTERNAME, 'New-BTContentBuilder' )) {
-        [Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder]::new()
+        $Builder = [Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder]::new()
+        $Builder | Add-Member -MemberType NoteProperty -Name 'Group' -Value $Group
+        $Builder | Add-Member -MemberType NoteProperty -Name 'Tag' -Value $Tag
+        $Builder
     }
 }

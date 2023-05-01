@@ -133,6 +133,10 @@ function Add-BTText {
         [ValidateRange(1,2)]
         [int] $MaxLines,
 
+        # Specifies that the text should be considered the name of a bindable string to be used when updating information on a toast notification.
+        [Parameter(ParameterSetName = 'CustomText')]
+        [switch] $Bindable,
+
         # Specifies that the text should be added as attribution text.
         [Parameter(Mandatory,
                    ParameterSetName = 'AttributionText')]
@@ -173,21 +177,37 @@ function Add-BTText {
 
             try {
                 foreach ($Line in $Text) {
-                    if ($Language) {
-                        $null = $ContentBuilder.AddText($Line,
-                                                        $paraStyle,
-                                                        $paraWrap,
-                                                        $paraMaxLines,
-                                                        $paraMinLines,
-                                                        $paraAlign,
-                                                        $Language)
+                    if ($Bindable.IsPresent) {
+                        $AdaptiveText = [Microsoft.Toolkit.Uwp.Notifications.AdaptiveText]::new()
+
+                        if ($MaxLines) {
+                            $AdaptiveText.HintMaxLines = $MaxLines
+                        }
+
+                        if ($Language) {
+                            $AdaptiveText.Language = $Language
+                        }
+
+                        $AdaptiveText.Text = [Microsoft.Toolkit.Uwp.Notifications.BindableString]::new($Line)
+
+                        $null = $Builder.AddVisualChild($AdaptiveText)
                     } else {
-                        $null = $ContentBuilder.AddText($Line,
-                                                        $paraStyle,
-                                                        $paraWrap,
-                                                        $paraMaxLines,
-                                                        $paraMinLines,
-                                                        $paraAlign)
+                        if ($Language) {
+                            $null = $ContentBuilder.AddText($Line,
+                                                            $paraStyle,
+                                                            $paraWrap,
+                                                            $paraMaxLines,
+                                                            $paraMinLines,
+                                                            $paraAlign,
+                                                            $Language)
+                        } else {
+                            $null = $ContentBuilder.AddText($Line,
+                                                            $paraStyle,
+                                                            $paraWrap,
+                                                            $paraMaxLines,
+                                                            $paraMinLines,
+                                                            $paraAlign)
+                        }
                     }
                 }
             } catch {

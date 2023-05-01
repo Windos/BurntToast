@@ -47,7 +47,12 @@ function Show-BTNotification {
     process {
         foreach ($Builder in $ContentBuilder) {
             if($PSCmdlet.ShouldProcess( "submitting: $($Builder.GetToastContent().GetContent())")) {
-                $Builder.Show()
+                $Toast = [Windows.UI.Notifications.ToastNotification]::new($Builder.GetXml())
+
+                $Builder.Show([Microsoft.Toolkit.Uwp.Notifications.CustomizeToast] {
+                    $Toast.Group = $Builder.Group
+                    $Toast.Tag = $Builder.Tag}
+                )
             }
         }
     }
