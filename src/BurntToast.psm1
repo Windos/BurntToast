@@ -50,6 +50,10 @@ if ($WinMajorVersion -ge 10) {
 
         Export-ModuleMember -Alias 'Builder'
         Export-ModuleMember -Function $Public.BaseName
+
+        if (-not $IsWindows) {
+            $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
+        }
     } else {
         throw 'This version of BurntToast will only work on Windows 10 Creators Update (15063) and above. ' +
               'If you would like to use BurntToast on earlier Windows 10 builds, please downgrade to a version of the module below 1.0'

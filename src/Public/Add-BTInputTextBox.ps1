@@ -11,7 +11,7 @@ function Add-BTInputTextBox {
         Up to five text boxes can be added to a toast notification.
 
         .INPUTS
-        Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder. You can pipe a toast content builder object to Add-BTImage.
+        Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder. You can pipe a toast content builder object to Add-BTInputTextBox.
 
         .OUTPUTS
         None. The Add-BTInputTextBox function does not provide any output by default.

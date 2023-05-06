@@ -49,10 +49,20 @@ function Show-BTNotification {
             if($PSCmdlet.ShouldProcess( "submitting: $($Builder.GetToastContent().GetContent())")) {
                 $Toast = [Windows.UI.Notifications.ToastNotification]::new($Builder.GetXml())
 
-                $Builder.Show([Microsoft.Toolkit.Uwp.Notifications.CustomizeToast] {
-                    $Toast.Group = $Builder.Group
-                    $Toast.Tag = $Builder.Tag}
-                )
+                if ($Builder.DataBinding) {
+                    $DataDictionary = New-Object 'system.collections.generic.dictionary[string,string]'
+
+                    foreach ($BindingKey in $Builder.DataBinding.Keys) {
+                        $DataDictionary.Add($BindingKey, $Builder.DataBinding.$BindingKey)
+                    }
+
+                    $Toast.Data = [Windows.UI.Notifications.NotificationData]::new($DataDictionary)
+                }
+
+                $Toast.Group = $Builder.Group
+                $Toast.Tag = $Builder.Tag
+
+                [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($Script:Config.AppId).Show($Toast)
             }
         }
     }

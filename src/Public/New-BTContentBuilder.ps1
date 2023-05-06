@@ -42,6 +42,7 @@ function New-BTContentBuilder {
         $Builder = [Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder]::new()
         $Builder | Add-Member -MemberType NoteProperty -Name 'Group' -Value $Group
         $Builder | Add-Member -MemberType NoteProperty -Name 'Tag' -Value $Tag
+        $Builder | Add-Member -MemberType NoteProperty -Name 'DataBinding' -Value @{}
         $Builder
     }
 }

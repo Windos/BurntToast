@@ -3,12 +3,13 @@
     ModuleVersion     = '1.0.0'
     GUID              = '751a2aeb-a68f-422e-a2ea-376bdd81612a'
     Author            = 'Joshua (Windos) King'
-    CompanyName       = 'king.geek.nz'
-    Copyright         = '(c) 2015 Joshua (Windos) King. All rights reserved.'
+    CompanyName       = 'ToastIT.dev'
+    Copyright         = '(c) 2023 Joshua (Windos) King. All rights reserved.'
     Description       = 'Module for creating and displaying Toast Notifications on Microsoft Windows 10, Windows Server 2019, and newer.
 IMPORTANT: The usage of this module changes substantially with Version 1.0.0, and is not compatible with previous versions.'
     PowerShellVersion = '5.0'
-    FunctionsToExport = 'Add-BTImage',
+    FunctionsToExport = 'Add-BTDataBinding',
+                        'Add-BTImage',
                         'Add-BTInputTextBox',
                         'Add-BTText',
                         'New-BTContentBuilder',
@@ -35,6 +36,8 @@ IMPORTANT: The usage of this module changes substantially with Version 1.0.0, an
 - Added Attribution switch to Add-BTText, allowing addition of attribution text to a toast notification.
 
 - Added Bindable switch to Add-BTText, allowing addition of bindable string to a toast notification that can be dynamically updated via data binding.
+
+- Added Add-BTDataBinding function, allows for the addition of data binding key value pairs to a toast content builder for use in tandem with bindable strings.
 
 - Added Add-BTInputTextBox function, allowing addition of text boxes.
 

@@ -50,6 +50,8 @@ new usage paradigms. Existing scripts will **NOT** work without substantial chan
 
 - Added Bindable switch to Add-BTText, allowing addition of bindable string to a toast notification that can be dynamically updated via data binding.
 
+- Added Add-BTDataBinding function, allows for the addition of data binding key value pairs to a toast content builder for use in tandem with bindable strings.
+
 - Added Add-BTInputTextBox function, allowing addition of text boxes.
 
 ### Improvements
