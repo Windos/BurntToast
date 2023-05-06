@@ -101,6 +101,13 @@ function Add-BTText {
 
         This example add attribution test to a toast notification.
 
+        .EXAMPLE
+        PS C:\>$Builder = New-BTContentBuilder
+
+        PS C:\>$Builder | Add-BTText -Text 'Placeholder String' -Bindable
+
+        This example adds a bindable string to a toast notification that should map to a key/value pair in the toast's data binding property.
+
         .NOTES
         A toast notification can contain a maximum of four reserved lines of text. By default this means you can include three customer text elements as the first, which acts like a heading, automatically reserves 2 lines.
 
@@ -177,7 +184,30 @@ function Add-BTText {
 
             try {
                 foreach ($Line in $Text) {
-                    if ($Bindable.IsPresent) {
+                    if ($Bindable) {
+                        $ExistingLineCount = 0
+                        foreach ($ExistingLine in $ContentBuilder.Content.Visual.BindingGeneric.Children) {
+                            if ($ExistingLine.GetType().Name -eq 'AdaptiveText') {
+                                if ($ExistingLineCount -eq 0 -and $null -eq $ExistingLine.HintMaxLines) {
+                                    $ExistingLineCount += if ($ExistingLine.HintMinLines) {
+                                        $ExistingLine.HintMinLines
+                                    } else {
+                                        2
+                                    }
+                                } else {
+                                    $ExistingLineCount += if ($ExistingLine.HintMinLines) {
+                                        $ExistingLine.HintMinLines
+                                    } else {
+                                        1
+                                    }
+                                }
+                            }
+                        }
+
+                        if ($ExistingLineCount -ge 4) {
+                            throw
+                        }
+
                         $AdaptiveText = [Microsoft.Toolkit.Uwp.Notifications.AdaptiveText]::new()
 
                         if ($MaxLines) {
@@ -190,7 +220,7 @@ function Add-BTText {
 
                         $AdaptiveText.Text = [Microsoft.Toolkit.Uwp.Notifications.BindableString]::new($Line)
 
-                        $null = $Builder.AddVisualChild($AdaptiveText)
+                        $null = $ContentBuilder.AddVisualChild($AdaptiveText)
                     } else {
                         if ($Language) {
                             $null = $ContentBuilder.AddText($Line,

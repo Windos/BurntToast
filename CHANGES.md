@@ -12,6 +12,8 @@
 
 - Added Attribution switch to Add-BTText, allowing addition of attribution text to a toast notification.
 
+- Added Bindable switch to Add-BTText, allowing addition of bindable string to a toast notification that can be dynamically updated via data binding.
+
 - Added Add-BTInputTextBox function, allowing addition of text boxes.
 
 ### Improvements
