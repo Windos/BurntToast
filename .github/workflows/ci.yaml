@@ -7,13 +7,14 @@ on:
   pull_request:
     branches:
       - main
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   Win2019-x64-pwsh:
     name: Server 2019 - PowerShell - x64
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Perform a Pester test from the command-line
         shell: pwsh
         run: ./Tasks/build.ps1 -Test
@@ -22,7 +23,7 @@ jobs:
     name: Server 2019 - PowerShell - x86
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Perform a Pester test from the command-line
         shell: pwsh
         run: |
@@ -33,7 +34,7 @@ jobs:
     name: Server 2019 - Windows PowerShell - x64
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Perform a Pester test from the command-line
         shell: powershell
         run: ./Tasks/build.ps1 -Test
@@ -42,7 +43,7 @@ jobs:
     name: Server 2019 - Windows PowerShell - x86
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Perform a Pester test from the command-line
         shell: powershell
         # TODO: This could be problematic with hardcoding
@@ -53,9 +54,13 @@ jobs:
     needs: ["Win2019-x64-pwsh", "Win2019-x64-winpwsh", "Win2019-x86-pwsh", "Win2019-x86-winpwsh"]
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 2
+      - name: Test Coverage
+        shell: pwsh
+        run: |
+          ./Tasks/build.ps1 -Test
       - name: Compile Module
         shell: pwsh
         run: ./Tasks/build.ps1 -Compile
@@ -68,13 +73,13 @@ jobs:
           ./Tasks/build.ps1 -Test
       - name: Upload Test Results
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: test-results
           path: "*.xml"
       - name: Upload PowerShell Module
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: burnttoast-module
           path: "./Output/BurntToast/"
@@ -86,11 +91,16 @@ jobs:
     if: always()
     steps:
       - name: Download Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: test-results
           path: artifacts
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           files: artifacts/**/TestResults.xml
+      - name: Publish Code Coverage Results
+        uses: codacy/codacy-coverage-reporter-action@v1
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: artifacts/CoverageResults.xml

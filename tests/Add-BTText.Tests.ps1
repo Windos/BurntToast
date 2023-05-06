@@ -164,4 +164,132 @@ Describe 'Add-BTText' {
             $Builder.GetXml().GetXml() | Should -BeExactly $ExpectedXML
         }
     }
+
+    Context 'attribution text' {
+        BeforeAll {
+            $Builder = New-BTContentBuilder
+            $Builder | Add-BTText -Text 'Example Toast Source' -Attribution
+        }
+
+        It 'adds the attribution text' {
+            $Builder.Content.Visual.BindingGeneric.Attribution.Text | Should -BeExactly 'Example Toast Source'
+        }
+        It 'generates the expected XML' {
+            $ExpectedXML = '<?xml version="1.0"?><toast><visual><binding template="ToastGeneric"><text placement="attribution">Example Toast Source</text></binding></visual></toast>'
+            $Builder.GetXml().GetXml() | Should -BeExactly $ExpectedXML
+        }
+        It 'writes a warning when overwriting attribution text' {
+            $CaptureFile = New-TemporaryFile
+            $ExpectedWarning = 'Attribution text can only be set once per toast notification. The existing attribution text will be overwritten.'
+
+            $Builder | Add-BTText -Text 'New Example Toast Source' -Attribution 3> $CaptureFile
+            $CaptureFile | Should -FileContentMatchExactly $ExpectedWarning
+
+            Remove-Item $CaptureFile -Force
+        }
+        It 'writes a warning when providing two strings as attribution text' {
+            $CaptureFile = New-TemporaryFile
+            $ExpectedWarning = 'Attribution text can only contain a single string and more than one was provided. Only the first string will be used.'
+
+            $Builder = New-BTContentBuilder
+            $Builder | Add-BTText -Text 'Example Toast Source', 'New Example Toast Source' -Attribution 3> $CaptureFile
+            $CaptureFile | Should -FileContentMatchExactly $ExpectedWarning
+
+            Remove-Item $CaptureFile -Force
+        }
+    }
+
+    Context 'bindable string' {
+        BeforeAll {
+            $Builder = New-BTContentBuilder
+            $Builder | Add-BTText -Text 'Placeholder String' -Bindable
+        }
+
+        It 'generates the expected XML' {
+            $ExpectedXML = '<?xml version="1.0"?><toast><visual><binding template="ToastGeneric"><text>{Placeholder String}</text></binding></visual></toast>'
+            $Builder.GetXml().GetXml() | Should -BeExactly $ExpectedXML
+        }
+        It 'has one text element' {
+            $Builder.GetToastContent().Visual.BindingGeneric.Children | Should -HaveCount 1
+        }
+        It 'has no defined max line count' {
+            $Builder.GetToastContent().Visual.BindingGeneric.Children[0].HintMaxLines | Should -BeNullOrEmpty
+        }
+    }
+
+    Context 'bindable string with options' {
+        BeforeAll {
+            $Builder = New-BTContentBuilder
+            $Builder | Add-BTText -Text 'First Placeholder String' -Bindable
+            $Builder | Add-BTText -Text 'Second Placeholder String' -Bindable -MaxLines 1 -Language 'en-NZ'
+        }
+
+        It 'generates the expected XML' {
+            $ExpectedXML = '<?xml version="1.0"?><toast><visual><binding template="ToastGeneric"><text>{First Placeholder String}</text><text lang="en-NZ" hint-maxLines="1">{Second Placeholder String}</text></binding></visual></toast>'
+            $Builder.GetXml().GetXml() | Should -BeExactly $ExpectedXML
+        }
+        It 'has two text elements' {
+            $Builder.GetToastContent().Visual.BindingGeneric.Children | Should -HaveCount 2
+        }
+        It 'the second text element has a maxline of 1 set, another elements have defined max line count' {
+            $Builder.GetToastContent().Visual.BindingGeneric.Children[2].HintMaxLines | Should -BeNullOrEmpty
+            $Builder.GetToastContent().Visual.BindingGeneric.Children[1].HintMaxLines | Should -Be 1
+        }
+    }
+
+    Context 'bindable string with regular text' {
+        BeforeAll {
+            $Builder = New-BTContentBuilder
+            $Builder | Add-BTText -Text 'First Line of Text'
+            $Builder | Add-BTText -Text 'Placeholder String' -Bindable
+        }
+
+        It 'generates the expected XML' {
+            $ExpectedXML = '<?xml version="1.0"?><toast><visual><binding template="ToastGeneric"><text>First Line of Text</text><text>{Placeholder String}</text></binding></visual></toast>'
+            $Builder.GetXml().GetXml() | Should -BeExactly $ExpectedXML
+        }
+        It 'has two text elements' {
+            $Builder.GetToastContent().Visual.BindingGeneric.Children | Should -HaveCount 2
+        }
+        It 'neither line has a defined max line count' {
+            $Builder.GetToastContent().Visual.BindingGeneric.Children[0].HintMaxLines | Should -BeNullOrEmpty
+            $Builder.GetToastContent().Visual.BindingGeneric.Children[1].HintMaxLines | Should -BeNullOrEmpty
+        }
+    }
+
+    Context 'attempting to add too many lines of text to a single toast with mixed content' {
+        It 'generates a warning and only ends up with three text elements' {
+            $CaptureFile = "$PSScriptRoot\WarningContent-Text_Add-BTText_$((New-Guid).Guid).txt"
+            $ExpectedWarning = 'The max lines of text \(4\) on the toast notification has been reached, extra lines have been ignored.'
+
+            $Builder = New-BTContentBuilder
+            $Builder | Add-BTText -Text 'First Line of Text'
+            $Builder | Add-BTText -Text 'Second Line of Text'
+            $Builder | Add-BTText -Text 'Third Line of Text' -Bindable
+            $Builder | Add-BTText -Text 'Fourth Line of Text' -Bindable 3> $CaptureFile
+            $CaptureFile | Should -FileContentMatchMultiline $ExpectedWarning
+
+            Remove-Item $CaptureFile -Force
+
+            $Builder.GetToastContent().Visual.BindingGeneric.Children | Should -HaveCount 3
+        }
+    }
+
+    Context 'attempting to add too many lines of text to a single toast with only bindable strings' {
+        It 'generates a warning and only ends up with three text elements' {
+            $CaptureFile = "$PSScriptRoot\WarningContent-Text_Add-BTText_$((New-Guid).Guid).txt"
+            $ExpectedWarning = 'The max lines of text \(4\) on the toast notification has been reached, extra lines have been ignored.'
+
+            $Builder = New-BTContentBuilder
+            $Builder | Add-BTText -Text 'First Line of Text' -Bindable
+            $Builder | Add-BTText -Text 'Second Line of Text' -Bindable
+            $Builder | Add-BTText -Text 'Third Line of Text' -Bindable
+            $Builder | Add-BTText -Text 'Fourth Line of Text' -Bindable 3> $CaptureFile
+            $CaptureFile | Should -FileContentMatchMultiline $ExpectedWarning
+
+            Remove-Item $CaptureFile -Force
+
+            $Builder.GetToastContent().Visual.BindingGeneric.Children | Should -HaveCount 3
+        }
+    }
 }

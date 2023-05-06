@@ -9,7 +9,7 @@
 
 ![BurntToast Logo Banner](/images/BurntToast-Wide.png)
 
-PowerShell Module for displaying **Windows 10** and **Windows Server 2019** Toast Notifications
+PowerShell Module for displaying **Windows 10** and **Windows Server 2019** Toast Notifications.
 
 ## Install
 
@@ -36,27 +36,58 @@ See the [Chocolatey community package](https://chocolatey.org/packages/burnttoas
 **Please note:** in v1.0.0 there are major breaking changes meaning you should not upgrade without understanding the
 new usage paradigms. Existing scripts will **NOT** work without substantial changes.
 
-- [v1.0.0-Preview1](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview1/BurntToast.zip)
+### [v1.0.0-Preview2](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview2/BurntToast.zip)
 
-  - BREAKING CHANGE: Began rewriting module making use of Toast Content Builder objects. Available functions in Preview1 include:
+### Breaking Changes
 
-    - Add-BTAppLogo
+- Consolidated multiple image functions into one function, Add-BTImage.
 
-    - Add-BTHeroImage
+  - Add-BTAppLogo and Add-BTHeroImage have been removed and their functionality added to Add-BTImage.
 
-    - Add-BTImage
+### Features
 
-    - Add-BTText
+- Added Attribution switch to Add-BTText, allowing addition of attribution text to a toast notification.
 
-    - New-BTContentBuilder
+- Added Bindable switch to Add-BTText, allowing addition of bindable string to a toast notification that can be dynamically updated via data binding.
 
-    - Show-BTNotification
+- Added Add-BTDataBinding function, allows for the addition of data binding key value pairs to a toast content builder for use in tandem with bindable strings.
 
-  - UPDATE: Microsoft.Windows.SDK.NET.Ref libraries to 10.0.22000.22
+- Added Add-BTInputTextBox function, allowing addition of text boxes.
 
-  - UPDATE: Microsoft.Toolkit.Uwp.Notifications library to 7.1.2
+### Improvements
 
-- see more in the [Full Change Log](CHANGES.md)
+- Ensure all invalid characters are removed from potential file system paths when caching images (thanks @markekraus)
+
+### Libraries
+
+- Microsoft.Windows.SDK.NET.Ref libraries bumped to 10.0.22621.28
+- Microsoft.Toolkit.Uwp.Notifications libraries bumped to 7.1.3
+
+### [v1.0.0-Preview1](https://github.com/Windos/BurntToast/releases/download/v1.0.0-Preview1/BurntToast.zip)
+
+#### Breaking Changes
+
+- Began rewriting module making use of Toast Content Builder objects. Available functions in Preview1 include:
+
+  - Add-BTAppLogo
+
+  - Add-BTHeroImage
+
+  - Add-BTImage
+
+  - Add-BTText
+
+  - New-BTContentBuilder
+
+  - Show-BTNotification
+
+#### Libraries
+
+- Microsoft.Windows.SDK.NET.Ref libraries bumped to 10.0.22000.22
+
+- Microsoft.Toolkit.Uwp.Notifications library bumped to 7.1.2
+
+### See more in the [Full Change Log](CHANGES.md)
 
 ## Contributors
 
