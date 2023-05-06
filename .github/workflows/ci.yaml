@@ -61,12 +61,6 @@ jobs:
         shell: pwsh
         run: |
           ./Tasks/build.ps1 -Test
-      - name: Upload Pre compilation Coverage Results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-results
-          path: "CoverageResults.xml"
       - name: Compile Module
         shell: pwsh
         run: ./Tasks/build.ps1 -Compile
@@ -82,7 +76,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test-results
-          path: "TestResults.xml"
+          path: "*.xml"
       - name: Upload PowerShell Module
         if: always()
         uses: actions/upload-artifact@v3
@@ -96,15 +90,10 @@ jobs:
     runs-on: ubuntu-latest
     if: always()
     steps:
-      - name: Download Test Results
+      - name: Download Artifacts
         uses: actions/download-artifact@v3
         with:
           name: test-results
-          path: artifacts
-      - name: Download Coverage Results
-        uses: actions/download-artifact@v3
-        with:
-          name: coverage-results
           path: artifacts
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
