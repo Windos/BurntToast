@@ -48,6 +48,6 @@ Describe 'Add-BTDataBinding' {
 
     It 'returns a toast content builder to the pipeline when the PassThru switch is supplied' {
         $Builder = New-BTContentBuilder
-        Add-BTText -ContentBuilder $Builder -Text 'Example' -Bindable -PassThru | Should -BeOfType [Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder]
+        Add-BTDataBinding -ContentBuilder $Builder -Key 'Test' -Value 'Example' -PassThru | Should -BeOfType [Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder]
     }
 }
