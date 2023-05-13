@@ -5,3 +5,4 @@ CoverageResults.xml
 coverage.xml
 codecov.sh
 coverage.json
+codacy-coverage-reporter-assembly.jar
