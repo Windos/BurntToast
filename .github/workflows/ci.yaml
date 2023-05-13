@@ -91,6 +91,7 @@ jobs:
     runs-on: ubuntu-latest
     if: always()
     steps:
+      - uses: actions/checkout@v3
       - name: Download Artifacts
         uses: actions/download-artifact@v3
         with:
@@ -100,8 +101,8 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           files: artifacts/**/TestResults.xml
-      - name: Publish Code Coverage Results
-        uses: codacy/codacy-coverage-reporter-action@v1
+      - name: Publish Code Coverage Results to Codecov
+        uses: codecov/codecov-action@v3
         with:
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          coverage-reports: artifacts/CoverageResults.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: artifacts/CoverageResults.xml
