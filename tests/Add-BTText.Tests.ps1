@@ -197,6 +197,11 @@ Describe 'Add-BTText' {
 
             Remove-Item $CaptureFile -Force
         }
+        It 'generates the expected XML when adding a language hint' {
+            $Builder | Add-BTText -Text 'Example Toast Source' -Attribution -Language 'en-NZ' 3> $null
+            $ExpectedXML = '<?xml version="1.0"?><toast><visual><binding template="ToastGeneric"><text lang="en-NZ" placement="attribution">Example Toast Source</text></binding></visual></toast>'
+            $Builder.GetXml().GetXml() | Should -BeExactly $ExpectedXML
+        }
     }
 
     Context 'bindable string' {

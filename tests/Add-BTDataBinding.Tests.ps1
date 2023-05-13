@@ -45,4 +45,9 @@ Describe 'Add-BTDataBinding' {
         $Builder.Content.Visual.BindingGeneric.Children.Text[0].BindingName | Should -BeIn $Builder.DataBinding.Keys
         $Builder.Content.Visual.BindingGeneric.Children.Text[1].BindingName | Should -BeIn $Builder.DataBinding.Keys
     }
+
+    It 'returns a toast content builder to the pipeline when the PassThru switch is supplied' {
+        $Builder = New-BTContentBuilder
+        Add-BTText -ContentBuilder $Builder -Text 'Example' -Bindable -PassThru | Should -BeOfType [Microsoft.Toolkit.Uwp.Notifications.ToastContentBuilder]
+    }
 }

@@ -62,7 +62,7 @@ function Show-BTNotification {
                 $Toast.Group = $Builder.Group
                 $Toast.Tag = $Builder.Tag
 
-                [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($Script:Config.AppId).Show($Toast)
+                [Microsoft.Toolkit.Uwp.Notifications.ToastNotificationManagerCompat]::CreateToastNotifier().Show($Toast)
             }
         }
     }

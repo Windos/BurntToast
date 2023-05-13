@@ -189,17 +189,9 @@ function Add-BTText {
                         foreach ($ExistingLine in $ContentBuilder.Content.Visual.BindingGeneric.Children) {
                             if ($ExistingLine.GetType().Name -eq 'AdaptiveText') {
                                 if ($ExistingLineCount -eq 0 -and $null -eq $ExistingLine.HintMaxLines) {
-                                    $ExistingLineCount += if ($ExistingLine.HintMinLines) {
-                                        $ExistingLine.HintMinLines
-                                    } else {
-                                        2
-                                    }
+                                    $ExistingLineCount += 2
                                 } else {
-                                    $ExistingLineCount += if ($ExistingLine.HintMinLines) {
-                                        $ExistingLine.HintMinLines
-                                    } else {
-                                        1
-                                    }
+                                    $ExistingLineCount += 1
                                 }
                             }
                         }

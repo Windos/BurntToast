@@ -27,9 +27,14 @@ Describe 'New-BTContentBuilder' {
             }
         }
 
-        It 'Has the expected XML content' {
+        It 'has the expected XML content' {
             $ExpectedLog = 'What if: Performing the operation "Show-BTNotification" on target "submitting: <?xml version="1.0" encoding="utf-8"?><toast><visual><binding template="ToastGeneric"><text>First Line of Text</text><text>Second Line of Text</text></binding></visual></toast>".'
             $Log | Should -Be $ExpectedLog
+        }
+
+        It 'does not throw an exception with a data binding' {
+            $Builder | Add-BTDataBinding -Key 'Test' -Value 'Example'
+            { Show-BTNotification -ContentBuilder $Builder } | Should -Not -Throw
         }
     }
 }
