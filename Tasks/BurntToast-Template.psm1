@@ -1,9 +1,7 @@
-$WinMajorVersion = (Get-CimInstance -ClassName Win32_OperatingSystem -Property Version).Version.Split('.')[0]
+$OSVersion = [System.Environment]::OSVersion.Version
 
-if ($WinMajorVersion -ge 10) {
-    [int] $WinBuild = (Get-CimInstance -ClassName Win32_OperatingSystem -Property BuildNumber).BuildNumber
-
-    if ($WinBuild -ge 15063) {
+if ($OSVersion.Major -ge 10 -and $null -eq $env:BurntToastPesterNotWindows10) {
+    if ($OSVersion.Build -ge 15063 -and $null -eq $env:BurntToastPesterNotAnniversaryUpdate) {
         $Paths = if ($IsWindows) {
             "$PSScriptRoot\lib\Microsoft.Toolkit.Uwp.Notifications\net5.0-windows10.0.17763\*.dll",
             "$PSScriptRoot\lib\Microsoft.Windows.SDK.NET\*.dll"
