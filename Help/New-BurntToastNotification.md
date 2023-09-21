@@ -67,7 +67,7 @@ You can optionally call the New-BurntToastNotification function with the Toast a
 ### -------------------------- EXAMPLE 1 --------------------------
 
 ```powershell
-PS C:\>New-BurntToastNotification
+New-BurntToastNotification
 ```
 
 This command creates and displays a Toast Notification with all default values.
@@ -75,7 +75,7 @@ This command creates and displays a Toast Notification with all default values.
 ### -------------------------- EXAMPLE 2 --------------------------
 
 ```powershell
-PS C:\>New-BurntToastNotification -Text 'Example Script', 'The example script has run successfully.'
+New-BurntToastNotification -Text 'Example Script', 'The example script has run successfully.'
 ```
 
 This command creates and displays a Toast Notification with customized title and display text.
@@ -83,7 +83,7 @@ This command creates and displays a Toast Notification with customized title and
 ### -------------------------- EXAMPLE 3 --------------------------
 
 ```powershell
-PS C:\>New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2'
+New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2'
 ```
 
 This command creates and displays a Toast Notification which plays a looping alarm sound and lasts longer than a default Toast.
@@ -91,8 +91,8 @@ This command creates and displays a Toast Notification which plays a looping ala
 ### -------------------------- EXAMPLE 4 --------------------------
 
 ```powershell
-PS C:\>$BlogButton = New-BTButton -Content 'Open Blog' -Arguments 'https://king.geek.nz'
-PS C:\>New-BurntToastNotification -Text 'New Blog Post!' -Button $BlogButton
+$BlogButton = New-BTButton -Content 'Open Blog' -Arguments 'https://king.geek.nz'
+New-BurntToastNotification -Text 'New Blog Post!' -Button $BlogButton
 ```
 
 This example creates a Toast Notification with a button which will open a link to ["https://king.geek.nz"](https://king.geek.nz) when clicked.
@@ -100,8 +100,8 @@ This example creates a Toast Notification with a button which will open a link t
 ### -------------------------- EXAMPLE 5 --------------------------
 
 ```powershell
-PS C:\>$ToastHeader = New-BTHeader -Id '001' -Title 'Stack Overflow Questions'
-PS C:\>New-BurntToastNotification -Text 'New Stack Overflow Question!', 'More details!' -Header $ToastHeader
+$ToastHeader = New-BTHeader -Id '001' -Title 'Stack Overflow Questions'
+New-BurntToastNotification -Text 'New Stack Overflow Question!', 'More details!' -Header $ToastHeader
 ```
 
 This example creates a Toast Notification which will be displayed under the header 'Stack Overflow Questions.'
@@ -109,8 +109,8 @@ This example creates a Toast Notification which will be displayed under the head
 ### -------------------------- EXAMPLE 6 --------------------------
 
 ```powershell
-PS C:\>$Progress = New-BTProgressBar -Status 'Copying files' -Value 0.2
-PS C:\>New-BurntToastNotification -Text 'File copy script running', 'More details!' -ProgressBar $Progress
+$Progress = New-BTProgressBar -Status 'Copying files' -Value 0.2
+New-BurntToastNotification -Text 'File copy script running', 'More details!' -ProgressBar $Progress
 ```
 
 This example creates a Toast Notification which will include a progress bar.
@@ -118,8 +118,8 @@ This example creates a Toast Notification which will include a progress bar.
 ### -------------------------- EXAMPLE 7 --------------------------
 
 ```powershell
-PS C:\>New-BurntToastNotification -Text 'Professional Content', 'And gr8 spelling' -UniqueIdentifier 'Toast001'
-PS C:\>New-BurntToastNotification -Text 'Professional Content', 'And great spelling' -UniqueIdentifier 'Toast001'
+New-BurntToastNotification -Text 'Professional Content', 'And gr8 spelling' -UniqueIdentifier 'Toast001'
+New-BurntToastNotification -Text 'Professional Content', 'And great spelling' -UniqueIdentifier 'Toast001'
 ```
 
 This example will show a toast with a spelling error, which is replaced by a second toast because they both shared a unique identifier.
