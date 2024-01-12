@@ -37,7 +37,7 @@ if ($OSVersion.Major -ge 10 -and $null -eq $env:BurntToastPesterNotWindows10) {
         }
 
         Export-ModuleMember -Alias 'Toast'
-        Export-ModuleMember -Function $Public.BaseName
+        Export-ModuleMember -Function $PublicFunctions
 
         if (-not $IsWindows) {
             $null = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]
