@@ -2,6 +2,12 @@
 
 - [1.0.0](https://github.com/Windos/BurntToast/releases/download/v1.0.0/BurntToast.zip)
 
+  - Breaking Change: Shoulder tap notification support has been removed
+
+  - Libraries: Microsoft.Windows.SDK.NET.Ref library bumped to 10.0.22621.28
+
+  - Libraries: Microsoft.Toolkit.Uwp.Notifications library bumped to 7.1.3
+
 - [0.8.5](https://github.com/Windos/BurntToast/releases/download/v0.8.5/BurntToast.zip)
 
   - Actually implement the ability to use a UniqueIdentifier with the Remove-BTNotification function (which was half implemented in 0.8.4)

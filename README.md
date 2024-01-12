@@ -53,6 +53,8 @@ See the [Chocolatey community package](https://chocolatey.org/packages/burnttoas
 
 ### Breaking Changes
 
+- Shoulder tap notification support has been removed
+
 ### Features
 
 ### Improvements
