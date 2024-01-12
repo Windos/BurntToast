@@ -51,63 +51,10 @@ See the [Chocolatey community package](https://chocolatey.org/packages/burnttoas
 
 ### Libraries
 
-    - Thanks [@glennsarti](https://github.com/glennsarti)
+- Microsoft.Windows.SDK.NET.Ref library bumped to 10.0.22621.28
+- Microsoft.Toolkit.Uwp.Notifications library bumped to 7.1.3
 
-  - Enhancement: Hero images can now be specified using the New-BurntToastNotification function using the -HeroImage parameter ([#80](https://github.com/Windos/BurntToast/issues/80))
-
-    - Thanks [@UniverseCitiz3n](https://github.com/UniverseCitiz3n)
-
-  - Enhancement: AppIDs can now be specified using the New-BurntToastNotification function using the -AppId parameter.
-
-    - Thanks [@cedarbaum](https://github.com/cedarbaum)
-
-  - Enhancement: You can now specify a UniqueIdentifier when using the Remove-BTNotification function rather than component Tag and Group strings.
-
-  - Fix: Weird edge cases when taking text from Twitch/IRC and using them in a toast is now sorted.
-
-    - Thanks [@potatoqualitee](https://github.com/potatoqualitee) and [@vexx32](https://github.com/vexx32)
-
-- [0.8.3](https://github.com/Windos/BurntToast/releases/download/v0.8.3/BurntToast.zip)
-
-  - Fix: Error when running Update-BTNotification on PowerShell 6.0+ ([#120](https://github.com/Windos/BurntToast/issues/120))
-
-  - Fix: Error when using actionable toast parameters on any version ([#122](https://github.com/Windos/BurntToast/issues/122))
-
-  - Fix: Multiple warnings about events not being supported when specifying multiple event types.
-
-- [v0.8.2](https://github.com/Windos/BurntToast/releases/download/v0.8.2/BurntToast.zip)
-
-  - Add: AdaptiveGroups are now usable via New-BTColumn
-
-- [v0.8.1](https://github.com/Windos/BurntToast/releases/download/v0.8.1/BurntToast.zip)
-
-  - Fix: Toast alias removed in 0.8.0 has been restored
-
-  - Deprecation: Signalling removal of Shoulder Tap cmdlets in future version, v0.9.0
-
-  - Deprecation: Signalling removal of Path parameter from New-BTAudio in future version, v0.9.0.
-
-    - See [MicrosoftDocs/windows-uwp Issue #1593](https://github.com/MicrosoftDocs/windows-uwp/issues/1593)
-
-- [v0.8.0](https://github.com/Windos/BurntToast/releases/download/v0.8.0/BurntToast.zip)
-
-  - Fix: Images from UNC path failing ([#111](https://github.com/Windos/BurntToast/issues/111))
-
-  - Add: Ability to force a refresh of cached images via IgnoreCache switch on New-BTImage
-
-  - Add: ACTIONABLE NOTIFICATIONS! Exposed via ActivatedAction and DismissedAction parameters on Submit-BTNotification and New-BurntToastNotification
-
-- [v0.7.2](https://github.com/Windos/BurntToast/releases/download/v0.7.2/BurntToast.zip)
-
-  - Fix: Curly Braces when "Reminder" pops up ([#72](https://github.com/Windos/BurntToast/issues/72))
-
-  - Fix: Caching remote gifs are saved based on their remote filename and not overwritten ([#105](https://github.com/Windos/BurntToast/issues/105))
-
-    - Thanks [@KelvinTegelaar](https://github.com/KelvinTegelaar)
-
-  - Fix: BurntToast and .NET 5 ([#101](https://github.com/Windos/BurntToast/issues/101))
-
-- see more in the [Full Change Log](CHANGES.md)
+### See previous releases in the [Full Change Log](CHANGES.md)
 
 ## Contributors
 
