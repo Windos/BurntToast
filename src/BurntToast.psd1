@@ -24,19 +24,14 @@
                         'New-BTInput',
                         'New-BTProgressBar',
                         'New-BTSelectionBoxItem',
-                        'New-BTShoulderTapBinding',
-                        'New-BTShoulderTapImage',
-                        'New-BTShoulderTapPeople',
                         'New-BTText',
                         'New-BTVisual',
-                        'New-BurntToastShoulderTap',
                         'New-BurntToastNotification',
                         'Remove-BTNotification',
                         'Submit-BTNotification',
                         'Update-BTNotification'
     CmdletsToExport   = @()
-    AliasesToExport   = @('ShoulderTap',
-                          'Toast')
+    AliasesToExport   = @('Toast')
     PrivateData       = @{
         PSData = @{
             Tags         = @('Notifications', 'Utilities', 'Windows10', 'Toast')
@@ -46,6 +41,7 @@
             ReleaseNotes = '# 1.0.0
 
 * Breaking Changes
+  * Shoulder tap notification support has been removed
 * Features
 * Improvements
 * Libraries
