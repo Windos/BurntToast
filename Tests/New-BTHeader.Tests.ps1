@@ -1,4 +1,14 @@
-. (Join-Path -Path $PSScriptRoot -ChildPath '_envPrep.ps1')
+BeforeAll {
+    if (Get-Module -Name 'BurntToast') {
+        Remove-Module -Name 'BurntToast'
+    }
+    
+    if ($ENV:BURNTTOAST_MODULE_ROOT) {
+        Import-Module $ENV:BURNTTOAST_MODULE_ROOT -Force
+    } else {
+        Import-Module "$PSScriptRoot/../src/BurntToast.psd1" -Force
+    }
+}
 
 Describe 'New-BTHeader' {
     Context 'loaded with standard arguments' {

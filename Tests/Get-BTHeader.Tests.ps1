@@ -1,14 +1,21 @@
-. (Join-Path -Path $PSScriptRoot -ChildPath '_envPrep.ps1')
+BeforeAll {
+    if (Get-Module -Name 'BurntToast') {
+        Remove-Module -Name 'BurntToast'
+    }
+    
+    if ($ENV:BURNTTOAST_MODULE_ROOT) {
+        Import-Module $ENV:BURNTTOAST_MODULE_ROOT -Force
+    } else {
+        Import-Module "$PSScriptRoot/../src/BurntToast.psd1" -Force
+    }
 
-# Helper function needs to be in the global scope so it can be used in mocks
-# Note - This may not work in Pester 5+
-Function Global:New-MockNotification(
-    $HeaderId = (New-GUID).ToString(),
-    $HeaderTitle = (New-GUID).ToString(),
-    $HeaderArguments = '',
-    $HeaderActivation = 'protocol'
-    ) {
-    $Content = @"
+    Function Global:New-MockNotification(
+        $HeaderId = (New-GUID).ToString(),
+        $HeaderTitle = (New-GUID).ToString(),
+        $HeaderArguments = '',
+        $HeaderActivation = 'protocol'
+        ) {
+        $Content = @"
 <?xml version="1.0" encoding="UTF-8"?>
 <toast>
     <visual>
@@ -20,9 +27,10 @@ Function Global:New-MockNotification(
     <header id="$HeaderId" title="$HeaderTitle" arguments="$HeaderArguments" activationType="$HeaderActivation" />
 </toast>
 "@
-    $XMLContent = [Windows.Data.Xml.Dom.XmlDocument]::new()
-    $XmlContent.LoadXml($Content)
-    [Windows.UI.Notifications.ToastNotification]::new($XMLContent)
+        $XMLContent = [Windows.Data.Xml.Dom.XmlDocument]::new()
+        $XmlContent.LoadXml($Content)
+        [Windows.UI.Notifications.ToastNotification]::new($XMLContent)
+    }
 }
 
 Describe 'Get-BTHeader' {
