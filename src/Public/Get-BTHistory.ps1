@@ -26,9 +26,6 @@ function Get-BTHistory {
 
     [cmdletBinding(HelpUri='https://github.com/Windos/BurntToast/blob/main/Help/Get-BTHistory.md')]
     param (
-        # Specifies the AppId of the 'application' or process that spawned the toast notification.
-        [string] $AppId = $Script:Config.AppId,
-
         # A string that uniquely identifies a toast notification. Submitting a new toast with the same identifier as a previous toast will replace the previous toast.
         #
         # This is useful when updating the progress of a process, using a progress bar, or otherwise correcting/updating the information on a toast.
@@ -38,23 +35,19 @@ function Get-BTHistory {
         [switch] $ScheduledToast
     )
 
-    if (!(Test-Path -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\$AppId")) {
-        throw "The AppId $AppId is not present in the registry, please run New-BTAppId to avoid inconsistent Toast behaviour."
+    if ($Script:ActionsSupported) {
+        Write-Warning -Message 'The output from this function in some versions of PowerShell is not useful. Unfortunately this is expected at this time.'
+    }
+
+    $Toasts = if ($ScheduledToast) {
+        [Microsoft.Toolkit.Uwp.Notifications.ToastNotificationManagerCompat]::CreateToastNotifier().GetScheduledToastNotifications()
     } else {
-        if ($Script:ActionsSupported) {
-            Write-Warning -Message 'The output from this function in some versions of PowerShell is not useful. Unfortunately this is expected at this time.'
-        }
+        [Microsoft.Toolkit.Uwp.Notifications.ToastNotificationManagerCompat]::History.GetHistory()
+    }
 
-        $Toasts = if ($ScheduledToast) {
-            [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).GetScheduledToastNotifications()
-        } else {
-            [Windows.UI.Notifications.ToastNotificationManager]::History.GetHistory($AppId)
-        }
-
-        if ($UniqueIdentifier) {
-            $Toasts | Where-Object {$_.Tag -eq $UniqueIdentifier -or $_.Group -eq $UniqueIdentifier}
-        } else {
-            $Toasts
-        }
+    if ($UniqueIdentifier) {
+        $Toasts | Where-Object {$_.Tag -eq $UniqueIdentifier -or $_.Group -eq $UniqueIdentifier}
+    } else {
+        $Toasts
     }
 }

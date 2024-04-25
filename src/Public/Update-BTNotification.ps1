@@ -44,16 +44,9 @@
         # This is useful when updating the progress of a process, using a progress bar, or otherwise correcting/updating the information on a toast.
         [string] $UniqueIdentifier,
 
-        # Specifies the AppId of the 'application' or process that spawned the toast notification.
-        [string] $AppId = $Script:Config.AppId,
-
         # A hashtable that binds strings to keys in a toast notification. In order to update a toast, the original toast needs to include a databinding hashtable.
         [hashtable] $DataBinding
     )
-
-    if (!(Test-Path -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\$AppId")) {
-        Write-Warning -Message "The AppId $AppId is not present in the registry, please run New-BTAppId to avoid inconsistent Toast behaviour."
-    }
 
     if (-not $IsWindows) {
         $null = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
@@ -73,7 +66,7 @@
         $ToastData.SequenceNumber = $SequenceNumber
     }
 
-    if($PSCmdlet.ShouldProcess("AppId: $AppId, UniqueId: $UniqueIdentifier", 'Updating notification')) {
-        [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Update($ToastData, $UniqueIdentifier, $UniqueIdentifier)
+    if($PSCmdlet.ShouldProcess("UniqueId: $UniqueIdentifier", 'Updating notification')) {
+        [Microsoft.Toolkit.Uwp.Notifications.ToastNotificationManagerCompat]::CreateToastNotifier().Update($ToastData, $UniqueIdentifier, $UniqueIdentifier)
     }
 }

@@ -83,9 +83,6 @@
 
         #TODO: [ValidateScript({ Test-ToastImage -Path $_ })]
 
-        # Specifies the AppId of the 'application' or process that spawned the toast notification.
-        [string] $AppId = $Script:Config.AppId,
-
         # Specifies the path to an image that will override the default image displayed with a Toast Notification.
         [String] $AppLogo,
 
@@ -156,7 +153,7 @@
                    ParameterSetName = 'Sound-Button')]
         [Microsoft.Toolkit.Uwp.Notifications.IToastButton[]] $Button,
 
-        # Specify the Toast Header object created using the New-BTHeader function, for seperation/categorization of toasts from the same AppId.
+        # Specify the Toast Header object created using the New-BTHeader function, for seperation/categorization of toasts from the same application.
         [Microsoft.Toolkit.Uwp.Notifications.ToastHeader] $Header,
 
         # Specify one or more Progress Bar object created using the New-BTProgressBar function.
@@ -262,7 +259,6 @@
 
     $ToastSplat = @{
         Content = $Content
-        AppId   = $AppId
     }
 
     if ($UniqueIdentifier) {
