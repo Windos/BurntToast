@@ -75,7 +75,7 @@ Describe 'New-BTColumn' {
         }
 
         It 'has consitent WhatIf response' {
-            $Expected = 'What if: Performing the operation "Submit-BTNotification" on target "submitting: [ToastNotification] with AppId {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe, Id , Sequence Number  and XML: <?xml version="1.0" encoding="utf-8"?><toast><visual><binding template="ToastGeneric"><text>{Now Playing}</text><group><subgroup hint-weight="4"><text hint-style="base">{Title:}</text><text hint-style="base">{Album:}</text><text hint-style="base">{Artist:}</text></subgroup><subgroup hint-weight="6"><text hint-style="baseSubtle">{soft focus}</text><text hint-style="baseSubtle">{Birocratic}</text><text hint-style="baseSubtle">{beets 4 (2017)}</text></subgroup></group></binding></visual></toast>".'
+            $Expected = 'What if: Performing the operation "Submit-BTNotification" on target "submitting: [ToastNotification] with Id , Sequence Number  and XML: <?xml version="1.0" encoding="utf-8"?><toast><visual><binding template="ToastGeneric"><text>{Now Playing}</text><group><subgroup hint-weight="4"><text hint-style="base">{Title:}</text><text hint-style="base">{Album:}</text><text hint-style="base">{Artist:}</text></subgroup><subgroup hint-weight="6"><text hint-style="baseSubtle">{soft focus}</text><text hint-style="baseSubtle">{Birocratic}</text><text hint-style="baseSubtle">{beets 4 (2017)}</text></subgroup></group></binding></visual></toast>".'
             $Log | Should -Be $Expected
         }
     }

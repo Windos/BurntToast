@@ -12,7 +12,6 @@
     FunctionsToExport = 'Get-BTHeader',
                         'Get-BTHistory',
                         'New-BTAction',
-                        'New-BTAppId',
                         'New-BTAudio',
                         'New-BTBinding',
                         'New-BTButton',

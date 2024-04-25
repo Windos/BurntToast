@@ -22,9 +22,6 @@ function Get-BTHeader {
     [cmdletBinding(DefaultParametersetName = 'All',
                    HelpUri='https://github.com/Windos/BurntToast/blob/main/Help/Get-BTHeader.md')]
     param (
-        # Specifies the AppId of the 'application' or process that spawned the toast notification.
-        [string] $AppId = $Script:Config.AppId,
-
         # A string that uniquely identifies a toast notification to retrieve the Header for
         [Parameter(Mandatory,
                    ParametersetName = 'ByToastId')]
@@ -43,9 +40,7 @@ function Get-BTHeader {
         [string] $Id
     )
 
-    $HistoryParams = @{
-        'AppId' = $AppId
-    }
+    $HistoryParams = @{}
     if ($PSCmdlet.ParameterSetName -eq 'ByToastId') { $HistoryParams['UniqueIdentifier'] = $ToastUniqueIdentifier}
 
     $HeaderIds = New-Object -TypeName "System.Collections.ArrayList"

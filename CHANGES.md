@@ -2,6 +2,8 @@
 
 - [1.0.0](https://github.com/Windos/BurntToast/releases/download/v1.0.0/BurntToast.zip)
 
+  - Breaking Change: Removed customizable AppId
+
   - Breaking Change: Shoulder tap notification support has been removed
 
   - Libraries: Microsoft.Windows.SDK.NET.Ref library bumped to 10.0.22621.28
