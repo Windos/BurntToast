@@ -48,14 +48,4 @@ Describe 'New-BTAudio' {
             $Log | Should -Be $Expected
         }
     }
-
-    Context 'input validation' {
-        It 'throws if audio file doesn''t exist' {
-            { New-BTAudio -Path 'C:\Fake\phantom.wav' } | Should -Throw "Cannot validate argument on parameter 'Path'. The file 'C:\Fake\phantom.wav' doesn't exist in the specified location. Please provide a valid path and try again."
-        }
-
-        It 'throws if the extension is not supported' {
-            { New-BTAudio -Path 'C:\Fake\phantom.mov' } | Should -Throw "Cannot validate argument on parameter 'Path'. The file extension '.mov' is not supported. Please provide a valid path and try again."
-        }
-    }
 }

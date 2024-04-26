@@ -6,6 +6,8 @@
 
   - Breaking Change: Shoulder tap notification support has been removed
 
+  - Breaking Change: Custom audio source support has been removed
+
   - Libraries: Microsoft.Windows.SDK.NET.Ref library bumped to 10.0.22621.28
 
   - Libraries: Microsoft.Toolkit.Uwp.Notifications library bumped to 7.1.3
