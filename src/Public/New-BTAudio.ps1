@@ -72,22 +72,7 @@
                      'ms-winsoundevent:Notification.Looping.Call10')]
         [uri] $Source,
 
-        # The full path to an audio file. Supported file types include:
-        #
-        # *.aac
-        # *.flac
-        # *.m4a
-        # *.mp3
-        # *.wav
-        # *.wma
-        [Parameter(Mandatory,
-                   ParameterSetName = 'CustomSound')]
-        [ValidateScript({Test-BTAudioPath $_})]
-        [Obsolete('Unfortunately, custom sounds no longer work and this parameter will be removed in v0.9.0. See: https://github.com/MicrosoftDocs/windows-uwp/issues/1593')]
-        [string] $Path,
-
         # Specifies that the slected sound should play multiple times if its duration is shorter than that of the toast it accompanies.
-        [Parameter(ParameterSetName = 'CustomSound')]
         [Parameter(ParameterSetName = 'StandardSound')]
         [switch] $Loop,
 
@@ -101,10 +86,6 @@
 
     if ($Source) {
         $Audio.Src = $Source
-    }
-
-    if ($Path) {
-        $Audio.Src = $Path
     }
 
     $Audio.Loop = $Loop
