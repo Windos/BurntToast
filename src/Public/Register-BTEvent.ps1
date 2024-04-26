@@ -42,6 +42,8 @@ function Register-BTEvent {
         [Parameter(Mandatory)]
         [scriptblock] $Action,
 
+        [string] $ArgumentFilter,
+
         # Indicates whether to save the event data. If this switch is specified,
         # the function saves the event data in a global variable with the specified variable name.
         [switch] $SaveEventData,
@@ -76,7 +78,9 @@ if ($Event.MessageData.SaveEventData) {
     New-Variable -Name $Event.MessageData.EventDataVariableName -Value $Event -Scope Global -Force
 }
 
-$($Action.ToString())
+if ($null -eq $ArgumentFilter -or $Event.SourceArgs.Argument -contains $ArgumentFilter) {
+    $($Action.ToString())
+}
 "@
 
     $CompatToastMgr = [Microsoft.Toolkit.Uwp.Notifications.ToastNotificationManagerCompat]
