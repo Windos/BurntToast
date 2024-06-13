@@ -11,14 +11,6 @@
 
 PowerShell Module for displaying **Windows 10** and **Windows Server 2019** Toast Notifications
 
-## ❗❗❗ NOTICE ❗❗❗
-
-BurntToast v1.0.0 will include **numerous** breaking changes and your existing scripts **will not** work without changes.
-
-**DO NOT** upgrade to BurntToast v1.0.0 until you are ready.
-
-You can read more about the up coming changes on [ToastIT.dev](https://toastit.dev/tag/burnttoast/) and BurntToast's new [Docs Site](https://docs.toastit.dev/changelog)
-
 ## Install
 
 ### PowerShell Gallery Install (Requires PowerShell v5)
