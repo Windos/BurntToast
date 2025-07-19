@@ -11,14 +11,6 @@
 
 PowerShell Module for displaying Toast Notifications on **Windows 10** and **Windows Server 2019** and above.
 
-## ❗❗❗ NOTICE ❗❗❗
-
-BurntToast v1.0.0 will include **numerous** breaking changes and your existing scripts **will not** work without changes.
-
-**DO NOT** upgrade to BurntToast v1.0.0 until you are ready.
-
-You can read more about the up coming changes on [ToastIT.dev](https://toastit.dev/tag/burnttoast/) and BurntToast's new [Docs Site](https://docs.toastit.dev/changelog)
-
 ## Install
 
 ### PowerShell Gallery Install
@@ -43,18 +35,25 @@ See the [Chocolatey community package](https://chocolatey.org/packages/burnttoas
 
 ### [v1.0.0](https://github.com/Windos/BurntToast/releases/download/v1.0.0/BurntToast.zip)
 
-### Breaking Changes
+#### Breaking Changes
 
-- Shoulder tap notification support has been removed
+- Custom Audio Path Removed: Support for custom audio file sources has been eliminated.
 
-### Features
+- AppId Customization Removed: The ability to specify a custom AppId has been removed.
 
-### Improvements
+- Shoulder Tap Notifications Removed: Support for "shoulder tap" toast types is no longer available.
 
-### Libraries
+#### Features and Improvements
 
-- Microsoft.Windows.SDK.NET.Ref library bumped to 10.0.22621.28
-- Microsoft.Toolkit.Uwp.Notifications library bumped to 7.1.3
+- Shortcut Support: Introduced capability to create Windows shortcuts with proper AppUserModelID—enables full toast branding when launching PowerShell.
+
+- Event Data Improvements: Event data handling and options improved for notification actions.
+
+#### Libraries
+
+- Microsoft.Windows.SDK.NET.Ref library bumped to 10.0.22621.28.
+
+- Microsoft.Toolkit.Uwp.Notifications library bumped to 7.1.3.
 
 ### See previous releases in the [Full Change Log](CHANGES.md)
 
