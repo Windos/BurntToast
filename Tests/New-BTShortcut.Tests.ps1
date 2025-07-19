@@ -20,4 +20,14 @@ Describe 'New-BTShortcut' {
             { New-BTShortcut -AppId "Acme.MyApp" -WhatIf } | Should -Not -Throw
         }
     }
+    Context 'with ForceWindowsPowerShell' {
+        It 'runs without error forcing Windows PowerShell' {
+            { New-BTShortcut -AppId "Acme.MyApp" -ForceWindowsPowerShell -WhatIf } | Should -Not -Throw
+        }
+    }
+    Context 'with ExecutablePath' {
+        It 'runs without error with custom executable path' {
+            { New-BTShortcut -AppId "Acme.MyApp" -ExecutablePath "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -WhatIf } | Should -Not -Throw
+        }
+    }
 }
