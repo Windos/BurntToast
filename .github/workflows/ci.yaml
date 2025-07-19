@@ -74,13 +74,13 @@ jobs:
           ./tasks/build.ps1 -Test
       - name: Upload Test Results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: "*.xml"
       - name: Upload PowerShell Module
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: burnttoast-module
           path: "./Output/BurntToast/"
@@ -93,7 +93,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Download Artifacts
-        uses: actions/download-artifact@v4.1.7
+        uses: actions/download-artifact@v4
         with:
           name: test-results
           path: artifacts
@@ -102,7 +102,7 @@ jobs:
         with:
           files: artifacts/**/TestResults.xml
       - name: Publish Code Coverage Results to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: artifacts/CoverageResults.xml
