@@ -41,12 +41,15 @@
             ReleaseNotes = '# 1.0.0
 
 * Breaking Changes
-  * Shoulder tap notification support has been removed
-* Features
-* Improvements
+  * Custom Audio Path Removed: Support for custom audio file sources has been eliminated.
+  * AppId Customization Removed: The ability to specify a custom AppId has been removed.
+  * Shoulder Tap Notifications Removed: Support for "shoulder tap" toast types is no longer available.
+* Features and Improvements
+  * Shortcut Support: Introduced capability to create Windows shortcuts with proper AppUserModelID—enables full toast branding when launching PowerShell.
+  * Event Data Improvements: Event data handling and options improved for notification actions.
 * Libraries
-  * Microsoft.Windows.SDK.NET.Ref library bumped to 10.0.22621.28
-  * Microsoft.Toolkit.Uwp.Notifications library bumped to 7.1.3
+  * Microsoft.Windows.SDK.NET.Ref library bumped to 10.0.22621.28.
+  * Microsoft.Toolkit.Uwp.Notifications library bumped to 7.1.3.
 '
         }
     }

@@ -2,15 +2,25 @@
 
 - [1.0.0](https://github.com/Windos/BurntToast/releases/download/v1.0.0/BurntToast.zip)
 
-  - Breaking Change: Removed customizable AppId
+  - Breaking Changes
 
-  - Breaking Change: Shoulder tap notification support has been removed
+    - Custom Audio Path Removed: Support for custom audio file sources has been eliminated.
 
-  - Breaking Change: Custom audio source support has been removed
+    - AppId Customization Removed: The ability to specify a custom AppId has been removed.
 
-  - Libraries: Microsoft.Windows.SDK.NET.Ref library bumped to 10.0.22621.28
+    - Shoulder Tap Notifications Removed: Support for "shoulder tap" toast types is no longer available.
 
-  - Libraries: Microsoft.Toolkit.Uwp.Notifications library bumped to 7.1.3
+  - Features and Improvements
+
+    - Shortcut Support: Introduced capability to create Windows shortcuts with proper AppUserModelID—enables full toast branding when launching PowerShell.
+
+    - Event Data Improvements: Event data handling and options improved for notification actions.
+
+  - Libraries
+
+    - Microsoft.Windows.SDK.NET.Ref library bumped to 10.0.22621.28.
+
+    - Microsoft.Toolkit.Uwp.Notifications library bumped to 7.1.3.
 
 - [0.8.5](https://github.com/Windos/BurntToast/releases/download/v0.8.5/BurntToast.zip)
 
