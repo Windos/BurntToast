@@ -11,18 +11,18 @@ on:
       - 'release\/v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
-  Win2019-x64-pwsh:
-    name: Server 2019 - PowerShell - x64
-    runs-on: windows-2019
+  Win2025-x64-pwsh:
+    name: Server 2025 - PowerShell - x64
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v3
       - name: Perform a Pester test from the command-line
         shell: pwsh
         run: ./tasks/build.ps1 -Test
 
-  Win2019-x86-pwsh:
-    name: Server 2019 - PowerShell - x86
-    runs-on: windows-2019
+  Win2025-x86-pwsh:
+    name: Server 2025 - PowerShell - x86
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v3
       - name: Perform a Pester test from the command-line
@@ -31,18 +31,18 @@ jobs:
           $Pwsh32 = .github/workflows/pwsh32.ps1
           & $Pwsh32 -File ./tasks/build.ps1 -Test
 
-  Win2019-x64-winpwsh:
-    name: Server 2019 - Windows PowerShell - x64
-    runs-on: windows-2019
+  Win2025-x64-winpwsh:
+    name: Server 2025 - Windows PowerShell - x64
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v3
       - name: Perform a Pester test from the command-line
         shell: powershell
         run: ./tasks/build.ps1 -Test
 
-  Win2019-x86-winpwsh:
-    name: Server 2019 - Windows PowerShell - x86
-    runs-on: windows-2019
+  Win2025-x86-winpwsh:
+    name: Server 2025 - Windows PowerShell - x86
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v3
       - name: Perform a Pester test from the command-line
@@ -52,8 +52,8 @@ jobs:
 
   build-and-oat-module:
     name: Build Module and OAT
-    needs: ["Win2019-x64-pwsh", "Win2019-x64-winpwsh", "Win2019-x86-pwsh", "Win2019-x86-winpwsh"]
-    runs-on: windows-2019
+    needs: ["Win2025-x64-pwsh", "Win2025-x64-winpwsh", "Win2025-x86-pwsh", "Win2025-x86-winpwsh"]
+    runs-on: windows-2025
     steps:
       - uses: actions/checkout@v3
         with:
