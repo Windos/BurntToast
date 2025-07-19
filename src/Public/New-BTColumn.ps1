@@ -42,8 +42,7 @@ function New-BTColumn {
         https://github.com/Windos/BurntToast/blob/main/Help/New-BTColumn.md
     #>
 
-    # [CmdletBinding(SupportsShouldProcess = $true)]
-    [cmdletBinding(HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTColumn.md')]
+    [CmdletBinding(SupportsShouldProcess = $true, HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTColumn.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.AdaptiveSubgroup])]
     param (
         [Parameter()]
@@ -70,7 +69,7 @@ function New-BTColumn {
         $AdaptiveSubgroup.HintTextStacking = $TextStacking
     }
 
-    #if($PSCmdlet.ShouldProcess("returning: [$($TextObj.GetType().Name)]:Text=$($TextObj.Text.BindingName):HintMaxLines=$($TextObj.HintMaxLines):HintMinLines=$($TextObj.HintMinLines):HintWrap=$($TextObj.HintWrap):HintAlign=$($TextObj.HintAlign):HintStyle=$($TextObj.HintStyle):Language=$($TextObj.Language)")) {
-    $AdaptiveSubgroup
-    #}
+    if ($PSCmdlet.ShouldProcess("Create AdaptiveSubgroup column")) {
+        $AdaptiveSubgroup
+    }
 }

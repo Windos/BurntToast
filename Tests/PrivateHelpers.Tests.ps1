@@ -45,12 +45,15 @@ Describe 'Optimize-BTImageSource' {
             # Pretend it's a UNC
             $unc = "\\server\share\img.png"
             $result = Optimize-BTImageSource -Source $unc
-            $result | Should -Match "$env:TEMP"
-            $result | Should -Match "img.png" -Or -Match "-"
+            $result | Should -Not -BeNullOrEmpty
+            $result | Should -BeLike "$env:TEMP*"
+            $result | Should -BeLike "*img.png"
             # Pretend it's HTTP
             $http = "http://example.com/img.png"
             $result2 = Optimize-BTImageSource -Source $http
-            $result2 | Should -Match "$env:TEMP"
+            $result2 | Should -Not -BeNullOrEmpty
+            $result2 | Should -BeLike "$env:TEMP*"
+            $result2 | Should -BeLike "*img.png"
         }
     }
     Context 'with ForceRefresh' {

@@ -6,7 +6,7 @@ function Optimize-BTImageSource {
         [Switch] $ForceRefresh
     )
 
-    if ([bool]([System.Uri]$Source).IsUnc -or $Source -like 'http?://*') {
+    if ([bool]([System.Uri]$Source).IsUnc -or ([System.Uri]$Source).Scheme -like 'http*') {
         $RemoteFileName = $Source -replace '/|:|\\', '-'
 
         $NewFilePath = '{0}\{1}' -f $Env:TEMP, $RemoteFileName
