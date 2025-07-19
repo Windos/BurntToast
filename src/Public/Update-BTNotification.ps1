@@ -1,30 +1,31 @@
 ﻿function Update-BTNotification {
     <#
         .SYNOPSIS
-        Updates a toast notification for display.
+        Updates an existing toast notification.
 
         .DESCRIPTION
-        The Update-BTNotification function updates a toast notification in the operating systems' notification manager.
+        The Update-BTNotification function updates a toast notification by matching UniqueIdentifier and replacing or updating its contents/data.
+        DataBinding provides the values to update in the notification, and SequenceNumber ensures correct ordering if updates overlap.
+
+        .PARAMETER SequenceNumber
+        Used for notification versioning; higher numbers indicate newer content to prevent out-of-order display.
+
+        .PARAMETER UniqueIdentifier
+        String uniquely identifying the toast notification to update.
+
+        .PARAMETER DataBinding
+        Hashtable containing the data binding keys/values to update.
 
         .INPUTS
-        LOTS...
+        None. You cannot pipe input to this function.
 
         .OUTPUTS
-        NONE
+        None.
 
         .EXAMPLE
-        $FirstDataBinding = @{
-            FirstLine = 'Example Toast Heading'
-            SecondLine = 'This toast is still the original'
-        }
-
-        New-BurntToastNotification -Text 'FirstLine', 'SecondLine' -UniqueIdentifier 'ExampleToast' -DataBinding $FirstDataBinding
-
-        $SecondDataBinding = @{
-            SecondLine = 'This toast has been updated!'
-        }
-
-        Update-BTNotification -UniqueIdentifier 'ExampleToast' -DataBinding $SecondDataBinding
+        $data = @{ Key = 'Value' }
+        Update-BTNotification -UniqueIdentifier 'ID001' -DataBinding $data
+        Updates notification with key 'ID001' using new data binding values.
 
         .LINK
         https://github.com/Windos/BurntToast/blob/main/Help/Update-BTNotification.md
@@ -34,17 +35,8 @@
                    HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/Update-BTNotification.md')]
     [CmdletBinding()]
     param (
-        # When updating toasts (not curently working) rapidly, the sequence number helps to ensure that toasts recieved out of order will not be displayed in a manner that may confuse.
-        #
-        # A higher sequence number indicates a newer toast.
         [uint64] $SequenceNumber,
-
-        # A string that uniquely identifies a toast notification. Submitting a new toast with the same identifier as a previous toast will replace the previous toast.
-        #
-        # This is useful when updating the progress of a process, using a progress bar, or otherwise correcting/updating the information on a toast.
         [string] $UniqueIdentifier,
-
-        # A hashtable that binds strings to keys in a toast notification. In order to update a toast, the original toast needs to include a databinding hashtable.
         [hashtable] $DataBinding
     )
 

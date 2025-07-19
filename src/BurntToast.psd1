@@ -23,6 +23,7 @@
                         'New-BTInput',
                         'New-BTProgressBar',
                         'New-BTSelectionBoxItem',
+                        'New-BTShortcut',
                         'New-BTText',
                         'New-BTVisual',
                         'New-BurntToastNotification',

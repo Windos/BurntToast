@@ -4,13 +4,32 @@
         Creates a new clickable button for a Toast Notification.
 
         .DESCRIPTION
-        The New-BTButton function creates a new clickable button for a Toast Notification. Up to five buttons can be added to one Toast.
+        The New-BTButton function creates a new button for a Toast Notification. Up to five buttons can be added to a single Toast notification.
+        Buttons may have display text, an icon, an optional activation type, argument string, or serve as system managed Dismiss/Snooze buttons.
 
-        Buttons can be fully customized with display text, images and arguments or system handled 'Snooze' and 'Dismiss' buttons.
+        .PARAMETER Snooze
+        Switch. Creates a system-handled snooze button. When paired with a selection box on the toast, the snooze time is customizable.
+
+        .PARAMETER Dismiss
+        Switch. Creates a system-handled dismiss button.
+
+        .PARAMETER Content
+        String. The text to display on this button. For system buttons, this overrides the default label.
+
+        .PARAMETER Arguments
+        String. App-defined string to pass when the button is pressed. Often a URI or file path to open.
+
+        .PARAMETER ActivationType
+        Enum. Defines the activation type that triggers when the button is pressed. Defaults to Protocol.
+
+        .PARAMETER ImageUri
+        String. Path or URI of an image icon to display next to the button label.
+
+        .PARAMETER Id
+        String. Specifies an ID associated with another toast control (textbox or selection box). For standard buttons, this aligns the button next to a control, for snooze buttons it associates with a selection box.
 
         .INPUTS
-        None
-            You cannot pipe input to this function.
+        None. You cannot pipe input to this function.
 
         .OUTPUTS
         Microsoft.Toolkit.Uwp.Notifications.ToastButton
@@ -19,29 +38,24 @@
 
         .EXAMPLE
         New-BTButton -Dismiss
-
-        This command creates a button which mimmicks the act of 'swiping away' the Toast when clicked.
+        Creates a button which mimics the act of 'swiping away' the Toast when clicked.
 
         .EXAMPLE
         New-BTButton -Snooze
-
-        This command creates a button which will snooze the Toast for the system default snooze time (often 10 minutes).
+        Creates a snooze button with system default snooze duration.
 
         .EXAMPLE
         New-BTButton -Snooze -Content 'Sleep' -Id 'TimeSelection'
-
-        This command creates a button which will snooze the Toast for the time selected in the SelectionBox with the ID 'TimeSelection'. The button will show the text 'Sleep' rather than 'Dismiss.'
+        Snooze button using the label 'Sleep' and referencing a selection box control.
 
         .EXAMPLE
         New-BTButton -Content 'Blog' -Arguments 'https://king.geek.nz'
-
-        This command creates a button with the display text "Blog", which will launch a browser window to "http://king.geek.nz" when clicked.
+        Regular button that opens a URL when clicked.
 
         .EXAMPLE
-        $Picture = 'C:\temp\example.png'
-        New-BTButton -Content 'View Picture' -Arguments $Picture -ImageUri $Picture
-
-        This example creates a button with the display text "View Picture" with a picture to the left, which will launch the default picture viewer application and load the picture when clicked.
+        $pic = 'C:\temp\example.png'
+        New-BTButton -Content 'View Picture' -Arguments $pic -ImageUri $pic
+        Button with a picture to the left, launches the image file.
 
         .LINK
         https://github.com/Windos/BurntToast/blob/main/Help/New-BTButton.md
@@ -55,50 +69,31 @@
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze], ParameterSetName = 'Snooze')]
 
     param (
-        # Specifies a system handled snooze button. When paired with a selection box the snooze time is customizable and user selectable, otherwise the system default snooze time is used.
-        #
-        # Display text defaults to a localized 'Snooze', but this can be overridden with the Content parameter.
         [Parameter(Mandatory,
                    ParameterSetName = 'Snooze')]
         [switch] $Snooze,
 
-        # Specifies a system handled dismiss button. Clicking the resulting button has the same affect as 'swiping away' or otherwise dismissing the Toast.
-        #
-        # Display text defaults to a localized 'Dismiss', but this can be overridden with the Content parameter.
         [Parameter(Mandatory,
                    ParameterSetName = 'Dismiss')]
         [switch] $Dismiss,
 
-        # Specifies the text to display on the button.
         [Parameter(Mandatory,
                    ParameterSetName = 'Button')]
         [Parameter(ParameterSetName = 'Dismiss')]
         [Parameter(ParameterSetName = 'Snooze')]
         [string] $Content,
 
-        # Specifies an app defined string.
-        #
-        # For the purposes of BurntToast notifications this is generally the path to a file or URI and paired with the Protocol ActivationType.
         [Parameter(Mandatory,
                    ParameterSetName = 'Button')]
         [string] $Arguments,
 
-        # Defines tne ActivationType that is trigger when the button is pressed.
-        #
-        # Defaults to Protocol which will open the file or URI specified in with the Arguments parameter in the rlevant system default application.
         [Parameter(ParameterSetName = 'Button')]
         [Microsoft.Toolkit.Uwp.Notifications.ToastActivationType] $ActivationType = [Microsoft.Toolkit.Uwp.Notifications.ToastActivationType]::Protocol,
 
-        # Specifies an image icon to display on the button.
         [Parameter(ParameterSetName = 'Button')]
         [Parameter(ParameterSetName = 'Snooze')]
         [string] $ImageUri,
 
-        # Specifies the ID of a relevant Toast control.
-        #
-        # Standard buttons can be paried with a text box which makes the button appear to the right of it.
-        #
-        # Snooze buttons can be paired with a selection box to select the ammount of time to snooze.
         [Parameter(ParameterSetName = 'Button')]
         [Parameter(ParameterSetName = 'Snooze')]
         [alias('TextBoxId', 'SelectionBoxId')]

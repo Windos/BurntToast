@@ -4,23 +4,26 @@
         Creates a Context Menu Item object.
 
         .DESCRIPTION
-        The New-BTContextMenuItem function creates a Context Menu Item object.
+        The New-BTContextMenuItem function creates a context menu item (ToastContextMenuItem) for a Toast Notification, typically added via New-BTAction.
+
+        .PARAMETER Content
+        The text string to display to the user for this menu item.
+
+        .PARAMETER Arguments
+        App-defined string that is returned if the context menu item is selected. Routinely a URI, file path, or app context string.
+
+        .PARAMETER ActivationType
+        Enum. Controls the type of activation for this menu item. Defaults to Foreground if not specified.
 
         .INPUTS
-        None
+        None. You cannot pipe input to this function.
 
         .OUTPUTS
-        ToastContextMenuItem
+        Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem
 
         .EXAMPLE
-        New-BTContextMenuItem -Content 'Google' -Arguments 'https://google.com' -ActivationType Protocol
-
-        This command creates a new Context Menu Item object with the specified properties.
-
-        .NOTES
-        Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
-
-        Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
+        New-BTContextMenuItem -Content 'Website' -Arguments 'https://example.com' -ActivationType Protocol
+        Creates a menu item labeled "Website" that opens a URL on right-click.
 
         .LINK
         https://github.com/Windos/BurntToast/blob/main/Help/New-BTContextMenuItem.md
@@ -31,15 +34,12 @@
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem])]
 
     param (
-        # The text to display on the menu item.
         [Parameter(Mandatory)]
         [string] $Content,
 
-        # App-defined string of arguments that the app can later retrieve once it is activated when the user clicks the menu item.
         [Parameter(Mandatory)]
         [string] $Arguments,
 
-        # Controls what type of activation this menu item will use when clicked. Defaults to Foreground.
         [Parameter()]
         [Microsoft.Toolkit.Uwp.Notifications.ToastActivationType] $ActivationType
     )

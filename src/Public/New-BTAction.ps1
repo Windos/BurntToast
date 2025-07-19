@@ -1,36 +1,47 @@
 ﻿function New-BTAction {
     <#
         .SYNOPSIS
-        Creates an action object for a Toast Notification.
+        Creates an action set for a Toast Notification.
 
         .DESCRIPTION
-        The New-BTAction function creates an 'action' object which contains defines the controls displayed at the bottom of a Toast Notification.
+        The New-BTAction function creates a Toast action object (IToastActions), defining the controls displayed at the bottom of a Toast Notification.
+        Actions can be custom (buttons, context menu items, and input controls) or system handled (Snooze and Dismiss).
 
-        Actions can either be system handeled and automatically localized Snooze and Dismiss buttons or a custom collection of inputs.
+        .PARAMETER Buttons
+        Button objects created with New-BTButton. Up to five may be included, or fewer if context menu items are also included.
+
+        .PARAMETER ContextMenuItems
+        Right-click context menu item objects created with New-BTContextMenuItem. Up to five may be included, or fewer if Buttons are included.
+
+        .PARAMETER Inputs
+        Input objects created via New-BTText and New-BTSelectionBoxItem. Up to five can be included.
+
+        .PARAMETER SnoozeAndDismiss
+        Switch. Creates a system-handled set of Snooze and Dismiss buttons, only available in the 'SnoozeAndDismiss' parameter set. Cannot be used with custom actions.
 
         .INPUTS
-        None
-            You cannot pipe input to this function.
+        None. You cannot pipe input to this function.
 
         .OUTPUTS
         Microsoft.Toolkit.Uwp.Notifications.IToastActions
 
         .EXAMPLE
         New-BTAction -SnoozeAndDismiss
-
-        This command creates an action element using the system handled snooze and dismiss modal.
+        Creates an action set using the system handled snooze and dismiss modal.
 
         .EXAMPLE
         New-BTAction -Buttons (New-BTButton -Content 'Google' -Arguments 'https://google.com')
-
-        This command creates an action element with a single clickable button.
+        Creates an action set with a single button that opens Google.
 
         .EXAMPLE
         $Button = New-BTButton -Content 'Google' -Arguments 'https://google.com'
         $ContextMenuItem = New-BTContextMenuItem -Content 'Bing' -Arguments 'https://bing.com'
         New-BTAction -Buttons $Button -ContextMenuItems $ContextMenuItem
+        Creates an action set with both a clickable button and a context menu item.
 
-        This example creates an action elemnt with both a clickable button and a right click context menu item.
+        .EXAMPLE
+        New-BTAction -Inputs (New-BTText -Content "Add comment")
+        Creates an action set allowing user textual input in the notification.
 
         .LINK
         https://github.com/Windos/BurntToast/blob/main/Help/New-BTAction.md
@@ -41,22 +52,18 @@
                    HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTAction.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.IToastActions])]
     param (
-        # Button objects created with the New-BTButton function. Up to five can be included, or less if Context Menu Items are also included.
         [ValidateCount(0, 5)]
         [Parameter(ParameterSetName = 'Custom Actions')]
         [Microsoft.Toolkit.Uwp.Notifications.IToastButton[]] $Buttons,
 
-        # Right click context menu item objects created with the New-BTContextMenuItem function. Up to five can be included, or less if Buttons are also included.
         [ValidateCount(0, 5)]
         [Parameter(ParameterSetName = 'Custom Actions')]
         [Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem[]] $ContextMenuItems,
 
-        # Input objects created via the New-BTText and New-BTSelectionBoxItem functions. Up to five can be included.
         [ValidateCount(0, 5)]
         [Parameter(ParameterSetName = 'Custom Actions')]
         [Microsoft.Toolkit.Uwp.Notifications.IToastInput[]] $Inputs,
 
-        # Creates a system handeled snooze and dismiss action. Cannot be included inconjunction with custom actions.
         [Parameter(Mandatory,
                    ParameterSetName = 'SnoozeAndDismiss')]
         [switch] $SnoozeAndDismiss

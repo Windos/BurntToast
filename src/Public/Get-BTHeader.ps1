@@ -1,19 +1,42 @@
 function Get-BTHeader {
     <#
         .SYNOPSIS
-        Show all toast headers in the Action Center.
+        Shows and filters all toast notification headers in the Action Center.
 
         .DESCRIPTION
-        The Get-BTHeader function returns all the unique toast notification headers that are in the Action Center. Toasts that have been dismissed by the user will not be returned.
+        The Get-BTHeader function returns all the unique toast notification headers currently present in the Action Center (notifications which have not been dismissed by the user).
+        You can filter by a specific toast notification identifier, header title, or header id.
+
+        .PARAMETER ToastUniqueIdentifier
+        The unique identifier (string) of a toast notification. Only headers belonging to the notification with this identifier will be returned.
+
+        .PARAMETER Title
+        Filters headers by a specific title (string).
+
+        .PARAMETER Id
+        Filters headers to only those with the specified header id (string).
 
         .INPUTS
-        STRING
+        None. You cannot pipe input to this function.
 
         .OUTPUTS
         Microsoft.Toolkit.Uwp.Notifications.ToastHeader
 
         .EXAMPLE
         Get-BTHeader
+        Returns all unique toast notification headers in the Action Center.
+
+        .EXAMPLE
+        Get-BTHeader -ToastUniqueIdentifier 'Toast001'
+        Returns headers for toasts with the specified unique identifier.
+
+        .EXAMPLE
+        Get-BTHeader -Title "Stack Overflow Questions"
+        Returns headers with a specific title.
+
+        .EXAMPLE
+        Get-BTHeader -Id "001"
+        Returns the header with the matching id.
 
         .LINK
         https://github.com/Windos/BurntToast/blob/main/Help/Get-BTHeader.md
@@ -22,18 +45,15 @@ function Get-BTHeader {
     [cmdletBinding(DefaultParametersetName = 'All',
                    HelpUri='https://github.com/Windos/BurntToast/blob/main/Help/Get-BTHeader.md')]
     param (
-        # A string that uniquely identifies a toast notification to retrieve the Header for
         [Parameter(Mandatory,
                    ParametersetName = 'ByToastId')]
         [Alias('ToastId')]
         [string] $ToastUniqueIdentifier,
 
-        # The title of the Header to retrieve
         [Parameter(Mandatory,
                    ParametersetName = 'ByTitle')]
         [string] $Title,
 
-        # The title of the Header to retrieve
         [Parameter(Mandatory,
                    ParametersetName = 'ById')]
         [Alias('HeaderId')]

@@ -4,32 +4,36 @@
         Creates a new Audio object for Toast Notifications.
 
         .DESCRIPTION
-        The New-BTAudio function creates a new Audio object for Toast Notifications.
+        The New-BTAudio function creates an audio object for Toast Notifications.
+        You can use this function to select a built-in notification sound (including alarms/calls), specify a custom audio file, or indicate that the notification should be silent.
 
-        You can use the parameters of New-BTAudio to select an audio file or a standard notification sound (including alarms). Alternativly you can specify that a Toast Notification should be silent.
+        .PARAMETER Source
+        URI string. Specifies the sound to play with the Toast Notification.
+        Accepts Microsoft notification sound URIs such as ms-winsoundevent:Notification.IM or a file path for custom audio.
+
+        .PARAMETER Loop
+        Switch. Specifies that the selected sound should loop, if its duration is shorter than the toast it accompanies.
+
+        .PARAMETER Silent
+        Switch. Makes the toast silent (no sound).
 
         .INPUTS
-        None
-
-        You cannot pipe input to this cmdlet.
+        None. You cannot pipe input to this function.
 
         .OUTPUTS
         Microsoft.Toolkit.Uwp.Notifications.ToastAudio
 
         .EXAMPLE
         New-BTAudio -Source ms-winsoundevent:Notification.SMS
-
-        Creates an Audio  which will cause a Toast Notification to play the standard Microsoft 'SMS' sound.
+        Creates an audio object which will cause a Toast Notification to play the standard Microsoft 'SMS' sound.
 
         .EXAMPLE
-        New-BTAudio -Path 'C:\Music\FavSong.mp3'
-
-        Creates an Audio  which will cause a Toast Notification to play the specified song.
+        New-BTAudio -Source 'C:\Music\FavSong.mp3'
+        Creates an audio object which will cause a Toast Notification to play the specified song or audio file.
 
         .EXAMPLE
         New-BTAudio -Silent
-
-        Creates an Audio  which will cause a Toast Notification to be silent.
+        Creates an audio object which will cause a Toast Notification to be silent.
 
         .LINK
         https://github.com/Windos/BurntToast/blob/main/Help/New-BTAudio.md
@@ -40,9 +44,6 @@
                    HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTAudio.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastAudio])]
     param (
-        # Specifies one of the built in Microsoft notification sounds.
-        #
-        # This paramater takes the full form of the sounds, in the form of a uri. The New-BurntToastNotification function simplifies this, so be aware of the difference.
         [Parameter(Mandatory,
                    ParameterSetName = 'StandardSound')]
         [ValidateSet('ms-winsoundevent:Notification.Default',
@@ -72,11 +73,9 @@
                      'ms-winsoundevent:Notification.Looping.Call10')]
         [uri] $Source,
 
-        # Specifies that the slected sound should play multiple times if its duration is shorter than that of the toast it accompanies.
         [Parameter(ParameterSetName = 'StandardSound')]
         [switch] $Loop,
 
-        # Specifies that the toast should be displayed without sound.
         [Parameter(Mandatory,
                    ParameterSetName = 'Silent')]
         [switch] $Silent

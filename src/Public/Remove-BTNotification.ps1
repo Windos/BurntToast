@@ -4,23 +4,40 @@ function Remove-BTNotification {
         Removes toast notifications from the Action Center.
 
         .DESCRIPTION
-        The Remove-BTNotification function removes toast notifications from the Action Center.
+        The Remove-BTNotification function removes toast notifications for the current application from the Action Center.
+        If no parameters are specified, all toast notifications for this app are removed.
+        Specify Tag and/or Group to remove specific notifications. Use UniqueIdentifier to remove notifications matching both tag and group.
 
-        If no parameters are specified, all toasts (for the current application) will be removed.
+        .PARAMETER Tag
+        The tag of the toast notification(s) to remove (String).
 
-        Tags and Groups for Toasts can be found using the Get-BTHistory function.
+        .PARAMETER Group
+        The group (category) of the toast notification(s) to remove (String).
+
+        .PARAMETER UniqueIdentifier
+        Used to specify both the Tag and Group and remove a uniquely identified toast.
 
         .INPUTS
-        LOTS
+        None. You cannot pipe input to this function.
 
         .OUTPUTS
-        NONE
+        None.
 
         .EXAMPLE
         Remove-BTNotification
+        Removes all toast notifications for the calling application.
 
         .EXAMPLE
-        Remove-BTNotification -Tag 'UniqueIdentifier'
+        Remove-BTNotification -Tag 'Toast001'
+        Removes the toast notification with tag 'Toast001'.
+
+        .EXAMPLE
+        Remove-BTNotification -Group 'Updates'
+        Removes all toast notifications in the group 'Updates'.
+
+        .EXAMPLE
+        Remove-BTNotification -UniqueIdentifier 'Toast001'
+        Removes the toast notification with both tag and group set to 'Toast001'.
 
         .LINK
         https://github.com/Windos/BurntToast/blob/main/Help/Remove-BTNotification.md
@@ -30,15 +47,12 @@ function Remove-BTNotification {
                    SupportsShouldProcess = $true,
                    HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/Remove-BTNotification.md')]
     param (
-        # Specifies the tag, which identifies a given toast notification.
         [Parameter(ParameterSetName = 'Individual')]
         [string] $Tag,
 
-        # Specifies the group, which helps to identify a given toast notification.
         [Parameter(ParameterSetName = 'Individual')]
         [string] $Group,
 
-        # A string that uniquely identifies a toast notification. Represents both the Tag and Group for a toast.
         [Parameter(Mandatory = $true,
                    ParameterSetName = 'Combo')]
         [string] $UniqueIdentifier

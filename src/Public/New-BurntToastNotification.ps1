@@ -1,67 +1,89 @@
 ﻿function New-BurntToastNotification {
     <#
         .SYNOPSIS
-        Creates and displays a Toast Notification.
+        Creates and displays a rich Toast Notification for Windows.
 
         .DESCRIPTION
-        The New-BurntToastNotification function creates and displays a Toast Notification on Microsoft Windows 10.
+        The New-BurntToastNotification function creates and displays a Toast Notification supporting text, images, sounds, progress bars, actions, snooze/dismiss, and more on Microsoft Windows 10+.
+        Parameter sets ensure mutual exclusivity (e.g., you cannot use Silent and Sound together).
 
-        You can specify the text and/or image displayed as well as selecting the sound that is played when the Toast Notification is displayed.
+        .PARAMETER Text
+        Up to 3 strings to show within the Toast Notification. The first is the title.
 
-        You can optionally call the New-BurntToastNotification function with the Toast alias.
+        .PARAMETER Column
+        Array of columns, created by New-BTColumn, to be rendered side-by-side in the toast.
+
+        .PARAMETER AppLogo
+        Path to an image that will appear as the application logo.
+
+        .PARAMETER HeroImage
+        Path to a prominent hero image for the notification.
+
+        .PARAMETER Sound
+        The sound to play. Choose from Default, alarms, calls, etc. (Cannot be used with Silent.)
+
+        .PARAMETER Silent
+        Switch. Makes the notification silent.
+
+        .PARAMETER SnoozeAndDismiss
+        Switch. Adds system-provided snooze and dismiss controls.
+
+        .PARAMETER Button
+        Array of button objects for custom actions, created by New-BTButton.
+
+        .PARAMETER Header
+        Toast header object (New-BTHeader): categorize or group notifications.
+
+        .PARAMETER ProgressBar
+        One or more progress bars, created by New-BTProgressBar, for visualizing progress within the notification.
+
+        .PARAMETER UniqueIdentifier
+        Optional string grouping related notifications; allows newer notifications to overwrite older.
+
+        .PARAMETER DataBinding
+        Hashtable. Associates string values with binding variables to allow updating toasts by data.
+
+        .PARAMETER ExpirationTime
+        DateTime. After which the notification is removed from the Action Center.
+
+        .PARAMETER SuppressPopup
+        Switch. If set, the toast is sent to Action Center but not displayed as a popup.
+
+        .PARAMETER CustomTimestamp
+        DateTime. Custom timestamp used for Action Center sorting.
+
+        .PARAMETER ActivatedAction
+        Script block to invoke when the toast is activated (clicked).
+
+        .PARAMETER DismissedAction
+        Script block to invoke when the toast is dismissed by the user.
+
+        .PARAMETER EventDataVariable
+        The name of the global variable that will contain event data for use in event handler script blocks.
 
         .INPUTS
-        None
-            You cannot pipe input to this function.
+        None. You cannot pipe input to this function.
 
         .OUTPUTS
-        None
-            New-BurntToastNotification displays the Toast Notification that is created.
+        None. New-BurntToastNotification displays the toast, it does not return an object.
 
         .EXAMPLE
         New-BurntToastNotification
-
-        This command creates and displays a Toast Notification with all default values.
-
-        .EXAMPLE
-        New-BurntToastNotification -Text 'Example Script', 'The example script has run successfully.'
-
-        This command creates and displays a Toast Notification with customized title and display text.
+        Shows a toast with all default values.
 
         .EXAMPLE
-        New-BurntToastNotification -Text 'WAKE UP!' -Sound 'Alarm2'
-
-        This command creates and displays a Toast Notification which plays a looping alarm sound and lasts longer than a default Toast.
-
-        .EXAMPLE
-        $BlogButton = New-BTButton -Content 'Open Blog' -Arguments 'https://king.geek.nz'
-        New-BurntToastNotification -Text 'New Blog Post!' -Button $BlogButton
-
-        This exmaple creates a Toast Notification with a button which will open a link to "https://king.geek.nz" when clicked.
+        New-BurntToastNotification -Text 'Example', 'Details about the operation.'
+        Shows a toast with custom title and body text.
 
         .EXAMPLE
-        $ToastHeader = New-BTHeader -Id '001' -Title 'Stack Overflow Questions'
-        New-BurntToastNotification -Text 'New Stack Overflow Question!', 'More details!' -Header $ToastHeader
-
-        This example creates a Toast Notification which will be displayed under the header 'Stack Overflow Questions.'
-
-        .EXAMPLE
-        $Progress = New-BTProgressBar -Status 'Copying files' -Value 0.2
-        New-BurntToastNotification -Text 'File copy script running', 'More details!' -ProgressBar $Progress
-
-        This example creates a Toast Notification which will include a progress bar.
+        $btn = New-BTButton -Content 'Google' -Arguments 'https://google.com'
+        New-BurntToastNotification -Text 'New Blog!' -Button $btn
+        Displays a toast with a button that opens Google.
 
         .EXAMPLE
-        New-BurntToastNotification -Text 'Professional Content', 'And gr8 spelling' -UniqueIdentifier 'Toast001'
-        New-BurntToastNotification -Text 'Professional Content', 'And great spelling' -UniqueIdentifier 'Toast001'
-
-        This example will show a toast with a spelling error, which is replaced by a second toast because they both shared a unique identifier.
-
-        .NOTES
-        I'm *really* sorry about the number of Parameter Sets. The best explanation is:
-
-        * You cannot specify a sound and mark the toast as silent at the same time.
-        * You cannot specify SnoozeAndDismiss and custom buttons at the same time.
+        $header = New-BTHeader -Id '001' -Title 'Updates'
+        New-BurntToastNotification -Text 'Major Update Available!' -Header $header
+        Creates a categorized notification under the 'Updates' header.
 
         .LINK
         https://github.com/Windos/BurntToast/blob/main/Help/New-BurntToastNotification.md
@@ -72,26 +94,15 @@
                    SupportsShouldProcess = $true,
                    HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BurntToastNotification.md')]
     param (
-        # Specifies the text to show on the Toast Notification. Up to three strings can be displayed, the first of which will be embolden as a title.
         [ValidateCount(0, 3)]
         [String[]] $Text = 'Default Notification',
 
-        # Specifies groups of content (text and images) created via New-BTColumn that are displayed as a column.
-        #
-        # Multiple columns can be provided and they will be displayed side by side.
         [Microsoft.Toolkit.Uwp.Notifications.AdaptiveSubgroup[]] $Column,
 
-        #TODO: [ValidateScript({ Test-ToastImage -Path $_ })]
-
-        # Specifies the path to an image that will override the default image displayed with a Toast Notification.
         [String] $AppLogo,
 
-        # Specifies the path to an image that will be used as the hero image on the toast.
         [String] $HeroImage,
 
-        # Selects the sound to acompany the Toast Notification. Any 'Alarm' or 'Call' tones will automatically loop and extent the amount of time that a Toast is displayed on screen.
-        #
-        # Cannot be used in conjunction with the 'Silent' switch.
         [Parameter(ParameterSetName = 'Sound')]
         [Parameter(Mandatory = $true,
                    ParameterSetName = 'Sound-SnD')]
@@ -124,9 +135,6 @@
                      'Call10')]
         [String] $Sound = 'Default',
 
-        # Indicates that the Toast Notification will be displayed on screen without an accompanying sound.
-        #
-        # Cannot be used in conjunction with the 'Sound' parameter.
         [Parameter(Mandatory = $true,
                    ParameterSetName = 'Silent')]
         [Parameter(Mandatory = $true,
@@ -135,7 +143,6 @@
                    ParameterSetName = 'Silent-Button')]
         [Switch] $Silent,
 
-        # Adds a default selection box and snooze/dismiss buttons to the bottom of the Toast Notification.
         [Parameter(Mandatory = $true,
                    ParameterSetName = 'SnD')]
         [Parameter(Mandatory = $true,
@@ -144,7 +151,6 @@
                    ParameterSetName = 'Sound-SnD')]
         [Switch] $SnoozeAndDismiss,
 
-        # Allows up to five buttons to be added to the bottom of the Toast Notification. These buttons should be created using the New-BTButton function.
         [Parameter(Mandatory = $true,
                    ParameterSetName = 'Button')]
         [Parameter(Mandatory = $true,
@@ -153,34 +159,25 @@
                    ParameterSetName = 'Sound-Button')]
         [Microsoft.Toolkit.Uwp.Notifications.IToastButton[]] $Button,
 
-        # Specify the Toast Header object created using the New-BTHeader function, for seperation/categorization of toasts from the same application.
         [Microsoft.Toolkit.Uwp.Notifications.ToastHeader] $Header,
 
-        # Specify one or more Progress Bar object created using the New-BTProgressBar function.
         [Microsoft.Toolkit.Uwp.Notifications.AdaptiveProgressBar[]] $ProgressBar,
 
-        # A string that uniquely identifies a toast notification. Submitting a new toast with the same identifier as a previous toast will replace the previous toast.
-        #
-        # This is useful when updating the progress of a process, using a progress bar, or otherwise correcting/updating the information on a toast.
         [string] $UniqueIdentifier,
 
-        # A hashtable that binds strings to keys in a toast notification. In order to update a toast, the original toast needs to include a databinding hashtable.
         [hashtable] $DataBinding,
 
-        # The time after which the notification is no longer relevant and should be removed from the Action Center.
         [datetime] $ExpirationTime,
 
-        # Bypasses display to the screen and sends the notification directly to the Action Center.
         [switch] $SuppressPopup,
 
-        # Sets the time at which Windows should consider the notification to have been created. If not specified the time at which the notification was recieved will be used.
-        #
-        # The time stamp affects sorting of notifications in the Action Center.
         [datetime] $CustomTimestamp,
 
         [scriptblock] $ActivatedAction,
 
-        [scriptblock] $DismissedAction
+        [scriptblock] $DismissedAction,
+
+        [string] $EventDataVariable
     )
 
     $ChildObjects = @()
@@ -284,6 +281,10 @@
 
     if ($DismissedAction) {
         $ToastSplat.Add('DismissedAction', $DismissedAction)
+    }
+
+    if ($EventDataVariable) {
+        $ToastSplat.Add('EventDataVariable', $EventDataVariable)
     }
 
     if ($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {

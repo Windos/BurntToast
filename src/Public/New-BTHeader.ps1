@@ -4,28 +4,33 @@
         Creates a new toast notification header.
 
         .DESCRIPTION
-        The New-BTHeader function creates a new toast notification header for a Toast Notification.
+        The New-BTHeader function creates a toast notification header (ToastHeader) for a Toast Notification. Headers are displayed at the top and used for categorization or grouping in Action Center.
 
-        These headers are diaplyed at the top of a toast and are also used to categorize toasts in the Action Center.
+        .PARAMETER Id
+        Unique string identifying this header instance. Used for replacement or updating by reuse.
+
+        .PARAMETER Title
+        The text displayed to the user as the header.
+
+        .PARAMETER Arguments
+        String data passed to Activation if the header itself is clicked.
+
+        .PARAMETER ActivationType
+        Enum specifying the activation type (defaults to Protocol).
 
         .INPUTS
-        None
-            You cannot pipe input to this function.
+        None. You cannot pipe input to this function.
 
         .OUTPUTS
         Microsoft.Toolkit.Uwp.Notifications.ToastHeader
 
         .EXAMPLE
         New-BTHeader -Title 'First Category'
-
-        This command creates a Toast Header object, which will be displayed with the text "First Category."
+        Creates a header titled 'First Category' for categorizing toasts.
 
         .EXAMPLE
         New-BTHeader -Id '001' -Title 'Stack Overflow Questions' -Arguments 'http://stackoverflow.com/'
-
-        This command creates a Toast Header object, which will be displayed with the text "First Category."
-
-        Clicking the header will take the user to the Stack Overflow website.
+        Creates a header with ID '001' and links activation to a URL.
 
         .LINK
         https://github.com/Windos/BurntToast/blob/main/Help/New-BTHeader.md
@@ -35,25 +40,15 @@
                    HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTHeader.md')]
 
     param (
-        # Unique string that identifies a header. If a new Id is provided, the system will treat the header as a new header even if it has the same display text as a previous header.
-        #
-        # It is possible to update a header's display text by re-using the Id but changing the title.
         [Parameter()]
         [string] $Id = 'ID' + (New-Guid).ToString().Replace('-','').ToUpper(),
 
-        # The header string that is displayed to the user.
         [Parameter(Mandatory)]
         [string] $Title,
 
-        # Specifies an app defined string.
-        #
-        # For the purposes of BurntToast notifications this is generally the path to a file or URI and paired with the Protocol ActivationType.
         [Parameter()]
         [string] $Arguments,
 
-        # Defines tne ActivationType that is trigger when the button is pressed.
-        #
-        # Defaults to Protocol which will open the file or URI specified in with the Arguments parameter in the relevant system default application.
         [Parameter()]
         [Microsoft.Toolkit.Uwp.Notifications.ToastActivationType] $ActivationType = [Microsoft.Toolkit.Uwp.Notifications.ToastActivationType]::Protocol
     )

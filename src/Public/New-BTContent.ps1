@@ -1,35 +1,55 @@
 ﻿function New-BTContent {
     <#
         .SYNOPSIS
-        Creates a new Toast Content object.
+        Creates a new Toast Content object (base element for displaying a toast).
 
         .DESCRIPTION
-        The New-BTContent function creates a new Toast Content object which is the Base Toast element, which contains at least a visual element.
+        The New-BTContent function creates a new ToastContent object, the root config for a toast, containing the toast's visual, actions, audio, header, scenario, etc.
+
+        .PARAMETER Actions
+        Contains one or more custom actions (buttons, context menus, input fields), created via New-BTAction.
+
+        .PARAMETER ActivationType
+        Enum. Specifies what activation type is used when the user clicks the toast body.
+
+        .PARAMETER Audio
+        Adds audio properties for the toast, as created by New-BTAudio.
+
+        .PARAMETER Duration
+        Enum. How long the toast notification is displayed (Short/Long).
+
+        .PARAMETER Header
+        ToastHeader object, created via New-BTHeader, categorizing the toast in Action Center.
+
+        .PARAMETER Launch
+        String. Data passed to the activation context when a toast is clicked.
+
+        .PARAMETER Scenario
+        Enum. Tells Windows to treat the toast as an alarm, reminder, or more (ToastScenario).
+
+        .PARAMETER Visual
+        Required. ToastVisual object, created by New-BTVisual, representing the core content of the toast.
+
+        .PARAMETER ToastPeople
+        ToastPeople object, representing recipient/persons (optional, used for group chat/etc).
+
+        .PARAMETER CustomTimestamp
+        DateTime. Optional timestamp for when the toast is considered created (affects Action Center sort order).
 
         .INPUTS
-        None
+        None. You cannot pipe input to this function.
 
         .OUTPUTS
-        ToastContent
+        Microsoft.Toolkit.Uwp.Notifications.ToastContent
 
         .EXAMPLE
-        $binding1 = New-BTBinding -Children $text1, $text2 -AppLogoOverride $image2
-        $visual1 = New-BTVisual -BindingGeneric $binding1
-        $content1 = New-BTContent -Visual $visual1
-
-        This example combines numerous objects created via BurntToast functions into a binding, then a visual element and finally into a content object.
-
-        The resultant object can now be displayed using the Submit-BTNotification function.
+        $binding = New-BTBinding -Children (New-BTText -Content 'Title')
+        $visual = New-BTVisual -BindingGeneric $binding
+        New-BTContent -Visual $visual
 
         .EXAMPLE
-        $content1 = New-BTContent -Visual $visual1 -ActivationType Protocol -Launch 'https://google.com'
-
-        This command takes a pre-existing visual object and also specifies options required to launch a browser on the Google homepage when clicking the toast.
-
-        .NOTES
-        Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
-
-        Please see the originating repo here: https://github.com/Microsoft/UWPCommunityToolkit
+        $content = New-BTContent -Visual $visual -ActivationType Protocol -Launch 'https://example.com'
+        Toast opens a browser to a URL when clicked.
 
         .LINK
         https://github.com/Windos/BurntToast/blob/main/Help/New-BTContent.md
@@ -39,28 +59,20 @@
                    HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/New-BTContent.md')]
     [OutputType([Microsoft.Toolkit.Uwp.Notifications.ToastContent])]
     param (
-        # Optionally create custom actions with buttons and inputs (New-BTAction.)
         [Microsoft.Toolkit.Uwp.Notifications.IToastActions] $Actions,
 
-        # Specifies what activation type will be used when the user clicks the body of this Toast.
         [Microsoft.Toolkit.Uwp.Notifications.ToastActivationType] $ActivationType,
 
-        # Specify custom audio options (New-BTAudio.)
         [Microsoft.Toolkit.Uwp.Notifications.ToastAudio] $Audio,
 
-        # The amount of time the Toast should display. You typically should use the Scenario attribute instead, which impacts how long a Toast stays on screen.
         [Microsoft.Toolkit.Uwp.Notifications.ToastDuration] $Duration,
 
-        # New in Creators Update: Specifies an optional header for the toast notification (New-BTHeader.)
         [Microsoft.Toolkit.Uwp.Notifications.ToastHeader] $Header,
 
-        # A string that is passed to the application when it is activated by the Toast. The format and contents of this string are defined by the app for its own use. When the user taps or clicks the Toast to launch its associated app, the launch string provides the context to the app that allows it to show the user a view relevant to the Toast content, rather than launching in its default way.
         [string] $Launch,
 
-        # Specify the scenario, to make the Toast behave like an alarm, reminder, or more.
         [Microsoft.Toolkit.Uwp.Notifications.ToastScenario] $Scenario,
 
-        # Specify the visual element object, created with the New-BTVisual function.
         [Parameter(Mandatory)]
         [Microsoft.Toolkit.Uwp.Notifications.ToastVisual] $Visual,
 

@@ -4,18 +4,56 @@
         Submits a completed toast notification for display.
 
         .DESCRIPTION
-        The Submit-BTNotification function submits a completed toast notification to the operating systems' notification manager for display.
+        The Submit-BTNotification function submits a completed toast notification to the operating system's notification manager for display.
+        This function supports advanced scenarios such as event callbacks for user actions or toast dismissal, sequence numbering to ensure correct update order, unique identification for toast replacement, expiration control, and direct Action Center delivery.
+
+        If the -ReturnEventData switch is used and any event action scriptblocks are supplied (ActivatedAction, DismissedAction, FailedAction),
+        the $Event automatic variable from the event will be assigned to $global:ToastEvent before invoking your script block.
+        You can override the variable name used for event data by specifying -EventDataVariable. If supplied, the event data will be assigned to the chosen global variable in your event handler (e.g., -EventDataVariable 'CustomEvent' results in $global:CustomEvent).
+        Specifying -EventDataVariable implicitly enables the behavior of -ReturnEventData.
+
+        .PARAMETER Content
+        A ToastContent object to display, such as returned by New-BTContent. The content defines the visual and data parts of the toast.
+
+        .PARAMETER SequenceNumber
+        A number that sequences this notification's version. When updating a toast, a higher sequence number ensures the most recent notification is displayed, and older ones are not resurrected if received out-of-order.
+
+        .PARAMETER UniqueIdentifier
+        A string that uniquely identifies the toast notification. Submitting a new toast with the same identifier as a previous toast replaces the previous notification. Useful for updating or overwriting the same toast notification (e.g., for progress).
+
+        .PARAMETER DataBinding
+        Hashtable mapping strings to binding keys in a toast notification. Enables advanced updating scenarios; the original toast must include the relevant databinding keys to be updateable.
+
+        .PARAMETER ExpirationTime
+        A [datetime] specifying when the notification is no longer relevant and should be removed from the Action Center.
+
+        .PARAMETER SuppressPopup
+        If set, the notification is delivered directly to the Action Center (bypasses immediate display as a popup/toast notification).
+
+        .PARAMETER ActivatedAction
+        A script block executed if the user activates/clicks the toast notification.
+
+        .PARAMETER DismissedAction
+        A script block executed if the user dismisses the toast notification.
+
+        .PARAMETER FailedAction
+        A script block executed if the notification fails to display properly.
+
+        .PARAMETER ReturnEventData
+        If set, the $Event variable from notification activation/dismissal is made available as $global:ToastEvent within event action script blocks.
+
+        .PARAMETER EventDataVariable
+        If specified, assigns the $Event variable from notification callbacks to this global variable name (e.g., -EventDataVariable MyVar gives $global:MyVar in handlers). Implies ReturnEventData.
 
         .INPUTS
-        None
+        None. You cannot pipe input to this function.
 
         .OUTPUTS
-        None
+        None. This function submits a toast but returns no objects.
 
         .EXAMPLE
         Submit-BTNotification -Content $Toast1 -UniqueIdentifier 'Toast001'
-
-        This command submits the complete toast content object $Toast1, from the New-BTContent function, and tags it with a unique identifier so that it can be replaced/updated.
+        Submits the toast content object $Toast1 and tags it with a unique identifier so it can be replaced or updated.
 
         .LINK
         https://github.com/Windos/BurntToast/blob/main/Help/Submit-BTNotification.md
@@ -24,33 +62,17 @@
     [CmdletBinding(SupportsShouldProcess = $true,
                    HelpUri = 'https://github.com/Windos/BurntToast/blob/main/Help/Submit-BTNotification.md')]
     param (
-        # A Toast Content object which is the Base Toast element, created using the New-BTContent function.
         [Microsoft.Toolkit.Uwp.Notifications.ToastContent] $Content,
-
-        # When updating toasts (not curently working) rapidly, the sequence number helps to ensure that toasts recieved out of order will not be displayed in a manner that may confuse.
-        #
-        # A higher sequence number indicates a newer toast.
         [uint64] $SequenceNumber,
-
-        # A string that uniquely identifies a toast notification. Submitting a new toast with the same identifier as a previous toast will replace the previous toast.
-        #
-        # This is useful when updating the progress of a process, using a progress bar, or otherwise correcting/updating the information on a toast.
         [string] $UniqueIdentifier,
-
-        # A hashtable that binds strings to keys in a toast notification. In order to update a toast, the original toast needs to include a databinding hashtable.
         [hashtable] $DataBinding,
-
-        # The time after which the notification is no longer relevant and should be removed from the Action Center.
         [datetime] $ExpirationTime,
-
-        # Bypasses display to the screen and sends the notification directly to the Action Center.
         [switch] $SuppressPopup,
-
         [scriptblock] $ActivatedAction,
-
         [scriptblock] $DismissedAction,
-
-        [scriptblock] $FailedAction
+        [scriptblock] $FailedAction,
+        [switch] $ReturnEventData,
+        [string] $EventDataVariable = 'ToastEvent'
     )
 
     if (-not $IsWindows) {
@@ -144,18 +166,32 @@
     }
 
     if ($ActivatedAction -or $DismissedAction -or $FailedAction) {
-        if ($Script:ActionsSupported) {
+        $Action_Activated = $ActivatedAction
+        $Action_Dismissed = $DismissedAction
+        $Action_Failed = $FailedAction
+
+        if ($ReturnEventData -or $EventDataVariable -ne 'ToastEvent') {
+            $EventReturn = '$global:{0} = $Event' -f $EventDataVariable
+
             if ($ActivatedAction) {
-                Register-ObjectEvent -InputObject $Toast -EventName Activated -Action $ActivatedAction |Out-Null
+                $Action_Activated = [ScriptBlock]::Create($EventReturn + "`n" + $Action_Activated.ToString())
             }
             if ($DismissedAction) {
-                Register-ObjectEvent -InputObject $Toast -EventName Dismissed -Action $DismissedAction | Out-Null
+                $Action_Dismissed = [ScriptBlock]::Create($EventReturn + "`n" + $Action_Dismissed.ToString())
             }
             if ($FailedAction) {
-                Register-ObjectEvent -InputObject $Toast -EventName Failed -Action $FailedAction | Out-Null
+                $Action_Failed = [ScriptBlock]::Create($EventReturn + "`n" + $Action_Failed.ToString())
             }
-        } else {
-            Write-Warning $Script:UnsupportedEvents
+        }
+
+        if ($Action_Activated) {
+            Register-ObjectEvent -InputObject $Toast -EventName Activated -Action $Action_Activated | Out-Null
+        }
+        if ($Action_Dismissed) {
+            Register-ObjectEvent -InputObject $Toast -EventName Dismissed -Action $Action_Dismissed | Out-Null
+        }
+        if ($Action_Failed) {
+            Register-ObjectEvent -InputObject $Toast -EventName Failed -Action $Action_Failed | Out-Null
         }
     }
 
