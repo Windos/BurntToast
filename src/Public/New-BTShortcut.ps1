@@ -51,15 +51,26 @@ function New-BTShortcut {
     After creating the shortcut, launch PowerShell exclusively via this shortcut to guarantee Windows uses your custom name and icon
     for actionable toast notifications. This works for pwsh.exe (PowerShell 7+), powershell.exe (Windows PowerShell), or any compatible host.
 #>
-    [CmdletBinding(SupportsShouldProcess = $true)]
+    [CmdletBinding(SupportsShouldProcess = $true, DefaultParameterSetName = "Dynamic")]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$true, ParameterSetName="Dynamic")]
+        [Parameter(Mandatory=$true, ParameterSetName="ForceWindowsPowerShell")]
+        [Parameter(Mandatory=$true, ParameterSetName="ExecutablePath")]
         [string]$AppId,
 
+        [Parameter(ParameterSetName="Dynamic")]
+        [Parameter(ParameterSetName="ForceWindowsPowerShell")]
+        [Parameter(ParameterSetName="ExecutablePath")]
         [string]$ShortcutPath = [System.IO.Path]::Combine([Environment]::GetFolderPath("Desktop"), "PowerShell - $DisplayName.lnk"),
 
+        [Parameter(ParameterSetName="Dynamic")]
+        [Parameter(ParameterSetName="ForceWindowsPowerShell")]
+        [Parameter(ParameterSetName="ExecutablePath")]
         [string]$DisplayName = "PowerShell ($AppId)",
 
+        [Parameter(ParameterSetName="Dynamic")]
+        [Parameter(ParameterSetName="ForceWindowsPowerShell")]
+        [Parameter(ParameterSetName="ExecutablePath")]
         [string]$IconPath,
 
         [Parameter(ParameterSetName = "ForceWindowsPowerShell", Mandatory = $true)]
