@@ -35,10 +35,11 @@
     PrivateData       = @{
         PSData = @{
             Tags         = @('Notifications', 'Utilities', 'Windows10', 'Toast')
+            Prerelease   = 'Preview20250719'
             LicenseUri   = 'https://github.com/Windos/BurntToast/blob/main/LICENSE'
             ProjectUri   = 'https://github.com/Windos/BurntToast'
-            IconUri      = 'https://raw.githubusercontent.com/Windos/BurntToast/main/Media/BurntToast-Logo.png'
-            ReleaseNotes = '# 1.0.0
+            IconUri      = 'https://rawcdn.githack.com/Windos/BurntToast/3dd8dd7457552056da4bbd27880f8283e1116395/Media/BurntToast-Logo.png'
+            ReleaseNotes = '# 1.0.0-Preview20250719
 
 * Breaking Changes
   * Custom Audio Path Removed: Support for custom audio file sources has been eliminated.
