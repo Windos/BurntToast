@@ -142,9 +142,7 @@ Describe 'New-BurntToastNotification' {
             try {
                 $Text1 = New-BTText -Content 'Default Notification'
 
-                $Attrib = [Microsoft.Toolkit.Uwp.Notifications.ToastGenericAttributionText]::new()
-
-                $Attrib.Text = 'via Pester'
+                $Attrib = 'via Pester'
 
                 $Binding1 = New-BTBinding -Children $Text1 -Attribution $Attrib
                 $Visual1 = New-BTVisual -BindingGeneric $Binding1
@@ -163,5 +161,24 @@ Describe 'New-BurntToastNotification' {
             $Expected = 'What if: Performing the operation "Submit-BTNotification" on target "submitting: [ToastNotification] with Id , Sequence Number  and XML: <?xml version="1.0" encoding="utf-8"?><toast><visual><binding template="ToastGeneric"><text>{Default Notification}</text><text placement="attribution">via Pester</text></binding></visual></toast>".'
             $Log | Should -Be $Expected
         }
+    }
+}
+
+Context 'include attribution string' {
+    BeforeAll {
+        Start-Transcript tmp.log
+        try {
+            New-BurntToastNotification -Text 'Notification with Attribution' -Attribution 'Via Pester' -WhatIf
+        }
+        finally {
+            Stop-Transcript
+            $Log = (Get-Content tmp.log).Where({ $_ -match "What if: " })
+            Remove-Item tmp.log
+        }
+    }
+
+    It 'includes attribution text in WhatIf response' {
+        $Expected = "What if: Performing the operation ""New-BurntToastNotification"" on target ""submitting: <?xml version=""1.0"" encoding=""utf-8""?><toast><visual><binding template=""ToastGeneric""><text>{Notification with Attribution}</text><text placement=""attribution"">Via Pester</text><image src=""$ImagePath"" placement=""appLogoOverride"" hint-crop=""circle"" /></binding></visual></toast>""."
+        $Log | Should -Be $Expected
     }
 }
