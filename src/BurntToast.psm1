@@ -46,6 +46,12 @@ if ($OSVersion.Major -ge 10 -and $null -eq $env:BurntToastPesterNotWindows10) {
             }
         }
 
+        $Script:ActionsSupported = 'System.Management.Automation.SemanticVersion' -as [type] -and
+            $PSVersionTable.PSVersion -ge [System.Management.Automation.SemanticVersion] '7.1.0-preview.4'
+
+        $Script:UnsupportedEvents = 'Dismissed and Failed Toast events are only supported on PowerShell 7.1.0 and above. ' +
+            'Your notification will still be displayed, but these actions will be ignored.'
+
         Export-ModuleMember -Alias 'Toast'
         Export-ModuleMember -Function $Public.BaseName
 

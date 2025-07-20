@@ -165,6 +165,8 @@
         $Toast.Data.SequenceNumber = $SequenceNumber
     }
 
+    $CompatMgr = [Microsoft.Toolkit.Uwp.Notifications.ToastNotificationManagerCompat]
+
     if ($ActivatedAction -or $DismissedAction -or $FailedAction) {
         $Action_Activated = $ActivatedAction
         $Action_Dismissed = $DismissedAction
@@ -185,17 +187,23 @@
         }
 
         if ($Action_Activated) {
-            Register-ObjectEvent -InputObject $Toast -EventName Activated -Action $Action_Activated | Out-Null
+            Register-ObjectEvent -InputObject $CompatMgr -EventName OnActivated -Action $Action_Activated | Out-Null
         }
-        if ($Action_Dismissed) {
-            Register-ObjectEvent -InputObject $Toast -EventName Dismissed -Action $Action_Dismissed | Out-Null
-        }
-        if ($Action_Failed) {
-            Register-ObjectEvent -InputObject $Toast -EventName Failed -Action $Action_Failed | Out-Null
+        if ($Action_Dismissed -or $Action_Dismissed) {
+            if ($Script:ActionsSupported) {
+                if ($Action_Dismissed) {
+                    Register-ObjectEvent -InputObject $Toast -EventName Dismissed -Action $Action_Dismissed | Out-Null
+                }
+                if ($Action_Failed) {
+                    Register-ObjectEvent -InputObject $Toast -EventName Failed -Action $Action_Failed | Out-Null
+                }
+            } else {
+                Write-Warning $Script:UnsupportedEvents
+            }
         }
     }
 
     if($PSCmdlet.ShouldProcess( "submitting: [$($Toast.GetType().Name)] with Id $UniqueIdentifier, Sequence Number $($Toast.Data.SequenceNumber) and XML: $($Content.GetContent())")) {
-        [Microsoft.Toolkit.Uwp.Notifications.ToastNotificationManagerCompat]::CreateToastNotifier().Show($Toast)
+        $CompatMgr::CreateToastNotifier().Show($Toast)
     }
 }
