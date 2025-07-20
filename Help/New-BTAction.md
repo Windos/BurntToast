@@ -10,12 +10,12 @@ The `New-BTAction` function creates a Toast action object (`IToastActions`), def
 
 ## PARAMETERS
 
-| Name              | Type                                                      | Description                                                                                                                           |
-|-------------------|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| `Buttons`         | Microsoft.Toolkit.Uwp.Notifications.IToastButton[]        | Button objects created with `New-BTButton`. Up to five may be included, or fewer if context menu items are also included.              |
-| `ContextMenuItems`| Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem[]| Right-click context menu item objects created with `New-BTContextMenuItem`. Up to five may be included, or fewer if Buttons are included.|
-| `Inputs`          | Microsoft.Toolkit.Uwp.Notifications.IToastInput[]         | Input objects created via `New-BTText` and `New-BTSelectionBoxItem`. Up to five can be included.                                      |
-| `SnoozeAndDismiss`| Switch                                                    | Switch. Creates a system-handled set of Snooze and Dismiss buttons, only available in the 'SnoozeAndDismiss' parameter set. Cannot be used with custom actions. |
+| Name              | Type                                                      | Description                                                                                                                           | Mandatory           |
+|-------------------|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|---------------------|
+| `Buttons`         | Microsoft.Toolkit.Uwp.Notifications.IToastButton[]        | Button objects created with `New-BTButton`. Up to five may be included, or fewer if context menu items are also included.              | No                  |
+| `ContextMenuItems`| Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem[]| Right-click context menu item objects created with `New-BTContextMenuItem`. Up to five may be included, or fewer if Buttons are included.| No                  |
+| `Inputs`          | Microsoft.Toolkit.Uwp.Notifications.IToastInput[]         | Input objects created via `New-BTText` and `New-BTSelectionBoxItem`. Up to five can be included.                                      | No                  |
+| `SnoozeAndDismiss`| Switch                                                    | Switch. Creates a system-handled set of Snooze and Dismiss buttons, only available in the 'SnoozeAndDismiss' parameter set. Cannot be used with custom actions. | Yes (when using 'SnoozeAndDismiss' set) |
 
 ## INPUTS
 

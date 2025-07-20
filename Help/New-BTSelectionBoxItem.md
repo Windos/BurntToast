@@ -10,10 +10,10 @@ The `New-BTSelectionBoxItem` function creates a selection box item (`ToastSelect
 
 ## PARAMETERS
 
-| Name        | Type       | Description                                                                                               |
-|-------------|------------|-----------------------------------------------------------------------------------------------------------|
-| `Id`        | String (Mandatory) | Unique identifier for this selection box item, also referred to by `DefaultSelectionBoxItemId` when used in `New-BTInput`.|
-| `Content`   | String (Mandatory) | String to display as the label for the item in the dropdown.                                        |
+| Name        | Type       | Description                                                                                               | Mandatory |
+|-------------|------------|-----------------------------------------------------------------------------------------------------------|-----------|
+| `Id`        | String (Mandatory) | Unique identifier for this selection box item, also referred to by `DefaultSelectionBoxItemId` when used in `New-BTInput`.| Yes       |
+| `Content`   | String (Mandatory) | String to display as the label for the item in the dropdown.                                        | Yes       |
 
 ## INPUTS
 

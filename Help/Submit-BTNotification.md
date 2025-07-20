@@ -17,19 +17,19 @@ Specifying `-EventDataVariable` implicitly enables the behavior of `-ReturnEvent
 
 ## PARAMETERS
 
-| Name               | Type        | Description                                                                                                           |
-|--------------------|-------------|-----------------------------------------------------------------------------------------------------------------------|
-| `Content`          | ToastContent     | A ToastContent object to display, such as returned by `New-BTContent`. The content defines the visual and data parts of the toast.                                                           |
-| `SequenceNumber`   | UInt64      | A number that sequences this notification's version. When updating a toast, a higher sequence number ensures the most recent notification is displayed.                                         |
-| `UniqueIdentifier` | String      | A string that uniquely identifies the toast notification. Submitting a new toast with the same identifier as a previous toast replaces the previous notification.                              |
-| `DataBinding`      | Hashtable   | Hashtable mapping strings to binding keys in a toast notification. Enables advanced updating scenarios.                                                    |
-| `ExpirationTime`   | DateTime    | When the notification is no longer relevant and should be removed from the Action Center.                                                                  |
-| `SuppressPopup`    | Switch      | If set, the notification is delivered directly to the Action Center (bypassing immediate display).                                                         |
-| `ActivatedAction`  | ScriptBlock | A script block executed if the user activates/clicks the toast notification.                                                                               |
-| `DismissedAction`  | ScriptBlock | A script block executed if the user dismisses the toast notification.                                                                                      |
-| `FailedAction`     | ScriptBlock | A script block executed if the notification fails to display properly.                                                                                     |
-| `ReturnEventData`  | Switch      | If set, the `$Event` variable from notification activation/dismissal is made available as `$global:ToastEvent` within event action script blocks.                                               |
-| `EventDataVariable`| String      | Assigns the `$Event` variable from notification callbacks to this global variable name. Implies `ReturnEventData`.                                         |
+| Name               | Type        | Description                                                                                                           | Mandatory |
+|--------------------|-------------|-----------------------------------------------------------------------------------------------------------------------|-----------|
+| `Content`          | ToastContent     | A ToastContent object to display, such as returned by `New-BTContent`. The content defines the visual and data parts of the toast.                | No        |
+| `SequenceNumber`   | UInt64      | A number that sequences this notification's version. When updating a toast, a higher sequence number ensures the most recent notification is displayed. | No        |
+| `UniqueIdentifier` | String      | A string that uniquely identifies the toast notification. Submitting a new toast with the same identifier as a previous toast replaces the previous notification. | No        |
+| `DataBinding`      | Hashtable   | Hashtable mapping strings to binding keys in a toast notification. Enables advanced updating scenarios.                | No        |
+| `ExpirationTime`   | DateTime    | When the notification is no longer relevant and should be removed from the Action Center.                             | No        |
+| `SuppressPopup`    | Switch      | If set, the notification is delivered directly to the Action Center (bypassing immediate display).                    | No        |
+| `ActivatedAction`  | ScriptBlock | A script block executed if the user activates/clicks the toast notification.                                         | No        |
+| `DismissedAction`  | ScriptBlock | A script block executed if the user dismisses the toast notification.                                                | No        |
+| `FailedAction`     | ScriptBlock | A script block executed if the notification fails to display properly.                                               | No        |
+| `ReturnEventData`  | Switch      | If set, the `$Event` variable from notification activation/dismissal is made available as `$global:ToastEvent` within event action script blocks. | No        |
+| `EventDataVariable`| String      | Assigns the `$Event` variable from notification callbacks to this global variable name. Implies `ReturnEventData`.   | No        |
 
 ## INPUTS
 

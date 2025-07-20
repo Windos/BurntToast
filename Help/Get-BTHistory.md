@@ -12,10 +12,10 @@ The objects returned include tag and group information which can be used with `R
 
 ## PARAMETERS
 
-| Name              | Type   | Description                                                                                 |
-|-------------------|--------|---------------------------------------------------------------------------------------------|
-| `UniqueIdentifier`| String | Returns only toasts with a matching tag or group specified by the provided unique identifier.|
-| `ScheduledToast`  | Switch | If provided, returns scheduled toast notifications instead of those currently in the Action Center.|
+| Name              | Type   | Description                                                                                 | Mandatory |
+|-------------------|--------|---------------------------------------------------------------------------------------------|-----------|
+| `UniqueIdentifier`| String | Returns only toasts with a matching tag or group specified by the provided unique identifier.| No        |
+| `ScheduledToast`  | Switch | If provided, returns scheduled toast notifications instead of those currently in the Action Center.| No    |
 
 ## INPUTS
 

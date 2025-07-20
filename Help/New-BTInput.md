@@ -11,14 +11,14 @@ Use the Text parameter set for a type-in input, and the Selection parameter set 
 
 ## PARAMETERS
 
-| Name                      | Type                                                                 | Description                                                                                        |
-|---------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
-| `Id`                      | String (Mandatory)                                                   | Developer-provided ID for referencing this input/result.                                           |
-| `Title`                   | String                                                               | Text to display above the input box or selection.                                                  |
-| `PlaceholderContent`      | String (Text set only)                                               | String placeholder to show when the text box is empty.                                             |
-| `DefaultInput`            | String                                                               | Default text to pre-fill in the text box.                                                          |
-| `DefaultSelectionBoxItemId` | String                                                            | ID of the default selection item (must match one of the provided SelectionBoxItems).               |
-| `Items`                   | Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem[] (Selection set) | Array of `ToastSelectionBoxItem` objects to populate the pick list.                           |
+| Name                      | Type                                                                 | Description                                                                                        | Mandatory                                 |
+|---------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|--------------------------------------------|
+| `Id`                      | String (Mandatory)                                                   | Developer-provided ID for referencing this input/result.                                           | Yes                                        |
+| `Title`                   | String                                                               | Text to display above the input box or selection.                                                  | No                                         |
+| `PlaceholderContent`      | String (Text set only)                                               | String placeholder to show when the text box is empty.                                             | No                                         |
+| `DefaultInput`            | String                                                               | Default text to pre-fill in the text box.                                                          | No                                         |
+| `DefaultSelectionBoxItemId` | String                                                            | ID of the default selection item (must match one of the provided SelectionBoxItems).               | No                                         |
+| `Items`                   | Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem[] (Selection set) | Array of `ToastSelectionBoxItem` objects to populate the pick list.                           | Yes (when using 'Selection' set)           |
 
 ## INPUTS
 

@@ -10,12 +10,12 @@ The `New-BTHeader` function creates a toast notification header (`ToastHeader`) 
 
 ## PARAMETERS
 
-| Name            | Type                                                   | Description                                                                                        |
-|-----------------|--------------------------------------------------------|----------------------------------------------------------------------------------------------------|
-| `Id`            | String                                                 | Unique string identifying this header instance. Used for replacement or updating by reuse.          |
-| `Title`         | String (Mandatory)                                     | The text displayed to the user as the header.                                                      |
-| `Arguments`     | String                                                 | String data passed to Activation if the header itself is clicked.                                   |
-| `ActivationType`| Microsoft.Toolkit.Uwp.Notifications.ToastActivationType| Enum specifying the activation type (defaults to Protocol).                                         |
+| Name            | Type                                                   | Description                                                                                        | Mandatory |
+|-----------------|--------------------------------------------------------|----------------------------------------------------------------------------------------------------|-----------|
+| `Id`            | String                                                 | Unique string identifying this header instance. Used for replacement or updating by reuse.          | No        |
+| `Title`         | String (Mandatory)                                     | The text displayed to the user as the header.                                                      | Yes       |
+| `Arguments`     | String                                                 | String data passed to Activation if the header itself is clicked.                                   | No        |
+| `ActivationType`| Microsoft.Toolkit.Uwp.Notifications.ToastActivationType| Enum specifying the activation type (defaults to Protocol).                                         | No        |
 
 ## INPUTS
 

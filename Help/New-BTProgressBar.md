@@ -10,13 +10,13 @@ The `New-BTProgressBar` function creates a new `AdaptiveProgressBar` element for
 
 ## PARAMETERS
 
-| Name        | Type                | Description                                                                           |
-|-------------|---------------------|---------------------------------------------------------------------------------------|
-| `Title`     | String              | Text displayed above the progress bar (optional context).                             |
-| `Status`    | String (Mandatory)  | String describing the current operation status, shown below the bar.                  |
-| `Indeterminate`| Switch           | When set, an indeterminate animation is shown (can't be used with Value).             |
-| `Value`     | Double (0-1)        | The percent complete (e.g. 0.45 = 45%).                                               |
-| `ValueDisplay`| String            | Replaces default percentage label with a custom one.                                  |
+| Name        | Type                | Description                                                                           | Mandatory                                 |
+|-------------|---------------------|---------------------------------------------------------------------------------------|--------------------------------------------|
+| `Title`     | String              | Text displayed above the progress bar (optional context).                             | No                                         |
+| `Status`    | String (Mandatory)  | String describing the current operation status, shown below the bar.                  | Yes                                        |
+| `Indeterminate`| Switch           | When set, an indeterminate animation is shown (can't be used with Value).             | Yes (when using 'Indeterminate' set)       |
+| `Value`     | Double (0-1)        | The percent complete (e.g. 0.45 = 45%).                                               | Yes (when using 'Determinate' set)         |
+| `ValueDisplay`| String            | Replaces default percentage label with a custom one.                                  | No                                         |
 
 ## INPUTS
 

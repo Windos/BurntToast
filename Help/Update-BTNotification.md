@@ -11,11 +11,11 @@ The `Update-BTNotification` function updates a toast notification by matching `U
 
 ## PARAMETERS
 
-| Name              | Type     | Description                                                                                             |
-|-------------------|----------|---------------------------------------------------------------------------------------------------------|
-| `SequenceNumber`  | UInt64   | Used for notification versioning; higher numbers indicate newer content to prevent out-of-order display. |
-| `UniqueIdentifier`| String   | String uniquely identifying the toast notification to update.                                            |
-| `DataBinding`     | Hashtable| Hashtable containing the data binding keys/values to update.                                             |
+| Name              | Type     | Description                                                                                             | Mandatory |
+|-------------------|----------|---------------------------------------------------------------------------------------------------------|-----------|
+| `SequenceNumber`  | UInt64   | Used for notification versioning; higher numbers indicate newer content to prevent out-of-order display. | No        |
+| `UniqueIdentifier`| String   | String uniquely identifying the toast notification to update.                                            | No        |
+| `DataBinding`     | Hashtable| Hashtable containing the data binding keys/values to update.                                             | No        |
 
 ## INPUTS
 

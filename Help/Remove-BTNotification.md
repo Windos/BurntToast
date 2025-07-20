@@ -12,11 +12,11 @@ Specify `Tag` and/or `Group` to remove specific notifications. Use `UniqueIdenti
 
 ## PARAMETERS
 
-| Name              | Type    | Description                                                                                 |
-|-------------------|---------|---------------------------------------------------------------------------------------------|
-| `Tag`             | String  | The tag of the toast notification(s) to remove.                                             |
-| `Group`           | String  | The group (category) of the toast notification(s) to remove.                                |
-| `UniqueIdentifier`| String  | Used to specify both the Tag and Group and remove a uniquely identified toast.              |
+| Name              | Type    | Description                                                                                 | Mandatory                       |
+|-------------------|---------|---------------------------------------------------------------------------------------------|----------------------------------|
+| `Tag`             | String  | The tag of the toast notification(s) to remove.                                             | No                               |
+| `Group`           | String  | The group (category) of the toast notification(s) to remove.                                | No                               |
+| `UniqueIdentifier`| String  | Used to specify both the Tag and Group and remove a uniquely identified toast.              | Yes (when using 'Combo' set)     |
 
 ## INPUTS
 

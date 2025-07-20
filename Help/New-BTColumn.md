@@ -12,11 +12,11 @@ Content is arranged vertically and multiple columns can be combined for side-by-
 
 ## PARAMETERS
 
-| Name          | Type                                                                        | Description                                                                                                                             |
-|---------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
-| `Children`    | Microsoft.Toolkit.Uwp.Notifications.IAdaptiveSubgroupChild[]                | Array. Elements (such as Adaptive Text or Image objects) for display in this column, created via `New-BTText` or `New-BTImage`.         |
-| `Weight`      | Int                                                                         | The relative width of this column compared to others in the toast.                                                                       |
-| `TextStacking`| Microsoft.Toolkit.Uwp.Notifications.AdaptiveSubgroupTextStacking            | Enum. Controls vertical alignment of the content; accepts values from `AdaptiveSubgroupTextStacking`.                                   |
+| Name          | Type                                                                        | Description                                                                                                                             | Mandatory |
+|---------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|-----------|
+| `Children`    | Microsoft.Toolkit.Uwp.Notifications.IAdaptiveSubgroupChild[]                | Array. Elements (such as Adaptive Text or Image objects) for display in this column, created via `New-BTText` or `New-BTImage`.         | No        |
+| `Weight`      | Int                                                                         | The relative width of this column compared to others in the toast.                                                                       | No        |
+| `TextStacking`| Microsoft.Toolkit.Uwp.Notifications.AdaptiveSubgroupTextStacking            | Enum. Controls vertical alignment of the content; accepts values from `AdaptiveSubgroupTextStacking`.                                   | No        |
 
 ## INPUTS
 

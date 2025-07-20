@@ -11,17 +11,17 @@ You can specify the image source, cropping, alt text, alignment, and additional 
 
 ## PARAMETERS
 
-| Name             | Type                                                    | Description                                                                                 |
-|------------------|---------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| `Source`         | String                                                  | URI or file path of the image. Can be from your app, local filesystem, or the internet (must be <200KB for remote). |
-| `AlternateText`  | String                                                  | Description of the image for assistive technology.                                          |
-| `AppLogoOverride`| Switch                                                  | Marks this image as the logo, to be shown as the app logo on the toast.                     |
-| `HeroImage`      | Switch                                                  | Marks this image as the hero image, to be prominently displayed.                            |
-| `Align`          | Microsoft.Toolkit.Uwp.Notifications.AdaptiveImageAlign  | Horizontal alignment (only supported within groups).                                        |
-| `Crop`           | Microsoft.Toolkit.Uwp.Notifications.AdaptiveImageCrop   | Specifies cropping of the image (e.g., Circle for logos).                                   |
-| `RemoveMargin`   | Switch                                                  | Removes default 8px margin around the image.                                                |
-| `AddImageQuery`  | Switch                                                  | Allows Windows to append scaling/language query string to the URI.                          |
-| `IgnoreCache`    | Switch                                                  | Forces image to be refreshed (when used with `Optimize-BTImageSource`).                     |
+| Name             | Type                                                    | Description                                                                                 | Mandatory                               |
+|------------------|---------------------------------------------------------|---------------------------------------------------------------------------------------------|------------------------------------------|
+| `Source`         | String                                                  | URI or file path of the image. Can be from your app, local filesystem, or the internet (must be <200KB for remote). | No                                       |
+| `AlternateText`  | String                                                  | Description of the image for assistive technology.                                          | No                                       |
+| `AppLogoOverride`| Switch                                                  | Marks this image as the logo, to be shown as the app logo on the toast.                     | Yes (when using 'AppLogo' set)           |
+| `HeroImage`      | Switch                                                  | Marks this image as the hero image, to be prominently displayed.                            | Yes (when using 'Hero' set)              |
+| `Align`          | Microsoft.Toolkit.Uwp.Notifications.AdaptiveImageAlign  | Horizontal alignment (only supported within groups).                                        | No                                       |
+| `Crop`           | Microsoft.Toolkit.Uwp.Notifications.AdaptiveImageCrop   | Specifies cropping of the image (e.g., Circle for logos).                                   | No                                       |
+| `RemoveMargin`   | Switch                                                  | Removes default 8px margin around the image.                                                | No                                       |
+| `AddImageQuery`  | Switch                                                  | Allows Windows to append scaling/language query string to the URI.                          | No                                       |
+| `IgnoreCache`    | Switch                                                  | Forces image to be refreshed (when used with `Optimize-BTImageSource`).                     | No                                       |
 
 ## INPUTS
 

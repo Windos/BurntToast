@@ -11,16 +11,16 @@ All formatting and layout options (wrapping, lines, alignment, style, language) 
 
 ## PARAMETERS
 
-| Name      | Type      | Description                                                                                           |
-|-----------|-----------|-------------------------------------------------------------------------------------------------------|
-| `Text`    | String    | The text to display as the content. If omitted, a blank line is produced. Aliased as 'Content'.       |
-| `MaxLines`| Int       | Maximum number of lines the text may display (wraps/collapses extra lines).                           |
-| `MinLines`| Int       | Minimum number of lines that must be shown.                                                           |
-| `Wrap`    | Switch    | Enable/disable word wrapping.                                                                         |
-| `Align`   | AdaptiveTextAlign | Property for horizontal alignment of the text.                                                |
-| `Style`   | AdaptiveTextStyle | Controls font size, weight, opacity for the text.                                             |
-| `Language`| String    | BCP-47 language tag for payload, e.g. "en-US" (overrides parent).                                     |
-| `Bind`    | Switch    | Indicates the text comes from a data binding expression (for advanced scenarios).                     |
+| Name      | Type      | Description                                                                                           | Mandatory |
+|-----------|-----------|-------------------------------------------------------------------------------------------------------|-----------|
+| `Text`    | String    | The text to display as the content. If omitted, a blank line is produced. Aliased as 'Content'.       | No        |
+| `MaxLines`| Int       | Maximum number of lines the text may display (wraps/collapses extra lines).                           | No        |
+| `MinLines`| Int       | Minimum number of lines that must be shown.                                                           | No        |
+| `Wrap`    | Switch    | Enable/disable word wrapping.                                                                         | No        |
+| `Align`   | AdaptiveTextAlign | Property for horizontal alignment of the text.                                                | No        |
+| `Style`   | AdaptiveTextStyle | Controls font size, weight, opacity for the text.                                             | No        |
+| `Language`| String    | BCP-47 language tag for payload, e.g. "en-US" (overrides parent).                                     | No        |
+| `Bind`    | Switch    | Indicates the text comes from a data binding expression (for advanced scenarios).                     | No        |
 
 ## INPUTS
 

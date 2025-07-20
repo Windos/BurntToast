@@ -11,26 +11,26 @@ Parameter sets ensure mutual exclusivity (e.g., you cannot use Silent and Sound 
 
 ## PARAMETERS
 
-| Name               | Type   | Description                                                                                                      |
-|--------------------|--------|------------------------------------------------------------------------------------------------------------------|
-| `Text`             | String[] (up to 3) | Up to 3 strings to show within the Toast Notification. The first is the title.                              |
-| `Column`           | AdaptiveSubgroup[]  | Array of columns, created by `New-BTColumn`, to be rendered side-by-side in the toast.                      |
-| `AppLogo`          | String              | Path to an image that will appear as the application logo.                                                  |
-| `HeroImage`        | String              | Path to a prominent hero image for the notification.                                                        |
-| `Sound`            | String              | The sound to play. Choose from Default, alarms, calls, etc. (Cannot be used with Silent.)                   |
-| `Silent`           | Switch              | Makes the notification silent.                                                                              |
-| `SnoozeAndDismiss` | Switch              | Adds system-provided snooze and dismiss controls.                                                           |
-| `Button`           | IToastButton[]      | Array of button objects for custom actions, created by `New-BTButton`.                                      |
-| `Header`           | ToastHeader         | Toast header object (`New-BTHeader`): categorize or group notifications.                                    |
-| `ProgressBar`      | AdaptiveProgressBar[] | One or more progress bars, created by `New-BTProgressBar`, for visualizing progress within the notification.|
-| `UniqueIdentifier` | String              | Optional string grouping related notifications; allows newer notifications to overwrite older.              |
-| `DataBinding`      | Hashtable           | Associates string values with binding variables to allow updating toasts by data.                           |
-| `ExpirationTime`   | DateTime            | After which the notification is removed from the Action Center.                                             |
-| `SuppressPopup`    | Switch              | If set, the toast is sent to Action Center but not displayed as a popup.                                    |
-| `CustomTimestamp`  | DateTime            | Custom timestamp used for Action Center sorting.                                                            |
-| `ActivatedAction`  | ScriptBlock         | Script block to invoke when the toast is activated (clicked).                                               |
-| `DismissedAction`  | ScriptBlock         | Script block to invoke when the toast is dismissed by the user.                                             |
-| `EventDataVariable`| String              | The name of the global variable that will contain event data for use in event handler script blocks.        |
+| Name               | Type   | Description                                                                                                      | Mandatory                                                  |
+|--------------------|--------|------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|
+| `Text`             | String[] (up to 3) | Up to 3 strings to show within the Toast Notification. The first is the title.                              | No                                                         |
+| `Column`           | AdaptiveSubgroup[]  | Array of columns, created by `New-BTColumn`, to be rendered side-by-side in the toast.                      | No                                                         |
+| `AppLogo`          | String              | Path to an image that will appear as the application logo.                                                  | No                                                         |
+| `HeroImage`        | String              | Path to a prominent hero image for the notification.                                                        | No                                                         |
+| `Sound`            | String              | The sound to play. Choose from Default, alarms, calls, etc. (Cannot be used with Silent.)                   | Yes (when using 'Sound-SnD'/'Sound-Button' set)            |
+| `Silent`           | Switch              | Makes the notification silent.                                                                              | Yes (when using 'Silent' sets)                             |
+| `SnoozeAndDismiss` | Switch              | Adds system-provided snooze and dismiss controls.                                                           | Yes (when using 'SnD' sets)                                |
+| `Button`           | IToastButton[]      | Array of button objects for custom actions, created by `New-BTButton`.                                      | Yes (when using 'Button' sets)                             |
+| `Header`           | ToastHeader         | Toast header object (`New-BTHeader`): categorize or group notifications.                                    | No                                                         |
+| `ProgressBar`      | AdaptiveProgressBar[] | One or more progress bars, created by `New-BTProgressBar`, for visualizing progress within the notification.| No                                                         |
+| `UniqueIdentifier` | String              | Optional string grouping related notifications; allows newer notifications to overwrite older.              | No                                                         |
+| `DataBinding`      | Hashtable           | Associates string values with binding variables to allow updating toasts by data.                           | No                                                         |
+| `ExpirationTime`   | DateTime            | After which the notification is removed from the Action Center.                                             | No                                                         |
+| `SuppressPopup`    | Switch              | If set, the toast is sent to Action Center but not displayed as a popup.                                    | No                                                         |
+| `CustomTimestamp`  | DateTime            | Custom timestamp used for Action Center sorting.                                                            | No                                                         |
+| `ActivatedAction`  | ScriptBlock         | Script block to invoke when the toast is activated (clicked).                                               | No                                                         |
+| `DismissedAction`  | ScriptBlock         | Script block to invoke when the toast is dismissed by the user.                                             | No                                                         |
+| `EventDataVariable`| String              | The name of the global variable that will contain event data for use in event handler script blocks.        | No                                                         |
 
 ## INPUTS
 

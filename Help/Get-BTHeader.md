@@ -11,11 +11,11 @@ You can filter by a specific toast notification identifier, header title, or hea
 
 ## PARAMETERS
 
-| Name                   | Type   | Description                                                                      |
-|------------------------|--------|----------------------------------------------------------------------------------|
-| `ToastUniqueIdentifier`| String | The unique identifier of a toast notification. Only headers belonging to the notification with this identifier will be returned. |
-| `Title`                | String | Filters headers by a specific title.                                             |
-| `Id`                   | String | Filters headers to only those with the specified header id.                      |
+| Name                   | Type   | Description                                                                      | Mandatory                          |
+|------------------------|--------|----------------------------------------------------------------------------------|-------------------------------------|
+| `ToastUniqueIdentifier`| String | The unique identifier of a toast notification. Only headers belonging to the notification with this identifier will be returned. | Yes (when using 'ByToastId' set)   |
+| `Title`                | String | Filters headers by a specific title.                                             | Yes (when using 'ByTitle' set)      |
+| `Id`                   | String | Filters headers to only those with the specified header id.                      | Yes (when using 'ById' set)         |
 
 ## INPUTS
 

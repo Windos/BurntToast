@@ -11,11 +11,11 @@ You can use this function to select a built-in notification sound (including ala
 
 ## PARAMETERS
 
-| Name        | Type         | Description                                                                                                                                                                |
-|-------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Source`    | Uri          | URI string. Specifies the sound to play with the Toast Notification. Accepts Microsoft notification sound URIs such as `ms-winsoundevent:Notification.IM` or a file path for custom audio. |
-| `Loop`      | Switch       | Specifies that the selected sound should loop, if its duration is shorter than the toast it accompanies.                                                                    |
-| `Silent`    | Switch       | Makes the toast silent (no sound).                                                                                                                                         |
+| Name        | Type         | Description                                                                                                                                                                | Mandatory              |
+|-------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|
+| `Source`    | Uri          | URI string. Specifies the sound to play with the Toast Notification. Accepts Microsoft notification sound URIs such as `ms-winsoundevent:Notification.IM` or a file path for custom audio. | Yes (when using standard sound) |
+| `Loop`      | Switch       | Specifies that the selected sound should loop, if its duration is shorter than the toast it accompanies.                                                                    | No                     |
+| `Silent`    | Switch       | Makes the toast silent (no sound).                                                                                                                                         | Yes (when using silent) |
 
 ## INPUTS
 

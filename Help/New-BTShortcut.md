@@ -11,14 +11,14 @@ This function automates creation of such a shortcut, optionally with a custom ic
 
 ## PARAMETERS
 
-| Name                 | Type     | Description                                                                                                     |
-|----------------------|----------|-----------------------------------------------------------------------------------------------------------------|
-| `AppId`              | String (Mandatory) | The AppUserModelID to set on the shortcut (should match the value registered with `New-BTAppId`).             |
-| `ShortcutPath`       | String   | Path where the shortcut (.lnk) will be created. Defaults to Desktop.                                            |
-| `DisplayName`        | String   | Friendly display name/description for the shortcut (optional).                                                  |
-| `IconPath`           | String   | Path to the icon image to use for the shortcut (should match icon registered for AppId; optional).              |
-| `ForceWindowsPowerShell` | Switch | Forces the shortcut to use Windows PowerShell (powershell.exe), even if PowerShell 7+ (pwsh.exe) is available. Cannot be used with ExecutablePath. |
-| `ExecutablePath`     | String   | The absolute path to a custom executable (pwsh.exe, powershell.exe, or another PowerShell host). Cannot be used with ForceWindowsPowerShell. |
+| Name                 | Type     | Description                                                                                                     | Mandatory                                 |
+|----------------------|----------|-----------------------------------------------------------------------------------------------------------------|--------------------------------------------|
+| `AppId`              | String (Mandatory) | The AppUserModelID to set on the shortcut (should match the value registered with `New-BTAppId`).             | Yes                                        |
+| `ShortcutPath`       | String   | Path where the shortcut (.lnk) will be created. Defaults to Desktop.                                            | No                                         |
+| `DisplayName`        | String   | Friendly display name/description for the shortcut (optional).                                                  | No                                         |
+| `IconPath`           | String   | Path to the icon image to use for the shortcut (should match icon registered for AppId; optional).              | No                                         |
+| `ForceWindowsPowerShell` | Switch | Forces the shortcut to use Windows PowerShell (powershell.exe), even if PowerShell 7+ (pwsh.exe) is available. Cannot be used with ExecutablePath. | Yes (when using 'ForceWindowsPowerShell' set) |
+| `ExecutablePath`     | String   | The absolute path to a custom executable (pwsh.exe, powershell.exe, or another PowerShell host). Cannot be used with ForceWindowsPowerShell. | Yes (when using 'ExecutablePath' set)      |
 
 ## INPUTS
 

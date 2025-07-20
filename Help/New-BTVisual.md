@@ -11,13 +11,13 @@ This includes the root Toast binding, optional alternate bindings, image query, 
 
 ## PARAMETERS
 
-| Name               | Type                                                    | Description                                                                                                         |
-|--------------------|---------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| `BindingGeneric`   | ToastBindingGeneric (Mandatory)                         | ToastBindingGeneric object describing the main layout and visuals (text, images, progress bars, columns).           |
-| `BindingShoulderTap`| ToastBindingShoulderTap                                | Optional alternate Toast binding rendered on devices supporting ShoulderTap notifications.                           |
-| `AddImageQuery`    | Switch                                                  | Allows image URIs to include scale and language info added by Windows.                                               |
-| `BaseUri`          | Uri                                                     | URI to prepend to all relative image URIs in the toast.                                                             |
-| `Language`         | String                                                  | BCP-47 tag specifying what language/locale to use for display.                                                      |
+| Name               | Type                                                    | Description                                                                                                         | Mandatory |
+|--------------------|---------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|-----------|
+| `BindingGeneric`   | ToastBindingGeneric (Mandatory)                         | ToastBindingGeneric object describing the main layout and visuals (text, images, progress bars, columns).           | Yes       |
+| `BindingShoulderTap`| ToastBindingShoulderTap                                | Optional alternate Toast binding rendered on devices supporting ShoulderTap notifications.                           | No        |
+| `AddImageQuery`    | Switch                                                  | Allows image URIs to include scale and language info added by Windows.                                               | No        |
+| `BaseUri`          | Uri                                                     | URI to prepend to all relative image URIs in the toast.                                                             | No        |
+| `Language`         | String                                                  | BCP-47 tag specifying what language/locale to use for display.                                                      | No        |
 
 ## INPUTS
 
