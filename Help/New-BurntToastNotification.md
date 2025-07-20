@@ -17,6 +17,7 @@ Parameter sets ensure mutual exclusivity (e.g., you cannot use Silent and Sound 
 | `Column`           | AdaptiveSubgroup[]  | Array of columns, created by `New-BTColumn`, to be rendered side-by-side in the toast.                      | No                                                         |
 | `AppLogo`          | String              | Path to an image that will appear as the application logo.                                                  | No                                                         |
 | `HeroImage`        | String              | Path to a prominent hero image for the notification.                                                        | No                                                         |
+| `Attribution`      | String              | Optional attribution text displayed at the bottom of the notification. Only supported on modern Windows.    | No                                                         |
 | `Sound`            | String              | The sound to play. Choose from Default, alarms, calls, etc. (Cannot be used with Silent.)                   | Yes (when using 'Sound-SnD'/'Sound-Button' set)            |
 | `Silent`           | Switch              | Makes the notification silent.                                                                              | Yes (when using 'Silent' sets)                             |
 | `SnoozeAndDismiss` | Switch              | Adds system-provided snooze and dismiss controls.                                                           | Yes (when using 'SnD' sets)                                |
@@ -75,6 +76,14 @@ New-BurntToastNotification -Text 'Major Update Available!' -Header $header
 ```
 
 Creates a categorized notification under the 'Updates' header.
+
+### Example: Notification with Attribution
+
+```powershell
+New-BurntToastNotification -Text 'Integration Complete' -Attribution 'Powered by BurntToast'
+```
+
+Displays a notification with attribution at the bottom, e.g., "Powered by BurntToast".
 
 ## LINKS
 

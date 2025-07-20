@@ -4,7 +4,7 @@
         Creates and displays a rich Toast Notification for Windows.
 
         .DESCRIPTION
-        The New-BurntToastNotification function creates and displays a Toast Notification supporting text, images, sounds, progress bars, actions, snooze/dismiss, and more on Microsoft Windows 10+.
+        The New-BurntToastNotification function creates and displays a Toast Notification supporting text, images, sounds, progress bars, actions, snooze/dismiss, attribution, and more on Microsoft Windows 10+.
         Parameter sets ensure mutual exclusivity (e.g., you cannot use Silent and Sound together).
 
         .PARAMETER Text
@@ -18,6 +18,9 @@
 
         .PARAMETER HeroImage
         Path to a prominent hero image for the notification.
+
+        .PARAMETER Attribution
+        Optional attribution text displayed at the bottom of the notification. Only supported on modern versions of Windows.
 
         .PARAMETER Sound
         The sound to play. Choose from Default, alarms, calls, etc. (Cannot be used with Silent.)
@@ -85,6 +88,10 @@
         New-BurntToastNotification -Text 'Major Update Available!' -Header $header
         Creates a categorized notification under the 'Updates' header.
 
+        .EXAMPLE
+        New-BurntToastNotification -Text 'Integration Complete' -Attribution 'Powered by BurntToast'
+        Displays a notification with attribution at the bottom.
+
         .LINK
         https://github.com/Windos/BurntToast/blob/main/Help/New-BurntToastNotification.md
     #>
@@ -102,6 +109,8 @@
         [String] $AppLogo,
 
         [String] $HeroImage,
+
+        [String] $Attribution,
 
         [Parameter(ParameterSetName = 'Sound')]
         [Parameter(Mandatory = $true,
@@ -215,6 +224,10 @@
         Children        = $ChildObjects
         AppLogoOverride = $AppLogoImage
         WhatIf          = $false
+    }
+
+    if ($Attribution) {
+        $BindingSplat['Attribution'] = $Attribution
     }
 
     if ($HeroImage) {

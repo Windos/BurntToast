@@ -19,7 +19,7 @@
         An optional override for the logo displayed in the notification, created with New-BTImage using the AppLogoOverride switch.
 
         .PARAMETER Attribution
-        Optional attribution text, created with New-BTText. Only supported on modern versions of Windows.
+        Optional attribution text. Only supported on modern versions of Windows.
 
         .PARAMETER BaseUri
         A URI that is combined with relative image URIs for images in the notification.
@@ -69,7 +69,7 @@
 
         [Microsoft.Toolkit.Uwp.Notifications.ToastGenericAppLogo] $AppLogoOverride,
 
-        [Microsoft.Toolkit.Uwp.Notifications.ToastGenericAttributionText] $Attribution,
+        [string] $Attribution,
 
         [uri] $BaseUri,
 
@@ -105,7 +105,14 @@
     }
 
     if ($Attribution) {
-        $Binding.Attribution = $Attribution
+        $AttribText = [Microsoft.Toolkit.Uwp.Notifications.ToastGenericAttributionText]::new()
+        $AttribText.Text = $Attribution
+
+        if ($Language) {
+            $AttribText.Language = $Language
+        }
+
+        $Binding.Attribution = $AttribText
     }
 
     if ($BaseUri) {
