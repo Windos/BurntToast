@@ -16,6 +16,12 @@
 
     - Event Data Improvements: Event data handling and options improved for notification actions.
 
+    - Enable "Activation" events on all supported versions of PowerShell, including Windows PowerShell.
+
+    - Enable "Dismissed" and "Failed" events on PowerShell 7.1+.
+
+    - Improve support for attribution text.
+
   - Libraries
 
     - Microsoft.Windows.SDK.NET.Ref library bumped to 10.0.22621.28.

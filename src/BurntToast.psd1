@@ -35,11 +35,21 @@
     PrivateData       = @{
         PSData = @{
             Tags         = @('Notifications', 'Utilities', 'Windows10', 'Toast')
-            Prerelease   = 'Preview20250719'
+            Prerelease   = 'Preview20250720'
             LicenseUri   = 'https://github.com/Windos/BurntToast/blob/main/LICENSE'
             ProjectUri   = 'https://github.com/Windos/BurntToast'
             IconUri      = 'https://rawcdn.githack.com/Windos/BurntToast/3dd8dd7457552056da4bbd27880f8283e1116395/Media/BurntToast-Logo.png'
             ReleaseNotes = '# 1.0.0-Preview20250719
+
+* Features and Improvements
+  * Create and update all help files.
+  * Enable "Activation" events on all supported versions of PowerShell, including Windows PowerShell.
+  * Enable "Dismissed" and "Failed" events on PowerShell 7.1+.
+  * Improve support for attribution text.
+* CI and Repository
+  * Update Issue and Feature Request Templates.
+
+# 1.0.0-Preview20250719
 
 * Breaking Changes
   * Custom Audio Path Removed: Support for custom audio file sources has been eliminated.
