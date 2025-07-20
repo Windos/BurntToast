@@ -1,4 +1,6 @@
+.roo/
 downloads/
 Output/
+.roomodes
 TestResults.xml
 CoverageResults.xml
