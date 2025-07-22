@@ -75,7 +75,7 @@ Describe 'New-BTImage' {
         BeforeAll {
             Start-Transcript tmp.log
             try {
-                New-BTImage -Source https://raw.githubusercontent.com/Windos/BurntToast/main/Media/BurntToast.png -WhatIf
+                New-BTImage -Source https://raw.githubusercontent.com/Windos/BurntToast/main/images/BurntToast.png -WhatIf
             }
             finally {
                 Stop-Transcript
