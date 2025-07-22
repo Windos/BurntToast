@@ -85,7 +85,7 @@ Describe 'New-BTImage' {
         }
 
         It 'has consitent WhatIf response' {
-            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [AdaptiveImage]:Source=$($env:TEMP)\https---raw.githubusercontent.com-Windos-BurntToast-main-Media-BurntToast.png:AlternateText=:HintCrop=Default:HintRemoveMargin=False:HintAlign=Default:AddImageQuery=""."
+            $Expected = "What if: Performing the operation ""New-BTImage"" on target ""returning: [AdaptiveImage]:Source=$($env:TEMP)\https---raw.githubusercontent.com-Windos-BurntToast-main-images-BurntToast.png:AlternateText=:HintCrop=Default:HintRemoveMargin=False:HintAlign=Default:AddImageQuery=""."
             $Log | Should -Be $Expected
         }
     }
