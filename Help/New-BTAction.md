@@ -2,134 +2,68 @@
 
 ## SYNOPSIS
 
-Creates an action object for a Toast Notification.
-
-## SYNTAX
-
-### Custom Actions (Default)
-
-```powershell
-New-BTAction [[-Buttons] <IToastButton[]>] [[-ContextMenuItems] <ToastContextMenuItem[]>] [[-Inputs] <IToastInput[]>]
-```
-
-### SnoozeAndDismiss
-
-```powershell
-New-BTAction -SnoozeAndDismiss
-```
+Creates an action set for a Toast Notification.
 
 ## DESCRIPTION
 
-The New-BTAction function creates an 'action' object which contains defines the controls displayed at the bottom of a Toast Notification.
-
-Actions can either be system handeled and automatically localized Snooze and Dismiss buttons or a custom collection of inputs.
-
-## EXAMPLES
-
-### -------------------------- EXAMPLE 1 --------------------------
-
-```powershell
-PS C:\>New-BTAction -SnoozeAndDismiss
-```
-
-This command creates an action element using the system handled snooze and dismiss modal.
-
-### -------------------------- EXAMPLE 2 --------------------------
-
-```powershell
-PS C:\>New-BTAction -Buttons (New-BTButton -Content 'Google' -Arguments 'https://google.com')
-```
-
-This command creates an action element with a single clickable button.
-
-### -------------------------- EXAMPLE 3 --------------------------
-
-```powershell
-PS C:\>$Button = New-BTButton -Content 'Google' -Arguments 'https://google.com'
-PS C:\>$ContextMenuItem = New-BTContextMenuItem -Content 'Bing' -Arguments 'https://bing.com'
-PS C:\>New-BTAction -Buttons $Button -ContextMenuItems $ContextMenuItem
-```
-
-This example creates an action elemnt with both a clickable button and a right click context menu item.
+The `New-BTAction` function creates a Toast action object (`IToastActions`), defining the controls displayed at the bottom of a Toast Notification. Actions can be custom (buttons, context menu items, and input controls) or system handled (Snooze and Dismiss).
 
 ## PARAMETERS
 
-### -Buttons
-
-Button objects created with the New-BTButton function. Up to five can be included, or less if Context Menu Items are also included.
-
-```yaml
-Type: IToastButton[]
-Parameter Sets: Custom Actions
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ContextMenuItems
-
-Right click context menu item objects created with the New-BTContextMenuItem function. Up to five can be included, or less if Buttons are also included.
-
-```yaml
-Type: ToastContextMenuItem[]
-Parameter Sets: Custom Actions
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Inputs
-
-Input objects created via the New-BTText and New-BTSelectionBoxItem functions. Up to five can be included.
-
-```yaml
-Type: IToastInput[]
-Parameter Sets: Custom Actions
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SnoozeAndDismiss
-
-Creates a system handeled snooze and dismiss action. Cannot be included inconjunction with custom actions.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: SnoozeAndDismiss
-Aliases:
-
-Required: True
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+| Name              | Type                                                      | Description                                                                                                                           | Mandatory           |
+|-------------------|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|---------------------|
+| `Buttons`         | Microsoft.Toolkit.Uwp.Notifications.IToastButton[]        | Button objects created with `New-BTButton`. Up to five may be included, or fewer if context menu items are also included.              | No                  |
+| `ContextMenuItems`| Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem[]| Right-click context menu item objects created with `New-BTContextMenuItem`. Up to five may be included, or fewer if Buttons are included.| No                  |
+| `Inputs`          | Microsoft.Toolkit.Uwp.Notifications.IToastInput[]         | Input objects created via `New-BTText` and `New-BTSelectionBoxItem`. Up to five can be included.                                      | No                  |
+| `SnoozeAndDismiss`| Switch                                                    | Switch. Creates a system-handled set of Snooze and Dismiss buttons, only available in the 'SnoozeAndDismiss' parameter set. Cannot be used with custom actions. | Yes (when using 'SnoozeAndDismiss' set) |
 
 ## INPUTS
 
-TODO
-
-You cannot pipe input to this function.
+None. You cannot pipe input to this function.
 
 ## OUTPUTS
 
 Microsoft.Toolkit.Uwp.Notifications.IToastActions
 
-## NOTES
+## EXAMPLES
 
-## RELATED LINKS
+### Example 1
 
-[New-BTAction](https://github.com/Windos/BurntToast/blob/main/Help/New-BTAction.md)
+```powershell
+New-BTAction -SnoozeAndDismiss
+```
+
+Creates an action set using the system handled snooze and dismiss modal.
+
+### Example 2
+
+```powershell
+New-BTAction -Buttons (New-BTButton -Content 'Google' -Arguments 'https://google.com')
+```
+
+Creates an action set with a single button that opens Google.
+
+### Example 3
+
+```powershell
+$Button = New-BTButton -Content 'Google' -Arguments 'https://google.com'
+$ContextMenuItem = New-BTContextMenuItem -Content 'Bing' -Arguments 'https://bing.com'
+New-BTAction -Buttons $Button -ContextMenuItems $ContextMenuItem
+```
+
+Creates an action set with both a clickable button and a context menu item.
+
+### Example 4
+
+```powershell
+New-BTAction -Inputs (New-BTText -Content "Add comment")
+```
+
+Creates an action set allowing user textual input in the notification.
+
+## LINKS
+
+- [New-BTButton](New-BTButton.md)
+- [New-BTContextMenuItem](New-BTContextMenuItem.md)
+- [New-BTText](New-BTText.md)
+- [New-BTSelectionBoxItem](New-BTSelectionBoxItem.md)

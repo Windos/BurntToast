@@ -2,78 +2,37 @@
 
 ## SYNOPSIS
 
-Creates a selection box item.
-
-## SYNTAX
-
-```powershell
-New-BTSelectionBoxItem [-Id] <String> [-Content] <String>
-```
+Creates a selection box item for use in a toast input.
 
 ## DESCRIPTION
 
-The New-BTSelectionBoxItem function creates a selection box item, for inclusion in a selection box created with New-BTInput.
-
-## EXAMPLES
-
-### -------------------------- EXAMPLE 1 --------------------------
-
-```powershell
-PS C:\>$Select1 = New-BTSelectionBoxItem -Id 'Item1' -Content 'First option in the list'
-```
-
-This command creates a new Selection Box Item object which can now be used with the New-BTInput function.
+The `New-BTSelectionBoxItem` function creates a selection box item (`ToastSelectionBoxItem`) to include as an option in a selection box, produced by `New-BTInput`.
 
 ## PARAMETERS
 
-### -Content
-
-String that is displayed on the selection item. This is what the user sees.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Id
-
-Developer-provided ID that the developer uses later to retrieve input when the Toast is interacted with.
-
-Can also be provided to a selection box to identify the default selection.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+| Name        | Type       | Description                                                                                               | Mandatory |
+|-------------|------------|-----------------------------------------------------------------------------------------------------------|-----------|
+| `Id`        | String (Mandatory) | Unique identifier for this selection box item, also referred to by `DefaultSelectionBoxItemId` when used in `New-BTInput`.| Yes       |
+| `Content`   | String (Mandatory) | String to display as the label for the item in the dropdown.                                        | Yes       |
 
 ## INPUTS
 
-None
+None. You cannot pipe input to this function.
 
 ## OUTPUTS
 
-ToastSelectionBoxItem
+Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem
 
-## NOTES
+## EXAMPLES
 
-Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
+### Example 1
 
-Please see the [originating repo](https://github.com/Microsoft/UWPCommunityToolkit).
+```powershell
+$Select1 = New-BTSelectionBoxItem -Id 'Item1' -Content 'First option in the list'
+```
 
-## RELATED LINKS
+Creates a Selection Box Item for use in a selection input element.
 
-[New-BTSelectionBoxItem](https://github.com/Windos/BurntToast/blob/main/Help/New-BTSelectionBoxItem.md)
+## LINKS
+
+- [New-BTInput](New-BTInput.md)

@@ -2,188 +2,57 @@
 
 ## SYNOPSIS
 
-Creates a new Toast Content object.
-
-## SYNTAX
-
-```powershell
-New-BTContent [[-Actions] <IToastActions>] [[-ActivationType] <ToastActivationType>] [[-Audio] <ToastAudio>]
- [[-Duration] <ToastDuration>] [[-Launch] <String>] [[-Scenario] <ToastScenario>] [-Visual] <ToastVisual>
-```
+Creates a new Toast Content object (base element for displaying a toast).
 
 ## DESCRIPTION
 
-The New-BTContent function creates a new Toast Content object which is the Base Toast element, which contains at least a visual element.
-
-## EXAMPLES
-
-### -------------------------- EXAMPLE 1 --------------------------
-
-```powershell
-PS C:\>$binding1 = New-BTBinding -Children $text1, $text2 -AppLogoOverride $image2
-PS C:\>$visual1 = New-BTVisual -BindingGeneric $binding1
-PS C:\>$content1 = New-BTContent -Visual $visual1
-```
-
-This example combines numerous objects created via BurntToast functions into a binding, then a visual element and finally into a content object.
-
-The resultant object can now be displayed using the Submit-BTNotification function.
-
-### -------------------------- EXAMPLE 2 --------------------------
-
-```powershell
-PS C:\>$content1 = New-BTContent -Visual $visual1 -ActivationType Protocol -Launch 'https://google.com'
-```
-
-This command takes a pre-existing visual object and also specifies options required to launch a browser on the Google homepage when clicking the toast.
+The `New-BTContent` function creates a new `ToastContent` object, the root config for a toast, containing the toast's visual, actions, audio, header, scenario, etc.
 
 ## PARAMETERS
 
-### -Actions
-
-Optionally create custom actions with buttons and inputs (New-BTAction.)
-
-```yaml
-Type: IToastActions
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ActivationType
-
-Specifies what activation type will be used when the user clicks the body of this Toast.
-
-```yaml
-Type: ToastActivationType
-Parameter Sets: (All)
-Aliases:
-Accepted values: Foreground, Background, Protocol
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Audio
-
-Specify custom audio options (New-BTAudio.)
-
-```yaml
-Type: ToastAudio
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Duration
-
-The amount of time the Toast should display. You typically should use the Scenario attribute instead, which impacts how long a Toast stays on screen.
-
-```yaml
-Type: ToastDuration
-Parameter Sets: (All)
-Aliases:
-Accepted values: Short, Long
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Header
-
-New in Creators Update: Specifies an optional header for the toast notification (New-BTHeader.)
-
-```yaml
-Type: ToastHeader
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Launch
-
-A string that is passed to the application when it is activated by the Toast. The format and contents of this string are defined by the app for its own use. When the user taps or clicks the Toast to launch its associated app, the launch string provides the context to the app that allows it to show the user a view relevant to the Toast content, rather than launching in its default way.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Scenario
-
-Specify the scenario, to make the Toast behave like an alarm, reminder, or more.
-
-```yaml
-Type: ToastScenario
-Parameter Sets: (All)
-Aliases:
-Accepted values: Default, Alarm, Reminder, IncomingCall
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Visual
-
-Specify the visual element object, created with the New-BTVisual function.
-
-```yaml
-Type: ToastVisual
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 8
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+| Name             | Type                                            | Description                                                                                         | Mandatory |
+|------------------|-------------------------------------------------|-----------------------------------------------------------------------------------------------------|-----------|
+| `Actions`        | Microsoft.Toolkit.Uwp.Notifications.IToastActions| Contains one or more custom actions (buttons, context menus, input fields), created via `New-BTAction`.| No        |
+| `ActivationType` | Microsoft.Toolkit.Uwp.Notifications.ToastActivationType | Enum. Specifies what activation type is used when the user clicks the toast body.                   | No        |
+| `Audio`          | Microsoft.Toolkit.Uwp.Notifications.ToastAudio   | Adds audio properties for the toast, as created by `New-BTAudio`.                                   | No        |
+| `Duration`       | Microsoft.Toolkit.Uwp.Notifications.ToastDuration| Enum. How long the toast notification is displayed (Short/Long).                                    | No        |
+| `Header`         | Microsoft.Toolkit.Uwp.Notifications.ToastHeader  | ToastHeader object, created via `New-BTHeader`, categorizing the toast in Action Center.            | No        |
+| `Launch`         | String                                          | Data passed to the activation context when a toast is clicked.                                      | No        |
+| `Scenario`       | Microsoft.Toolkit.Uwp.Notifications.ToastScenario| Enum. Tells Windows to treat the toast as an alarm, reminder, or more (`ToastScenario`).            | No        |
+| `Visual`         | Microsoft.Toolkit.Uwp.Notifications.ToastVisual  | **Required.** ToastVisual object, created by `New-BTVisual`, representing the core content of the toast.   | Yes       |
+| `ToastPeople`    | Microsoft.Toolkit.Uwp.Notifications.ToastPeople  | ToastPeople object, representing recipient/persons (optional, used for group chat/etc).             | No        |
+| `CustomTimestamp`| DateTime                                        | Optional timestamp for when the toast is considered created (affects Action Center sort order).      | No        |
 
 ## INPUTS
 
-TODO
+None. You cannot pipe input to this function.
 
 ## OUTPUTS
 
-ToastContent
+Microsoft.Toolkit.Uwp.Notifications.ToastContent
 
-## NOTES
+## EXAMPLES
 
-Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
+### Example 1
 
-Please see the Please see the [originating repo](https://github.com/windows-toolkit/WindowsCommunityToolkit).
+```powershell
+$binding = New-BTBinding -Children (New-BTText -Content 'Title')
+$visual = New-BTVisual -BindingGeneric $binding
+New-BTContent -Visual $visual
+```
 
-## RELATED LINKS
+### Example 2
 
-[New-BTContent](https://github.com/Windos/BurntToast/blob/main/Help/New-BTContent.md)
+```powershell
+$content = New-BTContent -Visual $visual -ActivationType Protocol -Launch 'https://example.com'
+```
+
+Toast opens a browser to a URL when clicked.
+
+## LINKS
+
+- [New-BTAction](New-BTAction.md)
+- [New-BTAudio](New-BTAudio.md)
+- [New-BTHeader](New-BTHeader.md)
+- [New-BTVisual](New-BTVisual.md)
+- [New-BTBinding](New-BTBinding.md)

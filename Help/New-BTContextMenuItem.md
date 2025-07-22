@@ -4,91 +4,37 @@
 
 Creates a Context Menu Item object.
 
-## SYNTAX
-
-```powershell
-New-BTContextMenuItem [-Content] <String> [-Arguments] <String> [[-ActivationType] <ToastActivationType>]
-```
-
 ## DESCRIPTION
 
-The New-BTContextMenuItem function creates a Context Menu Item object.
-
-## EXAMPLES
-
-### -------------------------- EXAMPLE 1 --------------------------
-
-```powershell
-PS C:\>New-BTContextMenuItem -Content 'Google' -Arguments 'https://google.com' -ActivationType Protocol
-```
-
-This command creates a new Context Menu Item object with the specified properties.
+The `New-BTContextMenuItem` function creates a context menu item (`ToastContextMenuItem`) for a Toast Notification, typically added via `New-BTAction`.
 
 ## PARAMETERS
 
-### -ActivationType
-
-Controls what type of activation this menu item will use when clicked. Defaults to Foreground.
-
-```yaml
-Type: ToastActivationType
-Parameter Sets: (All)
-Aliases:
-Accepted values: Foreground, Background, Protocol
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Arguments
-
-App-defined string of arguments that the app can later retrieve once it is activated when the user clicks the menu item.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Content
-
-The text to display on the menu item.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+| Name            | Type                                                   | Description                                                                                     | Mandatory |
+|-----------------|--------------------------------------------------------|-------------------------------------------------------------------------------------------------|-----------|
+| `Content`       | String (Mandatory)                                     | The text string to display to the user for this menu item.                                      | Yes       |
+| `Arguments`     | String (Mandatory)                                     | App-defined string that is returned if the context menu item is selected. Routinely a URI, file path, or app context string. | Yes       |
+| `ActivationType`| Microsoft.Toolkit.Uwp.Notifications.ToastActivationType| Controls the type of activation for this menu item. Defaults to Foreground if not specified.     | No        |
 
 ## INPUTS
 
-TODO
+None. You cannot pipe input to this function.
 
 ## OUTPUTS
 
-ToastContextMenuItem
+Microsoft.Toolkit.Uwp.Notifications.ToastContextMenuItem
 
-## NOTES
+## EXAMPLES
 
-Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
+### Example 1
 
-Please see the [originating repo](https://github.com/windows-toolkit/WindowsCommunityToolkit).
+```powershell
+New-BTContextMenuItem -Content 'Website' -Arguments 'https://example.com' -ActivationType Protocol
+```
 
-## RELATED LINKS
+Creates a menu item labeled "Website" that opens a URL on right-click.
 
-[New-BTContextMenuItem](https://github.com/Windos/BurntToast/blob/main/Help/New-BTContextMenuItem.md)
+## LINKS
+
+- [New-BTAction](New-BTAction.md)
+- [New-BTButton](New-BTButton.md)

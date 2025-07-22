@@ -1,14 +1,21 @@
-. (Join-Path -Path $PSScriptRoot -ChildPath '_envPrep.ps1')
+BeforeAll {
+    if (Get-Module -Name 'BurntToast') {
+        Remove-Module -Name 'BurntToast'
+    }
 
-# Helper function needs to be in the global scope so it can be used in mocks
-# Note - This may not work in Pester 5+
-Function Global:New-MockNotification(
-    $HeaderId = (New-GUID).ToString(),
-    $HeaderTitle = (New-GUID).ToString(),
-    $HeaderArguments = '',
-    $HeaderActivation = 'protocol'
-    ) {
-    $Content = @"
+    if ($ENV:BURNTTOAST_MODULE_ROOT) {
+        Import-Module $ENV:BURNTTOAST_MODULE_ROOT -Force
+    } else {
+        Import-Module "$PSScriptRoot/../src/BurntToast.psd1" -Force
+    }
+
+    Function Global:New-MockNotification(
+        $HeaderId = (New-GUID).ToString(),
+        $HeaderTitle = (New-GUID).ToString(),
+        $HeaderArguments = '',
+        $HeaderActivation = 'protocol'
+        ) {
+        $Content = @"
 <?xml version="1.0" encoding="UTF-8"?>
 <toast>
     <visual>
@@ -20,9 +27,10 @@ Function Global:New-MockNotification(
     <header id="$HeaderId" title="$HeaderTitle" arguments="$HeaderArguments" activationType="$HeaderActivation" />
 </toast>
 "@
-    $XMLContent = [Windows.Data.Xml.Dom.XmlDocument]::new()
-    $XmlContent.LoadXml($Content)
-    [Windows.UI.Notifications.ToastNotification]::new($XMLContent)
+        $XMLContent = [Windows.Data.Xml.Dom.XmlDocument]::new()
+        $XmlContent.LoadXml($Content)
+        [Windows.UI.Notifications.ToastNotification]::new($XMLContent)
+    }
 }
 
 Describe 'Get-BTHeader' {
@@ -36,14 +44,16 @@ Describe 'Get-BTHeader' {
     }
 
     Context 'With multiple duplicate notifications' {
-        Mock Get-BTHistory -ModuleName BurntToast -Verifiable -ParameterFilter { $ScheduledToast } {
-            New-MockNotification -HeaderId 'ID01'
-            New-MockNotification -HeaderId 'ID01'
-        }
+        BeforeAll {
+            Mock Get-BTHistory -ModuleName BurntToast -Verifiable -ParameterFilter { $ScheduledToast } {
+                New-MockNotification -HeaderId 'ID01'
+                New-MockNotification -HeaderId 'ID01'
+            }
 
-        Mock Get-BTHistory -ModuleName BurntToast -Verifiable -ParameterFilter { -not $ScheduledToast } {
-            New-MockNotification -HeaderId 'ID01'
-            New-MockNotification -HeaderId 'ID01'
+            Mock Get-BTHistory -ModuleName BurntToast -Verifiable -ParameterFilter { -not $ScheduledToast } {
+                New-MockNotification -HeaderId 'ID01'
+                New-MockNotification -HeaderId 'ID01'
+            }
         }
 
         It 'should ignore duplicate headers' {
@@ -55,14 +65,16 @@ Describe 'Get-BTHeader' {
     }
 
     Context 'With multiple unique notifications' {
-        Mock Get-BTHistory -ModuleName BurntToast -Verifiable -ParameterFilter { $ScheduledToast } {
-            New-MockNotification -HeaderId 'ID01' -HeaderTitle 'Title 01'
-            New-MockNotification -HeaderId 'ID02' -HeaderTitle 'Title 02'
-        }
+        BeforeAll {
+            Mock Get-BTHistory -ModuleName BurntToast -Verifiable -ParameterFilter { $ScheduledToast } {
+                New-MockNotification -HeaderId 'ID01' -HeaderTitle 'Title 01'
+                New-MockNotification -HeaderId 'ID02' -HeaderTitle 'Title 02'
+            }
 
-        Mock Get-BTHistory -ModuleName BurntToast -Verifiable -ParameterFilter { -not $ScheduledToast } {
-            New-MockNotification -HeaderId 'ID03' -HeaderTitle 'Title 03'
-            New-MockNotification -HeaderId 'ID04'
+            Mock Get-BTHistory -ModuleName BurntToast -Verifiable -ParameterFilter { -not $ScheduledToast } {
+                New-MockNotification -HeaderId 'ID03' -HeaderTitle 'Title 03'
+                New-MockNotification -HeaderId 'ID04'
+            }
         }
 
         It 'should return all headers' {
@@ -101,8 +113,10 @@ Describe 'Get-BTHeader' {
     }
 
     Context 'With a single unique notifications' {
-        Mock Get-BTHistory -ModuleName BurntToast -Verifiable -ParameterFilter { $ScheduledToast } {
-            New-MockNotification -HeaderId 'ID01' -HeaderTitle 'Title 01' -HeaderArguments 'arguments' -HeaderProtocol 'protocol'
+        BeforeAll {
+            Mock Get-BTHistory -ModuleName BurntToast -Verifiable -ParameterFilter { $ScheduledToast } {
+                New-MockNotification -HeaderId 'ID01' -HeaderTitle 'Title 01' -HeaderArguments 'arguments' -HeaderProtocol 'protocol'
+            }
         }
 
         It 'should return all header properties' {

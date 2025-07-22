@@ -1,0 +1,49 @@
+name: Feature Request/Idea 🚀
+description: Suggest a new feature or improvement
+title: "[Feature]: "
+labels: [enhancement, triage]
+assignees:
+- Windos
+body:
+- type: markdown
+  attributes:
+    value: |
+      Thanks for using BurntToast and taking the time to fill out a feature request! 💜
+
+      Please check to see if your request already exists with a quick search of the issues. Start with one relevant term and then add others if you get too many results.
+
+      Name your issue appropriately: give it a sentence that reads well enough for anyone seeing this in the release notes to know what it is.
+
+      When writing out the issue details, please ensure you are writing it as if you were explaining it to somebody else, even if you will be working on and resolving the issue yourself.
+      This helps others to understand the reasons for the issue and for it to be searchable in the future.
+- type: checkboxes
+  attributes:
+    label: Checklist
+    description: Before continuing, make sure you have done the following.
+    options:
+      - label: I have verified this is the correct repository for opening this issue.
+        required: true
+      - label: I have verified no other issues exist related to my request.
+        required: true
+- type: textarea
+  id: problem-related
+  attributes:
+    label: Is Your Feature Request Related To A Problem? Please describe.
+    description: |
+      In your own words, please describe the problem that would be fixed by introducing the feature or enhancement you request.
+  validations:
+    required: false
+- type: textarea
+  id: solution
+  attributes:
+    label: Describe The Solution. Why is it needed?
+    description: |
+      In your own words, please describe the solution and what you want to happen.
+  validations:
+    required: true
+- type: textarea
+  id: additional-context
+  attributes:
+    label: Additional Context
+    description: |
+      Please include any other information here that you feel may be relevant to the feature you want implemented that is not covered in the previous sections.

@@ -2,163 +2,53 @@
 
 ## SYNOPSIS
 
-Creates an input element on a Toast notification.
-
-## SYNTAX
-
-### Text (Default)
-
-```powershell
-New-BTInput -Id <String> [-Title <String>] [-PlaceholderContent <String>] [-DefaultInput <String>]
-```
-
-### Selection
-
-```powershell
-New-BTInput -Id <String> [-Title <String>] [-DefaultSelectionBoxItemId <String>]
- -Items <ToastSelectionBoxItem[]>
-```
+Creates an input element (text box or selection box) for a Toast notification.
 
 ## DESCRIPTION
 
-The New-BTInput function creates an input element on a Toast notification.
-
-Returned object is either a TextBox for users to type text into or SelectionBox to users to select from a list of options.
-
-## EXAMPLES
-
-### -------------------------- EXAMPLE 1 --------------------------
-
-```powershell
-PS C:\>New-BTInput -Id Reply001 -Title 'Type a reply:'
-```
-
-This command creates a new text box for a user to type a reply. (n.b. this sort of functionality probably won't work through BurntToast as PowerShell cannot, currently, subscribe to WinRT events.)
-
-### -------------------------- EXAMPLE 2 --------------------------
-
-```powershell
-PS C:\>New-BTInput -Id 'Selection001' -DefaultSelectionBoxItemId 'Item5' -Items $Select1, $Select2, $Select3, $Select4, $Select5
-```
-
-This command creates a new selection box containing five options and specifying the ID of one of the options as the default.
+The `New-BTInput` function creates a `ToastTextBox` for user-typed input or a `ToastSelectionBox` for user selection, for interaction via toasts.
+Use the Text parameter set for a type-in input, and the Selection parameter set with a set of options for pick list behavior.
 
 ## PARAMETERS
 
-### -DefaultInput
-
-The initial text to place in the text box. Leave this null for a blank text box.
-
-```yaml
-Type: String
-Parameter Sets: Text
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -DefaultSelectionBoxItemId
-
-This controls which item is selected by default, and refers to the Id property of a Selection Box Item (New-BTSelectionBoxItem.)
-
-If you do not provide this, the default selection will be empty (user sees nothing).
-
-```yaml
-Type: String
-Parameter Sets: Selection
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Id
-
-Used so that developers can retrieve user input once the app is activated.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Items
-
-The selection items that the user can pick from in this SelectionBox. Only 5 items can be added.
-
-```yaml
-Type: ToastSelectionBoxItem[]
-Parameter Sets: Selection
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PlaceholderContent
-
-Placeholder text to be displayed on the text box when the user hasn't typed any text yet.
-
-```yaml
-Type: String
-Parameter Sets: Text
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Title
-
-Title text to display above the element
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+| Name                      | Type                                                                 | Description                                                                                        | Mandatory                                 |
+|---------------------------|----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|--------------------------------------------|
+| `Id`                      | String (Mandatory)                                                   | Developer-provided ID for referencing this input/result.                                           | Yes                                        |
+| `Title`                   | String                                                               | Text to display above the input box or selection.                                                  | No                                         |
+| `PlaceholderContent`      | String (Text set only)                                               | String placeholder to show when the text box is empty.                                             | No                                         |
+| `DefaultInput`            | String                                                               | Default text to pre-fill in the text box.                                                          | No                                         |
+| `DefaultSelectionBoxItemId` | String                                                            | ID of the default selection item (must match one of the provided SelectionBoxItems).               | No                                         |
+| `Items`                   | Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBoxItem[] (Selection set) | Array of `ToastSelectionBoxItem` objects to populate the pick list.                           | Yes (when using 'Selection' set)           |
 
 ## INPUTS
 
-TODO
+None. You cannot pipe input to this function.
 
 ## OUTPUTS
 
-ToastTextBox
+- Microsoft.Toolkit.Uwp.Notifications.ToastTextBox
+- Microsoft.Toolkit.Uwp.Notifications.ToastSelectionBox
 
-ToastSelectionBox
+## EXAMPLES
 
-## NOTES
+### Example 1
 
-Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
+```powershell
+New-BTInput -Id 'Reply001' -Title 'Type a reply:'
+```
 
-Please see the [originating repo](https://github.com/Microsoft/UWPCommunityToolkit).
+Creates a text input field on the toast.
 
-## RELATED LINKS
+### Example 2
 
-[New-BTInput](https://github.com/Windos/BurntToast/blob/main/Help/New-BTInput.md)
+```powershell
+New-BTInput -Id 'Choice' -DefaultSelectionBoxItemId 'Item2' -Items $Sel1, $Sel2
+```
+
+Creates a selection (dropdown) input with two options.
+
+## LINKS
+
+- [New-BTAction](New-BTAction.md)
+- [New-BTSelectionBoxItem](New-BTSelectionBoxItem.md)
+- [New-BTText](New-BTText.md)

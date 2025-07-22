@@ -4,230 +4,79 @@
 
 Creates a new clickable button for a Toast Notification.
 
-## SYNTAX
-
-### Button (Default)
-
-```powershell
-New-BTButton -Content <String> -Arguments <String> [-ActivationType {Foreground | Background | Protocol}] [-ImageUri <String>] [-Id <String>]
-```
-
-### Snooze
-
-```powershell
-New-BTButton -Snooze [-Content <String>] [-Id <String>]
-```
-
-### Dismiss
-
-```powershell
-New-BTButton -Dismiss [-Content <String>]
-```
-
 ## DESCRIPTION
 
-The New-BTButton function creates a new clickable button for a Toast Notification. Up to five buttons can be added to one Toast.
-
-Buttons can be fully customized with display text, images and arguments or system handled 'Snooze' and 'Dismiss' buttons.
-
-## EXAMPLES
-
-### -------------------------- EXAMPLE 1 --------------------------
-
-```powershell
-PS C:\>New-BTButton -Dismiss
-```
-
-This command creates a button which mimmicks the act of 'swiping away' the Toast when clicked.
-
-### -------------------------- EXAMPLE 2 --------------------------
-
-```powershell
-PS C:\>New-BTButton -Snooze
-```
-
-This command creates a button which will snooze the Toast for the system default snooze time (often 10 minutes).
-
-### -------------------------- EXAMPLE 3 --------------------------
-
-```powershell
-PS C:\>New-BTButton -Snooze -Content 'Sleep' -Id 'TimeSelection'
-```
-
-This command creates a button which will snooze the Toast for the time selected in the SelectionBox with the ID 'TimeSelection'. The button will show the text 'Sleep' rather than 'Dismiss.'
-
-### -------------------------- EXAMPLE 4 --------------------------
-
-```powershell
-PS C:\>New-BTButton -Content 'Blog' -Arguments 'https://king.geek.nz'
-```
-
-This command creates a button with the display text "Blog", which will launch a browser window to ["https://king.geek.nz"](https://king.geek.nz) when clicked.
-
-### -------------------------- EXAMPLE 5 --------------------------
-
-```powershell
-PS C:\>$Picture = 'C:\temp\example.png'
-PS C:\>New-BTButton -Content 'View Picture' -Arguments $Picture -ImageUri $Picture
-```
-
-This example creates a button with the display text "View Picture" with a picture to the left, which will launch the default picture viewer application and load the picture when clicked.
+The `New-BTButton` function creates a new button for a Toast Notification.
+Up to five buttons can be added to a single Toast notification. Buttons may have display text, an icon, an optional activation type, argument string, or serve as system managed Dismiss/Snooze buttons.
 
 ## PARAMETERS
 
-### -ActivationType
-
-Defines the ActivationType that is trigger when the button is pressed.
-
-Defaults to Protocol which will open the file or URI specified in with the Arguments parameter in the rlevant system default application.
-
-```yaml
-Type: ToastActivationType
-Parameter Sets: Button
-Aliases:
-Accepted values: Foreground, Background, Protocol
-
-Required: False
-Position: Named
-Default value: Protocol
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Arguments
-
-Specifies an app defined string.
-
-For the purposes of BurntToast notifications this is generally the path to a file or URI and paired with the Protocol ActivationType.
-
-```yaml
-Type: String
-Parameter Sets: Button
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Content
-
-Specifies the text to display on the button.
-
-```yaml
-Type: String
-Parameter Sets: Button
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-```yaml
-Type: String
-Parameter Sets: Snooze, Dismiss
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Dismiss
-
-Specifies a system handled dismiss button. Clicking the resulting button has the same affect as 'swiping away' or otherwise dismissing the Toast.
-
-Display text defaults to a localized 'Dismiss', but this can be overridden with the Content parameter.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Dismiss
-Aliases:
-
-Required: True
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Id
-
-Specifies the ID of a relevant Toast control.
-
-Standard buttons can be paried with a text box which makes the button appear to the right of it.
-
-Snooze buttons can be paired with a selection box to select the ammount of time to snooze.
-
-```yaml
-Type: String
-Parameter Sets: Button, Snooze
-Aliases: TextBoxId, SelectionBoxId
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ImageUri
-
-Specifies an image icon to display on the button.
-
-```yaml
-Type: String
-Parameter Sets: Button
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Snooze
-
-Specifies a system handled snooze button. When paired with a selection box the snooze time is customizable and user selectable, otherwise the system default snooze time is used.
-
-Display text defaults to a localized 'Snooze', but this can be overridden with the Content parameter.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Snooze
-Aliases:
-
-Required: True
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+| Name           | Type                                                    | Description                                                                                                                                                                                                                  | Mandatory                                  |
+|----------------|---------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
+| `Snooze`       | Switch                                                  | Creates a system-handled snooze button. When paired with a selection box on the toast, the snooze time is customizable.                                                               | Yes (when using 'Snooze' set)               |
+| `Dismiss`      | Switch                                                  | Creates a system-handled dismiss button.                                                                                                                                               | Yes (when using 'Dismiss' set)              |
+| `Content`      | String                                                  | The text to display on this button. For system buttons, this overrides the default label.                                                                                              | Yes (when using 'Button' set')              |
+| `Arguments`    | String                                                  | App-defined string to pass when the button is pressed. Often a URI or file path to open.                                                                                              | Yes (when using 'Button' set)               |
+| `ActivationType`| Microsoft.Toolkit.Uwp.Notifications.ToastActivationType| Defines the activation type that triggers when the button is pressed. Defaults to Protocol.                                                                                            | No                                          |
+| `ImageUri`     | String                                                  | Path or URI of an image icon to display next to the button label.                                                                                                                      | No                                          |
+| `Id`           | String                                                  | Specifies an ID associated with another toast control (textbox or selection box). For standard buttons, this aligns the button next to a control; for snooze buttons, associates with a selection box.                      | No                                          |
 
 ## INPUTS
 
-TODO
-
-You cannot pipe input to this function.
+None. You cannot pipe input to this function.
 
 ## OUTPUTS
 
-Microsoft.Toolkit.Uwp.Notifications.ToastButton
+- Microsoft.Toolkit.Uwp.Notifications.ToastButton
+- Microsoft.Toolkit.Uwp.Notifications.ToastButtonDismiss
+- Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze
 
-Microsoft.Toolkit.Uwp.Notifications.ToastButtonDismiss
+## EXAMPLES
 
-Microsoft.Toolkit.Uwp.Notifications.ToastButtonSnooze
+### Example 1
 
-## NOTES
+```powershell
+New-BTButton -Dismiss
+```
 
-## RELATED LINKS
+Creates a button which mimics the act of 'swiping away' the Toast when clicked.
 
-[New-BTButton](https://github.com/Windos/BurntToast/blob/main/Help/New-BTButton.md)
+### Example 2
+
+```powershell
+New-BTButton -Snooze
+```
+
+Creates a snooze button with system default snooze duration.
+
+### Example 3
+
+```powershell
+New-BTButton -Snooze -Content 'Sleep' -Id 'TimeSelection'
+```
+
+Snooze button using the label 'Sleep' and referencing a selection box control.
+
+### Example 4
+
+```powershell
+New-BTButton -Content 'Blog' -Arguments 'https://king.geek.nz'
+```
+
+Regular button that opens a URL when clicked.
+
+### Example 5
+
+```powershell
+$pic = 'C:\temp\example.png'
+New-BTButton -Content 'View Picture' -Arguments $pic -ImageUri $pic
+```
+
+Button with a picture to the left, launches the image file.
+
+## LINKS
+
+- [New-BTAction](New-BTAction.md)
+- [New-BTContextMenuItem](New-BTContextMenuItem.md)
+- [New-BTText](New-BTText.md)
+- [New-BTSelectionBoxItem](New-BTSelectionBoxItem.md)

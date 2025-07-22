@@ -4,173 +4,65 @@
 
 Creates a new Generic Toast Binding object.
 
-## SYNTAX
-
-```powershell
-New-BTBinding [[-Children] <IToastBindingGenericChild[]>] [-AddImageQuery]
- [[-AppLogoOverride] <ToastGenericAppLogo>] [[-Attribution] <ToastGenericAttributionText>] [[-BaseUri] <Uri>]
- [[-HeroImage] <ToastGenericHeroImage>] [[-Language] <String>]
-```
-
 ## DESCRIPTION
 
-The New-BTBinding function creates a new Generic Toast Binding, where you provide text, images, and other visual elements for your Toast notification.
-
-## EXAMPLES
-
-### -------------------------- EXAMPLE 1 --------------------------
-
-```powershell
-PS C:\>$text1 = New-BTText -Content 'This is a test'
-PS C:\>$text2 = New-BTText
-PS C:\>$text3 = New-BTText -Content 'This more testing'
-PS C:\>$progress = New-BTProgressBar -Title 'Things are happening' -Status 'Working on it' -Value 0.01
-PS C:\>$image1 = New-BTImage -Source 'C:\BurntToast\Media\BurntToast.png'
-PS C:\>$image2 = New-BTImage -Source 'C:\BurntToast\Media\BurntToast.png' -AppLogoOverride -Crop Circle
-PS C:\>$image3 = New-BTImage -Source 'C:\BurntToast\Media\BurntToast.png' -HeroImage
-PS C:\>$binding1 = New-BTBinding -Children $text1, $text2, $text3, $image1, $progress -AppLogoOverride $image2 -HeroImage $image3
-```
-
-This example uses various BurntToast functions to create a number of objects, and then create a Generic Toast Binding using them as inputs.
+The `New-BTBinding` function creates a new Generic Toast Binding, in which you provide text, images, columns, progress bars, and more, controlling the visual appearance of the notification.
 
 ## PARAMETERS
 
-### -AddImageQuery
-
-Set to "true" to allow Windows to append a query string to the image URI supplied in the Toast notification. Use this attribute if your server hosts images and can handle query strings, either by retrieving an image variant based on the query strings or by ignoring the query string and returning the image as specified without the query string. This query string specifies scale, contrast setting, and language.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AppLogoOverride
-
-An optional override of the logo displayed on the Toast notification.
-
-Created using the New-BTImage function with the 'AppLogoOverride' switch.
-
-```yaml
-Type: ToastGenericAppLogo
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Attribution
-
-New in Anniversary Update: An optional text element that is displayed as attribution text.
-
-On devices without the Anniversary Update, this text will appear as if it's another Text element at the end of your Children list.
-
-```yaml
-Type: ToastGenericAttributionText
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -BaseUri
-
-A default base URI that is combined with relative URIs in image source attributes.
-
-```yaml
-Type: Uri
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Children
-
-The contents of the body of the Toast, which can include Text (New-BTText), Image (New-BTImage), Group (not yet implemented), and Progress Bar (New-BTProgressBar).
-
-Also, Text elements must come before any other elements. If a Text element is placed after any other element, an exception will be thrown when you try to retrieve the Toast XML content.
-
-And finally, certain Text properties like HintStyle aren't supported on the root children text elements, and only work inside a Group. If you use Group on devices without the Anniversary Update, the group content will simply be dropped.
-
-```yaml
-Type: IToastBindingGenericChild[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -HeroImage
-
-New in Anniversary Update: An optional hero image (a visually impactful image displayed on the Toast notification).
-
-On devices without the Anniversary Update, the hero image will simply be ignored.
-
-```yaml
-Type: ToastGenericHeroImage
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Language
-
-The target locale of the XML payload, specified as BCP-47 language tags such as "en-US" or "fr-FR". This locale is overridden by any locale specified in binding or text. If this value is a literal string, this attribute defaults to the user's UI language. If this value is a string reference, this attribute defaults to the locale chosen by Windows Runtime in resolving the string.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+| Name            | Type                                                                   | Description                                                                                                       | Mandatory |
+|-----------------|------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|-----------|
+| `Children`      | Microsoft.Toolkit.Uwp.Notifications.IToastBindingGenericChild[]        | Array of binding children elements to include, such as Text, Image, Group, or Progress Bar objects, created by other BurntToast functions (`New-BTText`, `New-BTImage`, `New-BTProgressBar`, etc.). | No        |
+| `Column`        | Microsoft.Toolkit.Uwp.Notifications.AdaptiveSubgroup[]                 | Array of AdaptiveSubgroup elements (columns), created via `New-BTColumn`, to display content side by side.         | No        |
+| `AddImageQuery` | Switch                                                                 | Allows Windows to append a query string to image URIs for scale/language support; only needed for remote images.   | No        |
+| `AppLogoOverride` | Microsoft.Toolkit.Uwp.Notifications.ToastGenericAppLogo              | Optional override for the logo displayed, created with `New-BTImage` using the `AppLogoOverride` switch.           | No        |
+| `Attribution`   | Microsoft.Toolkit.Uwp.Notifications.ToastGenericAttributionText        | Optional attribution text. Only supported on modern Windows versions.                                              | No        |
+| `BaseUri`       | Uri                                                                    | A URI that is combined with relative image URIs for images in the notification.                                    | No        |
+| `HeroImage`     | Microsoft.Toolkit.Uwp.Notifications.ToastGenericHeroImage              | Optional hero image object, created with `New-BTImage` using the `HeroImage` switch.                               | No        |
+| `Language`      | String                                                                 | Specifies the locale (e.g. "en-US" or "fr-FR") for the binding and contained text.                                 | No        |
 
 ## INPUTS
 
-TODO
+None. You cannot pipe input to this function.
 
 ## OUTPUTS
 
-ToastBindingGeneric
+Microsoft.Toolkit.Uwp.Notifications.ToastBindingGeneric
 
-## NOTES
+## EXAMPLES
 
-Credit for most of the help text for this function go to the authors of the UWPCommunityToolkit library that this module relies upon.
+### Example 1
 
-Please see the Please see the [originating repo](https://github.com/windows-toolkit/WindowsCommunityToolkit).
+```powershell
+$text1 = New-BTText -Content 'This is a test'
+$image1 = New-BTImage -Source 'C:\BurntToast\Media\BurntToast.png'
+$binding = New-BTBinding -Children $text1, $image1
+```
 
-## RELATED LINKS
+Combines text and image into a binding for use in a visual toast.
 
-[New-BTBinding](https://github.com/Windos/BurntToast/blob/main/Help/New-BTBinding.md)
+### Example 2
+
+```powershell
+$progress = New-BTProgressBar -Title 'Updating' -Status 'Running' -Value 0.4
+$binding = New-BTBinding -Children $progress
+```
+
+Includes a progress bar element in the binding.
+
+### Example 3
+
+```powershell
+$col1 = New-BTColumn -Children (New-BTText -Text 'a')
+$col2 = New-BTColumn -Children (New-BTText -Text 'b')
+$binding = New-BTBinding -Column $col1, $col2
+```
+
+Uses two columns to display content side by side.
+
+## LINKS
+
+- [New-BTText](New-BTText.md)
+- [New-BTImage](New-BTImage.md)
+- [New-BTColumn](New-BTColumn.md)
+- [New-BTProgressBar](New-BTProgressBar.md)

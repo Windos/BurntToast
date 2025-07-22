@@ -2,148 +2,57 @@
 
 ## SYNOPSIS
 
-Creates a new Audio Element for Toast Notifications.
+Creates a new Audio object for Toast Notifications.
 
-## SYNTAX
+## DESCRIPTION
 
-### StandardSound (Default)
+The `New-BTAudio` function creates an audio object for Toast Notifications.
+You can use this function to select a built-in notification sound (including alarms/calls), specify a custom audio file, or indicate that the notification should be silent.
+
+## PARAMETERS
+
+| Name        | Type         | Description                                                                                                                                                                | Mandatory              |
+|-------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|
+| `Source`    | Uri          | URI string. Specifies the sound to play with the Toast Notification. Accepts Microsoft notification sound URIs such as `ms-winsoundevent:Notification.IM` or a file path for custom audio. | Yes (when using standard sound) |
+| `Loop`      | Switch       | Specifies that the selected sound should loop, if its duration is shorter than the toast it accompanies.                                                                    | No                     |
+| `Silent`    | Switch       | Makes the toast silent (no sound).                                                                                                                                         | Yes (when using silent) |
+
+## INPUTS
+
+None. You cannot pipe input to this function.
+
+## OUTPUTS
+
+Microsoft.Toolkit.Uwp.Notifications.ToastAudio
+
+## EXAMPLES
+
+### Example 1
 
 ```powershell
-New-BTAudio -Source <Uri> [-Loop]
+New-BTAudio -Source ms-winsoundevent:Notification.SMS
 ```
 
-### CustomSound
+Creates an audio object which will cause a Toast Notification to play the standard Microsoft 'SMS' sound.
+
+### Example 2
 
 ```powershell
-New-BTAudio -Path <String> [-Loop]
+New-BTAudio -Source 'C:\Music\FavSong.mp3'
 ```
 
-### Silent
+Creates an audio object which will cause a Toast Notification to play the specified song or audio file.
+
+### Example 3
 
 ```powershell
 New-BTAudio -Silent
 ```
 
-## DESCRIPTION
+Creates an audio object which will cause a Toast Notification to be silent.
 
-The New-BTAudioElement function creates a new Audio Element for Toast Notifications.
+## LINKS
 
-You can use the parameters of New-BTAudioElement to select an audio file or a standard notification sound (including alarms).
-Alternativly you can specify that a Toast Notification should be silent.
-
-## EXAMPLES
-
-### -------------------------- EXAMPLE 1 --------------------------
-
-```powershell
-PS C:\>New-BTAudioElement -Source SMS
-```
-
-Creates an Audio Element which will cause a Toast Notification to play the standard Microsoft 'SMS' sound.
-
-### -------------------------- EXAMPLE 2 --------------------------
-
-```powershell
-PS C:\>New-BTAudioElement -Path 'C:\Music\FavSong.mp3'
-```
-
-Creates an Audio Element which will cause a Toast Notification to play the specified song.
-
-### -------------------------- EXAMPLE 3 --------------------------
-
-```powershell
-PS C:\>New-BTAudioElement -Silent
-```
-
-Creates an Audio Element which will cause a Toast Notification to be silent.
-
-## PARAMETERS
-
-### -Loop
-
-Specifies that the slected sound should play multiple times if its duration is shorter than that of the toast it accompanies.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: CustomSound, StandardSound
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Path
-
-The full path to an audio file. Supported file types include:
-
-*.aac
-*.flac
-*.m4a
-*.mp3
-*.wav
-*.wma
-
-```yaml
-Type: String
-Parameter Sets: CustomSound
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Silent
-
-Specifies that the toast should be displayed without sound.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: Silent
-Aliases:
-
-Required: True
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Source
-
-Specifies one of the built in Microsoft notification sounds.
-
-This paramater takes the full form of the sounds, in the form of a uri. The New-BurntToastNotification function simplifies this, so be aware of the difference.
-
-```yaml
-Type: Uri
-Parameter Sets: StandardSound
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-## INPUTS
-
-TODO
-
-You cannot pipe input to this cmdlet.
-
-## OUTPUTS
-
-ToastAudio
-
-## NOTES
-
-## RELATED LINKS
-
-[New-BTAudio](https://github.com/Windos/BurntToast/blob/main/Help/New-BTAudio.md)
+- [New-BurntToastNotification](New-BurntToastNotification.md)
+- [New-BTProgressBar](New-BTProgressBar.md)
+- [New-BTAction](New-BTAction.md)
