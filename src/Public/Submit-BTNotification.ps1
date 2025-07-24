@@ -7,6 +7,9 @@
         The Submit-BTNotification function submits a completed toast notification to the operating system's notification manager for display.
         This function supports advanced scenarios such as event callbacks for user actions or toast dismissal, sequence numbering to ensure correct update order, unique identification for toast replacement, expiration control, and direct Action Center delivery.
 
+        When an action ScriptBlock is supplied (Activated, Dismissed, or Failed), a normalized SHA256 hash of its content is used to generate a unique SourceIdentifier for event registration.
+        This prevents duplicate handler registration for the same ScriptBlock, warning if a duplicate registration is attempted.
+
         If the -ReturnEventData switch is used and any event action scriptblocks are supplied (ActivatedAction, DismissedAction, FailedAction),
         the $Event automatic variable from the event will be assigned to $global:ToastEvent before invoking your script block.
         You can override the variable name used for event data by specifying -EventDataVariable. If supplied, the event data will be assigned to the chosen global variable in your event handler (e.g., -EventDataVariable 'CustomEvent' results in $global:CustomEvent).
@@ -174,7 +177,6 @@
 
         if ($ReturnEventData -or $EventDataVariable -ne 'ToastEvent') {
             $EventReturn = '$global:{0} = $Event' -f $EventDataVariable
-
             if ($ActivatedAction) {
                 $Action_Activated = [ScriptBlock]::Create($EventReturn + "`n" + $Action_Activated.ToString())
             }
@@ -187,15 +189,58 @@
         }
 
         if ($Action_Activated) {
-            Register-ObjectEvent -InputObject $CompatMgr -EventName OnActivated -Action $Action_Activated | Out-Null
+            try {
+                $ActivatedHash = Get-BTScriptBlockHash $Action_Activated
+                $activatedParams = @{
+                    InputObject      = $CompatMgr
+                    EventName        = 'OnActivated'
+                    Action           = $Action_Activated
+                    SourceIdentifier = "BT_Activated_$ActivatedHash"
+                    ErrorAction      = 'Stop'
+                }
+                Register-ObjectEvent @activatedParams | Out-Null
+            } catch {
+                Write-Warning "Duplicate or conflicting OnActivated ScriptBlock event detected: Activation action not registered. $_"
+            }
+            <#
+                EDGE CASES / NOTES
+                - Hash collisions: In the rare event that two different ScriptBlocks normalize to the same text, they will share a SourceIdentifier and not both be registered.
+                - Only ScriptBlocks are handled: if a non-ScriptBlock is supplied where an action is expected, registration will fail.
+                - Actions with dynamic or closure content: If `ToString()` outputs identical strings for two blocks with different closure state, only one event will register.
+                - User warnings: Any error during event registration (including duplicate) triggers a user-facing warning instead of otherwise disrupting notification flow.
+            #>
         }
-        if ($Action_Dismissed -or $Action_Dismissed) {
+        if ($Action_Dismissed -or $Action_Failed) {
             if ($Script:ActionsSupported) {
                 if ($Action_Dismissed) {
-                    Register-ObjectEvent -InputObject $Toast -EventName Dismissed -Action $Action_Dismissed | Out-Null
+                    try {
+                        $DismissedHash = Get-BTScriptBlockHash $Action_Dismissed
+                        $dismissedParams = @{
+                            InputObject      = $Toast
+                            EventName        = 'Dismissed'
+                            Action           = $Action_Dismissed
+                            SourceIdentifier = "BT_Dismissed_$DismissedHash"
+                            ErrorAction      = 'Stop'
+                        }
+                        Register-ObjectEvent @dismissedParams | Out-Null
+                    } catch {
+                        Write-Warning "Duplicate or conflicting Dismissed ScriptBlock event detected: Dismissed action not registered. $_"
+                    }
                 }
                 if ($Action_Failed) {
-                    Register-ObjectEvent -InputObject $Toast -EventName Failed -Action $Action_Failed | Out-Null
+                    try {
+                        $FailedHash = Get-BTScriptBlockHash $Action_Failed
+                        $failedParams = @{
+                            InputObject      = $Toast
+                            EventName        = 'Failed'
+                            Action           = $Action_Failed
+                            SourceIdentifier = "BT_Failed_$FailedHash"
+                            ErrorAction      = 'Stop'
+                        }
+                        Register-ObjectEvent @failedParams | Out-Null
+                    } catch {
+                        Write-Warning "Duplicate or conflicting Failed ScriptBlock event detected: Failed action not registered. $_"
+                    }
                 }
             } else {
                 Write-Warning $Script:UnsupportedEvents

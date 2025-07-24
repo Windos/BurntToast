@@ -9,6 +9,8 @@ Submits a completed toast notification for display.
 The `Submit-BTNotification` function submits a completed toast notification to the operating system's notification manager for display.
 This function supports advanced scenarios such as event callbacks for user actions or toast dismissal, sequence numbering to ensure correct update order, unique identification for toast replacement, expiration control, and direct Action Center delivery.
 
+When a script block is supplied for any of the event actions (`ActivatedAction`, `DismissedAction`, or `FailedAction`), the function ensures that only one registration for a logically identical handler is allowed per notification event type. This is accomplished by normalizing and hashing the script block; the resulting hash uniquely identifies the action for event registration purposes. Attempting to register the same handler multiple times for a given event will not create a duplicate subscription, but instead will produce an informative warning.
+
 If the `-ReturnEventData` switch is used and any event action scriptblocks are supplied (`ActivatedAction`, `DismissedAction`, `FailedAction`),
 the `$Event` automatic variable from the event will be assigned to `$global:ToastEvent` before invoking your script block.
 You can override the variable name used for event data by specifying `-EventDataVariable`.

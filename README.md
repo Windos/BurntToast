@@ -32,6 +32,14 @@ See the [Chocolatey community package](https://chocolatey.org/packages/burnttoas
 
 ## Releases
 
+### [v1.0.1](https://github.com/Windos/BurntToast/releases/download/v1.0.1/BurntToast.zip)
+
+#### Bug Fixes
+
+- OnActivated events are "sticky"
+
+  - See #256 by [Windos](https://github.com/Windos)
+
 ### [v1.0.0](https://github.com/Windos/BurntToast/releases/download/v1.0.0/BurntToast.zip)
 
 #### Breaking Changes

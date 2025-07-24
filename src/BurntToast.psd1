@@ -1,6 +1,6 @@
 ﻿@{
     RootModule        = 'BurntToast.psm1'
-    ModuleVersion     = '1.0.0'
+    ModuleVersion     = '1.0.1'
     # Can only use CompatiblePSEditions if PowerShellVersion is set to 5.1, not sure about limiting this to that version yet.
     # CompatiblePSEditions = @('Desktop')
     GUID              = '751a2aeb-a68f-422e-a2ea-376bdd81612a'
@@ -38,7 +38,13 @@
             LicenseUri   = 'https://github.com/Windos/BurntToast/blob/main/LICENSE'
             ProjectUri   = 'https://github.com/Windos/BurntToast'
             IconUri      = 'https://rawcdn.githack.com/Windos/BurntToast/3dd8dd7457552056da4bbd27880f8283e1116395/Media/BurntToast-Logo.png'
-            ReleaseNotes = '# 1.0.0
+            ReleaseNotes = '# 1.0.1
+
+* Bug Fixes
+  * OnActivated events are "sticky"
+    * See #256 by [Windos](https://github.com/Windos)
+
+# 1.0.0
 
 * Breaking Changes
   * Custom Audio Path Removed: Support for custom audio file sources has been eliminated.

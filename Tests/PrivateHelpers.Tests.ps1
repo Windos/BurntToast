@@ -8,6 +8,7 @@ BeforeAll {
 
     . "$PSScriptRoot/../src/Private/Add-PipelineObject.ps1"
     . "$PSScriptRoot/../src/Private/Optimize-BTImageSource.ps1"
+    . "$PSScriptRoot/../src/Private/Get-BTScriptBlockHash.ps1"
 }
 
 Describe 'Add-PipelineObject' {
@@ -68,5 +69,35 @@ Describe 'Optimize-BTImageSource' {
                 Remove-Item $existsPath -ErrorAction SilentlyContinue
             }
         }
+    }
+}
+Describe 'Get-BTScriptBlockHash' {
+    It 'returns a consistent hash for identical scriptblocks' {
+        $sb1 = { Write-Host 'foo'; "bar" }
+        $sb2 = { Write-Host 'foo'; "bar" }
+        $hash1 = Get-BTScriptBlockHash $sb1
+        $hash2 = Get-BTScriptBlockHash $sb2
+        $hash1 | Should -BeExactly $hash2
+    }
+    It 'is whitespace-agnostic for logically identical scriptblocks' {
+        $sb1 = {Write-Host    'foo';  "bar"}
+        $sb2 = {
+            Write-Host
+                'foo'
+            ;"bar"
+        }
+        $hash1 = Get-BTScriptBlockHash $sb1
+        $hash2 = Get-BTScriptBlockHash $sb2
+        $hash1 | Should -BeExactly $hash2
+    }
+    It 'distinguishes truly different scriptblocks' {
+        $sb1 = { Write-Host 'foo' }
+        $sb2 = { Write-Host 'bar' }
+        Get-BTScriptBlockHash $sb1 | Should -Not -BeExactly (Get-BTScriptBlockHash $sb2)
+    }
+    It 'hashes scriptblocks containing only whitespace the same as empty' {
+        $sb1 = { }
+        $sb2 = {    }
+        Get-BTScriptBlockHash $sb1 | Should -BeExactly (Get-BTScriptBlockHash $sb2)
     }
 }
