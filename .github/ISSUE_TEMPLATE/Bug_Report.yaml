@@ -1,7 +1,7 @@
 name: Bug Report 🐛
 description: Report errors or unexpected behavior
 title: "[Bug]: "
-labels: [bug, triage]
+labels: [type: bug, status: triage]
 assignees:
 - Windos
 body:
