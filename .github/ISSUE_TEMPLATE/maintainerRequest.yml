@@ -1,0 +1,83 @@
+name: Maintainer Request
+description: Request membership to help maintain this repository.
+title: Maintainer Request
+#labels: ['maintainer-request']
+#projects: ['']
+# assignees:
+#  - 
+body:
+- type: markdown
+  attributes:
+    value: |
+      ## Thank you for your interest in joining as a maintainer of this project.
+
+      ### Please complete the following public form to request we review your application to join as a maintainer.
+- type: dropdown
+  id: time
+  validations:
+    required: true
+  attributes:
+    label: Can you provide at least 1 hour per week over the course of a year to help maintain this repository?
+    description: >-
+      Please select Yes or No.
+    options:
+      - "Yes"
+      - "No"
+- type: dropdown
+  id: accesslevel
+  validations:
+    required: true
+  attributes:
+    label: Do you require direct write access to the repository?
+    description: >-
+      This may be required for some maintainer roles. Please select Yes or No.
+      If you select No, you will be added as a collaborator and will not have direct write access to the repository.
+      If you select No, you will **still** be required to create a pull request to make changes to the repository.
+      If you select Maybe, will discuss with you if this is needed & if so how/when this may be granted in future.
+    options:
+      - "Yes"
+      - "No"
+      - "Maybe"
+- type: checkboxes
+  id: type
+  attributes:
+    label: maintainer type
+    description: >-
+      Please select the type of maintainer you are interested in becoming.
+    options:
+      - label: "Code Maintainer"
+      - label: "Issue Triage"
+      - label: "Code Review"
+      - label: "Documentation"
+      - label: "Testing"
+      - label: "Content Creation"
+      - label: "Other"
+- type: textarea
+  attributes:
+    label: "Note"
+    value: |
+      ## ⚠️ This form is public. Do not provide any private or proprietary information. ⚠️
+- type: textarea
+  attributes:
+    label: Why do you want to join as a maintainer?
+    description: Please provide a brief description of why you want to join as a maintainer.
+    placeholder: >
+      I want to join as a maintainer because...
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: What skills do you bring as a maintainer?
+    description: Please provide a brief description of what skills you bring to as a maintainer.
+    placeholder: >
+      I bring the following skills to as a maintainer...
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: Public links to articles, code, or other resources that demonstrate your skills.
+    description: Please provide public links to articles, code, or other resources that demonstrate your skills.
+    placeholder: >
+      I have the following public links to articles, code, or other resources that demonstrate my skills...
+  validations:
+    required: true
