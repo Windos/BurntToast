@@ -1,10 +1,10 @@
 name: Maintainer Request
 description: Request membership to help maintain this repository.
 title: Maintainer Request
-#labels: ['maintainer-request']
+labels: ['type: repository', 'status: triage']
 #projects: ['']
-# assignees:
-#  - 
+assignees:
+- Windos
 body:
 - type: markdown
   attributes:
