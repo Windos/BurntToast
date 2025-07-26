@@ -70,6 +70,12 @@ See the [Chocolatey community package](https://chocolatey.org/packages/burnttoas
 
 ### See previous releases in the [Full Change Log](CHANGES.md)
 
+## We're Looking for Maintainers!
+
+To ensure the long-term health of this project and prevent maintainer burnout, I'm looking for some additional helping hands. All contributions are of great value, from code and documentation to issue triage and testing.
+
+If you are interested in helping guide the future of this project, please let me know by filling out our [Maintainer Request Form](https://github.com/Windos/BurntToast/issues/new?template=Maintainer_Request.yaml). Look forward to hearing from you!
+
 ## Contributors
 
 - [Windos](https://github.com/Windos)
