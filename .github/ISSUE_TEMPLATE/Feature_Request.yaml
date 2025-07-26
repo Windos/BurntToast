@@ -1,7 +1,7 @@
 name: Feature Request/Idea 🚀
 description: Suggest a new feature or improvement
 title: "[Feature]: "
-labels: [type: feature request, status: triage]
+labels: ['type: feature request', 'status: triage']
 assignees:
 - Windos
 body:
