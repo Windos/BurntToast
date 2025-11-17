@@ -15,6 +15,10 @@ namespace BurntToast.Cmdlets
         [Parameter(Mandatory = true, Position = 2)]
         public string AppLogoPath { get; set; } = string.Empty;
 
+        [Parameter(Mandatory = false, Position = 3)]
+        [ValidateSet("Circle", "Square")]
+        public string AppLogoCrop { get; set; } = "Circle";
+
         protected override void ProcessRecord()
         {
             try
@@ -50,13 +54,13 @@ namespace BurntToast.Cmdlets
                 {
                     AppName = this.AppName,
                     IconPath = fullIconPath,
-                    AppLogoPath = fullAppLogoPath
+                    AppLogoPath = fullAppLogoPath,
+                    AppLogoCrop = this.AppLogoCrop
                 };
 
                 ConfigManager.SaveConfig(config);
 
-                WriteObject($"Configuration saved. AppName: '{config.AppName}', IconPath: '{config.IconPath}'");
-                WriteWarning("Please restart your PowerShell session for these changes to take effect.");
+                WriteWarning("Configuration Set. Please restart your PowerShell session for these changes to take effect.");
             }
             catch (Exception ex)
             {

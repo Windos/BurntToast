@@ -45,7 +45,14 @@ namespace BurntToast.Cmdlets
                     }
                 }
 
-                builder.SetAppLogoOverride(appLogoUri);
+                var appLogoCrop = AppNotificationImageCrop.Default;
+
+                if (config.AppLogoCrop == "Circle")
+                {
+                    appLogoCrop = AppNotificationImageCrop.Circle;
+                }
+
+                builder.SetAppLogoOverride(appLogoUri, appLogoCrop);
 
                 var appNotification = builder.BuildNotification();
 

@@ -9,6 +9,8 @@ namespace BurntToast.Internal
         public string IconPath { get; set; } = string.Empty;
 
         public string AppLogoPath { get; set; } = string.Empty;
+
+        public string AppLogoCrop { get; set; } = "Circle";
     }
 
     public static class ConfigManager
