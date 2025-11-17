@@ -49,7 +49,7 @@ namespace BurntToast.Cmdlets
         [Parameter(
             Mandatory = false,
             ParameterSetName = "Sound",
-            HelpMessage = "The sound to play when displaying the toast notification. Choose from Default, alarms, calls, etc. (Cannot be used with Silent.)"
+            HelpMessage = "The sound to play when displaying the toast notification. When the IncommingCall scenario is used, only sounds starting with 'Call' are supported. (Cannot be used with Silent.)"
         )]
         public AppNotificationSoundEvent Sound { get; set; } = AppNotificationSoundEvent.Default;
 
@@ -66,6 +66,17 @@ namespace BurntToast.Cmdlets
             HelpMessage = "Mute any audio associated with the toast notification."
         )]
         public SwitchParameter Silent { get; set; }
+
+        [Parameter(
+            Mandatory = false,
+            HelpMessage = "Specifies the display duration for the toast notification."
+        )]
+        public AppNotificationDuration Duration { get; set; } = AppNotificationDuration.Default;
+
+        [Parameter(
+            HelpMessage = "Specifies the scenario for the toast notification (e.g., Default, IncomingCall, Alarm, Reminder, Urgent)."
+        )]
+        public AppNotificationScenario Scenario { get; set; } = AppNotificationScenario.Default;
 
         protected override void ProcessRecord()
         {
@@ -154,7 +165,20 @@ namespace BurntToast.Cmdlets
                     builder.SetAudioEvent(Sound, audioLooping);
                 }
 
-                    var appNotification = builder.BuildNotification();
+                builder.SetDuration(Duration);
+
+                var scenarioToUse = Scenario;
+                if (Scenario == AppNotificationScenario.Urgent)
+                {
+                    if (!AppNotificationBuilder.IsUrgentScenarioSupported())
+                    {
+                        WriteWarning("The 'Urgent' scenario is not supported on this version of Windows. Reverting to 'Default' scenario.");
+                        scenarioToUse = AppNotificationScenario.Default;
+                    }
+                }
+                builder.SetScenario(scenarioToUse);
+
+                var appNotification = builder.BuildNotification();
 
                 AppNotificationManager.Default.Show(appNotification);
 
