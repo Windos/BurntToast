@@ -11,6 +11,14 @@ namespace BurntToast.Cmdlets
         [Parameter(Position = 0)]
         public string[]? Text { get; set; }
 
+        [Parameter(Mandatory = false)]
+        [ValidateNotNullOrEmpty]
+        public string? AppLogo { get; set; }
+
+        [Parameter(Mandatory = false)]
+        [ValidateSet("Circle", "Square")]
+        public string? AppLogoCrop { get; set; }
+
         protected override void ProcessRecord()
         {
             WriteVerbose("Building toast notification...");
@@ -18,7 +26,11 @@ namespace BurntToast.Cmdlets
             Config config = ConfigManager.LoadConfig();
             string appLogoPath = config.AppLogoPath;
             string fullAppLogoPath = Path.GetFullPath(appLogoPath);
-            Console.WriteLine($"[BurntToast] DEBUG: Registering with AppLogo: {fullAppLogoPath}");
+
+            if (AppLogo != null)
+            {
+                fullAppLogoPath = Path.GetFullPath(AppLogo);
+            }
 
             if (!File.Exists(fullAppLogoPath))
             {
@@ -47,7 +59,14 @@ namespace BurntToast.Cmdlets
 
                 var appLogoCrop = AppNotificationImageCrop.Default;
 
-                if (config.AppLogoCrop == "Circle")
+                if (AppLogoCrop != null)
+                {
+                    if (AppLogoCrop == "Circle")
+                    {
+                        appLogoCrop = AppNotificationImageCrop.Circle;
+                    }
+                }
+                else if (config.AppLogoCrop == "Circle")
                 {
                     appLogoCrop = AppNotificationImageCrop.Circle;
                 }
