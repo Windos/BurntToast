@@ -1,6 +1,5 @@
-.roo/
-downloads/
-Output/
-.roomodes
+src/.vs
+src/bin
+src/obj
 TestResults.xml
 CoverageResults.xml
