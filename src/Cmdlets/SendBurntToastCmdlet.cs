@@ -19,6 +19,14 @@ namespace BurntToast.Cmdlets
         [ValidateSet("Circle", "Square")]
         public string? AppLogoCrop { get; set; }
 
+        [Parameter(Mandatory = false)]
+        [ValidateNotNullOrEmpty]
+        public string? HeroImage { get; set; }
+
+        [Parameter(Mandatory = false)]
+        [ValidateNotNullOrEmpty]
+        public string? Attribution { get; set; }
+
         protected override void ProcessRecord()
         {
             WriteVerbose("Building toast notification...");
@@ -72,6 +80,24 @@ namespace BurntToast.Cmdlets
                 }
 
                 builder.SetAppLogoOverride(appLogoUri, appLogoCrop);
+
+                if (HeroImage != null)
+                {
+                    string fullHeroImagePath = Path.GetFullPath(HeroImage);
+
+                    if (!File.Exists(fullHeroImagePath))
+                    {
+                        throw new FileNotFoundException($"Hero Image file not found at path: {fullHeroImagePath}");
+                    }
+
+                    var heroImageUri = new Uri(fullHeroImagePath);
+                    builder.SetHeroImage(heroImageUri);
+                }
+
+                if (Attribution != null)
+                {
+                    builder.SetAttributionText(Attribution);
+                }
 
                 var appNotification = builder.BuildNotification();
 
