@@ -5,27 +5,60 @@ using System.Management.Automation;
 
 namespace BurntToast.Cmdlets
 {
-    [Cmdlet(VerbsCommunications.Send, "BurntToast")]
+    [Cmdlet(
+        VerbsCommunications.Send, "BurntToast",
+        DefaultParameterSetName = "Sound"
+    )]
     public class SendBurntToastCommand : Cmdlet
     {
-        [Parameter(Position = 0)]
+        [Parameter(
+            Position = 0,
+            HelpMessage = "Up to 3 strings to show within the Toast Notification. The first is the title."
+        )]
+        [ValidateCount(0,3)]
         public string[]? Text { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [Parameter(
+            Mandatory = false,
+            HelpMessage = "Path to an image that will appear as the application logo."
+        )]
         [ValidateNotNullOrEmpty]
         public string? AppLogo { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [Parameter(
+            Mandatory = false,
+            HelpMessage = "The crop applied to the application logo, either Circle or Square. Defaults to Circle."
+        )]
         [ValidateSet("Circle", "Square")]
         public string? AppLogoCrop { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [Parameter(
+            Mandatory = false,
+            HelpMessage = "Path to a prominent hero image for the notification."
+        )]
         [ValidateNotNullOrEmpty]
         public string? HeroImage { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [Parameter(
+            Mandatory = false,
+            HelpMessage = "Optional attribution text displayed at the bottom of the notification. Only supported on modern versions of Windows."
+        )]
         [ValidateNotNullOrEmpty]
         public string? Attribution { get; set; }
+
+        [Parameter(
+            Mandatory = false,
+            ParameterSetName = "Sound",
+            HelpMessage = "The sound to play when displaying the toast notification. Choose from Default, alarms, calls, etc. (Cannot be used with Silent.)"
+        )]
+        public AppNotificationSoundEvent Sound { get; set; } = AppNotificationSoundEvent.Default;
+
+        [Parameter(
+            Mandatory = true,
+            ParameterSetName = "Silent",
+            HelpMessage = "Mute any audio associated with the toast notification."
+        )]
+        public SwitchParameter Silent { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -99,7 +132,16 @@ namespace BurntToast.Cmdlets
                     builder.SetAttributionText(Attribution);
                 }
 
-                var appNotification = builder.BuildNotification();
+                if (Silent.IsPresent)
+                {
+                    builder.MuteAudio();
+                }
+                else
+                {
+                    builder.SetAudioEvent(Sound);
+                }
+
+                    var appNotification = builder.BuildNotification();
 
                 AppNotificationManager.Default.Show(appNotification);
 
