@@ -32,6 +32,10 @@ See the [Chocolatey community package](https://chocolatey.org/packages/burnttoas
 
 ## Releases
 
+### [v2.0.0](https://github.com/Windos/BurntToast/releases/download/v2.0.0/BurntToast.zip)
+
+#### Breaking Changes
+
 ### [v1.1.0](https://github.com/Windos/BurntToast/releases/download/v1.1.0/BurntToast.zip)
 
 #### Features and Improvements
