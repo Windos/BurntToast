@@ -54,6 +54,13 @@ namespace BurntToast.Cmdlets
         public AppNotificationSoundEvent Sound { get; set; } = AppNotificationSoundEvent.Default;
 
         [Parameter(
+            Mandatory = false,
+            ParameterSetName = "Sound",
+            HelpMessage = "Set the notification sound to loop until the toast notification times out or is dismissed. (Cannot be used with Silent.)"
+        )]
+        public SwitchParameter LoopSound { get; set; }
+
+        [Parameter(
             Mandatory = true,
             ParameterSetName = "Silent",
             HelpMessage = "Mute any audio associated with the toast notification."
@@ -138,7 +145,13 @@ namespace BurntToast.Cmdlets
                 }
                 else
                 {
-                    builder.SetAudioEvent(Sound);
+                    var audioLooping = AppNotificationAudioLooping.None;
+                    if (LoopSound.IsPresent)
+                    {
+                        audioLooping = AppNotificationAudioLooping.Loop;
+                    }
+
+                    builder.SetAudioEvent(Sound, audioLooping);
                 }
 
                     var appNotification = builder.BuildNotification();
