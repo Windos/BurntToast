@@ -54,6 +54,12 @@
         .PARAMETER Urgent
         If set, designates the toast as an "Important Notification" (scenario 'urgent') which can break through Focus Assist, ensuring the notification is delivered even when user focus mode is enabled.
 
+        .PARAMETER CooldownSeconds
+        Minimum number of seconds between repeated toasts that share the same UniqueIdentifier.
+        If a toast with the same identifier was shown within this window, the new one is silently suppressed.
+        Requires UniqueIdentifier to be set — without it, there is nothing to key the cooldown on.
+        Throttle state is stored as lock files in %TEMP%\BurntToast-Throttle.
+
         .INPUTS
         None. You cannot pipe input to this function.
 
@@ -82,8 +88,45 @@
         [scriptblock] $DismissedAction,
         [scriptblock] $FailedAction,
         [switch] $ReturnEventData,
-        [string] $EventDataVariable = 'ToastEvent'
+        [string] $EventDataVariable = 'ToastEvent',
+
+        # Throttle: suppress duplicate toasts within N seconds.
+        # Useful for hooks or automation that fire rapidly (e.g., CI agents, subprocesses).
+        # Requires UniqueIdentifier so each notification type gets its own cooldown window.
+        [int] $CooldownSeconds
     )
+
+    # Throttle guard: CooldownSeconds without UniqueIdentifier has nothing to key on,
+    # so we warn the user rather than silently ignoring it.
+    if ($CooldownSeconds -gt 0 -and -not $UniqueIdentifier) {
+        Write-Warning '-CooldownSeconds requires -UniqueIdentifier to track throttle state.'
+    }
+
+    # Throttle logic: uses a per-identifier lock file in %TEMP%\BurntToast-Throttle.
+    # We compare the lock file's LastWriteTime against the cooldown window.
+    # If the last toast was shown within the window, we bail out early — no toast, no noise.
+    # Note: we use .NET I/O here instead of Set-Content/New-Item because those cmdlets
+    # respect -WhatIf from the calling scope, but throttle state is internal bookkeeping
+    # that must persist even during dry runs — otherwise the second call can't see the first.
+    if ($CooldownSeconds -gt 0 -and $UniqueIdentifier) {
+        $throttleDir = Join-Path $env:TEMP 'BurntToast-Throttle'
+        if (-not [System.IO.Directory]::Exists($throttleDir)) {
+            [System.IO.Directory]::CreateDirectory($throttleDir) | Out-Null
+        }
+
+        $throttleFile = Join-Path $throttleDir "$UniqueIdentifier.lock"
+
+        if ([System.IO.File]::Exists($throttleFile)) {
+            $lastFired = [System.IO.File]::GetLastWriteTime($throttleFile)
+            if (([datetime]::Now - $lastFired).TotalSeconds -lt $CooldownSeconds) {
+                # Still within cooldown — skip this notification entirely.
+                return
+            }
+        }
+
+        # Touch the lock file so subsequent calls know when this one fired.
+        [System.IO.File]::WriteAllText($throttleFile, (Get-Date -Format o))
+    }
 
     if (-not $IsWindows) {
         $null = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
