@@ -68,6 +68,22 @@
         .PARAMETER Urgent
         If set, designates the toast as an "Important Notification" (scenario 'urgent'), allowing it to break through Focus Assist.
 
+        .PARAMETER CooldownSeconds
+        Minimum seconds between repeated toasts sharing the same UniqueIdentifier.
+        Prevents notification spam from rapid-fire scripts, hooks, or automation loops.
+        Passed through to Submit-BTNotification where the actual throttle logic runs.
+
+        .PARAMETER AutoAppLogo
+        Automatically detects the calling application (terminal, IDE, etc.) by walking the
+        process tree, extracts its icon, and uses it as the toast logo. Cannot be combined
+        with -AppLogo since they'd conflict over which image to show.
+
+        .PARAMETER AppLogoMap
+        Hashtable mapping process names (without .exe) to custom icon file paths.
+        Used with -AutoAppLogo to override the auto-detected icon for specific apps.
+        Example: @{ 'node' = 'C:\icons\claude.ico' } uses the Claude icon when the
+        calling process is node.exe (as it is when running Claude Code).
+
         .INPUTS
         None. You cannot pipe input to this function.
 
@@ -111,6 +127,16 @@
         [Microsoft.Toolkit.Uwp.Notifications.AdaptiveSubgroup[]] $Column,
 
         [String] $AppLogo,
+
+        # Auto-detect the calling app (terminal, IDE) and use its icon as the toast logo.
+        # Walks the process tree to find the first ancestor with a visible window,
+        # extracts its .exe icon, and caches it. Cannot be combined with -AppLogo.
+        [Switch] $AutoAppLogo,
+
+        # Override map for AutoAppLogo: keys are process names (without .exe),
+        # values are paths to custom icon files. Lets you pin specific icons to
+        # specific apps — e.g., @{ 'node' = 'C:\icons\claude.ico' } for Claude Code.
+        [hashtable] $AppLogoMap,
 
         [String] $HeroImage,
 
@@ -192,8 +218,17 @@
 
         [string] $EventDataVariable,
 
-        [switch] $Urgent
+        [switch] $Urgent,
+
+        # Throttle: minimum seconds between repeated toasts sharing the same UniqueIdentifier.
+        # Passed through to Submit-BTNotification where the actual suppression happens.
+        [int] $CooldownSeconds
     )
+
+    # AutoAppLogo and AppLogo both control the same image slot — can't use both.
+    if ($AutoAppLogo -and $AppLogo) {
+        throw 'Cannot use -AutoAppLogo and -AppLogo together. Choose one.'
+    }
 
     $ChildObjects = @()
 
@@ -207,7 +242,16 @@
         }
     }
 
-    if ($AppLogo) {
+    # Resolve which logo to use: explicit path, auto-detected from caller app, or default.
+    if ($AutoAppLogo) {
+        $detectedIcon = Get-BTCallerAppIcon -AppLogoMap $AppLogoMap
+        if ($detectedIcon) {
+            $AppLogoImage = New-BTImage -Source $detectedIcon -AppLogoOverride -Crop Circle -WhatIf:$false
+        } else {
+            # Detection failed — fall back to the default BurntToast logo silently.
+            $AppLogoImage = New-BTImage -AppLogoOverride -Crop Circle -WhatIf:$false
+        }
+    } elseif ($AppLogo) {
         $AppLogoImage = New-BTImage -Source $AppLogo -AppLogoOverride -Crop Circle -WhatIf:$false
     } else {
         $AppLogoImage = New-BTImage -AppLogoOverride -Crop Circle -WhatIf:$false
@@ -308,6 +352,30 @@
 
     if ($Urgent) {
         $ToastSplat.Add('Urgent', $true)
+    }
+
+    # Throttle check at the wrapper level too — Submit-BTNotification has the same check,
+    # but this wrapper's own ShouldProcess runs first and would print WhatIf output before
+    # Submit-BTNotification even gets called. By checking here, we bail out early and avoid
+    # misleading WhatIf messages for throttled notifications.
+    if ($CooldownSeconds -and $UniqueIdentifier) {
+        $throttleDir = Join-Path $env:TEMP 'BurntToast-Throttle'
+        if (-not [System.IO.Directory]::Exists($throttleDir)) {
+            [System.IO.Directory]::CreateDirectory($throttleDir) | Out-Null
+        }
+        $throttleFile = Join-Path $throttleDir "$UniqueIdentifier.lock"
+        if ([System.IO.File]::Exists($throttleFile)) {
+            $lastFired = [System.IO.File]::GetLastWriteTime($throttleFile)
+            if (([datetime]::Now - $lastFired).TotalSeconds -lt $CooldownSeconds) {
+                return
+            }
+        }
+        [System.IO.File]::WriteAllText($throttleFile, (Get-Date -Format o))
+    }
+
+    # Still forward CooldownSeconds for callers using Submit-BTNotification directly.
+    if ($CooldownSeconds) {
+        $ToastSplat.Add('CooldownSeconds', $CooldownSeconds)
     }
 
     if ($PSCmdlet.ShouldProcess( "submitting: $($Content.GetContent())" )) {
