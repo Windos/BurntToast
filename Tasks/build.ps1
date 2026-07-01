@@ -76,7 +76,7 @@ if ($Compile.IsPresent) {
 if ($Test.IsPresent) {
     Write-Host "Running Pester within CI with code coverage"
 
-    Install-Module -Name Pester -RequiredVersion '6.0.0-rc1' -AllowPrerelease -Force -SkipPublisherCheck -Scope CurrentUser
+    Install-Module -Name Pester -RequiredVersion '6.0.0-rc4' -AllowPrerelease -Force -SkipPublisherCheck -Scope CurrentUser
     Remove-Module -Name Pester -Force -ErrorAction SilentlyContinue
     Import-Module -Name Pester -MinimumVersion '6.0.0' -Force
 
