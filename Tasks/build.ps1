@@ -94,5 +94,5 @@ if ($Test.IsPresent) {
     }
 
     $res = Invoke-Pester -Configuration $PesterConfig
-    if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed." }
+    if (($res.FailedCount + $res.FailedBlocksCount + $res.FailedContainersCount) -gt 0) { throw "$($res.FailedCount) tests failed." }
 }
