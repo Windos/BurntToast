@@ -7,13 +7,13 @@ Creates a new Audio object for Toast Notifications.
 ## DESCRIPTION
 
 The `New-BTAudio` function creates an audio object for Toast Notifications.
-You can use this function to select a built-in notification sound (including alarms/calls), specify a custom audio file, or indicate that the notification should be silent.
+You can use this function to select a built-in Microsoft notification sound (including alarms and calls) or indicate that the notification should be silent. Custom audio file paths are not supported in BurntToast 1.0.0 and later.
 
 ## PARAMETERS
 
 | Name        | Type         | Description                                                                                                                                                                | Mandatory              |
 |-------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|
-| `Source`    | Uri          | URI string. Specifies the sound to play with the Toast Notification. Accepts Microsoft notification sound URIs such as `ms-winsoundevent:Notification.IM` or a file path for custom audio. | Yes (when using standard sound) |
+| `Source`    | Uri          | URI string. Specifies a supported Microsoft notification sound URI, such as `ms-winsoundevent:Notification.IM`. Custom audio file paths are not supported. | Yes (when using standard sound) |
 | `Loop`      | Switch       | Specifies that the selected sound should loop, if its duration is shorter than the toast it accompanies.                                                                    | No                     |
 | `Silent`    | Switch       | Makes the toast silent (no sound).                                                                                                                                         | Yes (when using silent) |
 
@@ -38,10 +38,10 @@ Creates an audio object which will cause a Toast Notification to play the standa
 ### Example 2
 
 ```powershell
-New-BTAudio -Source 'C:\Music\FavSong.mp3'
+New-BTAudio -Source ms-winsoundevent:Notification.Looping.Alarm2 -Loop
 ```
 
-Creates an audio object which will cause a Toast Notification to play the specified song or audio file.
+Creates an audio object for the built-in Alarm2 sound with looping enabled.
 
 ### Example 3
 

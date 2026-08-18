@@ -5,11 +5,11 @@
 
         .DESCRIPTION
         The New-BTAudio function creates an audio object for Toast Notifications.
-        You can use this function to select a built-in notification sound (including alarms/calls), specify a custom audio file, or indicate that the notification should be silent.
+        You can use this function to select a built-in Microsoft notification sound (including alarms and calls) or indicate that the notification should be silent. Custom audio file paths are not supported in BurntToast 1.0.0 and later.
 
         .PARAMETER Source
-        URI string. Specifies the sound to play with the Toast Notification.
-        Accepts Microsoft notification sound URIs such as ms-winsoundevent:Notification.IM or a file path for custom audio.
+        URI string. Specifies a supported Microsoft notification sound URI, such as ms-winsoundevent:Notification.IM.
+        Custom audio file paths are not supported.
 
         .PARAMETER Loop
         Switch. Specifies that the selected sound should loop, if its duration is shorter than the toast it accompanies.
@@ -28,8 +28,8 @@
         Creates an audio object which will cause a Toast Notification to play the standard Microsoft 'SMS' sound.
 
         .EXAMPLE
-        New-BTAudio -Source 'C:\Music\FavSong.mp3'
-        Creates an audio object which will cause a Toast Notification to play the specified song or audio file.
+        New-BTAudio -Source ms-winsoundevent:Notification.Looping.Alarm2 -Loop
+        Creates an audio object for the built-in Alarm2 sound with looping enabled.
 
         .EXAMPLE
         New-BTAudio -Silent
